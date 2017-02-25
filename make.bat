@@ -1,0 +1,37 @@
+del *.toc
+del *.thm
+del *.lot
+del *.lof
+del *.aux
+del *.out
+del *.bbl
+del *.blg
+del *.nls
+del *.nlo
+del *.nlg
+del *.glo
+del *.ilg
+del *.log
+del main.pdf
+pdflatex titlePage
+pdflatex main
+pdflatex main
+makeindex main.nlo -s nomencl.ist -o main.nls
+bibtex main
+bibtex main
+pdflatex main
+pdflatex main
+del *.toc
+del *.thm
+del *.lot
+del *.lof
+del *.aux
+del *.out
+del *.bbl
+del *.blg
+del *.nls
+del *.nlo
+del *.nlg
+del *.glo
+del *.ilg
+main.pdf

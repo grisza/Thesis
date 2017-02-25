@@ -1,0 +1,18 @@
+%\cleardoublepage
+%\phantomsection
+\chapter{Podsumowanie i wnioski ([TODO] tak się powinien nazwyać ostatni rozdział i najpierw co zostało zrbione a ewentualnie po tym dopiero dalsze prace)}\label{chap:finalSummary}
+
+Zaprezentowana w pracy metoda zawiera nowe podejście do łączenia ze sobą danych z~czujników inercyjnych i~opisu modelu szkieletowego udostępnianego przez kotroler Kinect. W wyniku hybrydowego łączenia danych o orientacji kości układu szkieletowego, poprawiona została dokładność śledzenia ruchu stawów oraz możliwa była skuteczna aproksymacja informacji o pozycji stawów szkieletu, których nie można było wyznaczyć bezpośrednio z wykorzystanych urządzeń pomiarowych. Względem metod opisanych w~dostępnej i~znanej autorowi literaturze unikalnymi elementami zaproponowanej metody są:
+\begin{itemize}
+	\item \textbf{łączenie informacji o~obrotach kości},\\
+	\item \textbf{kompleksowa kompensacja znanych i~mierzalnych błędów pomiarowych obu urządzeń}, \\
+	\item \textbf{zróżnicowanie sposobu łączenia ze sobą danych w~zależności od jakości uzyskanych sygnałów, na który wpływa kontekst wykonywanego ruchu}.
+\end{itemize}
+
+Zaproponowana metoda, przetestowana na przykładzie kończyn górnych, pozwoliła uzyskać dokładność pozycjonowania stawów średnio o~12\% lepszą od metody o~nominalnie największej deklarowanej w~artykułach dokładności, opartej o~łączenie danych o~pozycjach stawów oraz o~7\% lepsze wyniki w~przypadku szacowania kąta zgięcia ręki w~łokciu. ([TODO] czy 12 czy 18 procent, bo mam wrażenie, że ostatnie wyniki się trochę różnią. Warto to uwspółnić z publikacją)\\
+
+Metoda opisana w~niniejszej pracy pokazuje, że możliwe jest wykorzystanie ogólnodostępnych, nieprofesjonalnych i niedrogich urządzeń do śledzenia ruchu kończyn i~po połączeniu ich sygnałów uzyskać wyniki poprawiające i~bardziej kompletne niż te uzyskiwane przez każde z~urządzeń z~osobna ([TODO] to trochę mało odkrywcze, bo ogólnie wiadomo, że data fuzion poprawia wyniki w porównaiu z każdym urządzenime z osobna). Przeprowadzone, z użyciem autorskiej metody, eksperymenty dowodzą również, że połączenie danych o~obrotach kości daje poprawę szacowania położenia stawów w porównaniu z metodami opartymi o~bezpośrednie śledzenie pozycji stawów. Dzieje się to dlatego, że w~trakcie łączenia ([TODO] czego?) nie dodajemy potencjalnego błędu wynikającego z~niedokładności pomiaru modelu kości ([TODO] mało zrozumiałe czego to dotyczy). Dodatkowo eliminujemy w~ten sposób ([TODO] w jaki sposób? O czym jest mowa?) problem, który widoczny jest w~przypadku samego Kinecta tj. zmiennej długości każdej z~kości w~zależności od aktualnej klatki ([TODO] a w jaki sposób eliminujemy to, że Kinect zmiania szacowania długości kości. Chyba trochę inaczej to trzeba napisać). Oczywiście metoda ta może być w~dalszym ciągu rozwijana i~modyfikowana czego zidentyfikowane pomysły zostały przedstawione w~rozdziale \ref{chap:durther}.([TODO] zamiast osobnego rozdziału w tym miejscy wpleść konkretne propozycje dalszych badań)\\
+
+Przyjęty sposób realizacji łączenia danych na potrzeby śledzenia ruchu stawów szkieletu człowieka pokazuje, że choć dotychczas nie opisywany w~literaturze, jest kierunkiem który warto rozwijać i~ulepszać. ([TODO] to zdanie jest chyba nie potrzebne)
+
+([TODO] WAŻNE w podsumowaniu nie odniosłeś się w ogóle do przyjętej tezty badawczej i celów badań. One muszą być jasko i precyzyjnie omóówione i oczywiście trzeba pokazać, że przeproowadzone eksperymenty dowodzą tezy badawczej i przy okazji została opracowana nowa metoda)

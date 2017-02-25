@@ -1,0 +1,450 @@
+%\cleardoublepage
+%\phantomsection
+\chapter{Eksperymenty badawcze}\label{chap:experiments}
+Eksperymenty badawcze wyryfikujące charakterystyki sensorów, jak również dokładności opracowanej autorsko hybrydowej metody śledzenia ruchu kończyn, zostały wykonane w~laboratorium technik multimedialnych w~Centrum Technologii Informacyjnych Politechniki Łódzkiej. Jako źródło danych referencyjnych wykorzystany został zainstalowany tam system śledzenia ruchu firmy Vicon zbudowany na bazie 10 kamer Vicon T-40S \cite{ViconSpec} rejestrujących ruch markerów. System działa z~częstotliwością 100 klatek na sekundę, a~dane przetwarzane były przez dedykowaną aplikację Nexus w~wersji 2.0. Dane dla omówianej metody ([TODO] co to znaczy dane dla metody?) zostały zarejestrowane przez kontroler Microsoft Kinect w~wersji dla konsoli XBox 360 model 1413 oraz przez urządzenie rejestrujące dane z~czujników inercyjnych zaprojektowane i~wykonane samodzielnie. Szczegółowy opis przeprowadzonych eksperymentów badawczych znajduje się w~dalszej części niniejszej dysertacji.
+%nie wiem dlaczego w części poświęconej eksperymentom znalazła się analiza czujników intercyjnych skoro one miały być wcześniej
+% \section{Urządzenie pomiarowe sygnałów z~czujników inercyjnych}\label{sec:device:imuDevice}
+% Pomiar ruchu ręki za pomocą czujników inercyjnych wykorzystuje zintegrowane moduły IveneSens MPU-6050 wykonane w~architekturze MEMS i~określane są jako urządzenia posiadające 6 stopni swobody, co oznacza, że zarówno moduł żyroskopu, jak i~akcelerometru udostępniają pomiary w~każdej z~3 osi układu współrzędnych. Sensory te są bezpośrednio podłączone do mini komputera Arduino Due działającego pod kontrolą mikroprocesora Atmel będącego przykładem procesora w~architekturze ARM. Arduino stanowi mobilną jednostkę centralną, która prowadzi odbiór danych bezpośrednio z~sensorów oraz ich przesłanie do komputera PC. Zbudowane urządzenie zasilane jest prądem stałym poprzez port mikro-USB (rysunek \ref{fig:device:circuitDiagram}, port USB1). \\
+
+% Komunikacja komputera Arduino z~czujnikami inercyjnymi odbywa się za pomocą magistrali $I^2 C$, gdzie Arduino pełni rolę urządzenia typu \emph{master}, a~sensory \emph{slave}. Arduino Due posiada dwa fizyczne kontrolery tej magistrali, co umożliwia podłączenie i~prawidłową obsługę do 4 urządzeń MPU-6050, przy założeniu zmiany trybu adresowania dla dwóch z~nich w~celu uniknięcia konfliktu pomiędzy urządzeniami. Komunikacja odbywa się przy wykorzystaniu dwóch linii: SDA -- odpowiedzialna za przesył danych oraz SCL, która odpowiada za zegar taktujący magistralę. Moduły MPU-6050 odpytywane są cyklicznie o~wartości pomiarów: temperatury ($t$), żyroskopu względem każdej z~3 osi ($g_x,g_y,g_z$) oraz akcelerometru również względem 3 osi ($a_x,a_y,a_z$). Każda z~odczytanych wartości pomiarowych jest zapisana w~postaci 2-bajtowej liczby całkowitej, co daje 14 bajtów danych dla każdego modułu MPU-6050. Do jednej z~dostępnych magistrali $I^2 C$ podłączony jest także moduł zegara DS--3230 odpowiedzialny za pomiar czasu jaki upływa pomiędzy dwiema kolejnymi ramkami pomiarów. \\
+% Komunikacja pomiędzy urządzeniem pomiarowym a~komputerem PC odbywa się bezprzewodowo z~wykorzystaniem technologii Bluetooth. Odpowiedzialny za nią jest moduł HC05 emulujący port szeregowy i~jako taki udostępniony na komputerze przetwarzającym dane. Prędkość z~jaką odbywa się transmisja danych została skonfigurowana na 115200 bodów (\emph{ang. baud}). Konfiguracja taka pozwala na płynne pobieranie i~przesyłanie informacji ze średnią szybkością 100 ramek na sekundę. Schemat budowy i~połączeń pomiędzy poszczególnymi elementami urządzenia pomiarowego przedstawiony jest na rysunku \ref{fig:device:circuitDiagram}. Elementy opisane powyżej, kluczowe dla działania urządzenia pomiarowego sygnałów z~czujników inercyjnych, wyróżnione zostały kolorem niebieskim.\\
+
+
+% Pojedyncza ramka oprócz kompletu pomiarów z~dwóch czujników zawiera również znaki kontrolne określające początek i~koniec pojedynczej ramki, jej numer w~sekwencji oraz wspomniany wcześniej czas jaki upłynął pomiędzy dwoma kolejnymi pomiarami. Pełen zestaw przesyłanych danych zajmuje łącznie 22 bajty.
+
+% \input{images/arduino}
+%tego nie sprawdzam, bo mam wrażenie, że to już było wczesniej, chyba, ze chcesz dodać konfigurację urzadzeń pomiarowych, tylko, że temu było poświęcone dużo miejsca nieco wcześniej
+\section{Scena}
+
+Obszar roboczy, na którym dokonywane były pomiary ruchu, został zamknięty w~przestrzeni (prostopadłościanu) obserwowanej przez kamery systemu Vicon, której obrys podstawy zbliżony był do kwadratu $4m$x$4m$. W~trakcie kalibracji systemu referencyjnego punkt początkowy $\left(0, 0, 0\right)$ został zdefiniowany w~miejscu, w~którym został umieszczony kontroler Kinect ([TODO] niezbędny jest rysunek ze schamtem sceny). W~trakcie trwania eksperymentu, badany użytkownik stał w~odległości ok. $2m$ od Kinecta, czyli w~odległości, w~której działa on najbardziej dokładnie. Eksperymenty badawcze, opisane w~niniejszej pracy, zostały przeprowadzone na przykładzie ruchu prawej ręki ([TODO] ale w eksperymentach biorą udział 2 ręce?), jednak nie ogranicza to możliwości zastosowania opracowanej w pracy metody do śledzenia pozostałych kończyn. Markery niezbędne do prawidłowego działania systemu śledzenia ruchu firmy Vicon zostały umieszczone według schematu zamieszczonego na rysunku \ref{fig:experiments:viconArm}
+
+\begin{figure}[!htp]
+	\centering
+	\includegraphics[width=0.6\textwidth]{images/Fig11.png}
+	\caption{Schemat romieszczenia markerów na ręce zgodny z zaleceniami systemu Vicon}
+	\label{fig:experiments:viconArm}
+\end{figure}
+
+Sposób umieszczenia markerów został zaczerpnięty ze schematu ich rozmieszczenia zawartego w~instrukcji do systemu Vicon, jednak poszerzony został o~dodatkowe markery tak, aby nadgarstek i~łokieć śledzony był za pomocą 4 znaczników a~ramię za pomocą 3. Aby móc skutecznie porównać ze sobą położenie stawów, wyznaczonych na podstawie pomiarów z~kontrolera Kinect i~z czujników inercyjnych z~tymi wyznaczonymi przez system śledzenia ruchu Vicon, współrzędne śledzonych markerów, reprezentujące wybrany staw, muszą być uśrednione, tak żeby na ich podstawie obliczyć współrzędne stawów analizowanej kończyny. Do dokładnego wyznaczenia pojedynczego punktu reprezentującego staw, niezbędne jest ([TODO] mam wątpliwości czy faktycznie jest niezbędny czy tylko pomocny, bo przecież da się obliczyć na bazie 1 punktu zakładając pewien model biomechaniczny??) oszacowanie położenia 3 markerów. Dzięki zastosowaniu uzupełniających markerów do układu rekomendowanego przez firmę Vicon, udało się znacznie ograniczyć liczbę klatek pomiarowych, na których były widoczne mniej niż 3 markery, przez co precyzja śledzenia ruchu kończyn była większa.  \\ 
+
+System śledzenia ruchu Vicon, w~wykorzystanej konfiguracji, dostarczał pomiary co 10 ms tj. działał z~częstotliwością 100 Hz. ([TODO] można coś wspomnieć o ksiązkowej dokładności tego systemu i że może pracować z wieksza częstotliwością tylko że nie jest to potrzebne)\\
+
+Oprócz markerów niezbędnych dla poprawnego działania systemu Vicon na przedramieniu i~ramieniu, w~połowie ich długości, zostały umieszczone czujniki inercyjne. Czujniki te, aby możliwie wiernie rejestrowały ruchy kończyn zostały przymocowane do skóry za pomocą taśmy klejącej oraz dodatkowo dociśnięte elastycznymi opaskami. Dzięki temu były one w~stanie wykonywać obroty wraz z~kończynami. ([TODO] koniecznie trzeba wspomnieć w którym miejscu kończyny po obwodzie zostały przymocowane. Warto napisać, że powinno się przymocowywać je blisko kości aby praca mięśni nie miała wpływu na przemiszczanie czujnika względem kości. Może jakiaś pozycja literaturowa, która o tym pisze.)
+
+Pełne rozmieszczenie urządzeń na scenie prezentuje rysunek \ref{fig:experiments:scene}. Prostokąty dookoła obszaru roboczego oznaczone V1 -- V10 to kamery systemu Vicon.
+%ten rysunek powinien byc znacznie wcześniej, powinien mieć oznaczone układy współrzednych i powinno byc od niego odwołanie w treści pracy
+\begin{figure}[!htp]
+	\centering
+	\includegraphics[width=0.6\textwidth]{images/scene.png}
+	\caption{Schemat rozmieszczenia elementów sceny w~laboratorium}
+	\label{fig:experiments:scene}
+\end{figure}
+
+\section{Badanie ruchu}
+
+Każdy z~ruchów ręki był wykonany przez troje aktorów i~powtórzony 10 razy w~dwóch seriach po 5 powtórzeń. Podzielenie całego ćwiczenia na serie z~mniejszą liczbą powtórzeń związane było z~efektem zmęczenia aktorów, jakie było widoczne wraz z~kolejnymi powtórzeniami. Ćwiczenia jakie należało wykonać zostały dobrane w~taki sposób, aby sprawdzić opisaną metodę zarówno w~sytuacjach, w~których kontroler Kinect i~czujniki inercyjne działają w~uprzywilejowanym dla nich zakresie pracy jak i~w~takich, w~których jedno z~urządzeń posiada istotne ograniczenia w~działaniu. Wszystkie sekwencje rozpoczynały się od pozycji wyjściowej z~rękami rozłożonymi na boki tzw. \emph{T--pose}. Następnie, wykonywano zgięcie rąk w~łokciu ku górze i~ich wyprostowanie w~celu zsynchronizowania pomiarów Kinecta i~czujników inercyjnych w~czasie. Po sekwencji synchronizującej następowały właściwe ćwiczenia, w~których każde powtórzenie zaczynało i~kończyło się pozycją \emph{T--pose}. Wykonywane ćwiczenia prezentuje rysunek \ref{fig:experiments:poses}
+
+\begin{figure}[!htp]
+	\centering
+	\includegraphics[width=\textwidth]{images/poses.png}
+	\caption{Ćwiczenia wykonywane w~ramach eksperymentu}
+	\label{fig:experiments:poses}
+\end{figure}
+
+W kolejności wykonywane ćwiczenia to:
+\begin{enumerate}
+	\item Zgięcie ręki w~łokciu do góry; \\
+	\item Zgięcie ręki w~łokciu do przodu; \\
+	\item Wyciągnięcie wyprostowanych ramion do przodu; \\
+	\item Utrzymanie wyprostowanych ramion w~bezruchu przez czas około 60s; \\
+\end{enumerate}
+
+Ćwiczenie 1 wykonywane było w~płaszczyźnie, w~której czujniki inercyjne są w~stanie dokonywać dokładnych i~stabilnych w~czasie pomiarów, natomiast dla Kinecta nie następuje okluzja stawów. Ćwiczenia 2 i~3 wymagają wykonania ruchu w~płaszczyźnie, w~której pomiary czujników inercyjnych są błędne i~nie mogą być traktowane jako wiarygodne. Dodatkowo, w~trakcie wykonywania ćwiczenia, kontroler Kinect traci możliwość obserwacji stawów ręki z~powodu ich przesłaniania się. Ostatnie ćwiczenie z~kolei sprawdza stabilność pomiaru w~bez ruchu, który obarczony jest dryfem pomiarów ze strony akcelerometru i~żyroskopu.\\
+
+Wszystkie pomiary zostały następnie ([TODO] co to znaczy nastepnie, kiedy? i jak zsynchronizowane skoro wcześniej była tylko mowa o synchronizacji IMU z Kinectem) zsynchronizowane czasowo z~pomiarami referencyjnymi uzyskanymi za pomocą systemu śledzenia Vicon i~porównane z~nimi w~celu określenia dokładności wyznaczania pozycji stawów i~kąta zgięcia w~łokciu. Układy współrzędnych systemu śledzenia Vicon i~systemu opartego na autorskiej metodzie śledzenia ruchu zostały ujednolicone. Jako główny przyjęto układ odniesienia drugiego ze wspomnianych systemów. ([TODO] dlaczego układ Kinecta był wiodący a nie ukłąd Vicona? Vicon wydaje się bardziej stabilny.) Zaprezentowane w~niniejszym rozdziale wyniki są średnią z~uzyskanych porównań pomiarów ([TODO] co to jest średnia z porównań pomiarów?? Może trzeba napisać co było uśredniane i dlaczego i co było porównywane?). Dodatkowo, oprócz porównania ich do danych referencyjnych (pochodzących z systemu Vicon), otrzymane wyniki porównane zostały także z~pomiarami uzyskanymi za pomocą metody o~najwyższej opisanej w~literaturze dokładności, opierającej się na łączeniu danych o~pozycjach poszczególnych stawów tj. metodą zaproponowaną przez Kalkbrenner et al. \cite{Kalkbrenner2014}.(nazywana dalej metodą Kalkbrennera)\\
+%trzeba wprowadzic pojęcie średniej dokładności, które następnie pojawi się analizie. Nie wiadomo dokładnie z tekstu jak średnie odległości przekładają się na dokładność szacowania pozycji. Ta dyskusja już była: czy szacujemy błąd, czy szacujemy dokładność, czy może coś jeszcze?
+Wyniki zebrane w~tabelach \ref{tab:experiments:first:avg} i~\ref{tab:experiments:four:avg} są średnimi odległościami euklidesowymi ($\bar{d}$) pomiędzy położeniem śledzonego stawu w~systemie Vicon ($p_V$), a~jego estymowanym położeniem ($p_E$), wyznaczonymi według wzoru \eqref{eq:experiments:euclidean}. Estymacja położenia $p_E$ odbywa się za pomocą dwóch porównywanych ze sobą metod: metody Kalkbrennera ($p_Ep$) i~metody zaproponowanej przez autora niniejszej dysertacji ($p_Eo$). %([TODO] w opisie brakuje opisu symbolu T. Poza tym p_E dla kalkbrenera i Twój powinny mieć w tabelach inne oznaczenia. Podać jeszcze interpretację średnich odległości, tzn. że chodzi o średni błąd oszacowania)
+
+\begin{equation}
+	\bar{d} = \frac{1}{T}\sum_{i=1}^{T}{\norm{p_V - p_E}}
+	\label{eq:experiments:euclidean}
+\end{equation}
+
+Analogicznie wyznaczona jest jest wartość średnia dla kąta w~łokciu.\\
+Każda wartość ([TODO] podac symbol tego co jest liczone) wyliczona jest na podstawie sekwencji 5 powtórzeń tego samego ruchu wykonywanych w~wolnym tempie. ([TODO] tzn jak 5 powtórzeń jest brane pod uwagę gdy obliczane sa wyniki. Co jest uśredniane, kiedy i jak?)
+Porównanie pomiędzy wynikami uzyskanymi za pomocą obu metod zostało wyznaczone jako stosunek różnicy pomiędzy średnimi dokładnościami wyników uzyskanych za pomocą metody autora oraz metody Kalkbrennera do średniej dokładności metody Kalkbrennera (wz. \eqref{eq:experiments:comparison}).\\
+([TODO] średnia dokładność jest pojęciem nie do końca zdefiniowanym)
+\begin{equation}
+	r = \frac{\bar{d_Ep} - \bar{d_Eo}}{\bar{d_Ep}}
+	\label{eq:experiments:comparison}
+\end{equation}
+gdzie:
+\begin{conditions}
+	\bar{d_Ep} & średnia dokładność metody Kalkbrennera (oparta o~łączenie pozycji stawów),\\	
+	\bar{d_Eo} & średnia dokładność metody autora niniejszej pracy (oparta o~łączenie orientacji przestrzennej kości).\\
+\end{conditions}
+
+([TODO] w opisie powyżej nie było żadnej informacji o modelu biomechanicznym kości, a przeciez coś było przyjmowane aby można było to wszystko wyliczyć!!!)
+\section*{Ćwiczenie 1 -- Zgięcie ramienia w~łokciu do góry}
+Pierwsze ćwiczenie, jakie zostało wykonane z~użyciem omawianej metody, to zgięcie ręki w~łokciu do~góry. Jest to ruch łatwy do śledzenia dla obu urządzeń pomiarowych ze względu na brak występowania okluzji stawów oraz prostopadłej do wektora grawitacji płaszczyźnie wykonywania ruchu. Wyniki uzyskane w~tym ćwiczeniu prezentuje tabela \ref{tab:experiments:first:avg}
+%w tabeli pojawia się średnia, ale nie wiemy jaka to średnia. W wierszach jest 6 pozycji więc nie wiemy skąd 6 skoro były 2 serie po 5 ?? Jak się mają wartości w wierszach do wspólczynników i parametrów, które sa liczone powyżej (r, średnia dokładność, średni błąd) ? Trochę jest w tym bałagan.
+\begin{table}[!htp]
+	\caption{Średnia dokładność pomiarów dla ćwiczenia nr 1}
+	\label{tab:experiments:first:avg}
+	\noindent
+	\tiny
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline 
+		& \multicolumn{3}{c|}{Metoda autorska} & \multicolumn{3}{c|}{Metoda Kalkbrennera}  \\ 
+		\hline 
+		           & Położenie    & Położenie       & Kąt                  & Położenie    & Położenie       & Kąt                  \\
+		           & łokcia $[cm]$ & nadgarstka $[cm]$ & w~łokciu	$[\degree]$ & łokcia $[cm]$ & nadgarstka $[cm]$ & w~łokciu	$[\degree]$ \\
+		\hline
+		1          & 2.2            & 2.7               & 3.24                  & 2.6            & 3.1               & 3.44                  \\
+		2          & 2.3            & 2.8               & 3.33                  & 2.7            & 3.1               & 3.77                  \\
+		3          & 2.2            & 2.7               & 3.15                  & 2.5            & 3.0               & 3.42                  \\
+		4          & 2.3            & 2.7               & 3.18                  & 2.6            & 3.0               & 3.48                  \\
+		5          & 2.1            & 2.8               & 3.35                  & 2.5            & 2.9               & 3.51                  \\
+		6          & 2.3            & 2.8               & 3.52                  & 2.6            & 3.0               & 3.63                  \\
+		\hline
+		Średnia    & 2.2            & 2.8               & 3.30                  & 2.6            & 3.0               & 3.542                 \\
+		Odchylenie & 0.08           & 0.05              & 0.12                  & 0.07           & 0.07              & 0.12                  \\
+		\hline
+	\end{tabular} 
+	
+\end{table} 
+
+Ćwiczenie polegające na wielokrotnym zgięciu ręki w~łokciu do góry, zgodnie z~przewidywaniami, dla obu urządzeń pomiarowych nie były trudne. Przez cały czas trwania ćwiczenia stawy były poprawnie identyfikowane i~w~pełni śledzone przez kontroler Kinect. Także czujniki inercyjne były w~stanie zarejestrować w~pełni  wykonywany ruch. Także obie porównywane ze sobą metody łączące dane dokonywały zbliżonych obliczeń, a~zakres szacowanego przez nie ruchu był zbliżony do tego wykonywanego na żywo. Widoczne było natomiast zróżnicowanie w~dopasowaniu szkieletu do ciała ze względu na przyjęty model długości kości. W~metodzie Kalkbrennera miała miejsce częsta zmiana tego oszacowania co wpływało, że śledzony staw potrafił zmienić swoje położenie bez ruchu, a~także znaleźć się poza konturem postaci. W~przypadku metody autora niniejszej rozprawy, zauważalne były częste, jednak niewielkie, fluktuacje pozycji ([TODO] pozycji czego?) jednak nie wpływały one ([TODO] na co?) w~takim stopniu jak zmienna długość segmentów reprezentujących kości. Wydaje się również, że to właśnie brak stałego modelu długości kości w~metodzie Kalkbrennera ma największy wpływ na różnicę uzyskiwanych wyników.\\
+([TODO] pojawia się jedynie analiza pozycji a co z czasem?? Brak poza tym dokładnej deklaracji jak w Twojej metodzie przyjęty jest model kostny.)
+
+W omawianym ćwiczeniu ruch wykonywany był głównie przez przedramię, czyli zmiany położenia były widoczne na stawie nadgarstkowym. Wykresy \ref{fig:experiments:first:wristX}, \ref{fig:experiments:first:wristY},\ref{fig:experiments:first:wristZ} pokazują położenie stawu nadgarstkowego w~każdej z~3 osi w~trakcie wykonywania ruchu. Widać na nich wyraźną różnicę w~stabilności pomiarów objawiająca się ciągłymi drganiami widocznymi na wykresie złączenia danych za pomocą metody Kalkbrennera.
+
+%\begin{figure}[!htb]
+	%\centering
+	%\includegraphics[width=0.9\linewidth]{images/100/Slide1.jpg}
+	%\caption{Wykres przedstawiający położenie stawu łokciowego w~osi X}
+	%\label{fig:experiments:first:ElbowX}
+%\end{figure}
+
+([TODO] w poniższych rysunkach trzeba powiększyć teksty opisu, bo sa niewidoczne. Poza tym warto dla dowolnego fragmentu wykresu zastosować coś na zasadzie lupy aby dokładniej zobaczyć jak się mają te wykresy do siebie. Teraz jest trochę mało czytelnie.)
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.9\linewidth]{images/100/Slide4.jpg}
+	\caption{Wykres przedstawiający położenie stawu nadgarstkowego w~osi X}
+	\label{fig:experiments:first:wristX}
+\end{figure}
+
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.9\linewidth]{images/100/Slide5.jpg}
+	\caption{Wykres przedstawiający położenie stawu nadgarstkowego w~osi Y}
+	\label{fig:experiments:first:wristY}
+\end{figure}
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.9\linewidth]{images/100/Slide6.jpg}
+	\caption{Wykres przedstawiający położenie stawu nadgarstkowego w~osi Z}
+	\label{fig:experiments:first:wristZ}
+\end{figure}
+
+Rysunki \ref{fig:experiments:first:raw} oraz \ref{fig:experiments:first:fused} pokazują wizualizację ruchu ręki podczas tego ćwiczenia. W~przypadku obu metod łączenia danych widać poprawę pozycjonowania stawów względem danych otrzymanych bezpośrednio z~urządzeń pomiarowych. 
+
+\begin{figure}[!htb]
+	\captionsetup{singlelinecheck=off}
+	\centering
+	\subfigure[Wizualizacja ruchu bezpośrednio z~urządzeń pomiarowych]{\includegraphics[width=0.45\linewidth]{images/100/raw.png}	\label{fig:experiments:first:raw}}	
+	\subfigure[Wizualizacja ruchu po złączeniu danych z~urządzeń pomiarowych]{\includegraphics[width=0.45\linewidth]{images/100/Fused.png}		\label{fig:experiments:first:fused}}
+%w podpisie nie robiłbym takiego wypunktowania, tylko wymienił po kolei, bo to źle wygląda. Poza tym na rysunku drugim widać, że Kalkrener jest dokładniejszy niż Twoja metoda, bo jest bliższy Vicona.	
+	\caption[Wizualizacja położenia stawów ręki w~ćwiczeniu 1]{Wizualizacja położenia stawów ręki w~ćwiczeniu 1. Kolory:}	
+	\begin{itemize}
+		\item Czarny -- Vicon
+		\item Niebieski -- czujniki inercyjne
+		\item Zielony -- Kinect
+		\item Szary -- metoda Kalkbrennera
+		\item Pomarańczowy -- metoda autorska
+	\end{itemize}
+\end{figure}
+
+\section*{Ćwiczenia 2 i~3 -- Zgięcie ramienia w~łokciu do przodu oraz wyciągnięcie wyprostowanych ramion do przodu}
+Ćwiczenia 2 i~3 przedstawiają ruchy o~zwiększonym stopniu trudności śledzenia dla obu urządzeń pomiarowych. W~tym przypadku następuje stopniowe przysłanianie jednego ze stawów co oznacza utratę możliwości dokładnego śledzenia ruchu przez kontroler Kinect. Dodatkowo ruch odbywał się w~płaszczyźnie trudnej z~punktu widzenia czujników inercyjnych, ponieważ obrót dokonywany był wokół osi równoległej do wektora grawitacji. Tabela \ref{tab:experiments:sec:avg} przedstawia średnie dokładności wykonywanego ruchu samego przedramienia, natomiast tabela \ref{tab:experiments:thr:avg} przedstawia wyniki dla ruchu całej wyprostowanej ręki.
+
+([TODO] nie zdefiniowano pojęcia średniej dokładności i teraz to samo zamieszanie co wcześniej. DObrze wprowadzić symbol dla średniej dokładności i potem go konsekwentnie uzywać w tabelach i opisach. SKąd w tabeli jest 6 wierszy? Z czego to się wzięło?)
+
+\begin{table}[!htp]
+	\caption{Średnia dokładność pomiarów dla ćwiczenia nr 2}
+	\label{tab:experiments:sec:avg}
+	\noindent
+	\tiny
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline 
+		& \multicolumn{3}{c|}{Metoda autorska} & \multicolumn{3}{c|}{Metoda Kalkbrennera}  \\ 
+		\hline 
+		           & Położenie    & Położenie       & Kąt                  & Położenie    & Położenie       & Kąt                  \\
+		           & łokcia $[cm]$ & nadgarstka $[cm]$ & w~łokciu	$[\degree]$ & łokcia $[cm]$ & nadgarstka $[cm]$ & w~łokciu	$[\degree]$ \\
+		\hline
+		1          & 2.7            & 3.0               & 14.46                 & 3.1            & 3.5               & 15.01                 \\
+		2          & 2.5            & 2.8               & 12.72                 & 3.1            & 3.0               & 13.07                 \\
+		4          & 2.4            & 2.7               & 12.78                 & 2.8            & 3.0               & 14.49                 \\
+		5          & 2.4            & 2.9               & 13.38                 & 3.1            & 3.0               & 15.28                 \\
+		6          & 2.5            & 2.9               & 13.41                 & 3.2            & 3.0               & 14.61                 \\
+		\hline
+		Średnia   & 2.5            & 2.9               & 13.35                 & 3.1            & 3.4               & 14.49                 \\
+		Odchylenie & 0.11           & 0.1               & 0.65                  & 0.14           & 0.12              & 0.77                  \\
+		\hline
+	\end{tabular} 
+	
+\end{table} 
+
+\begin{table}[!htp]
+	\caption{Średnia dokładność pomiarów dla ćwiczenia nr 3}
+	\label{tab:experiments:thr:avg}
+	\noindent
+	\tiny
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline 
+		& \multicolumn{3}{c|}{Metoda autorska} & \multicolumn{3}{c|}{Metoda Kalkbrennera}  \\ 
+		\hline 
+		           & Położenie    & Położenie       & Kąt                  & Położenie    & Położenie       & Kąt                  \\
+		           & łokcia $[cm]$ & nadgarstka $[cm]$ & w~łokciu	$[\degree]$ & łokcia $[cm]$ & nadgarstka $[cm]$ & w~łokciu	$[\degree]$ \\
+		\hline
+		1          & 2.6            & 3.0               & 13.32                 & 3.1            & 3.5               & 15.75                 \\
+		2          & 2.2            & 2.5               & 12.37                 & 2.9            & 3.3               & 13.12                 \\
+		3          & 2.7            & 3.0               & 13.18                 & 2.7            & 3.1               & 12.54                 \\
+		4          & 2.7            & 3.1               & 14.78                 & 3.1            & 3.5               & 16.41                 \\
+		5          & 2.2            & 2.6               & 16.77                 & 2.7            & 3.0               & 15.75                 \\
+		\hline
+		Średnia   & 2.5            & 2.8               & 14.08                 & 2.9            & 3.3               & 14.71                 \\
+		Odchylenie & 0.23           & 0.24              & 1.55                  & 0.18           & 0.2               & 1.57                  \\
+		\hline
+	\end{tabular} 
+	
+\end{table} 
+
+W obu ćwiczeniach w~trakcie wykonywania ruchu następował moment, w~którym jeden lub dwa stawy stawały się niewidoczne dla kontrolera Kinect, a~co za tym idzie, obie metody musiały bazować tylko na jednym źródle danych. Metoda opracowana przez autora niniejszej pracy nie wykorzystywała  w~trakcie łączenia danych pomiarów uzyskanych z~niepewnego źródła i~stopniowo wstrzymywała aktualizację estymowanego położenia stawu. Natomiast metoda Kalkbrennera wykorzystywała w~dalszym ciągu dane z~kontrolera Kinect zmieniając jedynie jego stopień istotności (rys. \ref{fig:experiments:sec:follow}). 
+
+Ze względu na to, że kontroler Kinect, pomimo utraty możliwości śledzenia dowolnego stawu, wciąż estymuje jego położenie, zasadne jest sprawdzanie czy fuzja pomiarów dostarczonych przez kontroler Kinect z~pomiarami urządzeń inercyjnych nie sprawi, że ostateczna estymacja położenia stawu stanie się zbyt niedokładna. Metoda Kalkbrennera co prawda dokonuje takiego sprawdzenia w~trakcie stosowania filtru Kalmana, jednak widoczne było podążanie szacunkowych wartości położenia stawu za skokami danych z~Kinecta. Oznacza to, że wpływ pomiarów kontrolera Kinect na ostateczną estymację jest znaczący i~zastosowana w~metodzie Kalkbrennera zmiana stopnia ich istotności w~procesie łączenia danych jest niewystarczająca na ograniczenie negatywnego wpływu niedokładności kontrolera Kinect.
+%na pooniższym rysunku totalnie p-omieszałeś kolory dla poszczególnych metod i czujników. Trzeba to uporządkować.
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.8\linewidth]{images/300/Slide3_focus.png}
+	\caption{Wykres przedstawiający podążanie wyznaczania pozycji stawu za pomiarami Kinecta w~trakcie wykonywania ćwiczenia 3}
+	\label{fig:experiments:sec:follow}
+\end{figure}
+
+\begin{figure}[!htb]
+	\captionsetup{singlelinecheck=off}
+	\centering
+	\subfigure[Wizualizacja ruchu bezpośrednio z~urządzeń pomiarowych]{\includegraphics[width=0.45\linewidth]{images/200/raw.png}	\label{fig:experiments:sec:raw}}	
+	\subfigure[Wizualizacja ruchu po złączeniu danych z~urządzeń pomiarowych]{\includegraphics[width=0.45\linewidth]{images/200/Fused.png}		\label{fig:experiments:sec:fused}}	
+	\caption[Wizualizacja położenia stawów ręki w~ćwiczeniu 2]{Wizualizacja położenia stawów ręki w~ćwiczeniu 2.}	
+	\label{fig:experiments:sec}
+\end{figure}
+%zlikwidować takie wypunktowanie w podpisie rysunku. 
+\begin{figure}[!htb]
+	\captionsetup{singlelinecheck=off}
+	\centering
+	\subfigure[Wizualizacja ruchu bezpośrednio z~urządzeń pomiarowych]{\includegraphics[width=0.45\linewidth]{images/300/raw.png}	\label{fig:experiments:th:raw}}	
+	\subfigure[Wizualizacja ruchu po złączeniu danych z~urządzeń pomiarowych]{\includegraphics[width=0.45\linewidth]{images/300/Fused.png}		\label{fig:experiments:th:fused}}	
+	\caption[Wizualizacja położenia stawów ręki w~ćwiczeniu 3]{Wizualizacja położenia stawów ręki w~ćwiczeniu 3. Kolory:}	
+	\label{fig:experiments:th}
+	\begin{itemize}
+		\item Czarny -- Vicon
+		\item Niebieski -- czujniki inercyjne
+		\item Zielony -- Kinect
+		\item Szary -- metoda Kalkbrennera
+		\item Pomarańczowy -- metoda autorska
+	\end{itemize}
+\end{figure}
+
+Rysunki \ref{fig:experiments:sec:raw} i~\ref{fig:experiments:th:raw} przedstawiają wizualizację położenia stawów ręki za estymowaną na podstawię pomiarów uzyskanych bezpośrednio z~urządzeń pomiarowych ([TODO] to zdanie nie ma sensu i nie wiem jak je poprawić). Widoczne na nich jest niedokładne szacowanie położenia stawu łokciowego przez kontroler Kinect w~momencie jego przysłonięcia, a~z tym związane jest także niedokładne szacowanie położenia nadgarstka, pomimo jego pełnej widoczności. Widoczne jest także błędne szacowanie skrętu ([TODO] czego?) względem osi grawitacji przez urządzenia inercyjne. Wizualizuje to w~pełni ograniczenia w~działaniu obu urządzeń pomiarowych, które zostały opisane w~rozdziale \ref{chap:characteristics}. W~przypadku wizualizacji pozycjonowania ([TODO] czego?) za pomocą metody Kalkbrennera oraz metody autora niniejszej rozprawy (rys. \ref{fig:experiments:sec:fused} oraz \ref{fig:experiments:th:fused}) w~obu przypadkach widoczne jest zmniejszenie wpływu tych ([TODO] jakich?) ograniczeń na ostateczne szacowanie położenia stawów. Widać równocześnie wierniejsze odwzorowanie ruchu w~przypadku metody autora.\\
+
+\section*{Ćwiczenie 4 -- Utrzymanie wyprostowanych ramion}
+Celem ostatniego ćwiczenia było sprawdzenie stabilności pomiarów w~przypadku długiego braku ruchu. W~tym wypadku urządzeniem, którego dane pomiarowe mogą szczególnie ulec pogorszeniu w~trakcie działania jest urządzenie zbudowane z~czujników inercyjnych. Tabela \ref{tab:experiments:four:avg} zawiera zestawienie dokładności pomiarów dla tego eksperymentu.
+
+\begin{table}[!htb]
+	\caption{Średnia dokładność pomiarów dla ćwiczenia nr 4}
+	\label{tab:experiments:four:avg}
+	\noindent
+	\tiny
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline 
+		& \multicolumn{3}{c|}{Metoda autorska} & \multicolumn{3}{c|}{Metoda Kalkbrennera}  \\ 
+		\hline 
+		           & Położenie    & Położenie       & Kąt                  & Położenie    & Położenie       & Kąt                  \\
+		           & łokcia $[cm]$ & nadgarstka $[cm]$ & w~łokciu	$[\degree]$ & łokcia $[cm]$ & nadgarstka $[cm]$ & w~łokciu	$[\degree]$ \\
+		\hline
+		1          & 2.1            & 2.4               & 4.55                  & 2.4            & 2.7               & 4.86                  \\
+		2          & 2.3            & 2.6               & 3.86                  & 2.4            & 2.7               & 5.10                  \\
+		3          & 2.2            & 2.5               & 3.69                  & 2.6            & 2.8               & 4.23                  \\
+		4          & 2.3            & 2.6               & 4.23                  & 2.5            & 2.8               & 4.61                  \\
+		5          & 2.6            & 2.5               & 4.32                  & 2.4            & 2.7               & 4.84                  \\
+		6          & 2.2            & 2.5               & 4.02                  & 2.3            & 2.7               & 4.26                  \\
+		\hline
+				
+		Średnia   & 2.3            & 2.5               & 4.11                  & 2.5            & 2.8               & 4.65                  \\
+		Odchylenie & 0.16           & 0.07              & 0.29                  & 0.08           & 0.04              & 0.32                  \\
+		\hline
+	\end{tabular} 
+	
+\end{table} 
+
+Podobnie jak w~ćwiczeniu 1 tak i~w~ćwiczeniu 4 oba urządzenia były w~stanie przez cały czas trwania eksperymentu śledzić ruchy wykonywane przez śledzonego aktora. Jednak podobnie jak we wspomnianym ćwiczeniu, zmianie ulegały długości segmentów kości i~miało to przełożenie na działanie metody Kalkbrennera. Wizualizacje łańcuchów kinematycznych przedstawione na rysunku \ref{fig:experiments:four} pokazują, że Kinect, mimo pełnej widoczności całej ręki, miał trudność z~poprawnym określeniem jej pozycji w~osi pionowej. Mimo to obie metody były w~stanie wyznaczyć pozycje stawów z~lepszą dokładnością niż każde z~urządzeń pomiarowych osobno.
+%zlikwidować brzydkie wypunktowanie w podpisie do rysunku
+\begin{figure}[!htb]
+	\captionsetup{singlelinecheck=off}
+	\centering
+	\subfigure[Wizualizacja ruchu bezpośrednio z~urządzeń pomiarowych]{\includegraphics[width=0.45\linewidth]{images/400/raw.png}	\label{fig:experiments:four:raw}}	
+	\subfigure[Wizualizacja ruchu po złączeniu danych z~urządzeń pomiarowych]{\includegraphics[width=0.45\linewidth]{images/400/Fused.png}		\label{fig:experiments:four:fused}}	
+	\caption[Wizualizacja ruchu ręki w~ćwiczeniu (4)]{Wizualizacja ruchu ręki w~ćwiczeniu (4). Kolory:}	
+	\label{fig:experiments:four}
+	\begin{itemize}
+		\item Czarny -- Vicon
+		\item Niebieski -- czujniki inercyjne
+		\item Zielony -- Kinect
+		\item Szary -- metoda Kalkbrennera
+		\item Pomarańczowy -- metoda autorska
+	\end{itemize}
+\end{figure}
+
+Wykresy estymacji położenia stawów łokciowego (rys. \ref{fig:experiments:four:elbowZ}) oraz nadgarstkowego (rys. \ref{fig:experiments:four:wristZ}) pozwalają zaobserwować wpływ stabilności pomiarów jednego stawu na drugi. Jest to szczególnie widoczne w~wykresie metody Kalkbrennera, gdzie amplituda drgań pozycji nadgarstka jest widocznie większa niż w~przypadku drgań łokcia. 
+
+\begin{figure}[!htb]
+	\centering
+	\subfigure[Łokieć]{\includegraphics[width=0.45\linewidth]{images/400/3.jpg}	\label{fig:experiments:four:elbowZ}}	
+	\subfigure[Nadgarstek]{\includegraphics[width=0.45\linewidth]{images/400/6.jpg} \label{fig:experiments:four:wristZ}}	
+	\caption{Wykres położenia stawów w~osi Z~w~ćwiczeniu 4.}	
+	\label{fig:experiments:four:Zaxis}
+\end{figure}
+
+\section{Podsumowanie}
+
+Ćwiczenia wykonywane w~ramach eksperymentów miały za zadanie sprawdzić działanie metody autora niniejszej pracy, a~także metody Kalkbrennera w~sytuacji, gdy jeden z~czujników przestaje być wiarygodny oraz kiedy dane otrzymywane degradowane są w~czasie. Dla kontrastu weryfikacja dokładności porównywanych metod, dokonana została także na bazie ćwiczenia, które dla obu urządzeń pomiarowych może być nazywane neutralnym (ćwiczenie 1).\\
+
+Porównane ze sobą zostały 3 wartości: położenie stawu łokciowego, położenie stawu nadgarstkowego oraz kąt zgięcia ręki w~łokciu. ([TODO] nieprawda bo nie porównujesz stawu łokciwego z kątem w łokciu, a to wynika z Twojego zdania) Dwie pierwsze wartości pokazują na ile obie metody mogłyby być zastosowane w~systemach śledzenia dla środowisk wirtualnych, gdzie dochodzić może do interakcji z~otoczeniem. ([TODO] bardzo daleka alegoria, która nie jest zrozumiała. Słabe uzasadnienie zastosowania dla środowisk wirtualnych. Ktoś może nie wiedzieć jak się ma jedno do drugiego, bo nic na ten temat wczesniej nie pisałeś) Trzecia wartość jest uniezależniona od przyjętego modelu długości kości i~jego ewentualnych błędów oraz~zmienności. ([TODO] wszystkie wartości są zależne od przyjętego modelu kości, a nie tylko ostatnia) Ona też pozwala na zweryfikowanie systemów ([TODO] jakich) na potrzeby ćwiczeń rehabilitacyjnych mających na celu poprawę zakresu ruchu stawów. \\ ([TODO] trochę te zdania mocno wydumane i pozbawione nalezytego wyjasnienia)
+
+Wykresy z rysunków \ref{fig:experiments:elbow:summary}, \ref{fig:experiments:wrist:summary} oraz \ref{fig:experiments:angle:summary} pokazują podsumowanie porównania dokładności uzyskiwanych wyników ([TODO] znowu nie wiadomo co to jest dokładność uzyskanych wyników) za pomocą metody Kalkbrennera oraz metody autora tej pracy ([TODO] teraz czuje, że metoda powinna mieć jakiś skrót, np. od angielskiej jej nazwy, którą pewnie trzeba wymyśleć). Widać na~nich poprawę w~wyznaczaniu położenia stawu łokciowego do 18\%, nadgarstowego do 16\% oraz zdolności szacowania kąta zgięcia ręki w~łokciu do 11\%. Z~przedstawionych wyników wynika większa poprawa w~wyznaczaniu pozycji łokcia niż w~przypadku nadgarstka. Spowodowane jest to kumulowaniem się błędów własnych estymacji położenia nadgarstka, jak i~błędów estymacji położenia łokcia. Jest to cecha charakterystyczna stosowania hierarchicznego modelu ciała człowieka lub jego części. Dla przyjętej hierarchicznej reprezentacji układu kostnego postaci, czym badany staw jest bardziej odległy od punktu początkowego (korzenia) tym dokładność estymacji jego położenia jest mniejsza i~mniejsze są możliwości jej poprawy.\\
+
+Na wykresie z rysunku \ref{fig:experiments:angle:summary} reprezentującym szacowanie kąta zgięcia ręki w~łokciu widać mniejszą poprawę pomiędzy porównywanymi metodami. ([TODO] co to jest mniejsza poprawa pomiędzy metodami. To mi jakoś po polsku nie brzmi) Można na tej podstawie wyciągnąć wniosek, że znaczący wpływ na ogólną dokładność działania obu metod ma zastosowanie w~autorskiej metodzie, stałej długości segmentów reprezentujących kości modelu szkieletowego ([TODO] znowu trochę nie po polsku, bo na dokładność 2 metod ma wpływ zmiana zastosowana w jednej metodzie? Nie rozumiem). Poprawienie szacowania wartości kąta zgięcia ręki świadczy natomiast o~zmniejszeniu występowania drgań poszczególnych segmentów modelu szkieletowego wyznaczonego przez metodę autora tej pracy.
+
+\pgfplotsset{width=12cm,compat=1.8}
+%w poniższych rysunkach wprowadzenie w pionowej osi mdo potęgi -2 są bez sensu. Przeciez to sa centymetry. Nie wiadomo co oznaczają metry/centymetry na pionowej osi
+\begin{figure}[!htb]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				ybar,
+				bar width=.5cm,
+				width=\textwidth,
+				height=.5\textwidth,
+				legend style={at={(0.5,1)},
+					anchor=north,legend columns=-1},
+				symbolic x coords={ex 1,ex 2,ex 3,ex 4},
+				xticklabels={Ćwiczenie 1,Ćwiczenie 2,Ćwiczenie 3,Ćwiczenie 4},
+				xtick=data,
+				ymin=0,ymax=5,
+				ylabel={cm},
+			]
+			\addplot [blue!20!black,fill=blue!80!white,error bars/.cd,y dir=both,y explicit] coordinates { 
+			(ex 1,2.6) +- (0.0, 0.07)         
+			(ex 2,3.1) +- (0.0, 0.11)
+			(ex 3,2.9) +- (0.0, 0.18)  
+			(ex 4,2.5) +- (0.0, 0.08) };
+			\addplot [orange!20!black,fill=orange!80!white,error bars/.cd,y dir=both,y explicit] coordinates { 
+			(ex 1,2.2) +- (0.0, 0.08)         
+			(ex 2,2.5) +- (0.0, 0.14)
+			(ex 3,2.5) +- (0.0, 0.23)  
+			(ex 4,2.3) +- (0.0, 0.16) };
+			\legend{Metoda Kalkbrennera, Metoda autorska}
+			\node at (axis cs:ex 1,4){\textcolor{red}{13\%}};
+			\node at (axis cs:ex 2,4){\textcolor{red}{18\%}};
+			\node at (axis cs:ex 3,4){\textcolor{red}{14\%}};
+			\node at (axis cs:ex 4,4){\textcolor{red}{7\%}};
+		\end{axis}
+	\end{tikzpicture}	
+	\caption{Średnia dokładność wyznaczania pozycji łokcia}
+	\label{fig:experiments:elbow:summary}
+\end{figure}
+
+\begin{figure}[!htb]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				ybar,
+				bar width=.5cm,
+				width=\textwidth,
+				height=.5\textwidth,
+				legend style={at={(0.5,1)},
+					anchor=north,legend columns=-1},
+				symbolic x coords={ex 1,ex 2,ex 3,ex 4},
+				xtick=data,
+				ymin=0,ymax=5,
+				xticklabels={Ćwiczenie 1,Ćwiczenie 2,Ćwiczenie 3,Ćwiczenie 4},
+				ylabel={cm},
+			]
+			\addplot [blue!20!black,fill=blue!80!white,error bars/.cd,y dir=both,y explicit] coordinates { 
+			(ex 1,3.0) +- (0.0, 0.05)
+			(ex 2,3.4) +- (0.0, 0.1)
+			(ex 3,3.3) +- (0.0, 0.24)
+			(ex 4,2.8) +- (0.0, 0.04)};
+			\addplot  [orange!20!black,fill=orange!80!white,error bars/.cd,y dir=both,y explicit] coordinates { 
+			(ex 1,2.9) +- (0.0, 0.07)
+			(ex 2,2.9) +- (0.0, 0.12)
+			(ex 3,2.8) +- (0.0, 0.2)
+			(ex 4,2.5) +- (0.0, 0.07)};
+				
+			\legend{Metoda Kalkbrennera, Metoda autorska}
+			\node at (axis cs:ex 1,4){\textcolor{red}{8\%}};
+			\node at (axis cs:ex 2,4){\textcolor{red}{16\%}};
+			\node at (axis cs:ex 3,4){\textcolor{red}{14\%}};
+			\node at (axis cs:ex 4,4){\textcolor{red}{9\%}};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Średnia dokładność wyznaczania pozycji nadgarstka}
+	\label{fig:experiments:wrist:summary}
+\end{figure}
+
+
+\begin{figure}[!htb]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				ybar,
+				bar width=.5cm,
+				width=\textwidth,
+				height=.5\textwidth,
+				legend style={at={(0.5,1)},
+					anchor=north,legend columns=-1},
+				symbolic x coords={ex 1,ex 2,ex 3,ex 4},
+				xtick=data,
+				xticklabels={Ćwiczenie 1,Ćwiczenie 2,Ćwiczenie 3,Ćwiczenie 4},
+				ymin=0,ymax=20,
+				ylabel={\degree},
+			]
+			\addplot+[blue!20!black,fill=blue!80!white,error bars/.cd,y dir=both,y explicit] coordinates { 
+			(ex 1,3.54) +- (0.0, 0.12)
+			(ex 2,14.49) +- (0.0, 0.77)
+			(ex 3,14.71) +- (0.0, 1.57)
+			(ex 4,4.65)  +- (0.0, 0.32)
+			};
+			\addplot+[orange!20!black,fill=orange!80!white,error bars/.cd,y dir=both,y explicit] coordinates { 
+			(ex 1,3.29) +- (0.0, 0.12)
+			(ex 2,13.35)+- (0.0, 0.65)
+			(ex 3,14.08)+- (0.0, 1.55)
+			(ex 4,4.11)  +- (0.0, 0.29)};
+				
+			\legend{Metoda Kalkbrennera, Metoda autorska}
+			\node at (axis cs:ex 1,16){\textcolor{red}{6\%}};
+			\node at (axis cs:ex 2,16){\textcolor{red}{8\%}};
+			\node at (axis cs:ex 3,16){\textcolor{red}{4\%}};
+			\node at (axis cs:ex 4,16){\textcolor{red}{11\%}};
+		\end{axis}
+	\end{tikzpicture}	
+	\caption{Średnia dokładność wyznaczania kąta zgięcia ręki w~łokciu}
+	\label{fig:experiments:angle:summary}
+\end{figure}
