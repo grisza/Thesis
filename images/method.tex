@@ -1,51 +1,51 @@
 \begin{figure}[!htb]
-\centering
-\begin{tikzpicture}[
-    auto,
-      block/.style    = { rectangle, draw=blue, thick, 
-                        fill=white, text width=50, text centered,
-                         minimum height=2em, font=\tiny },
-        newBlock/.style    = { rectangle, draw=green, thick, 
-			    fill=green!20, text width=55, text centered,
-			     minimum height=2em, font=\tiny }
-  ]
-
-\node[block](IMU)at (-1,2){Czujniki inercyjne};
-\node[newBlock](Temp) at (2,0.5){Korekta \\ względem \\ temperatury (wz. \eqref{eq:hybrid:temperatureCorrection})};
-\node[block](AHRS) at (4.5,2){Filtr \\ Madgwicka + LERP};
-\node[block](EulerImu) at (7,2){Transformacja do \\ kątów Eulera (wz. \eqref{eq:appx:rot:quatToEuler})};
-\node[newBlock](Fusion) at (7, 0){Łączenie \\ orientacji (wz. \eqref{eq:hybrid:reliableFusion} i~\eqref{eq:hybrid:unreliableFusion})};
-\node[block](EulerKinect) at (7,-2){Transformacja do \\ kątów Eulera (wz. \eqref{eq:appx:rot:quatToEuler})};
-\node[newBlock](Triage) at (7,-3.5){Ocena jakości pomiarów Kinecta};
-
-
-\node[newBlock](LPF) at (4.5,-3.5){Filtr \\ dolnoprzepustowy (wz. \eqref{eq:hybrid:kinect:lpf})};
-\node[newBlock](Distance) at (2,-3.5){Korekta \\ odległości (wz. \eqref{eq:distCorr})};
-\node[block](Kinect)at (-1,-3.5){Kinect};
-
-\node[block](quat) at (11.5,0){Transformacja do \\ kwaternionu (wz. \eqref{eq:appx:rot:eulerToQuat})};
-\node[block](pos) at (11.5,-3.5){Wyznaczenie pozycji stawu};
-
-\draw[->]  (Kinect) -- node[above,font=\tiny]{P} ++ (Distance);
-\draw[->]  (Distance) --  node[above,font=\tiny]{P'} ++(LPF);
-\draw[->]  (LPF) -- (Triage);
-\draw[->]  (Triage) -- (EulerKinect);
-\draw[->]  (EulerKinect) -- node[left,font=\tiny]{$\begin{bmatrix}  \Phi^K  \Theta^K  \Psi^K \end{bmatrix}$} ++(Fusion);
-
-
-
-\draw[->]  (Fusion) -- node[above,font=\tiny]{$\begin{bmatrix}  \Phi^F  \Theta^F  \Psi^F \end{bmatrix}$} ++ (quat);
-\draw[->]  (quat) -- node[left,font=\tiny]{$Q^F$}++(pos);
-\draw[->]  (EulerImu) --  node[left,font=\tiny]{$\begin{bmatrix}  \Phi^I  \Theta^I  \Psi^I \end{bmatrix}$} ++ (Fusion);
-\draw[->]  (AHRS) --  node[above,font=\tiny]{$Q^I$} ++ (EulerImu);
-\draw[->]  (Temp) -| node[below,font=\tiny]{A'}  (AHRS);
-\draw[->]  (IMU) -- node[above,font=\tiny]{G} ++ (AHRS);
-\draw[->]  (0, 1.8) -|  node[right,font=\tiny]{T} ++ (Temp);
-\draw[->]  (IMU) |-  node[below,font=\tiny]{A}  (Temp);
-\draw[dashed, ->](quat) -- (11.5,3.0) node[above,font=\tiny]{$Q^F$} -|  (AHRS);
-\draw[->]  (pos) -- node[left,font=\tiny]{$\left[p_x^F,p_y^F,p_z^F\right]$} (11.5,-4.5);
-\end{tikzpicture}
+	\centering
+	\begin{tikzpicture}[
+			auto,
+			block/.style    = { rectangle, draw=blue, thick, 
+				fill=white, text width=50, text centered,
+				minimum height=2em, font=\tiny },
+			newBlock/.style    = { rectangle, draw=green, thick, 
+				fill=green!20, text width=55, text centered,
+				minimum height=2em, font=\tiny }
+		]
+		
+		\node[block](IMU)at (-1,2){Czujniki inercyjne};
+		\node[newBlock](Temp) at (2,0.5){Korekta \\ względem \\ temperatury (wz. \eqref{eq:hybrid:temperatureCorrection})};
+		\node[block](AHRS) at (4.5,2){Filtr \\ Madgwicka + LERP};
+		\node[block](EulerImu) at (7,2){Transformacja do \\ kątów Eulera (wz. \eqref{eq:appx:rot:quatToEuler})};
+		\node[newBlock](Fusion) at (7, 0){Łączenie \\ orientacji (wz. \eqref{eq:hybrid:reliableFusion} i~\eqref{eq:hybrid:unreliableFusion})};
+		\node[block](EulerKinect) at (7,-2){Transformacja do \\ kątów Eulera (wz. \eqref{eq:appx:rot:quatToEuler})};
+		\node[newBlock](Triage) at (7,-3.5){Ocena jakości pomiarów Kinecta};
+		
+		
+		\node[newBlock](LPF) at (4.5,-3.5){Filtr \\ dolnoprzepustowy (wz. \eqref{eq:hybrid:kinect:lpf})};
+		\node[newBlock](Distance) at (2,-3.5){Korekta \\ odległości (wz. \eqref{eq:distCorr})};
+		\node[block](Kinect)at (-1,-3.5){Kinect};
+		
+		\node[block](quat) at (11.5,0){Transformacja do \\ kwaternionu (wz. \eqref{eq:appx:rot:eulerToQuat})};
+		\node[block](pos) at (11.5,-3.5){Wyznaczenie pozycji stawu};
+		
+		\draw[->]  (Kinect) -- node[above,font=\tiny]{P} ++ (Distance);
+		\draw[->]  (Distance) --  node[above,font=\tiny]{P'} ++(LPF);
+		\draw[->]  (LPF) -- (Triage);
+		\draw[->]  (Triage) -- (EulerKinect);
+		\draw[->]  (EulerKinect) -- node[left,font=\tiny]{$\begin{bmatrix}  \Phi^K  \Theta^K  \Psi^K \end{bmatrix}$} ++(Fusion);
+		
+		
+		
+		\draw[->]  (Fusion) -- node[above,font=\tiny]{$\begin{bmatrix}  \Phi^F  \Theta^F  \Psi^F \end{bmatrix}$} ++ (quat);
+		\draw[->]  (quat) -- node[left,font=\tiny]{$Q^F$}++(pos);
+		\draw[->]  (EulerImu) --  node[left,font=\tiny]{$\begin{bmatrix}  \Phi^I  \Theta^I  \Psi^I \end{bmatrix}$} ++ (Fusion);
+		\draw[->]  (AHRS) --  node[above,font=\tiny]{$Q^I$} ++ (EulerImu);
+		\draw[->]  (Temp) -| node[below,font=\tiny]{A'}  (AHRS);
+		\draw[->]  (IMU) -- node[above,font=\tiny]{G} ++ (AHRS);
+		\draw[->]  (0, 1.8) -|  node[right,font=\tiny]{T} ++ (Temp);
+		\draw[->]  (IMU) |-  node[below,font=\tiny]{A}  (Temp);
+		\draw[dashed, ->](quat) -- (11.5,3.0) node[above,font=\tiny]{$Q^F$} -|  (AHRS);
+		\draw[->]  (pos) -- node[left,font=\tiny]{$\left[p_x^F,p_y^F,p_z^F\right]$} (11.5,-4.5);
+	\end{tikzpicture}
 	\caption{Diagram przedstawiający kolejne etapy działania autorskiej metody łączenia danych IMU i~Kinecta.}
-	
+		
 	\label{fig:hybrid:methodDiagram}
 \end{figure}

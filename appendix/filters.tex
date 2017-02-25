@@ -15,8 +15,8 @@ Faza pierwsza polega na oszacowaniu aktualnej wartości (stanu) pomiaru na podst
 
 \begin{subequations}
 	\begin{align}
-	\widehat{x}^-_k & = A\widehat{x}_{k-1} + Bu_{k-1} + w_{k-1}\label{eq:appx:KF:ph1a} \\
-	P^-_k           & = AP_{k-1}A^T + Q \label{eq:appx:KF:ph1b}                        
+		\widehat{x}^-_k & = A\widehat{x}_{k-1} + Bu_{k-1} + w_{k-1}\label{eq:appx:KF:ph1a} \\
+		P^-_k           & = AP_{k-1}A^T + Q \label{eq:appx:KF:ph1b}                        
 	\end{align}
 \end{subequations}
 
@@ -38,10 +38,10 @@ Drugim etapem jaki możemy wyszczególnić w~trakcie działania omawianego filtr
 
 \begin{subequations}
 	\begin{align}
-	z_k           & = H*\widehat{x}^-_k + v_k \label{eq:appx:KF:ph2a}                        \\
-	K_k           & = P^-_{k}H^T(HP^-_{k}H^T + R)^{-1} \label{eq:appx:KF:ph2b}               \\
-	\widehat{x}_k & = \widehat{x}^-_k + K_{k}(z_k-H\widehat{x}^-_k)  \label{eq:appx:KF:ph2c} \\
-	P_k           & = (I-K_{k}H)P^-_k \label{eq:appx:KF:ph2d}                                
+		z_k           & = H*\widehat{x}^-_k + v_k \label{eq:appx:KF:ph2a}                        \\
+		K_k           & = P^-_{k}H^T(HP^-_{k}H^T + R)^{-1} \label{eq:appx:KF:ph2b}               \\
+		\widehat{x}_k & = \widehat{x}^-_k + K_{k}(z_k-H\widehat{x}^-_k)  \label{eq:appx:KF:ph2c} \\
+		P_k           & = (I-K_{k}H)P^-_k \label{eq:appx:KF:ph2d}                                
 	\end{align}
 \end{subequations}
 
@@ -62,47 +62,47 @@ Obie fazy wykonywane są cyklicznie, a~kompletny algorytm przedstawia rysunek \r
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[>=latex']
-	\tikzset{block/.style= {draw, rectangle, align=center,minimum width=4cm,minimum height=1cm},
-		rblock/.style={draw, shape=rectangle,rounded corners=1.5em,align=center,minimum width=2cm,minimum height=1cm},
-		input/.style={ % requires library shapes.geometric
-			draw,
-			trapezium,
-			trapezium left angle=60,
-			trapezium right angle=120,
-			minimum width=2cm,
-			align=center,
-			minimum height=1cm
-		},
-	}
-	\node [block]    (predicate)      
-	{  
-		\begin{tabular}{l}
-		\textbf{Faza predykacji}                                            \\
-		\parbox{5cm}{                                                       
-			\begin{itemize}[leftmargin=*]                                       
-			\item Estymacja aktualnego stanu \eqref{eq:appx:KF:ph1a}            \\
-			\item Estymacja kowariancji aktulnego stanu \eqref{eq:appx:KF:ph1b} \\
-			\end{itemize}}                                                      
-		\end{tabular} 
-	};
-	
-	\node [block, right =1cm of predicate] (correction)      
-	{  
-		\begin{tabular}{l}
-		\textbf{Faza korekcji}                                                              \\
-		\parbox{6.5cm}{                                                                     
-			\begin{itemize}[leftmargin=*]                                                       
-			\item {Wyznaczenie współczynnika wzmocnienia Kalmana \eqref{eq:appx:KF:ph2a}}     \\
-			\item {Korekta estymacji stanu w~oparciu o~uzyskany pomiar \eqref{eq:appx:KF:ph2b}} \\
-			\item {Obliczenie kowariancji błędu estymacji \eqref{eq:appx:KF:ph2c}}            \\
-			\end{itemize}}                                                                      
-		\end{tabular} 
-	};    
-	%% paths
-	\path[every node/.style={font=\sffamily\small,
-		fill=white,inner sep=1pt}]
-	(predicate.north) edge [->, very thick, bend left] (correction.north)
-	(correction.south) edge [->, very thick, bend left] (predicate.south);
+		\tikzset{block/.style= {draw, rectangle, align=center,minimum width=4cm,minimum height=1cm},
+			rblock/.style={draw, shape=rectangle,rounded corners=1.5em,align=center,minimum width=2cm,minimum height=1cm},
+			input/.style={ % requires library shapes.geometric
+				draw,
+				trapezium,
+				trapezium left angle=60,
+				trapezium right angle=120,
+				minimum width=2cm,
+				align=center,
+				minimum height=1cm
+			},
+		}
+		\node [block]    (predicate)      
+		{  
+			\begin{tabular}{l}
+				\textbf{Faza predykacji}                                            \\
+				\parbox{5cm}{                                                       
+				\begin{itemize}[leftmargin=*]                                       
+				\item Estymacja aktualnego stanu \eqref{eq:appx:KF:ph1a}            \\
+				\item Estymacja kowariancji aktulnego stanu \eqref{eq:appx:KF:ph1b} \\
+				\end{itemize}}                                                      
+			\end{tabular} 
+		};
+			
+		\node [block, right =1cm of predicate] (correction)      
+		{  
+			\begin{tabular}{l}
+				\textbf{Faza korekcji}                                                              \\
+				\parbox{6.5cm}{                                                                     
+				\begin{itemize}[leftmargin=*]                                                       
+				\item {Wyznaczenie współczynnika wzmocnienia Kalmana \eqref{eq:appx:KF:ph2a}}     \\
+				\item {Korekta estymacji stanu w~oparciu o~uzyskany pomiar \eqref{eq:appx:KF:ph2b}} \\
+				\item {Obliczenie kowariancji błędu estymacji \eqref{eq:appx:KF:ph2c}}            \\
+				\end{itemize}}                                                                      
+			\end{tabular} 
+		};    
+		%% paths
+		\path[every node/.style={font=\sffamily\small,
+			fill=white,inner sep=1pt}]
+		(predicate.north) edge [->, very thick, bend left] (correction.north)
+		(correction.south) edge [->, very thick, bend left] (predicate.south);
 	\end{tikzpicture}
 	\caption{Schemat działania filtru Kalmana}
 	\label{fig:appx:KF:algorithm}
@@ -118,8 +118,8 @@ Filtr Kalmana w~swojej pierwotnej formie stanowi optymalny estymator dla proces�
 
 \begin{subequations}
 	\begin{align}
-	\widehat{x}^-_k & = f(\widehat{x}_{k-1}, u_{k-1}, w_{k-1})\label{eq:appx:EKF:ph1a} \\
-	P^-_k           & = A^J P_{k-1} {A^J}^T + W^J Q {W^J}^T \label{eq:appx:EKF:ph1b}   
+		\widehat{x}^-_k & = f(\widehat{x}_{k-1}, u_{k-1}, w_{k-1})\label{eq:appx:EKF:ph1a} \\
+		P^-_k           & = A^J P_{k-1} {A^J}^T + W^J Q {W^J}^T \label{eq:appx:EKF:ph1b}   
 	\end{align}
 \end{subequations}
 
@@ -133,10 +133,10 @@ Równania \eqref{eq:appx:EKF:ph2a}, \eqref{eq:appx:EKF:ph2b}, \eqref{eq:appx:KF:
 
 \begin{subequations}
 	\begin{align}
-	z_k           & = h(\widehat{x}^-_k, v_k) \label{eq:appx:EKF:ph2a}                                 \\
-	K_k           & = P^-_{k}{H^J}^T(H^J P^-_{k}{H^J}^T + V^J R {V^J}^T)^{-1} \label{eq:appx:EKF:ph2b} \\
-	\widehat{x}_k & = \widehat{x}^-_k + K_{k}(z_k-h(\widehat{x}^-_k, v_k))  \label{eq:appx:EKF:ph2c}   \\
-	P_k           & = (I-K_{k}H^J)P^-_k \label{eq:appx:EKF:ph2d}                                       
+		z_k           & = h(\widehat{x}^-_k, v_k) \label{eq:appx:EKF:ph2a}                                 \\
+		K_k           & = P^-_{k}{H^J}^T(H^J P^-_{k}{H^J}^T + V^J R {V^J}^T)^{-1} \label{eq:appx:EKF:ph2b} \\
+		\widehat{x}_k & = \widehat{x}^-_k + K_{k}(z_k-h(\widehat{x}^-_k, v_k))  \label{eq:appx:EKF:ph2c}   \\
+		P_k           & = (I-K_{k}H^J)P^-_k \label{eq:appx:EKF:ph2d}                                       
 	\end{align}
 \end{subequations}
 
@@ -150,10 +150,10 @@ Sposób wyznaczenia użytych jakobianów prezentują równania \eqref{eq:appx:EK
 
 \begin{subequations}
 	\begin{align}
-	A^J_{[i, j]} & = \frac{\partial f_{[i]}}{\partial x_{[j]}}(\widehat{x}_{k-1}, u_{k-1}, w_{k-1}) \label{eq:appx:EKF:J1} \\
-	W^J_{[i, j]} & = \frac{\partial f_{[i]}}{\partial w_{[j]}}(\widehat{x}_{k-1}, u_{k-1}, w_{k-1}) \label{eq:appx:EKF:J2} \\
-	H^J_{[i, j]} & = \frac{\partial h_{[i]}}{\partial x_{[j]}}(\widehat{x}^-_k, v_k) \label{eq:appx:EKF:J3}                \\
-	V^J_{[i, j]} & = \frac{\partial h_{[i]}}{\partial v_{[j]}}(\widehat{x}^-_k, v_k) \label{eq:appx:EKF:J4}                
+		A^J_{[i, j]} & = \frac{\partial f_{[i]}}{\partial x_{[j]}}(\widehat{x}_{k-1}, u_{k-1}, w_{k-1}) \label{eq:appx:EKF:J1} \\
+		W^J_{[i, j]} & = \frac{\partial f_{[i]}}{\partial w_{[j]}}(\widehat{x}_{k-1}, u_{k-1}, w_{k-1}) \label{eq:appx:EKF:J2} \\
+		H^J_{[i, j]} & = \frac{\partial h_{[i]}}{\partial x_{[j]}}(\widehat{x}^-_k, v_k) \label{eq:appx:EKF:J3}                \\
+		V^J_{[i, j]} & = \frac{\partial h_{[i]}}{\partial v_{[j]}}(\widehat{x}^-_k, v_k) \label{eq:appx:EKF:J4}                
 	\end{align}
 \end{subequations}
 
@@ -167,28 +167,28 @@ W 1995 w~wyniku prac prowadzonych przez S. Juliera, J. Uhlmanna i~H. Durrant-Why
 Względem EKF w~przypadku tego algorytmu występuje dodatkowy krok, wyznaczenie punktów sigma \eqref{eq:appx:UKF:ph0}. 
 
 \begin{equation}
-\chi^\alpha_{k-1} = [\widehat{x}^\alpha_{k-1} \widehat{x}^\alpha_{k-1}\pm\sqrt{(L+\lambda)P^\alpha_{k-1}}] \label{eq:appx:UKF:ph0}
+	\chi^\alpha_{k-1} = [\widehat{x}^\alpha_{k-1} \widehat{x}^\alpha_{k-1}\pm\sqrt{(L+\lambda)P^\alpha_{k-1}}] \label{eq:appx:UKF:ph0}
 \end{equation}
 
 Kolejnym krokiem jest faza predykacji wyrażona za pomocą wzorów \eqref{eq:appx:UKF:ph1a} - \eqref{eq:appx:UKF:ph1e}
 \begin{subequations}
 	\begin{align}
-	\chi^x_{k}        & = F[\chi^x_{k-1},\chi^v_{k-1}] \label{eq:appx:UKF:ph1a}                                                               \\
-	\widehat{x}^-_{k} & = \sum_{i=0}^{2L}W_i^{(m)}\chi^x_{i,k}\label{eq:appx:UKF:ph1b}                                                        \\
-	P^-_k             & = \sum_{i=0}^{2L}W_i^{(c)}[\chi^x_{i,k}-\widehat{x}^-_{k}][\chi^x_{i,k}-\widehat{x}^-_{k}]^T \label{eq:appx:UKF:ph1c} \\
-	\gamma_k          & = H[\chi^x_k, \chi^n_{k-1}] \label{eq:appx:UKF:ph1d}                                                                  \\
-	\widehat{y}^-_{k} & = \sum_{i=0}^{2L}W_i^{(m)}\gamma_{i,k} \label{eq:appx:UKF:ph1e}                                                       
+		\chi^x_{k}        & = F[\chi^x_{k-1},\chi^v_{k-1}] \label{eq:appx:UKF:ph1a}                                                               \\
+		\widehat{x}^-_{k} & = \sum_{i=0}^{2L}W_i^{(m)}\chi^x_{i,k}\label{eq:appx:UKF:ph1b}                                                        \\
+		P^-_k             & = \sum_{i=0}^{2L}W_i^{(c)}[\chi^x_{i,k}-\widehat{x}^-_{k}][\chi^x_{i,k}-\widehat{x}^-_{k}]^T \label{eq:appx:UKF:ph1c} \\
+		\gamma_k          & = H[\chi^x_k, \chi^n_{k-1}] \label{eq:appx:UKF:ph1d}                                                                  \\
+		\widehat{y}^-_{k} & = \sum_{i=0}^{2L}W_i^{(m)}\gamma_{i,k} \label{eq:appx:UKF:ph1e}                                                       
 	\end{align}
 \end{subequations}
 
 Faza korekcji została wyrażona wzorami \eqref{eq:appx:UKF:ph2a} - \eqref{eq:appx:UKF:ph2e}
 \begin{subequations}
 	\begin{align}
-	P_{\widehat{y}_k\widehat{y}_k} & = \sum_{i=0}^{2L}W_i^{(c)}[\gamma_{i,k} - \widehat{y}^-_k][\gamma_{i,k} - \widehat{y}^-_k]^T\label{eq:appx:UKF:ph2a} \\
-	P_{\widehat{x}_k\widehat{y}_k} & = \sum_{i=0}^{2L}W_i^{(c)}[\chi_{i,k} - \widehat{x}^-_k][\gamma_{i,k} - \widehat{y}^-_k]^T\label{eq:appx:UKF:ph2b}   \\
-	K_k                            & = P_{\widehat{x}_k\widehat{y}_k} P^{-1}_{\widehat{y}_k\widehat{y}_k} \label{eq:appx:UKF:ph2c}                        \\
-	\widehat{x}_k                  & = \widehat{x}^-_{k} + K_k(y_k - \widehat(y)^-_k) \label{eq:appx:UKF:ph2d}                                            \\
-	P_k                            & = P^-_k - K_kP_{\widehat{y}_k\widehat{y}_k}K_k^T \label{eq:appx:UKF:ph2e}                                            
+		P_{\widehat{y}_k\widehat{y}_k} & = \sum_{i=0}^{2L}W_i^{(c)}[\gamma_{i,k} - \widehat{y}^-_k][\gamma_{i,k} - \widehat{y}^-_k]^T\label{eq:appx:UKF:ph2a} \\
+		P_{\widehat{x}_k\widehat{y}_k} & = \sum_{i=0}^{2L}W_i^{(c)}[\chi_{i,k} - \widehat{x}^-_k][\gamma_{i,k} - \widehat{y}^-_k]^T\label{eq:appx:UKF:ph2b}   \\
+		K_k                            & = P_{\widehat{x}_k\widehat{y}_k} P^{-1}_{\widehat{y}_k\widehat{y}_k} \label{eq:appx:UKF:ph2c}                        \\
+		\widehat{x}_k                  & = \widehat{x}^-_{k} + K_k(y_k - \widehat(y)^-_k) \label{eq:appx:UKF:ph2d}                                            \\
+		P_k                            & = P^-_k - K_kP_{\widehat{y}_k\widehat{y}_k}K_k^T \label{eq:appx:UKF:ph2e}                                            
 	\end{align}
 \end{subequations}
 
@@ -216,73 +216,73 @@ Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został 
 	\subfigure[Wariant podstawowy]
 	{
 		\begin{tikzpicture}[auto, thick, node distance=2cm, >=triangle 45]
-		\tikzset{%
-			block/.style    = {draw, thick, rectangle, minimum height = 3em,
-				minimum width = 3em},
-			sum/.style      = {draw, circle, node distance = 2cm}, % Adder
-			input/.style    = {coordinate}, % Input
-			output/.style   = {coordinate} % Output
-		}
-		
-		\draw
-		node at (0,0)[right=-3mm]{\Large \textopenbullet}
-		node [input, name=xSignal] {} 
-		node at (4,0) [block] (lpf) {$G(s)$}
-		
-		node at (0,-2)[right=-3mm]{\Large \textopenbullet}
-		node [input, below of=xSignal, name=ySignal] {} 
-		node at (4,-2)[block] (hpf) {$1-G(s)$}
-		
-		node at (7, -1) [sum, name=suma]{\suma}
-		
-		node [output, right of=suma](out) {} ;
-		
-		\draw[->](xSignal) -- node {$x = z~+ n_1$}(lpf);
-		\draw[->](ySignal) -- node {$y = z~+ n_2$}(hpf);
-		\draw[->](hpf) -| node {}(suma);
-		\draw[->](lpf) -| node {}(suma);
-		\draw[->](suma) -- node {$\widehat{z}$}(out);
+			\tikzset{%
+				block/.style    = {draw, thick, rectangle, minimum height = 3em,
+					minimum width = 3em},
+				sum/.style      = {draw, circle, node distance = 2cm}, % Adder
+				input/.style    = {coordinate}, % Input
+				output/.style   = {coordinate} % Output
+			}
+					
+			\draw
+			node at (0,0)[right=-3mm]{\Large \textopenbullet}
+			node [input, name=xSignal] {} 
+			node at (4,0) [block] (lpf) {$G(s)$}
+					
+			node at (0,-2)[right=-3mm]{\Large \textopenbullet}
+			node [input, below of=xSignal, name=ySignal] {} 
+			node at (4,-2)[block] (hpf) {$1-G(s)$}
+					
+			node at (7, -1) [sum, name=suma]{\suma}
+					
+			node [output, right of=suma](out) {} ;
+					
+			\draw[->](xSignal) -- node {$x = z~+ n_1$}(lpf);
+			\draw[->](ySignal) -- node {$y = z~+ n_2$}(hpf);
+			\draw[->](hpf) -| node {}(suma);
+			\draw[->](lpf) -| node {}(suma);
+			\draw[->](suma) -- node {$\widehat{z}$}(out);
 		\end{tikzpicture}
 		\label{fig:appx:CF:algorithmA}
 	}
 	\subfigure[Wariant pracujący na szumie]
 	{
 		\begin{tikzpicture}[auto, thick, node distance=2cm, >=triangle 45]
-		\tikzset{%
-			block/.style    = {draw, thick, rectangle, minimum height = 3em,
-				minimum width = 3em},
-			sum/.style      = {draw, circle, node distance = 2cm}, % Adder
-			input/.style    = {coordinate}, % Input
-			output/.style   = {coordinate} % Output
-		}
-		
-		\draw
-		node at (0,0)[right=-3mm]{\Large \textopenbullet}
-		node [input, name=xSignal] {} 		
-		node at (3,0)[right=-2.5mm](point){\Large \textbullet}
-		
-		node at (0,-2)[right=-3mm]{\Large \textopenbullet}		
-		node [input, below of=xSignal, name=ySignal] {} 
-		node at (3, -2) [sum, name=sum1]{$-$}
-		node at (6,-2)[block] (lpf) {$G(s)$}
-		
-		node at (8, -1) [sum, name=sum2]{\suma}
-		
-		node [output, right of=sum2](out) {} ;
-		
-		\draw[->](xSignal) -- node {$x = z~+ n_1$}(point);
-		\draw[->](point) -- node {}(sum1);
+			\tikzset{%
+				block/.style    = {draw, thick, rectangle, minimum height = 3em,
+					minimum width = 3em},
+				sum/.style      = {draw, circle, node distance = 2cm}, % Adder
+				input/.style    = {coordinate}, % Input
+				output/.style   = {coordinate} % Output
+			}
+					
+			\draw
+			node at (0,0)[right=-3mm]{\Large \textopenbullet}
+			node [input, name=xSignal] {} 		
+			node at (3,0)[right=-2.5mm](point){\Large \textbullet}
+					
+			node at (0,-2)[right=-3mm]{\Large \textopenbullet}		
+			node [input, below of=xSignal, name=ySignal] {} 
+			node at (3, -2) [sum, name=sum1]{$-$}
+			node at (6,-2)[block] (lpf) {$G(s)$}
+					
+			node at (8, -1) [sum, name=sum2]{\suma}
+					
+			node [output, right of=sum2](out) {} ;
+					
+			\draw[->](xSignal) -- node {$x = z~+ n_1$}(point);
+			\draw[->](point) -- node {}(sum1);
 			\draw[->](point) -| node {}(sum2);
-		\draw[->](ySignal) -- node {$y = z~+ n_2$}(sum1);
-		\draw[->](sum1) -- node {$n_2-n_1$}(lpf);		
-		\draw[->](lpf) -| node {}(sum2);
-		
-		\draw[->](sum2) -- node {$\widehat{z}$}(out);
+			\draw[->](ySignal) -- node {$y = z~+ n_2$}(sum1);
+			\draw[->](sum1) -- node {$n_2-n_1$}(lpf);		
+			\draw[->](lpf) -| node {}(sum2);
+					
+			\draw[->](sum2) -- node {$\widehat{z}$}(out);
 		\end{tikzpicture}
 		\label{fig:appx:CF:algorithmB}
 	}
 	\caption{Schemat działania filtru komplementarnego}
-	
+		
 \end{figure}
 
 gdzie:

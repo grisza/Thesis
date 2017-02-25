@@ -1,5 +1,8 @@
 @echo off
-.\latexindent.exe %1 > temp
-move temp %1
+
+for /r %%f in (*.tex) do (
+    .\latexindent.exe %%f > temp
+    move temp %%f             
+)
 
 @echo on
