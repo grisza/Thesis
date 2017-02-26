@@ -28,7 +28,6 @@
 \usepackage{amsfonts}
 \usepackage{tikz}
 \usepackage{enumitem}
-\usetikzlibrary{arrows,shapes,positioning,shadows,trees,shapes.geometric}
 \usepackage{textcomp}
 \usepackage{multirow}
 \usepackage{graphics}
@@ -53,7 +52,7 @@
 
 
 \DeclareGraphicsExtensions{.eps}
-
+\usetikzlibrary{arrows,shapes,positioning,shadows,trees,shapes.geometric}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \definecolor{gray80}{gray}{0.8}
@@ -121,23 +120,17 @@
 
 \newcommand*\sfrac[2]{{}^{#1}\!/_{#2}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \author{Grzegorz Glonek}
 \title{Hybrydowa metoda śledzenia ruchu człowieka w~czasie rzeczywistym}
 
 
 
 \begin{document}
-%____________ Front matter
-%
 \pagestyle{empty}
 \pagenumbering{arabic}
 \frontmatter
 
 \includepdf{titlePage.pdf}
-
-%____________ Main matter
-
 \input{acknowledgements.tex}
 
 \tableofcontents
@@ -153,14 +146,11 @@
 \phantomsection
 
 \input{intro.tex}
-
 \input{literature.tex}
-
-\input{hybrid.tex}
-\input{experiments.tex}
-
-\input{further.tex}
-\input{summary.tex}
+%\input{hybrid.tex}
+%\input{experiments.tex}
+%\input{further.tex}
+%\input{summary.tex}
 
 \appendix
 \part{Dodatki}
@@ -168,25 +158,15 @@
 \input{appendix/filters.tex}
 \input{appendix/allan.tex}
 
-\bookmarksetup{startatroot}% this is it
-\addtocontents{toc}{\bigskip}% perhaps as well
+\bookmarksetup{startatroot}
+\addtocontents{toc}{\bigskip}
 
 \backmatter
-%\cleardoublepage
-%\phantomsection
 \bibliographystyle{ddabbrv}
 \bibliography{main}
 
-%\cleardoublepage
-%\phantomsection
 \listoffigures
-
-%\cleardoublepage
-%\phantomsection
 \listoftables
-
-%\cleardoublepage
-%\includepdf{gg.pdf}
 
 \end{document}
 
