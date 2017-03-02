@@ -1,6 +1,4 @@
-%\cleardoublepage
-%\phantomsection
-%Hybrydowa metoda śledzenia ruchu człowieka w~czasie rzeczywistym
+
 \chapter{Wstęp}\label{chap:intro}
 Śledzenie ruchu człowieka w~systemach komputerowych jest rozumiane jako proces obliczeniowy, którego celem jest jednoznaczne i~pozbawione znaczących opóźnień szacowanie położenia stawów układu szkieletowego człowieka w~przestrzeni i~w~czasie. Dysponując położeniem stawów w~czasie i~modelem układu kostnego człowieka można oszacować kolejne pozy postaci oraz ich zmianę - ruch postaci.
 
@@ -24,7 +22,6 @@ Jedną z~inspiracji dla niniejszej pracy i~jednocześnie przykładowym zastosowa
 
 \section{Cel i~teza pracy}
 Celem niniejszej pracy było opracowanie metody połączenia sygnałów z~wybranych urządzeń pomiarowych: kontrolera Kinect i~czujników inercyjnych, która działa z~częstotliwością porównywalną do częstotliwości pracy kontrolera Kinecta (30 Hz) i~zapewnia wysoką, wyższą niż u innych autorów, dokładność oszacowania położenia śledzonych stawów układu kostnego człowieka. W~konsekwencji śledzenie wykonywanych przez postać ruchów byłoby bardziej precyzyjne. Ruchy kończyn powinny być realizowane w~tempie charakterystycznym dla ćwiczeń rehabilitacyjnych, aby zastosowanie zaproponowanych urządzeń pomiarowych było zasadne. Gdyby prędkość ruchu kończyn przekroczyłaby zdolność rejestracji któregoś z~wybranych urządzeń pomiarowych należałoby zastąpić je urządzeniami o~wyższej częstotliwości rejestracji pomiarów. Nie ogranicza to jednak zastosowania metody do łączenia danych pochodzących z~innych urządzeń, pod warunkiem, że charakter zwracanych danych pomiarowych będzie analogiczny. 
-%Metoda zaproponowana w~niniejszej pracy została porównana z~metodą dotychczas opisaną w~literaturze o~najlepszej deklarowanej dokładności oszacowania położoenia stawów.
 
 Zgodnie z~powyższymi celami oraz analizą dostępnej literatury została postawiona następująca teza:\\
 \begin{center}
@@ -36,8 +33,6 @@ Jako przykład został wybrany i~zbadany ruch prawej ręki bez śledzenia ruchu 
 
 \section{Struktura pracy}
 Niniejsza dysertacja została podzielona na 4 części. Poza wstępem kolejne części dotyczą: analizy aktualnego stanu zagadnienia, przedstawienia autorskiej hybrydowej metody śledzenia ruchu oraz weryfikacji skuteczności opracowanej metody zwieńczonej podsumowaniem niniejszej pracy. 
-
-%\textbf{Do części 4 trzeba dodać eksperymenty, wyniki i~podsumowanie, bo tak to 4 częśc jest za krótka. POza tym numery rozdziałów trzeba uaktualnić i~wprowadzić jako referencje a~nie na sztywno.}  
 
 Analiza aktualnego stanu zagadnienia (rozdział \ref{chap:literature}) zawiera omówienie istniejących systemów śledzenia ruchu (rozdział \ref{sec:literature:mocapSystems}), sposobów reprezentacji ciała człowieka w systemach komputerowych (rozdział \ref{chap:bodyRep}) analizę charakterystyk pracy i~budowy kontrolera Microsoft Kinect oraz~czujników inercyjnych (rozdział \ref{chap:characteristics}), a~także analizę istniejących w~literaturze realizacji hybrydowych systemów śledzenia ruchu człowieka wykorzystujących te same lub analogiczne urządzenia pomiarowe (rozdział \ref{sec:literature:hybrids}). Należy w~tym miejscu zaznaczyć, że opisane w~pracy charakterystyki kontrolera Kinect i~czujników inercyjnych, zostały w~znacznej mierze wyznaczone na bazie własnych badań oraz na podstawie wiedzy dostępnej w~literaturze.
 

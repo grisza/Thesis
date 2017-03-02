@@ -1,5 +1,3 @@
-%\cleardoublepage
-%\phantomsection
 \chapter{Hybrydowa metoda śledzenia ruchu człowieka}\label{chap:hybrid}
 
 Prezentowana w niniejszej dysertacji hybrydowa metoda śledzenia ruchu człowieka, wykorzystuje dwa rodzaje urządzeń pomiarowych: kontroler Microsoft Kinect oraz czujniki inercyjne - akcelerometr i żyroskop, które zostały scharakteryzowane w rozdziale \ref{chap:characteristics}. Mając na uwadze dokładność danych przesyłanych przez każde z zastosowanych urządzeń pomiarowych oraz ograniczenia w ich działaniu, takie jak wrażliwość na występowanie okluzji sensora głębi, czy ograniczona liczba stopni swobody układów inercyjnych, opracowana przeze mnie hybrydowa metoda śledzenia ruchu człowieka umożliwia ograniczenie wpływu niedoskonałości każdego ze stosowanych urządzeń. Autorskie połączenie danych (ang. \textsl{data fusion}) z kontrolera Kinect i czujników inercyjnych poprawia precyzję szacowania położenia stawów, a co za tym idzie wpływa korzystnie na precyzję śledzenia wykonywanego przez użytkownika ruchu. Ograniczenie wpływu niedoskonałości każdego z wykorzystanych urządzeń pomiarowych na dokładność śledzenia ruchu możliwe jest dzięki temu, że są one względem siebie w pewnym stopniu komplementarne to znaczy, że niedoskonałości występujące w jednym urządzeniu i wpływające np. na brak śledzenia ruchu w jednej z płaszczyzn mogą zostać ograniczone przez wykorzystanie możliwości śledzenia ruchu w tej płaszczyźnie przez drugie z urządzeń.\\
@@ -29,10 +27,12 @@ W zakresie czujnika inercyjnego szacowanie położenia stawu odbywa się na pods
 	\label{eq:methodFormula}
 \end{equation}
 
-Wzór \eqref{eq:methodFormula} odnosi się do każdego markera zbudowanego z pary czujników: akcelerometru i żyroskopu (markery inercyjne) umieszczonego na ciele pomiędzy dwoma kolejnymi stawami, których pozycje oszacowane przez kontroler Kinect są argumentami metody. 
-%po tym zdaniu śmiem przypuszczać, że podstawowym Twoim problemem jest śledzenie stawu dziecka względem stawu rodzica a nie pozycji stawu w zewnętrznym układzie wspólrzednych. Trzeba to wyjaśnić 
+Wzór \eqref{eq:methodFormula} odnosi się do każdego markera zbudowanego z pary czujników: akcelerometru i żyroskopu (markery inercyjne) umieszczonego na ciele pomiędzy dwoma kolejnymi stawami, których pozycje oszacowane przez kontroler Kinect są argumentami metody. Zastosowanie go do każdego z umieszczonych 
+%[Fixed]po tym zdaniu śmiem przypuszczać, że podstawowym Twoim problemem jest śledzenie stawu dziecka względem stawu rodzica a nie pozycji stawu w zewnętrznym układzie wspólrzednych. Trzeba to wyjaśnić 
 
-Eksperymenty badawcze przeprowadzone w niniejszej pracy śledziły (sam eksperyment nic nie śledzi) ruch ręki z wykorzystaniem dwóch markerów inercyjnych, jednego umieszczonego na ramieniu (pomiędzy stawem barkowym a stawem łokciowym) oraz drugiego umieszczonego na przedramieniu, pomiędzy stawem łokciowym a stawem nadgarstkowym. Schemat umieszczenia markerów inercyjnych przedstawia rysunek \ref{fig:hybrid:imuMarkerPlacementSample}.
+Eksperymenty badawcze przeprowadzone w niniejszej pracy polegały na śledzeniu 
+%(sam eksperyment nic nie śledzi) 
+ruchu ręki z wykorzystaniem dwóch markerów inercyjnych, jednego umieszczonego na ramieniu (pomiędzy stawem barkowym a stawem łokciowym) oraz drugiego umieszczonego na przedramieniu, pomiędzy stawem łokciowym a stawem nadgarstkowym. Schemat umieszczenia markerów inercyjnych przedstawia rysunek \ref{fig:hybrid:imuMarkerPlacementSample}.
 %opis eksperymentów powinien być w częsci testowej a nie w opisie metody
 \begin{figure}[!htp]
 	\centering	
