@@ -1,5 +1,19 @@
 %\cleardoublepage
 %\phantomsection
+
+%Eksperymenty badawcze przeprowadzone w niniejszej pracy polegały na wykonywaniu 
+%(sam eksperyment nic nie śledzi) 
+%ruchu ręki z wykorzystaniem dwóch markerów inercyjnych, jednego umieszczonego na ramieniu (pomiędzy stawem barkowym a stawem łokciowym) oraz drugiego umieszczonego na przedramieniu, pomiędzy stawem łokciowym a stawem nadgarstkowym oraz śledzeniu tego ruchu za pomocą urządzeń pomiarowych. Schemat umieszczenia markerów inercyjnych przedstawia rysunek \ref{fig:hybrid:imuMarkerPlacementSample}.
+%opis eksperymentów powinien być w częsci testowej a nie w opisie metody
+% \begin{figure}[!htp]
+% 	\centering	
+% 	\includegraphics[width=0.75\textwidth]{images/imuArm.png}
+% 	\caption{Schemat umieszczenia markerów inercyjnych na potrzeby eksperymentów badawczych opisanych w niniejszej pracy.}
+% 	\label{fig:hybrid:imuMarkerPlacementSample}
+% \end{figure}
+%identyczny ryzunek był w drugim rozdziale. Po co to powtarzać. Poza tym to część
+
+
 \chapter{Eksperymenty badawcze}\label{chap:experiments}
 Eksperymenty badawcze wyryfikujące charakterystyki sensorów, jak również dokładności opracowanej autorsko hybrydowej metody śledzenia ruchu kończyn, zostały wykonane w~laboratorium technik multimedialnych w~Centrum Technologii Informacyjnych Politechniki Łódzkiej. Jako źródło danych referencyjnych wykorzystany został zainstalowany tam system śledzenia ruchu firmy Vicon zbudowany na bazie 10 kamer Vicon T-40S \cite{ViconSpec} rejestrujących ruch markerów. System działa z~częstotliwością 100 klatek na sekundę, a~dane przetwarzane były przez dedykowaną aplikację Nexus w~wersji 2.0. Dane dla omówianej metody ([TODO] co to znaczy dane dla metody?) zostały zarejestrowane przez kontroler Microsoft Kinect w~wersji dla konsoli XBox 360 model 1413 oraz przez urządzenie rejestrujące dane z~czujników inercyjnych zaprojektowane i~wykonane samodzielnie. Szczegółowy opis przeprowadzonych eksperymentów badawczych znajduje się w~dalszej części niniejszej dysertacji.
 %nie wiem dlaczego w części poświęconej eksperymentom znalazła się analiza czujników intercyjnych skoro one miały być wcześniej
@@ -63,7 +77,7 @@ W kolejności wykonywane ćwiczenia to:
 
 Wszystkie pomiary zostały następnie ([TODO] co to znaczy nastepnie, kiedy? i jak zsynchronizowane skoro wcześniej była tylko mowa o synchronizacji IMU z Kinectem) zsynchronizowane czasowo z~pomiarami referencyjnymi uzyskanymi za pomocą systemu śledzenia Vicon i~porównane z~nimi w~celu określenia dokładności wyznaczania pozycji stawów i~kąta zgięcia w~łokciu. Układy współrzędnych systemu śledzenia Vicon i~systemu opartego na autorskiej metodzie śledzenia ruchu zostały ujednolicone. Jako główny przyjęto układ odniesienia drugiego ze wspomnianych systemów. ([TODO] dlaczego układ Kinecta był wiodący a nie ukłąd Vicona? Vicon wydaje się bardziej stabilny.) Zaprezentowane w~niniejszym rozdziale wyniki są średnią z~uzyskanych porównań pomiarów ([TODO] co to jest średnia z porównań pomiarów?? Może trzeba napisać co było uśredniane i dlaczego i co było porównywane?). Dodatkowo, oprócz porównania ich do danych referencyjnych (pochodzących z systemu Vicon), otrzymane wyniki porównane zostały także z~pomiarami uzyskanymi za pomocą metody o~najwyższej opisanej w~literaturze dokładności, opierającej się na łączeniu danych o~pozycjach poszczególnych stawów tj. metodą zaproponowaną przez Kalkbrenner et al. \cite{Kalkbrenner2014}.(nazywana dalej metodą Kalkbrennera)\\
 %trzeba wprowadzic pojęcie średniej dokładności, które następnie pojawi się analizie. Nie wiadomo dokładnie z tekstu jak średnie odległości przekładają się na dokładność szacowania pozycji. Ta dyskusja już była: czy szacujemy błąd, czy szacujemy dokładność, czy może coś jeszcze?
-Wyniki zebrane w~tabelach \ref{tab:experiments:first:avg} i~\ref{tab:experiments:four:avg} s� średnimi odległościami euklidesowymi ($\bar{d}$) pomiędzy położeniem śledzonego stawu w~systemie Vicon ($p_V$), a~jego estymowanym położeniem ($p_E$), wyznaczonymi według wzoru \eqref{eq:experiments:euclidean}. Estymacja położenia $p_E$ odbywa się za pomocą dwóch porównywanych ze sobą metod: metody Kalkbrennera ($p_Ep$) i~metody zaproponowanej przez autora niniejszej dysertacji ($p_Eo$). 
+Wyniki zebrane w~tabelach \ref{tab:experiments:first:avg} i~\ref{tab:experiments:four:avg} s� średnimi odległościami euklidesowymi ($\bar{d}$) pomiędzy położeniem śledzonego stawu w~systemie Vicon ($p_V$), a~jego estymowanym położeniem ($p_E$), wyznaczonymi według wzoru \eqref{eq:experiments:euclidean}. Estymacja położenia $p_E$ odbywa się za pomocą dwóch porównywanych ze sobą metod: metody Kalkbrennera ($p_Ep$) i~metody zaproponowanej przez autora niniejszej dysertacji ($p_Eo$). 
 %([TODO] w opisie brakuje opisu symbolu T. Poza tym p_E dla kalkbrenera i Twój powinny mieć w tabelach inne oznaczenia. Podać jeszcze interpretację średnich odległości, tzn. że chodzi o średni błąd oszacowania)
 
 \begin{equation}
@@ -113,7 +127,7 @@ Pierwsze ćwiczenie, jakie zostało wykonane z~użyciem omawianej metody, to zgi
 		Odchylenie & 0.08           & 0.05              & 0.12                  & 0.07           & 0.07              & 0.12                  \\
 		\hline
 	\end{tabular} 
-			
+						
 \end{table} 
 
 Ćwiczenie polegające na wielokrotnym zgięciu ręki w~łokciu do góry, zgodnie z~przewidywaniami, dla obu urządzeń pomiarowych nie były trudne. Przez cały czas trwania ćwiczenia stawy były poprawnie identyfikowane i~w~pełni śledzone przez kontroler Kinect. Także czujniki inercyjne były w~stanie zarejestrować w~pełni  wykonywany ruch. Także obie porównywane ze sobą metody łączące dane dokonywały zbliżonych obliczeń, a~zakres szacowanego przez nie ruchu był zbliżony do tego wykonywanego na żywo. Widoczne było natomiast zróżnicowanie w~dopasowaniu szkieletu do ciała ze względu na przyjęty model długości kości. W~metodzie Kalkbrennera miała miejsce częsta zmiana tego oszacowania co wpływało, że śledzony staw potrafił zmienić swoje położenie bez ruchu, a~także znaleźć się poza konturem postaci. W~przypadku metody autora niniejszej rozprawy, zauważalne były częste, jednak niewielkie, fluktuacje pozycji ([TODO] pozycji czego?) jednak nie wpływały one ([TODO] na co?) w~takim stopniu jak zmienna długość segmentów reprezentujących kości. Wydaje się również, że to właśnie brak stałego modelu długości kości w~metodzie Kalkbrennera ma największy wpływ na różnicę uzyskiwanych wyników.\\
@@ -197,7 +211,7 @@ Rysunki \ref{fig:experiments:first:raw} oraz \ref{fig:experiments:first:fused} p
 		Odchylenie & 0.11           & 0.1               & 0.65                  & 0.14           & 0.12              & 0.77                  \\
 		\hline
 	\end{tabular} 
-			
+						
 \end{table} 
 
 \begin{table}[!htp]
@@ -223,7 +237,7 @@ Rysunki \ref{fig:experiments:first:raw} oraz \ref{fig:experiments:first:fused} p
 		Odchylenie & 0.23           & 0.24              & 1.55                  & 0.18           & 0.2               & 1.57                  \\
 		\hline
 	\end{tabular} 
-			
+						
 \end{table} 
 
 W obu ćwiczeniach w~trakcie wykonywania ruchu następował moment, w~którym jeden lub dwa stawy stawały się niewidoczne dla kontrolera Kinect, a~co za tym idzie, obie metody musiały bazować tylko na jednym źródle danych. Metoda opracowana przez autora niniejszej pracy nie wykorzystywała  w~trakcie łączenia danych pomiarów uzyskanych z~niepewnego źródła i~stopniowo wstrzymywała aktualizację estymowanego położenia stawu. Natomiast metoda Kalkbrennera wykorzystywała w~dalszym ciągu dane z~kontrolera Kinect zmieniając jedynie jego stopień istotności (rys. \ref{fig:experiments:sec:follow}). 
@@ -287,12 +301,12 @@ Celem ostatniego ćwiczenia było sprawdzenie stabilności pomiarów w~przypadku
 		5          & 2.6            & 2.5               & 4.32                  & 2.4            & 2.7               & 4.84                  \\
 		6          & 2.2            & 2.5               & 4.02                  & 2.3            & 2.7               & 4.26                  \\
 		\hline
-								
+														
 		Średnia   & 2.3            & 2.5               & 4.11                  & 2.5            & 2.8               & 4.65                  \\
 		Odchylenie & 0.16           & 0.07              & 0.29                  & 0.08           & 0.04              & 0.32                  \\
 		\hline
 	\end{tabular} 
-			
+						
 \end{table} 
 
 Podobnie jak w~ćwiczeniu 1 tak i~w~ćwiczeniu 4 oba urządzenia były w~stanie przez cały czas trwania eksperymentu śledzić ruchy wykonywane przez śledzonego aktora. Jednak podobnie jak we wspomnianym ćwiczeniu, zmianie ulegały długości segmentów kości i~miało to przełożenie na działanie metody Kalkbrennera. Wizualizacje łańcuchów kinematycznych przedstawione na rysunku \ref{fig:experiments:four} pokazują, że Kinect, mimo pełnej widoczności całej ręki, miał trudność z~poprawnym określeniem jej pozycji w~osi pionowej. Mimo to obie metody były w~stanie wyznaczyć pozycje stawów z~lepszą dokładnością niż każde z~urządzeń pomiarowych osobno.
@@ -398,7 +412,7 @@ Na wykresie z rysunku \ref{fig:experiments:angle:summary} reprezentującym szaco
 				(ex 2,2.9) +- (0.0, 0.12)
 				(ex 3,2.8) +- (0.0, 0.2)
 			(ex 4,2.5) +- (0.0, 0.07)};
-										
+																			
 			\legend{Metoda Kalkbrennera, Metoda autorska}
 			\node at (axis cs:ex 1,4){\textcolor{red}{8\%}};
 			\node at (axis cs:ex 2,4){\textcolor{red}{16\%}};
@@ -438,7 +452,7 @@ Na wykresie z rysunku \ref{fig:experiments:angle:summary} reprezentującym szaco
 				(ex 2,13.35)+- (0.0, 0.65)
 				(ex 3,14.08)+- (0.0, 1.55)
 			(ex 4,4.11)  +- (0.0, 0.29)};
-										
+																			
 			\legend{Metoda Kalkbrennera, Metoda autorska}
 			\node at (axis cs:ex 1,16){\textcolor{red}{6\%}};
 			\node at (axis cs:ex 2,16){\textcolor{red}{8\%}};
