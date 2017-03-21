@@ -15,10 +15,8 @@ del *.log
 del main.pdf
 pdflatex titlePage
 pdflatex main
-pdflatex main
 makeindex main.nlo -s nomencl.ist -o main.nls
-bibtex main
-bibtex main
+biber main
 pdflatex main
 pdflatex main
 del *.toc

@@ -2,11 +2,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage[MeX]{polski}
 \usepackage[polish]{babel}
+\usepackage[style=ieee, citestyle=numeric-comp,backend=biber,sorting=none]{biblatex}
 \usepackage{blindtext}
 \usepackage{bookmark,hyperref}
 \usepackage[OT4]{fontenc}
 \usepackage{ntheorem}
-\usepackage[numbers,sort&compress]{natbib}
+%\usepackage[numbers,sort&compress]{natbib}
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{graphicx}
@@ -49,6 +50,7 @@
 \usepackage{MnSymbol}%
 \usepackage{wasysym}%
 
+\addbibresource{main.bib}
 
 \DeclareGraphicsExtensions{.eps}
 \usetikzlibrary{arrows,shapes,positioning,shadows,trees,shapes.geometric}
@@ -112,11 +114,6 @@
 {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$}@{${}={}$} p{0.8\textwidth}}}
 	{\end{tabular}\par\vspace{\belowdisplayskip}}
 
-\newcounter{equationset}
-\newcommand{\equationset}[1]{% \equationset{<caption>}
-	\refstepcounter{equationset}% Step counter
-	\noindent\makebox[\linewidth]{Równania~\theequationset: #1}}% Print caption
-
 \newcommand*\sfrac[2]{{}^{#1}\!/_{#2}}
 
 \author{Grzegorz Glonek}
@@ -125,6 +122,8 @@
 
 
 \begin{document}
+%\DeclareUnicodeCharacter{00e5}{a}
+
 \pagestyle{empty}
 \pagenumbering{arabic}
 \frontmatter
@@ -160,11 +159,13 @@
 \addtocontents{toc}{\bigskip}
 
 \backmatter
-\bibliographystyle{ddabbrv}
-\bibliography{main}
+%\bibliographystyle{ddabbrv}
+%\bibliographystyle{ieeetr}
+%\bibliographystyle{plunsrt}
+
+\printbibliography[heading=subbibintoc]
 
 \listoffigures
 \listoftables
 
 \end{document}
-
