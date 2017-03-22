@@ -217,7 +217,7 @@ przedstawiający wartość oszacowania orientacji w~osi $Z$ w~czasie dla modułu
 Wyznaczając orientację przestrzenną modułu inercyjnego zbudowanego jedynie z~akcelerometru i~żyroskopu należy mieć na uwadze układ odniesienia dla otrzymywanych wartości. Oszacowanie będące wynikiem działania filtru Madgwicka dla osi $X$ i~$Y$ wykorzystuje jako swój punkt odniesienia wektor siły grawitacji, co oznacza że te dwie wartości będą wskazywały orientacje względem grawitacji ziemskiej. Orientacja względem osi $Z$ oszacowana jedynie na podstawie pomiarów żyroskopu, co do zasady, wyraża obrót w~stosunku do pozycji początkowej w~jakiej znajdował się moduł w~trakcie inicjalizacji filtru Madgwicka. Sposobem na ustabilizowanie oszacowania orientacji wokół osi $Z$ i~odniesienia go względem grawitacji Ziemi byłoby uzupełnienie urządzenia pomiarowego o~magnetometr. \\
 
 \begin{figure}[!htb]
-			
+							
 	\centering 
 	\includegraphics[width=0.75\textwidth]{images/imumeasuredAngles.png}
 	\caption{Wykres przedstawiający uśrednione wartości oszacowania kąta obrotu wokół osi $X$ i~$Y$ za pomocą modułu inercyjnego}
@@ -228,7 +228,7 @@ Wyznaczając orientację przestrzenną modułu inercyjnego zbudowanego jedynie z
 	\includegraphics[width=0.75\textwidth]{images/imuDrift.png}
 	\caption{Wykres przedstawiający dryf oszacowania kąta obrotu modułu inercyjnego wokół osi $Z$}
 	\label{fig:hybrid:imu:drift}
-		
+						
 \end{figure}
 
 Zanim jednak dane z~czujników IMU zostaną połączone za pomocą filtru Madgwicka, pomiary uzyskane za pomocą akcelerometru poddane są korekcie ze względu na aktualną temperaturę pracy sensora. Wzór \eqref{eq:hybrid:temperatureCorrection} przedstawia sposób korekty pomiaru z~akcelerometru  $A$ w~określonej temperaturze $T$. Temperatura $T_0$ to temperatura neutralna, która wg specyfikacji wykorzystanego układu elektronicznego oraz na podstawie własnych badań 
@@ -253,17 +253,19 @@ Aby ograniczyć wpływ opisanych szumów na dalsze etapy działania opracowanej 
 
 \begin{figure}[!htb]
 	\centering
-	\subfigure[Pomiar bezpośredni - zaszumiony]{
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics{images/kinectElbowRaw.png}	
+		\caption{Pomiar bezpośredni -- zaszumiony}
 		\label{fig:hybrid:kinect:noised}
-		\includegraphics[width=\textwidth]{images/kinectElbowRaw.png}
-	}
-								
-	\subfigure[Pomiar odszumiony]{
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics{images/kinectElbowFiltered.png}	
+		\caption{Pomiar odszumiony}
 		\label{fig:hybrid:kinect:denoised}
-		\includegraphics[width=\textwidth]{images/kinectElbowFiltered.png}	
-	}
-								
-	\caption{Wykres przedstawiający oszacowanie położenia stawu łokciowego za pomocą kontrolera Kinect}
+	\end{subfigure}				
+	\caption{Wykres przedstawiający oszacowanie położenia stawu łokciowego za pomocą kontrolera Kinect na podstawie sygnału zaszumionego (a) oraz odszumionego (b)}
 \end{figure}
 
 Wartość współczynnika filtracji $f_{LPF}$ została wyznaczona w~drodze prowadzonych badań własnych i~została ustalona na $0.065$. Przeprowadzone przeze mnie badanie 
@@ -386,10 +388,10 @@ wraz z~odchyleniem standardowym uzyskiwanych oszacowań spowodowane jest faktem,
 
 \begin{figure}[!htp]
 	\centering
-								
+												
 	\includegraphics[width=0.75\textwidth]{images/kinectRotationStdDev.png}
 	\caption{Odchylenie standardowe estymacji kąta obrotu postaci względem Kinecta}
-							
+											
 	\label{fig:hybrid:kinect:kinectRotationVariance}
 \end{figure}
 
@@ -411,16 +413,19 @@ gdzie:
 
 \begin{figure}%[!htb]
 	\centering 
-	\subfigure[Staw śledzony ze statusem \emph{Tracked}]
-	{
-		\includegraphics[width=0.75\textwidth]{images/Fig09.png}
+	\begin{subfigure}[b]{0.79\textwidth}
+		\centering
+		\includegraphics{images/Fig09.png}	
+		\caption{Staw śledzony ze statusem \emph{Tracked}}
 		\label{fig:hybrid:kinect:hpfNotOccluded}
-	}
-	\subfigure[Staw śledzony ze statusami \emph{Tracked} i~\emph{Interferred} (oznaczone owalem)]
-	{
-		\includegraphics[width=0.75\textwidth]{images/Fig10.png}
+	\end{subfigure}	
+			
+	\begin{subfigure}[b]{0.79\textwidth}
+		\centering
+		\includegraphics{images/Fig10.png}
+		\caption{Staw śledzony ze statusami \emph{Tracked} i~\emph{Interferred} (oznaczone owalem)}
 		\label{fig:hybrid:kinect:hpfOccluded}
-	}
+	\end{subfigure}	
 	\caption{Wynik działania filtru górnoprzepustowego (wz. \eqref{eq:hybrid:kinect:hpf}) w~stosunku do położenia wybranych stawów w~przestrzeni w~osi $Z$ dla stawu śledozonego ze stałym statusem \emph{Tracked} (a) oraz zmiennym statusem \emph{Tracked} i~\emph{Interferred} (b)}
 	\label{fig:hybrid:kinect:hpfResults}
 \end{figure}

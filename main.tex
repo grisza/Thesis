@@ -1,13 +1,19 @@
 \documentclass[a4paper,12pt,openright,twoside,table]{mwbkfixed}
 \usepackage[utf8]{inputenc}
+\usepackage[OT4]{fontenc}
 \usepackage[MeX]{polski}
 \usepackage[polish]{babel}
 \usepackage[style=ieee, citestyle=numeric-comp,backend=biber,sorting=none]{biblatex}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{numprint}
+
 \usepackage{blindtext}
-\usepackage{bookmark,hyperref}
-\usepackage[OT4]{fontenc}
+\usepackage{bookmark}
+\usepackage{hyperref}
 \usepackage{ntheorem}
-%\usepackage[numbers,sort&compress]{natbib}
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{graphicx}
@@ -24,14 +30,11 @@
 \usepackage{float}
 \usepackage{longtable} %łamanie tabel
 \usepackage[toc,page]{appendix}
-\usepackage{amsmath}
-\usepackage{amsfonts}
 \usepackage{tikz}
 \usepackage{enumitem}
 \usepackage{textcomp}
 \usepackage{multirow}
 \usepackage{graphics}
-\usepackage{subfigure}
 \usepackage{gensymb}
 \usepackage{epstopdf}
 \usepackage{mathtools}
@@ -42,17 +45,19 @@
 \usepackage{epstopdf}
 \usepackage{listings}
 \usepackage{array}
-\usepackage{caption}
 \usepackage{tabularx}
-\usepackage{amsmath}
 \usepackage{cases}
 \usepackage{indentfirst}
 \usepackage{MnSymbol}%
 \usepackage{wasysym}%
 
 \addbibresource{main.bib}
+\npdecimalsign{.}
+\nprounddigits{2}
 
 \DeclareGraphicsExtensions{.eps}
+\usetikzlibrary{patterns}
+\pgfplotsset{width=12cm,compat=1.14}
 \usetikzlibrary{arrows,shapes,positioning,shadows,trees,shapes.geometric}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -119,10 +124,7 @@
 \author{Grzegorz Glonek}
 \title{Hybrydowa metoda śledzenia ruchu człowieka w~czasie rzeczywistym}
 
-
-
 \begin{document}
-%\DeclareUnicodeCharacter{00e5}{a}
 
 \pagestyle{empty}
 \pagenumbering{arabic}

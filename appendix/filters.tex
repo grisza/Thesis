@@ -1,17 +1,17 @@
-\chapter{Filtracja sygnałów}
+\chapter{Popularne metody filtracji i estymacji sygnałów pomiarowych}
 \label{chap:appx:filters}
-Istotnym etapem przetwarzania sygnałów jest ich filtracja. Zazwyczaj celem tej operacji jest usunięcie niepożądanego szumu z~uzyskanych pomiarów.~Znanych jest wiele metod filtracji, które weszły do powszechnego użytku, jednak szczególną grupą filtrów są filtry Kalmana.~Przez ponad 50 lat znalazły one zastosowanie w~przemyśle, a~także stały się obiektem wielu\footnote{W samej tylko bibliotece cyfrowej organizacji IEEE (\url{http://ieeexplore.ieee.org}) wyszukiwanie frazy ''Kalman filter'' zwraca około 25000 wyników.} badań i~opracowań naukowych np:  \cite{Droleta,Welch2006, Kedzierski2007, Huo2014, Pandey2014}
+Istotnym etapem przetwarzania sygnałów jest ich filtracja. Zazwyczaj celem tej operacji jest usunięcie niepożądanego szumu z~uzyskanych pomiarów.~Znanych jest wiele metod filtracji, które weszły do powszechnego użytku, jednak szczególną grupą filtrów są filtry Kalmana.~Przez ponad 50 lat znalazły one zastosowanie w~przemyśle, a~także stały się obiektem wielu\footnote{W samej tylko bibliotece cyfrowej IEEE Xplore (\url{http://ieeexplore.ieee.org}) wyszukiwanie frazy ''Kalman filter'' zwraca około 25000 wyników.} badań i~opracowań naukowych \cite{Droleta,Welch2006, Kedzierski2007, Huo2014, Pandey2014}.
 
 \section*{Liniowy filtr Kalmana (KF - \emph{ang. Kalman filter})}
 \label{sec:appx:filters:KF}
 \nomenclature{KF}{Liniowy filtr Kalmana}
 Liniowy filtr Kalmana jest oryginalną metodą filtracji sygnału opracowana i~opisaną przez Rudolpha E. Kalmana w~1960 \cite{Kalman1960} i~1961 \cite{KalmanBucy1961}. Metoda ta pozwala na oszacowanie wartości kolejnych pomiarów tylko na podstawie bieżących danych oraz modelu matematycznego obserwowanego zjawiska. Działanie filtra możemy podzielić na dwie następujące bezpośrednio po sobie fazy: 
 \begin{enumerate}
-	\item Predykacji
-	\item Korekcji
+	\item Predykacji,
+	\item Korekcji.
 \end{enumerate}
 
-Faza pierwsza polega na oszacowaniu aktualnej wartości (stanu) pomiaru na podstawie ostatniego znanego pomiaru oraz modelu przejścia pomiędzy kolejnymi stanami. Jeśli w~naszym układzie występuje źródło sygnału kontrolnego, pomiary z~niego uzyskane możemy wykorzystać w~tej fazie do wymuszenia określonego stanu. Oszacowanie aktualnego pomiaru uwzględnia także występowanie szumu, który to z~założenia jest szumem białym. Równania \eqref{eq:appx:KF:ph1a} oraz \eqref{eq:appx:KF:ph1b} przedstawiają matematyczny zapis fazy predykacji nazywanej także aktualizacją czasową.
+Faza pierwsza polega na oszacowaniu aktualnej wartości (stanu) pomiaru na podstawie ostatniego znanego pomiaru oraz modelu przejścia pomiędzy kolejnymi stanami. Jeśli w~naszym układzie występuje źródło sygnału kontrolnego, pomiary z~niego uzyskane możemy wykorzystać w~tej fazie do wymuszenia określonego stanu. Oszacowanie aktualnego pomiaru uwzględnia także występowanie szumu, który to z~założenia jest szumem białym. Równania \ref{eq:appx:KF:ph1a} oraz \ref{eq:appx:KF:ph1b} przedstawiają matematyczny zapis fazy predykacji nazywanej także aktualizacją czasową.
 
 \begin{subequations}
 	\begin{align}
@@ -22,19 +22,19 @@ Faza pierwsza polega na oszacowaniu aktualnej wartości (stanu) pomiaru na podst
 
 gdzie:
 \begin{itemize}
-	\item $\widehat{x}^-_k$ -- prognozowana wartość stanu
-	\item $\widehat{x}_{k-1}$ -- wartość stanu oszacowana w~poprzednim kroku
-	\item $P^-_k$ -- prognozowana wartość kowariancji estymacji
-	\item $P_{k-1}$ -- faktyczna wartość kowariancji estymacji wykonana w~poprzednim kroku
-	\item $A$ -- stała macierz definiująca przejście pomiędzy dwoma, następującymi po sobie stanami
-	\item $B$ --  stała macierz definiująca powiązanie pomiędzy aktualnym stanem/pomiarem z~pomiarem sygnału sterującego
-	\item $w$ --  zmienna losowa o~rozkładzie normalnym będąca szumem procesu
-	\item $Q$ --  kowariancja szumu procesu
+	\item $\widehat{x}^-_k$ -- prognozowana wartość stanu w kroku $k$,
+	\item $\widehat{x}_{k-1}$ -- wartość stanu oszacowana w~kroku $k-1$,
+	\item $P^-_k$ -- prognozowana wartość kowariancji estymacji,
+	\item $P_{k-1}$ -- faktyczna wartość kowariancji estymacji wykonana w~kroku $k-1$,
+	\item $A$ -- stała macierz definiująca przejście pomiędzy dwoma, następującymi po sobie stanami,
+	\item $B$ --  stała macierz definiująca powiązanie pomiędzy aktualnym stanem/pomiarem a~pomiarem sygnału sterującego,
+	\item $w$ --  zmienna losowa o~rozkładzie normalnym będąca szumem procesu,
+	\item $Q$ --  kowariancja szumu procesu.
 \end{itemize}
 
 Efektem działania tej fazy jest oszacowana wartość aktualnego stanu obserwowanego źródła wraz z~kowariancją tego oszacowania.
 
-Drugim etapem jaki możemy wyszczególnić w~trakcie działania omawianego filtru jest faza korekcji lub inaczej aktualizacji pomiarowej. Matematycznie fazę tę można zapisać za pomocą równań \eqref{eq:appx:KF:ph2a}, \eqref{eq:appx:KF:ph2b}, \eqref{eq:appx:KF:ph2c} oraz \eqref{eq:appx:KF:ph2d}.
+Drugim etapem jaki możemy wyszczególnić w~trakcie działania omawianego filtru jest faza korekcji lub inaczej aktualizacji pomiarowej. Matematycznie fazę tę można zapisać za pomocą równań \ref{eq:appx:KF:ph2a}, \ref{eq:appx:KF:ph2b}, \ref{eq:appx:KF:ph2c} oraz \ref{eq:appx:KF:ph2d}.
 
 \begin{subequations}
 	\begin{align}
@@ -47,17 +47,17 @@ Drugim etapem jaki możemy wyszczególnić w~trakcie działania omawianego filtr
 
 gdzie:
 \begin{itemize}
-	\item $z_k$ -- aktualny pomiar uzyskany ze źródła
-	\item $H$ -- macierz definiująca powiązanie aktualnego pomiaru z~oszacowanym stanem
-	\item $v_k$ -- szum pomiaru
-	\item $K_k$ -- wzmocnienie Kalmana (\emph{ang. Kalman gain})
-	\item $R$ -- macierz wariancji uzyskanego pomiaru
-	\item $I$ -- macierz jednostkowa
+	\item $z_k$ -- aktualny pomiar uzyskany ze źródła w kroku $k$,
+	\item $H$ -- macierz definiująca powiązanie aktualnego pomiaru z~oszacowanym stanem,
+	\item $v_k$ -- szum pomiaru,
+	\item $K_k$ -- wzmocnienie Kalmana (\emph{ang. Kalman gain}),
+	\item $R$ -- macierz wariancji uzyskanego pomiaru,
+	\item $I$ -- macierz jednostkowa.
 \end{itemize}
 
 Wartością, którą filtr zwraca jako wynik swojego działania jest $\widehat{x}_k$.
 
-Obie fazy wykonywane są cyklicznie, a~kompletny algorytm przedstawia rysunek \ref{fig:appx:KF:algorithm}.
+Obie fazy wykonywane są cyklicznie, a~kompletny algorytm przedstawia schemat z rysunku \ref{fig:appx:KF:algorithm}.
 
 \begin{figure}
 	\centering
@@ -77,25 +77,25 @@ Obie fazy wykonywane są cyklicznie, a~kompletny algorytm przedstawia rysunek \r
 		\node [block]    (predicate)      
 		{  
 			\begin{tabular}{l}
-				\textbf{Faza predykacji}                                            \\
-				\parbox{5cm}{                                                       
-				\begin{itemize}[leftmargin=*]                                       
-				\item Estymacja aktualnego stanu \eqref{eq:appx:KF:ph1a}            \\
-				\item Estymacja kowariancji aktulnego stanu \eqref{eq:appx:KF:ph1b} \\
-				\end{itemize}}                                                      
+				\textbf{Faza predykacji}                                          \\
+				\parbox{5cm}{                                                     
+				\begin{itemize}[leftmargin=*]                                     
+				\item Estymacja aktualnego stanu \ref{eq:appx:KF:ph1a}            \\
+				\item Estymacja kowariancji aktulnego stanu \ref{eq:appx:KF:ph1b} \\
+				\end{itemize}}                                                    
 			\end{tabular} 
 		};
-															
+																							
 		\node [block, right =1cm of predicate] (correction)      
 		{  
 			\begin{tabular}{l}
-				\textbf{Faza korekcji}                                                              \\
-				\parbox{6.5cm}{                                                                     
-				\begin{itemize}[leftmargin=*]                                                       
-				\item {Wyznaczenie współczynnika wzmocnienia Kalmana \eqref{eq:appx:KF:ph2a}}     \\
-				\item {Korekta estymacji stanu w~oparciu o~uzyskany pomiar \eqref{eq:appx:KF:ph2b}} \\
-				\item {Obliczenie kowariancji błędu estymacji \eqref{eq:appx:KF:ph2c}}            \\
-				\end{itemize}}                                                                      
+				\textbf{Faza korekcji}                                                            \\
+				\parbox{6.5cm}{                                                                   
+				\begin{itemize}[leftmargin=*]                                                     
+				\item {Wyznaczenie współczynnika wzmocnienia Kalmana \ref{eq:appx:KF:ph2a}}     \\
+				\item {Korekta estymacji stanu w~oparciu o~uzyskany pomiar \ref{eq:appx:KF:ph2b}} \\
+				\item {Obliczenie kowariancji błędu estymacji \ref{eq:appx:KF:ph2c}}            \\
+				\end{itemize}}                                                                    
 			\end{tabular} 
 		};    
 		%% paths
@@ -108,13 +108,13 @@ Obie fazy wykonywane są cyklicznie, a~kompletny algorytm przedstawia rysunek \r
 	\label{fig:appx:KF:algorithm}
 \end{figure}
 
-Filtr Kalmana dzięki swojej budowie może być używany nie tylko w~procesie odszumiania sygnału. Drugim ważnym i~popularnym jego zastosowaniem jest łączenie ze sobą sygnałów z~różnych źródeł. Wówczas wartości jednego z~nich wykorzystywane są w~fazie predykacji, a~drugiego w~fazie korekcji.
+Filtr Kalmana, dzięki swojej budowie, może być używany nie tylko w~procesie odszumiania sygnału. Drugim ważnym i~popularnym jego zastosowaniem jest łączenie ze sobą sygnałów z~różnych źródeł. Wówczas wartości jednego z~nich wykorzystywane są w~fazie predykacji, a~drugiego w~fazie korekcji.
 
 
 \section*{Rozszerzony filtr Kalmana (EKF - \emph{ang. Extended Kalman Filter})}
 \label{sec:appx:filters:EKF}
 \nomenclature{EKF}{Rozszerzony filtr Kalmana}
-Filtr Kalmana w~swojej pierwotnej formie stanowi optymalny estymator dla procesów o~charakterze liniowym. Filtracja sygnałów nieliniowych wymagała modyfikacji oryginalnej formuły i~prace takie zostały podjęte niemal natychmiast po opublikowaniu prac Rudolpha Kalmana. W~1962 Stanley F. Schmidt, jeden z~dyrektorów NASA zaangażowany w~program Apollo, wraz z~zespołem opublikował pracę zawierającą zmodyfikowaną formułę liniowego filtru Kalmana przetwarzającą dane nieliniowe \cite{smith1962application}. Działanie filtru opiera się na linearyzacji przetwarzanego sygnału za pomocą szeregu Taylora. Schemat działania jest analogiczny do tego przedstawionego na rysunku \ref{fig:appx:KF:algorithm}, jednak zmianie ulegają poszczególne równania. Faza estymacji opiera się na równaniach \eqref{eq:appx:EKF:ph1a} i~\eqref{eq:appx:EKF:ph1b}.
+Filtr Kalmana w~swojej pierwotnej formie stanowi optymalny estymator dla procesów o~charakterze liniowym. Filtracja sygnałów nieliniowych wymagała modyfikacji oryginalnej formuły i~prace takie zostały podjęte niemal natychmiast po opublikowaniu prac Rudolpha Kalmana. W~1962 Stanley F. Schmidt, jeden z~dyrektorów NASA zaangażowany w~program Apollo, wraz z~zespołem opublikował pracę zawierającą zmodyfikowaną formułę liniowego filtru Kalmana przetwarzającą dane nieliniowe \cite{smith1962application}. Działanie filtru opiera się na linearyzacji przetwarzanego sygnału za pomocą szeregu Taylora. Schemat działania jest analogiczny do tego przedstawionego na rysunku \ref{fig:appx:KF:algorithm}, jednak zmianie ulegają poszczególne równania. Faza estymacji opiera się na równaniach \ref{eq:appx:EKF:ph1a} i~\ref{eq:appx:EKF:ph1b}.
 
 \begin{subequations}
 	\begin{align}
@@ -125,11 +125,11 @@ Filtr Kalmana w~swojej pierwotnej formie stanowi optymalny estymator dla proces�
 
 gdzie:
 \begin{itemize}
-	\item $f()$ -- funkcja nieliniowa określająca przejście pomiędzy kolejnymi stanami
-	\item $A^J , W^J$ -- jakobiany funkcji $f()$
+	\item $f()$ -- funkcja nieliniowa określająca przejście pomiędzy kolejnymi stanami,
+	\item $A^J , W^J$ -- jakobiany funkcji $f()$.
 \end{itemize}
 
-Równania \eqref{eq:appx:EKF:ph2a}, \eqref{eq:appx:EKF:ph2b}, \eqref{eq:appx:KF:ph2c} oraz \eqref{eq:appx:KF:ph2d} definiują natomiast fazę korekcji.
+Równania \ref{eq:appx:EKF:ph2a}, \ref{eq:appx:EKF:ph2b}, \ref{eq:appx:KF:ph2c} oraz \ref{eq:appx:KF:ph2d} definiują natomiast fazę korekcji.
 
 \begin{subequations}
 	\begin{align}
@@ -142,11 +142,11 @@ Równania \eqref{eq:appx:EKF:ph2a}, \eqref{eq:appx:EKF:ph2b}, \eqref{eq:appx:KF:
 
 gdzie:
 \begin{itemize}
-	\item $h$ -- funkcja nieliniowa definiująca relację pomiędzy estymowanym stanem a~faktycznym pomiarem
-	\item $H^J, V^J$ -- jakobiany funkcji $h$
+	\item $h$ -- funkcja nieliniowa definiująca relację pomiędzy estymowanym stanem a~faktycznym pomiarem,
+	\item $H^J, V^J$ -- jakobiany funkcji $h$.
 \end{itemize}
 
-Sposób wyznaczenia użytych jakobianów prezentują równania \eqref{eq:appx:EKF:J1}, \eqref{eq:appx:EKF:J2}, \eqref{eq:appx:EKF:J3} oraz \eqref{eq:appx:EKF:J4}
+Sposób wyznaczenia użytych jakobianów prezentują równania \ref{eq:appx:EKF:J1}, \ref{eq:appx:EKF:J2}, \ref{eq:appx:EKF:J3} oraz \ref{eq:appx:EKF:J4}.
 
 \begin{subequations}
 	\begin{align}
@@ -157,20 +157,20 @@ Sposób wyznaczenia użytych jakobianów prezentują równania \eqref{eq:appx:EK
 	\end{align}
 \end{subequations}
 
-Filtr EKF okazał się skuteczny dla filtracji sygnałów nieliniowych jednak konieczność obliczania jakobianów zwiększa koszty obliczeniowe tego rozwiązania co jest szczególnie widoczne w~przypadku częstego dokonywania pomiarów. 
+Filtr EKF okazał się skuteczny dla filtracji sygnałów nieliniowych jednak konieczność obliczania jakobianów zwiększa koszty obliczeniowe tego rozwiązania, co jest szczególnie widoczne w~przypadku częstego dokonywania pomiarów. 
 
 
 \section*{Bezśladowy filtr Kalmana (UKF - \emph{ang. Unscented Kalman Filter})}
 \label{sec:appx:filters:UKF}
 \nomenclature{UKF}{Bezśladowy filtr Kalmana}
 W 1995 w~wyniku prac prowadzonych przez S. Juliera, J. Uhlmanna i~H. Durrant-Whyte\'a została opublikowana \cite{Julier1995} metoda filtrowania sygnałów nieliniowych oparta o~analizę danych statystycznych filtrowanego sygnału. Realizowana jest ona poprzez zastosowanie przekształcenia bezśladowego operującego na rozkładzie prawdopodobieństwa filtrowanego sygnału, ponieważ mniej kosztowne, a~jednocześnie dokładniejsze jest aproksymowanie takich danych, niż funkcji nieliniowych \cite{Uhlmann94}.
-Względem EKF w~przypadku tego algorytmu występuje dodatkowy krok, wyznaczenie punktów sigma \eqref{eq:appx:UKF:ph0}. 
+Względem EKF, w~przypadku tego algorytmu, występuje dodatkowy krok --- wyznaczenie punktów sigma (równanie \ref{eq:appx:UKF:ph0}). 
 
 \begin{equation}
 	\chi^\alpha_{k-1} = [\widehat{x}^\alpha_{k-1} \widehat{x}^\alpha_{k-1}\pm\sqrt{(L+\lambda)P^\alpha_{k-1}}] \label{eq:appx:UKF:ph0}
 \end{equation}
 
-Kolejnym krokiem jest faza predykacji wyrażona za pomocą wzorów \eqref{eq:appx:UKF:ph1a} - \eqref{eq:appx:UKF:ph1e}
+Kolejnym krokiem jest faza predykacji wyrażona za pomocą wzorów \ref{eq:appx:UKF:ph1a} - \ref{eq:appx:UKF:ph1e}
 \begin{subequations}
 	\begin{align}
 		\chi^x_{k}        & = F[\chi^x_{k-1},\chi^v_{k-1}] \label{eq:appx:UKF:ph1a}                                                               \\
@@ -181,7 +181,7 @@ Kolejnym krokiem jest faza predykacji wyrażona za pomocą wzorów \eqref{eq:app
 	\end{align}
 \end{subequations}
 
-Faza korekcji została wyrażona wzorami \eqref{eq:appx:UKF:ph2a} - \eqref{eq:appx:UKF:ph2e}
+Faza korekcji została wyrażona wzorami \ref{eq:appx:UKF:ph2a} - \ref{eq:appx:UKF:ph2e}
 \begin{subequations}
 	\begin{align}
 		P_{\widehat{y}_k\widehat{y}_k} & = \sum_{i=0}^{2L}W_i^{(c)}[\gamma_{i,k} - \widehat{y}^-_k][\gamma_{i,k} - \widehat{y}^-_k]^T\label{eq:appx:UKF:ph2a} \\
@@ -200,10 +200,10 @@ Faza korekcji została wyrażona wzorami \eqref{eq:appx:UKF:ph2a} - \eqref{eq:ap
 %	\item TODO
 %\end{itemize}
 
-Dokładny opis bezśladowego filtru Kalmana można znaleźć między innymi w~pracach E. Wana oraz R. van der Merwe \cite{Wan2000, Wan2001}, którzy pracowali nad rozwinięciem tej metody. Wspomniani autorzy w~tej samej pracy porównali ze sobą dokładność szacowania dla EKF i~UKF wykorzystując sygnał wygenerowany na podstawie równania Mackey-Glassa \cite{Glass2010} zaburzonego białym szumem. Zamieszczone wyniki jednoznacznie pokazują, że filtr UKF był w~stanie oszacować odfiltrowany sygnał z~mniejszym błędem niż EKF. Podobne badania porównujące oba te filtry były prowadzone także w~polskich ośrodkach badawczych m. in. na Wojskowej Akademii Technicznej. Także i~w tym przypadku, opublikowane wyniki wskazywały na większą dokładność filtru UKF \cite{Konatowski2007, Konatowski2007a}.
+Dokładny opis bezśladowego filtru Kalmana można znaleźć między innymi w~pracach E. Wana oraz R. van der Merwe \cite{Wan2000, Wan2001}, którzy pracowali nad rozwinięciem tej metody. Wspomniani autorzy, w~tej samej pracy, porównali ze sobą dokładność szacowania dla EKF i~UKF wykorzystując sygnał wygenerowany na podstawie równania Mackey-Glassa \cite{Glass2010} zaburzonego białym szumem. Zamieszczone wyniki jednoznacznie pokazują, że filtr UKF był w~stanie oszacować odfiltrowany sygnał z~mniejszym błędem niż EKF. Podobne badania porównujące oba te filtry były prowadzone także w~polskich ośrodkach badawczych między innymi na Wojskowej Akademii Technicznej. Także i~w tym przypadku, opublikowane wyniki wskazywały na większą dokładność filtru UKF \cite{Konatowski2007, Konatowski2007a}.
 
 \section*{Filtr komplementarny}\label{sec:appx:filters:CF}
-Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został od razu wykorzystany w~pozaakademickim środowisku i~stał się niejako standardowym narzędziem filtracji i~fuzji sygnałów. Jednak w~przypadku kiedy stan obserwowanego systemu jest wyrażony przez więcej niż jedną wartość liczbową, implementacja filtru Kalmana wymaga wykorzystania implementacji algebry macierzowej, która jest złożona obliczeniowo \cite{wiki:MatrixAlgebraComplexity2016}. Świadomość tego ograniczenia skłoniła badaczy do poszukiwania alternatywnego sposobu na filtrację sygnałów przy zachowaniu zbliżonej dokładności. Przykład efektów takich badań możemy zobaczyć w~pracy W. Higginsa pt. ''A Comparison of Complementary and Kalman Filtering'' \cite{Higgins1975} w~której prezentuje on postać filtru komplementarnego oraz wykazuje związek takiej metody z~filtrem Kalmana. Typowym zastosowaniem filtru komplementarnego jest złączenie ze sobą sygnałów opisujących to samo zjawisko, ale odznaczających się różną częstotliwością szumu (wysoką i~niską). Ogólny schemat podstawowego filtru komplementarnego zaprezentowany został na rysunku \ref{fig:appx:CF:algorithmA}
+Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został od razu wykorzystany w~pozaakademickim środowisku i~stał się niejako standardowym narzędziem filtracji i~fuzji sygnałów. Jednak w~przypadku kiedy stan obserwowanego systemu jest wyrażony przez więcej niż jedną wartość liczbową, implementacja filtru Kalmana wymaga wykorzystania implementacji algebry macierzowej, która jest złożona obliczeniowo \cite{wiki:MatrixAlgebraComplexity2016}. Świadomość tego ograniczenia skłoniła badaczy do poszukiwania alternatywnego sposobu na filtrację sygnałów przy zachowaniu zbliżonej dokładności. Przykład efektów takich badań możemy zobaczyć w~pracy Higginsa \cite{Higgins1975}, w~której prezentuje on postać filtru komplementarnego oraz wykazuje związek takiej metody z~filtrem Kalmana. Typowym zastosowaniem filtru komplementarnego jest złączenie ze sobą sygnałów opisujących to samo zjawisko, ale odznaczających się różną częstotliwością szumu (wysoką i~niską). Ogólny schemat podstawowego filtru komplementarnego zaprezentowany został na rysunku \ref{fig:appx:CF:algorithm}a.
 
 % Defining string as labels of certain blocks.
 \newcommand{\suma}{\Large$+$}
@@ -213,8 +213,8 @@ Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został 
 
 \begin{figure}[!htb]
 	\centering 
-	\subfigure[Wariant podstawowy]
-	{
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
 		\begin{tikzpicture}[auto, thick, node distance=2cm, >=triangle 45]
 			\tikzset{%
 				block/.style    = {draw, thick, rectangle, minimum height = 3em,
@@ -223,30 +223,32 @@ Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został 
 				input/.style    = {coordinate}, % Input
 				output/.style   = {coordinate} % Output
 			}
-																							
+																																			
 			\draw
 			node at (0,0)[right=-3mm]{\Large \textopenbullet}
 			node [input, name=xSignal] {} 
 			node at (4,0) [block] (lpf) {$G(s)$}
-																							
+																																			
 			node at (0,-2)[right=-3mm]{\Large \textopenbullet}
 			node [input, below of=xSignal, name=ySignal] {} 
 			node at (4,-2)[block] (hpf) {$1-G(s)$}
-																							
+																																			
 			node at (7, -1) [sum, name=suma]{\suma}
-																							
+																																			
 			node [output, right of=suma](out) {} ;
-																							
+																																			
 			\draw[->](xSignal) -- node {$x = z~+ n_1$}(lpf);
 			\draw[->](ySignal) -- node {$y = z~+ n_2$}(hpf);
 			\draw[->](hpf) -| node {}(suma);
 			\draw[->](lpf) -| node {}(suma);
 			\draw[->](suma) -- node {$\widehat{z}$}(out);
 		\end{tikzpicture}
-		\label{fig:appx:CF:algorithmA}
-	}
-	\subfigure[Wariant pracujący na szumie]
-	{
+		\caption{Wariant podstawowy}
+		\label{fig:appx:CF:algorithmA}			
+	\end{subfigure}
+			
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
 		\begin{tikzpicture}[auto, thick, node distance=2cm, >=triangle 45]
 			\tikzset{%
 				block/.style    = {draw, thick, rectangle, minimum height = 3em,
@@ -255,50 +257,51 @@ Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został 
 				input/.style    = {coordinate}, % Input
 				output/.style   = {coordinate} % Output
 			}
-																							
+																																			
 			\draw
 			node at (0,0)[right=-3mm]{\Large \textopenbullet}
 			node [input, name=xSignal] {} 		
 			node at (3,0)[right=-2.5mm](point){\Large \textbullet}
-																							
+																																			
 			node at (0,-2)[right=-3mm]{\Large \textopenbullet}		
 			node [input, below of=xSignal, name=ySignal] {} 
 			node at (3, -2) [sum, name=sum1]{$-$}
 			node at (6,-2)[block] (lpf) {$G(s)$}
-																							
+																																			
 			node at (8, -1) [sum, name=sum2]{\suma}
-																							
+																																			
 			node [output, right of=sum2](out) {} ;
-																							
+																																			
 			\draw[->](xSignal) -- node {$x = z~+ n_1$}(point);
 			\draw[->](point) -- node {}(sum1);
 			\draw[->](point) -| node {}(sum2);
 			\draw[->](ySignal) -- node {$y = z~+ n_2$}(sum1);
 			\draw[->](sum1) -- node {$n_2-n_1$}(lpf);		
 			\draw[->](lpf) -| node {}(sum2);
-																							
+																																			
 			\draw[->](sum2) -- node {$\widehat{z}$}(out);
 		\end{tikzpicture}
-		\label{fig:appx:CF:algorithmB}
-	}
+		\caption{Wariant pracujący na szumie}
+		\label{fig:appx:CF:algorithmB}			
+	\end{subfigure}
 	\caption{Schemat działania filtru komplementarnego}
-								
+	\label{fig:appx:CF:algorithm}					
 \end{figure}
 
 gdzie:
 \begin{itemize}
-	\item $x, y$ -- zaszumione sygnały wejściowe
-	\item $z$ -- sygnał nieposiadający szumu (idealny)
-	\item $n_1, n_2$ -- szum jakiemu poddany jest sygnał $z$
-	\item $G(s)$ -- filtr dolnoprzepustowy; $G(s) = \frac{1}{{\tau}s+1}$
-	\item $1 - G(s)$ -- filtr górnoprzepustowy $1 - G(s) = 1 - \frac{1}{{\tau}s+1} = \frac{{\tau}s}{{\tau}s+1}$
-	\item $\widehat{z}$ -- sygnał wyjściowy będący odfiltrowanym złączeniem sygnałów $x$ i~$y$
+	\item $x, y$ -- zaszumione sygnały wejściowe,
+	\item $z$ -- sygnał nieposiadający szumu (idealny),
+	\item $n_1, n_2$ -- szum jakiemu poddany jest sygnał $z$,
+	\item $G(s)$ -- filtr dolnoprzepustowy; $G(s) = \frac{1}{{\tau}s+1}$,
+	\item $1 - G(s)$ -- filtr górnoprzepustowy $1 - G(s) = 1 - \frac{1}{{\tau}s+1} = \frac{{\tau}s}{{\tau}s+1}$,
+	\item $\widehat{z}$ -- sygnał wyjściowy będący odfiltrowanym złączeniem sygnałów $x$ i~$y$.
 \end{itemize}
 
-Zarówno wspomniany już Higgins, jak i~R. Brown \cite{BROWN1972} w~swoich artykułach pokazali związek pomiędzy filtrem Kalmana i~filtrem komplementarnym. Wykazali tym samym, że może on stanowić mniej złożoną i~mniej kosztowną obliczeniowo alternatywę dla KF bez znaczącej utraty jakości uzyskanego wyniku. Zagadnienie, w~kontekście którego odbywały się badania nad tym filtrem, obejmowało problem integracji sygnałów z~urządzeń pozwalających wyznaczyć prędkości oraz kierunek ruchu obiektu (w tym przypadku chodziło o~poruszanie się pojazdów kosmicznych).
+Zarówno wspomniany już Higgins, jak i~Brown \cite{BROWN1972} w~swoich artykułach pokazali związek pomiędzy filtrem Kalmana i~filtrem komplementarnym. Wykazali tym samym, że może on stanowić mniej złożoną i~mniej kosztowną obliczeniowo alternatywę dla filtru Kalmana bez znaczącej utraty jakości uzyskanego wyniku. Zagadnienie, w~kontekście którego odbywały się badania nad tym filtrem, obejmowało problem integracji sygnałów z~urządzeń pozwalających wyznaczyć prędkości oraz kierunek ruchu obiektu (w tym przypadku chodziło o~poruszanie się pojazdów kosmicznych).
 \section*{Filtry Mahoney'a i~Madgwicka}
-Podobnie jak w~przypadku filtru Kalmana, istnieje także wariant filtra komplementarnego dla sygnałów nieliniowych. W~podobnym kontekście prace nad opracowaniem takiego filtra prowadził m.in. Robert Mahoney, który zaprezentował serię artykułów przedstawiających zarówno sam filtr, jak i~sposób jego projektowania oraz zastosowanie \cite{Baldwin2007,Mahony2005a,Mahony2008,Euston2008}. 
-Na bazie tych prac w~2010 roku Sebastian Madgwick opracował autorską metodę \cite{Madgwick2010,Madgwick2011} integracji danych z~czujników inercyjnych i~magnetycznych w~celu wyznaczenia orientacji w~przestrzeni obserwowanego obiektu. Algorytm ten według opublikowanych wyników eksperymentów wykazuje większą dokładność niż algorytm oparty o~KF. Analizując budowę tego filtra oraz schemat zamieszczony w~publikacji autora warto zauważyć jego analogię do schematu filtra komplementarnego \ref{fig:appx:CF:algorithmA}.
+Podobnie jak w~przypadku filtru Kalmana, istnieje także wariant filtra komplementarnego dla sygnałów nieliniowych. W~podobnym kontekście prace nad opracowaniem takiego filtra prowadził między innymi Robert Mahoney, który zaprezentował serię artykułów przedstawiających zarówno sam filtr, jak i~sposób jego projektowania oraz zastosowanie \cite{Baldwin2007,Mahony2005a,Mahony2008,Euston2008}. 
+Na bazie tych prac w~2010 roku Sebastian Madgwick opracował autorską metodę \cite{Madgwick2010,Madgwick2011} integracji danych z~czujników inercyjnych i~magnetycznych w~celu wyznaczenia orientacji w~przestrzeni obserwowanego obiektu. Algorytm ten według opublikowanych wyników eksperymentów wykazuje większą dokładność niż algorytm oparty o~filtr Kalmana. Analizując budowę tego filtra oraz schemat zamieszczony w~publikacji autora warto zauważyć jego analogię do schematu filtra komplementarnego (rys. \ref{fig:appx:CF:algorithmA}).
 %Rysunek \ref{fig:appx:Madg:algorithm} przedstawia schemat działania filtru Madgwicka. Warto zauważyć, że analogię w~jego budowie do schematu filtra komplementarnego \ref{fig:appx:CF:algorithmA}.
 
 %\begin{figure}[!htb]

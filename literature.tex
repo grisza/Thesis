@@ -93,7 +93,7 @@ W swoim artykule Brooks i~Czarowicz \cite{Brooks2012} porównują podstawowe cec
 	\noindent
 	\centering
 	\begin{tabular}{|l|c|c|}
-															
+																							
 		\hline 
 		                                 & \textbf{Kinect} & \textbf{Organic Motion} \\ 
 		\hline 
@@ -251,11 +251,18 @@ Przykładem poszczególnych etapów wyznaczania położenia stawu która wykorzy
 		
 \begin{figure}
 	\centering	
-	\subfigure[Położenie markerów]{
-		\includegraphics[width=0.45\textwidth]{images/pelvisEstimationA.jpg}
-		\label{fig:literature:vicon:pelvisPlacementA}}
-	\subfigure[Położenie wyznaczonego stawu kości miedniczej]{
-		\includegraphics[width=0.45\textwidth]{images/pelvisEstimationB.jpg}	}
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\includegraphics{images/pelvisEstimationA.jpg}
+		\caption{Położenie markerów}
+		\label{fig:literature:vicon:pelvisPlacementA}
+	\end{subfigure}	
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\includegraphics{images/pelvisEstimationB.jpg}
+		\caption{Położenie wyznaczonego stawu kości miedniczej}
+		\label{fig:literature:vicon:pelvisPlacementB}
+	\end{subfigure}	
 	\caption{Rysunek przedstawiający wyznaczenie położenia kości miedniczej na potrzeby modelu szkieletowego na podstawie położenia markerów w~systemie Vicon\cite{ViconModelingInstruction}.}
 	\label{fig:literature:vicon:pelvisPlacement}
 \end{figure}
@@ -358,17 +365,19 @@ Reprezentacja ta jest najbardziej intuicyjną z~powszechnie używanych, poniewa�
 		
 \begin{figure}
 	\centering
-	\subfigure[Relatywny \cite{nasa2016}]{
+	\begin{subfigure}[b]{0.7\textwidth}
+		\centering
+		\includegraphics{images/nasaAircraft.png}
+		\caption{Relatywny \cite{nasa2016}}
 		\label{fig:appx:rot:eulerRel}
-		\includegraphics[width=0.75\textwidth]{images/nasaAircraft.png}
-	}
-														
-	\subfigure[Absolutny \cite{Baker2015}]{
+	\end{subfigure}	
+	\begin{subfigure}[b]{0.7\textwidth}
+		\centering
+		\includegraphics{images/eulerAbsolute.png}
+		\caption{Absolutny \cite{Baker2015}}
 		\label{fig:appx:rot:eulerAbs}
-		\includegraphics[width=0.5\textwidth]{images/eulerAbsolute.png}	
-	}
-															
-	\caption{Kąty Eulera względem przyjętego układu współrzędnych}
+	\end{subfigure}									
+	\caption{Kąty Eulera względem przyjętego układu współrzędnych relatywnego (a) lub absolutnego (b)}
 \end{figure}
 		
 \begin{table}
@@ -593,15 +602,25 @@ Kinect przez ponad 5 lat dostępności na rynku jest obiektem badań związanych
 Jednym z~podstawowych ograniczeń jakie występują w~tym urządzeniu jest wrażliwość na światło słoneczne. Jak to zostało wcześniej opisane, jedynym źródłem danych wykorzystywanym do budowy mapy głębi, a~także do stworzenia modelu szkieletowego jest kamera z~filtrem podczerwieni oraz wzorzec punktów podczerwonych emitowanych przez wbudowany projektor. Światło słoneczne natomiast składa się z~pełnego spektrum barw zarówno z~zakresu widzialnego jak i~niewidzialnego dla człowieka. Oznacza to, że promienie słoneczne mogą wprowadzić dodatkowe punkty na scenie, które nie należą do wzorca, a~będą zarejestrowane przez kamerę. Zarejestrowanie przez kamerę podczerwoną kontrolera Kinect punktów spoza przyjętego wzorca prowadzi do niepoprawnego zbudowania mapy głębi wykorzystywanej w~procesie wyznaczania modelu szkieletowego. Rysunek \ref{fig:characteristics:kinect:depthMap} przedstawia mapę głębi zbudowaną wewnątrz pomieszczenia \ref{fig:characteristics:kinect:depthMapA} oraz na zewnątrz w~dwóch przypadkach, w~miejscu zacienionym \ref{fig:characteristics:kinect:depthMapB} oraz w~pełnym słońcu \ref{fig:characteristics:kinect:depthMapC}. 
 		
 \begin{figure}
-	\subfigure[Wewnątrz pomieszczenia]{
-		\includegraphics[width=0.3\textwidth]{images/kinectIndoor.png}
-		\label{fig:characteristics:kinect:depthMapA}}
-	\subfigure[Na zewnątrz pomieszczenia w~cieniu]{
-		\includegraphics[width=0.3\textwidth]{images/kinecOutdoorShade.png}
-		\label{fig:characteristics:kinect:depthMapB}}
-	\subfigure[Na zewnątrz pomieszczenia w~świetle słonecznym]{
-		\includegraphics[width=0.3\textwidth]{images/kinecOutdoorFull.png}
-		\label{fig:characteristics:kinect:depthMapC}}
+	\centering
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics{images/kinectIndoor.png}
+		\caption{Wewnątrz pomieszczenia}
+		\label{fig:characteristics:kinect:depthMapA}
+	\end{subfigure}	
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics{images/kinecOutdoorShade.png}
+		\caption{Na zewnątrz pomieszczenia w~cieniu}
+		\label{fig:characteristics:kinect:depthMapB}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics{images/kinecOutdoorFull.png}
+		\caption{Na zewnątrz pomieszczenia w~świetle słonecznym}
+		\label{fig:characteristics:kinect:depthMapC}
+	\end{subfigure}
 	\caption{Mapa głębi ręki w~różnych warunkach oświetleniowych\cite{Suarez2012}.}
 	\label{fig:characteristics:kinect:depthMap}
 \end{figure}
@@ -663,11 +682,20 @@ Wykres na rysunku \ref{fig:characteristics:kinect:bodyRotationChart} przedstawia
 Wykres przedstawiony na rysunku \ref{fig:characteristics:kinect:kinectRightHandElbowAngle} pokazuje również zmianę wartości kąta mierzonego w~łokciu prawej ręki $\beta$ (rys. \ref{fig:characteristics:kinect:bodyRotationAngle}) w~trakcie wykonywania obrotu. Ręka przez cały czas trwania obrotu była wyprostowana w~łokciu i~stanowiła przedłużenie linii pomiędzy barkami (\emph{T--pose}). Jak widać na wykresie, pomimo pełnej widoczności prawej ręki przez kamery Kinecta przy obrocie w~zakresie  $50\degree < \alpha \le 90\degree$ , pomiar kąta $\beta$ jest niestabilny, a~jego wartość nie jest nawet zbliżona do wartości kąta wyprostowanej w~łokciu ręki ($170\degree-180\degree$). 
 		
 \begin{figure}  [!htp] 
-	\begin{center}
-		\subfigure[Stan śledzenia stawów podczas obrotu ciała \emph{(T-pose)} względem kontrolera]{\label{fig:characteristics:kinect:bodyRotationChart}\includegraphics[scale=0.8]{images/kinectRotation.png}}
-		\subfigure[Kąt w~łokciu prawej ręki podczas obrotu ciała \emph{(T-pose)} względem kontrolera]{\label{fig:characteristics:kinect:kinectRightHandElbowAngle}\includegraphics[scale=0.8]{images/kinectRightHandElbowAngle.png}} 
-	\end{center}
-										
+	\centering
+	\begin{subfigure}[b]{0.8\textwidth}
+		\centering
+		\includegraphics{images/kinectRotation.png}
+		\caption{Stan śledzenia stawów podczas obrotu ciała \emph{(T-pose)} względem kontrolera}
+		\label{fig:characteristics:kinect:bodyRotationChart}
+	\end{subfigure}	
+			
+	\begin{subfigure}[b]{0.8\textwidth}
+		\centering
+		\includegraphics{images/kinectRightHandElbowAngle.png}
+		\caption{Kąt w~łokciu prawej ręki podczas obrotu ciała \emph{(T-pose)} względem kontrolera}
+		\label{fig:characteristics:kinect:kinectRightHandElbowAngle}
+	\end{subfigure}												
 	\caption{Pomiary zależne od kąta obrotu względem Kinecta [źródło własne]}
 \end{figure}
 		
@@ -715,7 +743,7 @@ Na podstawie pomiarów uzyskanych w~trakcie eksperymentu opisanego powyżej, mac
 	\end{bmatrix}	
 \end{equation}
 		
-\pgfplotsset{width=12cm,compat=1.8}
+
 		
 \begin{figure}
 	\centering
@@ -730,7 +758,7 @@ Na podstawie pomiarów uzyskanych w~trakcie eksperymentu opisanego powyżej, mac
 				ymajorgrids=true,
 				grid style=dashed,
 			]
-																							
+																																			
 			\addplot+[
 				only marks,
 				scatter,
@@ -740,7 +768,7 @@ Na podstawie pomiarów uzyskanych w~trakcie eksperymentu opisanego powyżej, mac
 			coordinates {
 				(0.85,-0.10)(1.00,-0.07)(1.20,-0.06)(1.40,-0.04)(1.60,-0.03)(1.80,-0.02)(1.96, 0.00)(2.08, 0.00)(2.20, 0.00)(2.32, 0.00)(2.50, 0.02)(2.70, 0.04)(2.90, 0.06)(3.10, 0.07)(3.35, 0.12)
 			};
-																							
+																																			
 			\addplot [
 				dashed,
 				domain=0.5:3.8, 
@@ -751,7 +779,7 @@ Na podstawie pomiarów uzyskanych w~trakcie eksperymentu opisanego powyżej, mac
 			\legend{$y = 0.02x^3 - 0.11x^2 + 0.27x - 0.25$}
 		\end{axis}
 	\end{tikzpicture}	
-									
+													
 	\caption{Przybliżenie dokładności pomiaru głębi względem odległości śledzonej postaci od kontrolera Kinect [żródło własne].}
 	\label{fig:characteristics:kinect:distanceAccuracy}
 \end{figure}
@@ -803,13 +831,20 @@ Akcelerometr mierzy siłę działającą na niego w~dowolnym z~trzech kierunków
 ($1g =9.80665^m/_{s^2}$). Ze względu na to, że siła grawitacji działa na wszystkie obiekty nieustannie, akcelerometr leżący horyzontalnie na płaskiej powierzchni i~nie poruszający się, będzie wskazywał wartość $1g$ wzdłuż osi równoległej do wektora grawitacji i~$0g$ w~pozostałych dwóch osiach. Pomijając wpływ szumów na odczyty pomiarów z~akcelerometru, jeśli dla nieporuszajacego się czujnika wartości pomiaru będą inne niż podane powyżej, oznacza to, że czujnik jednak nie leży w~pozycji horyzontalnej. Pomiar wynoszący $0g$ we wszystkich trzech osiach oznacza, że dany obiekt spada swobodnie w~orientacji idealnie horyzontalnej.\\
 		
 \begin{figure}[!htp]
-	\subfigure[Struktura wewnętrzna \cite{memsAccStructure2016}]{
-		\includegraphics[width=0.49\textwidth]{images/memsAccelerometerStructure.png}
-		\label{fig:characteristics:imu:acc:memsA}}
-	\subfigure[Wizualizacja budowy \cite{memsAccIdea2016}]{
-		\includegraphics[width=0.49\textwidth]{images/memsAccelerometerIdea.png}
-		\label{fig:characteristics:imu:acc:memsB}}
-									
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics{images/memsAccelerometerStructure.png}
+		\caption{Struktura wewnętrzna \cite{memsAccStructure2016}}
+		\label{fig:characteristics:imu:acc:memsA}
+	\end{subfigure}	
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics{images/memsAccelerometerIdea.png}
+		\caption{Wizualizacja budowy \cite{memsAccIdea2016}}
+		\label{fig:characteristics:imu:acc:memsB}
+	\end{subfigure}	
+													
 	\caption{Struktura wewnętrzna akcelerometru w~technologii MEMS}
 	\label{fig:characteristics:imu:acc:mems}
 \end{figure}
@@ -858,11 +893,18 @@ Szczegółowy opis budowy i~działania akcelerometrów zbudowanych w~architektur
 Budowa wykorzystanego żyroskopu, podobnie jak akcelerometru, opiera się na układzie kondensatorów o~zmiennej pojemności, jednak w~tym przypadku są one dodatkowo wprawione w~drgania. Działanie takiego żyroskopu opiera się na efekcie Coriolisa \cite{memsAccIdea2016}. Budowę i~uproszczony sposób działania czujnika przedstawia rysunek \ref{fig:characteristics:imu:gyro:mems}. Wykorzystane urządzenie mierzy prędkość kątową wokół 3 osi wyrażoną w~stopniach na sekundę ($^\degree/_s$), odpowiadającą konwencji nazewniczej związanej z~reprezentacją obrotów w~postaci kątów Eulera (rozdział \ref{chap:orientstionRep}). 
 		
 \begin{figure}[!htp]
-	\subfigure[Struktura wewnętrzna \cite{memsGyroStructure2016}]{
-		\includegraphics[width=0.49\textwidth]{images/memsGyroscopeStructure.jpg}}
-	\subfigure[Wizualizacja budowy \cite{memsAccIdea2016}]{
-		\includegraphics[width=0.49\textwidth]{images/memsGyroscopeIdea.jpg}}
-										
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics{images/memsGyroscopeStructure.jpg}
+		\caption{Struktura wewnętrzna \cite{memsGyroscopeStructure}}
+		\label{fig:characteristics:imu:gyro:memsA}
+	\end{subfigure}	
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics{images/memsGyroscopeIdea.jpg}
+		\caption{Wizualizacja budowy \cite{memsAccIdea2016}}
+		\label{fig:characteristics:imu:gyro:memsB}
+	\end{subfigure}							
 	\caption{Struktura wewnętrzna żyroskopu w~technologii MEMS}
 	\label{fig:characteristics:imu:gyro:mems}
 \end{figure}
