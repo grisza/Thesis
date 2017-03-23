@@ -59,78 +59,80 @@ Wartością, którą filtr zwraca jako wynik swojego działania jest $\widehat{x
 
 Obie fazy wykonywane są cyklicznie, a~kompletny algorytm przedstawia schemat z rysunku \ref{fig:appx:KF:algorithm}.
 
-\begin{savenotes}\begin{figure}
-	\centering
-	\begin{tikzpicture}[>=latex']
-		\tikzset{block/.style= {draw, rectangle, align=center,minimum width=4cm,minimum height=1cm},
-			rblock/.style={draw, shape=rectangle,rounded corners=1.5em,align=center,minimum width=2cm,minimum height=1cm},
-			input/.style={ % requires library shapes.geometric
-				draw,
-				trapezium,
-				trapezium left angle=60,
-				trapezium right angle=120,
-				minimum width=2cm,
-				align=center,
-				minimum height=1cm
-			},
-		}
-		\node [block]    (predicate)      
-		{  
-			\begin{tabular}{l}
-				\textbf{Faza predykacji}                                          \\
-				\parbox{5cm}{                                                     
-				\begin{itemize}[leftmargin=*]                                     
-				\item Estymacja aktualnego stanu \ref{eq:appx:KF:ph1a}            \\
-				\item Estymacja kowariancji aktulnego stanu \ref{eq:appx:KF:ph1b} \\
-				\end{itemize}}                                                    
-			\end{tabular} 
-		};
-																							
-		\node [block, right =1cm of predicate] (correction)      
-		{  
-			\begin{tabular}{l}
-				\textbf{Faza korekcji}                                                            \\
-				\parbox{6.5cm}{                                                                   
-				\begin{itemize}[leftmargin=*]                                                     
-				\item {Wyznaczenie współczynnika wzmocnienia Kalmana \ref{eq:appx:KF:ph2a}}     \\
-				\item {Korekta estymacji stanu w~oparciu o~uzyskany pomiar \ref{eq:appx:KF:ph2b}} \\
-				\item {Obliczenie kowariancji błędu estymacji \ref{eq:appx:KF:ph2c}}            \\
-				\end{itemize}}                                                                    
-			\end{tabular} 
-		};    
-		%% paths
-		\path[every node/.style={font=\sffamily\small,
-			fill=white,inner sep=1pt}]
-		(predicate.north) edge [->, very thick, bend left] (correction.north)
-		(correction.south) edge [->, very thick, bend left] (predicate.south);
-	\end{tikzpicture}
-	\caption{Schemat działania filtru Kalmana}
-	\label{fig:appx:KF:algorithm}
-\end{figure}\end{savenotes}
-
+\begin{savenotes}
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}[>=latex']
+			\tikzset{block/.style= {draw, rectangle, align=center,minimum width=4cm,minimum height=1cm},
+				rblock/.style={draw, shape=rectangle,rounded corners=1.5em,align=center,minimum width=2cm,minimum height=1cm},
+				input/.style={ % requires library shapes.geometric
+					draw,
+					trapezium,
+					trapezium left angle=60,
+					trapezium right angle=120,
+					minimum width=2cm,
+					align=center,
+					minimum height=1cm
+				},
+			}
+			\node [block]    (predicate)      
+			{  
+				\begin{tabular}{l}
+					\textbf{Faza predykacji}                                          \\
+					\parbox{5cm}{                                                     
+					\begin{itemize}[leftmargin=*]                                     
+					\item Estymacja aktualnego stanu \ref{eq:appx:KF:ph1a}            \\
+					\item Estymacja kowariancji aktulnego stanu \ref{eq:appx:KF:ph1b} \\
+					\end{itemize}}                                                    
+				\end{tabular} 
+			};
+																														
+			\node [block, right =1cm of predicate] (correction)      
+			{  
+				\begin{tabular}{l}
+					\textbf{Faza korekcji}                                                            \\
+					\parbox{6.5cm}{                                                                   
+					\begin{itemize}[leftmargin=*]                                                     
+					\item {Wyznaczenie współczynnika wzmocnienia Kalmana \ref{eq:appx:KF:ph2a}}     \\
+					\item {Korekta estymacji stanu w~oparciu o~uzyskany pomiar \ref{eq:appx:KF:ph2b}} \\
+					\item {Obliczenie kowariancji błędu estymacji \ref{eq:appx:KF:ph2c}}            \\
+					\end{itemize}}                                                                    
+				\end{tabular} 
+			};    
+			%% paths
+			\path[every node/.style={font=\sffamily\small,
+				fill=white,inner sep=1pt}]
+			(predicate.north) edge [->, very thick, bend left] (correction.north)
+			(correction.south) edge [->, very thick, bend left] (predicate.south);
+		\end{tikzpicture}
+		\caption{Schemat działania filtru Kalmana}
+		\label{fig:appx:KF:algorithm}
+	\end{figure}
+\end{savenotes}
+		
 Filtr Kalmana, dzięki swojej budowie, może być używany nie tylko w~procesie odszumiania sygnału. Drugim ważnym i~popularnym jego zastosowaniem jest łączenie ze sobą sygnałów z~różnych źródeł. Wówczas wartości jednego z~nich wykorzystywane są w~fazie predykacji, a~drugiego w~fazie korekcji.
-
-
+		
+		
 \section*{Rozszerzony filtr Kalmana (EKF - \emph{ang. Extended Kalman Filter})}
 \label{sec:appx:filters:EKF}
 \nomenclature{EKF}{Rozszerzony filtr Kalmana}
 Filtr Kalmana w~swojej pierwotnej formie stanowi optymalny estymator dla procesów o~charakterze liniowym. Filtracja sygnałów nieliniowych wymagała modyfikacji oryginalnej formuły i~prace takie zostały podjęte niemal natychmiast po opublikowaniu prac Rudolpha Kalmana. W~1962 Stanley F. Schmidt, jeden z~dyrektorów NASA zaangażowany w~program Apollo, wraz z~zespołem opublikował pracę zawierającą zmodyfikowaną formułę liniowego filtru Kalmana przetwarzającą dane nieliniowe \cite{smith1962application}. Działanie filtru opiera się na linearyzacji przetwarzanego sygnału za pomocą szeregu Taylora. Schemat działania jest analogiczny do tego przedstawionego na rysunku \ref{fig:appx:KF:algorithm}, jednak zmianie ulegają poszczególne równania. Faza estymacji opiera się na równaniach \ref{eq:appx:EKF:ph1a} i~\ref{eq:appx:EKF:ph1b}.
-
+		
 \begin{subequations}
 	\begin{align}
 		\widehat{x}^-_k & = f(\widehat{x}_{k-1}, u_{k-1}, w_{k-1})\label{eq:appx:EKF:ph1a} \\
 		P^-_k           & = A^J P_{k-1} {A^J}^T + W^J Q {W^J}^T \label{eq:appx:EKF:ph1b}   
 	\end{align}
 \end{subequations}
-
+		
 gdzie:
 \begin{itemize}
 	\item $f()$ -- funkcja nieliniowa określająca przejście pomiędzy kolejnymi stanami,
 	\item $A^J , W^J$ -- jakobiany funkcji $f()$.
 \end{itemize}
-
+		
 Równania \ref{eq:appx:EKF:ph2a}, \ref{eq:appx:EKF:ph2b}, \ref{eq:appx:KF:ph2c} oraz \ref{eq:appx:KF:ph2d} definiują natomiast fazę korekcji.
-
+		
 \begin{subequations}
 	\begin{align}
 		z_k           & = h(\widehat{x}^-_k, v_k) \label{eq:appx:EKF:ph2a}                                 \\
@@ -139,15 +141,15 @@ Równania \ref{eq:appx:EKF:ph2a}, \ref{eq:appx:EKF:ph2b}, \ref{eq:appx:KF:ph2c} 
 		P_k           & = (I-K_{k}H^J)P^-_k \label{eq:appx:EKF:ph2d}                                       
 	\end{align}
 \end{subequations}
-
+		
 gdzie:
 \begin{itemize}
 	\item $h$ -- funkcja nieliniowa definiująca relację pomiędzy estymowanym stanem a~faktycznym pomiarem,
 	\item $H^J, V^J$ -- jakobiany funkcji $h$.
 \end{itemize}
-
+		
 Sposób wyznaczenia użytych jakobianów prezentują równania \ref{eq:appx:EKF:J1}, \ref{eq:appx:EKF:J2}, \ref{eq:appx:EKF:J3} oraz \ref{eq:appx:EKF:J4}.
-
+		
 \begin{subequations}
 	\begin{align}
 		A^J_{[i, j]} & = \frac{\partial f_{[i]}}{\partial x_{[j]}}(\widehat{x}_{k-1}, u_{k-1}, w_{k-1}) \label{eq:appx:EKF:J1} \\
@@ -156,20 +158,20 @@ Sposób wyznaczenia użytych jakobianów prezentują równania \ref{eq:appx:EKF:
 		V^J_{[i, j]} & = \frac{\partial h_{[i]}}{\partial v_{[j]}}(\widehat{x}^-_k, v_k) \label{eq:appx:EKF:J4}                
 	\end{align}
 \end{subequations}
-
+		
 Filtr EKF okazał się skuteczny dla filtracji sygnałów nieliniowych jednak konieczność obliczania jakobianów zwiększa koszty obliczeniowe tego rozwiązania, co jest szczególnie widoczne w~przypadku częstego dokonywania pomiarów. 
-
-
+		
+		
 \section*{Bezśladowy filtr Kalmana (UKF - \emph{ang. Unscented Kalman Filter})}
 \label{sec:appx:filters:UKF}
 \nomenclature{UKF}{Bezśladowy filtr Kalmana}
 W 1995 w~wyniku prac prowadzonych przez S. Juliera, J. Uhlmanna i~H. Durrant-Whyte\'a została opublikowana \cite{Julier1995} metoda filtrowania sygnałów nieliniowych oparta o~analizę danych statystycznych filtrowanego sygnału. Realizowana jest ona poprzez zastosowanie przekształcenia bezśladowego operującego na rozkładzie prawdopodobieństwa filtrowanego sygnału, ponieważ mniej kosztowne, a~jednocześnie dokładniejsze jest aproksymowanie takich danych, niż funkcji nieliniowych \cite{Uhlmann94}.
 Względem EKF, w~przypadku tego algorytmu, występuje dodatkowy krok --- wyznaczenie punktów sigma (równanie \ref{eq:appx:UKF:ph0}). 
-
+		
 \begin{equation}
 	\chi^\alpha_{k-1} = [\widehat{x}^\alpha_{k-1} \widehat{x}^\alpha_{k-1}\pm\sqrt{(L+\lambda)P^\alpha_{k-1}}] \label{eq:appx:UKF:ph0}
 \end{equation}
-
+		
 Kolejnym krokiem jest faza predykacji wyrażona za pomocą wzorów \ref{eq:appx:UKF:ph1a} - \ref{eq:appx:UKF:ph1e}
 \begin{subequations}
 	\begin{align}
@@ -180,7 +182,7 @@ Kolejnym krokiem jest faza predykacji wyrażona za pomocą wzorów \ref{eq:appx:
 		\widehat{y}^-_{k} & = \sum_{i=0}^{2L}W_i^{(m)}\gamma_{i,k} \label{eq:appx:UKF:ph1e}                                                       
 	\end{align}
 \end{subequations}
-
+		
 Faza korekcji została wyrażona wzorami \ref{eq:appx:UKF:ph2a} - \ref{eq:appx:UKF:ph2e}
 \begin{subequations}
 	\begin{align}
@@ -191,7 +193,7 @@ Faza korekcji została wyrażona wzorami \ref{eq:appx:UKF:ph2a} - \ref{eq:appx:U
 		P_k                            & = P^-_k - K_kP_{\widehat{y}_k\widehat{y}_k}K_k^T \label{eq:appx:UKF:ph2e}                                            
 	\end{align}
 \end{subequations}
-
+		
 %gdzie:
 %\begin{itemize}
 %	\item TODO
@@ -199,95 +201,97 @@ Faza korekcji została wyrażona wzorami \ref{eq:appx:UKF:ph2a} - \ref{eq:appx:U
 %	\item TODO
 %	\item TODO
 %\end{itemize}
-
+		
 Dokładny opis bezśladowego filtru Kalmana można znaleźć między innymi w~pracach E. Wana oraz R. van der Merwe \cite{Wan2000, Wan2001}, którzy pracowali nad rozwinięciem tej metody. Wspomniani autorzy, w~tej samej pracy, porównali ze sobą dokładność szacowania dla EKF i~UKF wykorzystując sygnał wygenerowany na podstawie równania Mackey-Glassa \cite{Glass2010} zaburzonego białym szumem. Zamieszczone wyniki jednoznacznie pokazują, że filtr UKF był w~stanie oszacować odfiltrowany sygnał z~mniejszym błędem niż EKF. Podobne badania porównujące oba te filtry były prowadzone także w~polskich ośrodkach badawczych między innymi na Wojskowej Akademii Technicznej. Także i~w tym przypadku, opublikowane wyniki wskazywały na większą dokładność filtru UKF \cite{Konatowski2007, Konatowski2007a}.
-
+		
 \section*{Filtr komplementarny}\label{sec:appx:filters:CF}
 Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został od razu wykorzystany w~pozaakademickim środowisku i~stał się niejako standardowym narzędziem filtracji i~fuzji sygnałów. Jednak w~przypadku kiedy stan obserwowanego systemu jest wyrażony przez więcej niż jedną wartość liczbową, implementacja filtru Kalmana wymaga wykorzystania implementacji algebry macierzowej, która jest złożona obliczeniowo \cite{wiki:MatrixAlgebraComplexity2016}. Świadomość tego ograniczenia skłoniła badaczy do poszukiwania alternatywnego sposobu na filtrację sygnałów przy zachowaniu zbliżonej dokładności. Przykład efektów takich badań możemy zobaczyć w~pracy Higginsa \cite{Higgins1975}, w~której prezentuje on postać filtru komplementarnego oraz wykazuje związek takiej metody z~filtrem Kalmana. Typowym zastosowaniem filtru komplementarnego jest złączenie ze sobą sygnałów opisujących to samo zjawisko, ale odznaczających się różną częstotliwością szumu (wysoką i~niską). Ogólny schemat podstawowego filtru komplementarnego zaprezentowany został na rysunku \ref{fig:appx:CF:algorithmA}.
-
+		
 % Defining string as labels of certain blocks.
 \newcommand{\suma}{\Large$+$}
 \newcommand{\inte}{$\displaystyle \int$}
 \newcommand{\derv}{\huge$\frac{d}{dt}$}
-
-
-\begin{savenotes}\begin{figure}[!htb]
-	\centering 
-	\begin{subfigure}[b]{0.49\textwidth}
-		\centering
-		\begin{tikzpicture}[auto, thick, node distance=2cm, >=triangle 45]
-			\tikzset{%
-				block/.style    = {draw, thick, rectangle, minimum height = 3em,
-					minimum width = 3em},
-				sum/.style      = {draw, circle, node distance = 2cm}, % Adder
-				input/.style    = {coordinate}, % Input
-				output/.style   = {coordinate} % Output
-			}
-																																			
-			\draw
-			node at (0,0)[right=-3mm]{\Large \textopenbullet}
-			node [input, name=xSignal] {} 
-			node at (4,0) [block] (lpf) {$G(s)$}
-																																			
-			node at (0,-2)[right=-3mm]{\Large \textopenbullet}
-			node [input, below of=xSignal, name=ySignal] {} 
-			node at (4,-2)[block] (hpf) {$1-G(s)$}
-																																			
-			node at (7, -1) [sum, name=suma]{\suma}
-																																			
-			node [output, right of=suma](out) {} ;
-																																			
-			\draw[->](xSignal) -- node {$x = z~+ n_1$}(lpf);
-			\draw[->](ySignal) -- node {$y = z~+ n_2$}(hpf);
-			\draw[->](hpf) -| node {}(suma);
-			\draw[->](lpf) -| node {}(suma);
-			\draw[->](suma) -- node {$\widehat{z}$}(out);
-		\end{tikzpicture}
-		\caption{Wariant podstawowy}
-		\label{fig:appx:CF:algorithmA}			
-	\end{subfigure}
-			
-	\begin{subfigure}[b]{0.49\textwidth}
-		\centering
-		\begin{tikzpicture}[auto, thick, node distance=2cm, >=triangle 45]
-			\tikzset{%
-				block/.style    = {draw, thick, rectangle, minimum height = 3em,
-					minimum width = 3em},
-				sum/.style      = {draw, circle, node distance = 2cm}, % Adder
-				input/.style    = {coordinate}, % Input
-				output/.style   = {coordinate} % Output
-			}
-																																			
-			\draw
-			node at (0,0)[right=-3mm]{\Large \textopenbullet}
-			node [input, name=xSignal] {} 		
-			node at (3,0)[right=-2.5mm](point){\Large \textbullet}
-																																			
-			node at (0,-2)[right=-3mm]{\Large \textopenbullet}		
-			node [input, below of=xSignal, name=ySignal] {} 
-			node at (3, -2) [sum, name=sum1]{$-$}
-			node at (6,-2)[block] (lpf) {$G(s)$}
-																																			
-			node at (8, -1) [sum, name=sum2]{\suma}
-																																			
-			node [output, right of=sum2](out) {} ;
-																																			
-			\draw[->](xSignal) -- node {$x = z~+ n_1$}(point);
-			\draw[->](point) -- node {}(sum1);
-			\draw[->](point) -| node {}(sum2);
-			\draw[->](ySignal) -- node {$y = z~+ n_2$}(sum1);
-			\draw[->](sum1) -- node {$n_2-n_1$}(lpf);		
-			\draw[->](lpf) -| node {}(sum2);
-																																			
-			\draw[->](sum2) -- node {$\widehat{z}$}(out);
-		\end{tikzpicture}
-		\caption{Wariant pracujący na szumie}
-		\label{fig:appx:CF:algorithmB}			
-	\end{subfigure}
-	\caption{Schemat działania filtru komplementarnego}
-	\label{fig:appx:CF:algorithm}					
-\end{figure}\end{savenotes}
-
+		
+		
+\begin{savenotes}
+	\begin{figure}[!htb]
+		\centering 
+		\begin{subfigure}[b]{0.49\textwidth}
+			\centering
+			\begin{tikzpicture}[auto, thick, node distance=2cm, >=triangle 45]
+				\tikzset{%
+					block/.style    = {draw, thick, rectangle, minimum height = 3em,
+						minimum width = 3em},
+					sum/.style      = {draw, circle, node distance = 2cm}, % Adder
+					input/.style    = {coordinate}, % Input
+					output/.style   = {coordinate} % Output
+				}
+																																															
+				\draw
+				node at (0,0)[right=-3mm]{\Large \textopenbullet}
+				node [input, name=xSignal] {} 
+				node at (4,0) [block] (lpf) {$G(s)$}
+																																															
+				node at (0,-2)[right=-3mm]{\Large \textopenbullet}
+				node [input, below of=xSignal, name=ySignal] {} 
+				node at (4,-2)[block] (hpf) {$1-G(s)$}
+																																															
+				node at (7, -1) [sum, name=suma]{\suma}
+																																															
+				node [output, right of=suma](out) {} ;
+																																															
+				\draw[->](xSignal) -- node {$x = z~+ n_1$}(lpf);
+				\draw[->](ySignal) -- node {$y = z~+ n_2$}(hpf);
+				\draw[->](hpf) -| node {}(suma);
+				\draw[->](lpf) -| node {}(suma);
+				\draw[->](suma) -- node {$\widehat{z}$}(out);
+			\end{tikzpicture}
+			\caption{Wariant podstawowy}
+			\label{fig:appx:CF:algorithmA}			
+		\end{subfigure}
+									
+		\begin{subfigure}[b]{0.49\textwidth}
+			\centering
+			\begin{tikzpicture}[auto, thick, node distance=2cm, >=triangle 45]
+				\tikzset{%
+					block/.style    = {draw, thick, rectangle, minimum height = 3em,
+						minimum width = 3em},
+					sum/.style      = {draw, circle, node distance = 2cm}, % Adder
+					input/.style    = {coordinate}, % Input
+					output/.style   = {coordinate} % Output
+				}
+																																															
+				\draw
+				node at (0,0)[right=-3mm]{\Large \textopenbullet}
+				node [input, name=xSignal] {} 		
+				node at (3,0)[right=-2.5mm](point){\Large \textbullet}
+																																															
+				node at (0,-2)[right=-3mm]{\Large \textopenbullet}		
+				node [input, below of=xSignal, name=ySignal] {} 
+				node at (3, -2) [sum, name=sum1]{$-$}
+				node at (6,-2)[block] (lpf) {$G(s)$}
+																																															
+				node at (8, -1) [sum, name=sum2]{\suma}
+																																															
+				node [output, right of=sum2](out) {} ;
+																																															
+				\draw[->](xSignal) -- node {$x = z~+ n_1$}(point);
+				\draw[->](point) -- node {}(sum1);
+				\draw[->](point) -| node {}(sum2);
+				\draw[->](ySignal) -- node {$y = z~+ n_2$}(sum1);
+				\draw[->](sum1) -- node {$n_2-n_1$}(lpf);		
+				\draw[->](lpf) -| node {}(sum2);
+																																															
+				\draw[->](sum2) -- node {$\widehat{z}$}(out);
+			\end{tikzpicture}
+			\caption{Wariant pracujący na szumie}
+			\label{fig:appx:CF:algorithmB}			
+		\end{subfigure}
+		\caption{Schemat działania filtru komplementarnego}
+		\label{fig:appx:CF:algorithm}					
+	\end{figure}
+\end{savenotes}
+				
 gdzie:
 \begin{itemize}
 	\item $x, y$ -- zaszumione sygnały wejściowe,
@@ -297,44 +301,46 @@ gdzie:
 	\item $1 - G(s)$ -- filtr górnoprzepustowy $1 - G(s) = 1 - \frac{1}{{\tau}s+1} = \frac{{\tau}s}{{\tau}s+1}$,
 	\item $\widehat{z}$ -- sygnał wyjściowy będący odfiltrowanym złączeniem sygnałów $x$ i~$y$.
 \end{itemize}
-
+				
 Zarówno wspomniany już Higgins, jak i~Brown \cite{BROWN1972} w~swoich artykułach pokazali związek pomiędzy filtrem Kalmana i~filtrem komplementarnym. Wykazali tym samym, że może on stanowić mniej złożoną i~mniej kosztowną obliczeniowo alternatywę dla filtru Kalmana bez znaczącej utraty jakości uzyskanego wyniku. Zagadnienie, w~kontekście którego odbywały się badania nad tym filtrem, obejmowało problem integracji sygnałów z~urządzeń pozwalających wyznaczyć prędkości oraz kierunek ruchu obiektu (w tym przypadku chodziło o~poruszanie się pojazdów kosmicznych).
 \section*{Filtry Mahoney'a i~Madgwicka}
 Podobnie jak w~przypadku filtru Kalmana, istnieje także wariant filtra komplementarnego dla sygnałów nieliniowych. W~podobnym kontekście prace nad opracowaniem takiego filtra prowadził między innymi Robert Mahoney, który zaprezentował serię artykułów przedstawiających zarówno sam filtr, jak i~sposób jego projektowania oraz zastosowanie \cite{Baldwin2007,Mahony2005a,Mahony2008,Euston2008}. 
 Na bazie tych prac w~2010 roku Sebastian Madgwick opracował autorską metodę \cite{Madgwick2010,Madgwick2011} integracji danych z~czujników inercyjnych i~magnetycznych w~celu wyznaczenia orientacji w~przestrzeni obserwowanego obiektu. Algorytm ten według opublikowanych wyników eksperymentów wykazuje większą dokładność niż algorytm oparty o~filtr Kalmana. Analizując budowę tego filtra oraz schemat zamieszczony w~publikacji autora warto zauważyć jego analogię do schematu filtra komplementarnego (rys. \ref{fig:appx:CF:algorithmA}).
 %Rysunek \ref{fig:appx:Madg:algorithm} przedstawia schemat działania filtru Madgwicka. Warto zauważyć, że analogię w~jego budowie do schematu filtra komplementarnego \ref{fig:appx:CF:algorithmA}.
-
-%\begin{savenotes}\begin{figure}[!htb]
-%	\centering 
-
-%		\begin{tikzpicture}[auto, thick, node distance=2cm, >=triangle 45]
-%		\tikzset{%
-%			block/.style    = {draw, thick, rectangle, minimum height = 3em,
-%				minimum width = 3em},
-%			sum/.style      = {draw, circle, node distance = 2cm}, % Adder
-%			input/.style    = {coordinate}, % Input
-%			output/.style   = {coordinate} % Output
-%		}
-		
-%		\draw
-%		node at (0,0)[right=-3mm]{\Large \textopenbullet}
-%		node [input, name=xSignal] {} 
-%		node at (4,0) [block] (lpf) {$G(s)$}
-%		
-%		node at (0,-2)[right=-3mm]{\Large \textopenbullet}
-%		node [input, below of=xSignal, name=ySignal] {} 
-%		node at (4,-2)[block] (hpf) {$1-G(s)$}
-%		
-%		node at (7, -1) [sum, name=suma]{\suma}
-%		
-%		node [output, right of=suma](out) {} ;
-%		
-%		\draw[->](xSignal) -- node {$x = z~+ n_1$}(lpf);
-%		\draw[->](ySignal) -- node {$y = z~+ n_2$}(hpf);
-%		\draw[->](hpf) -| node {}(suma);
-%		\draw[->](lpf) -| node {}(suma);
-%		\draw[->](suma) -- node {$\widehat{z}$}(out);
-%		\end{tikzpicture}
-%		\label{fig:appx:Madg:algorithm}
-%
-%	\end{figure}\end{savenotes}
+				
+%\begin{savenotes}
+%\begin{figure}[!htb]
+	%	\centering 
+					
+	%		\begin{tikzpicture}[auto, thick, node distance=2cm, >=triangle 45]
+	%		\tikzset{%
+	%			block/.style    = {draw, thick, rectangle, minimum height = 3em,
+	%				minimum width = 3em},
+	%			sum/.style      = {draw, circle, node distance = 2cm}, % Adder
+	%			input/.style    = {coordinate}, % Input
+	%			output/.style   = {coordinate} % Output
+	%		}
+							
+	%		\draw
+	%		node at (0,0)[right=-3mm]{\Large \textopenbullet}
+	%		node [input, name=xSignal] {} 
+	%		node at (4,0) [block] (lpf) {$G(s)$}
+	%		
+	%		node at (0,-2)[right=-3mm]{\Large \textopenbullet}
+	%		node [input, below of=xSignal, name=ySignal] {} 
+	%		node at (4,-2)[block] (hpf) {$1-G(s)$}
+	%		
+	%		node at (7, -1) [sum, name=suma]{\suma}
+	%		
+	%		node [output, right of=suma](out) {} ;
+	%		
+	%		\draw[->](xSignal) -- node {$x = z~+ n_1$}(lpf);
+	%		\draw[->](ySignal) -- node {$y = z~+ n_2$}(hpf);
+	%		\draw[->](hpf) -| node {}(suma);
+	%		\draw[->](lpf) -| node {}(suma);
+	%		\draw[->](suma) -- node {$\widehat{z}$}(out);
+	%		\end{tikzpicture}
+	%		\label{fig:appx:Madg:algorithm}
+	%
+	%	\end{figure}
+%	\end{savenotes}

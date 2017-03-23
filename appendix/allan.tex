@@ -10,15 +10,17 @@ Wariancja Allana ($\sigma^2(\tau)$) wyznaczana jest dla sygnału $\Omega$ wyraż
 	\sigma^2(\tau) = \frac{1}{2(N-2n)}\sum_{K=1}^{N-2n}[\overline{\Omega}_{K+1}(\tau)-\overline{\Omega}_K(\tau)]^2
 \end{equation}
 
-\begin{savenotes}\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\textwidth]{images/Allans2GyroXosig.png}
-	\caption{Wykres funkcji odchylenia Allana dla sygnału osi X żyroskopu}
-	\label{fig:appx:allan:deviationPlot}
-\end{figure}\end{savenotes}
-
+\begin{savenotes}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\textwidth]{images/Allans2GyroXosig.png}
+		\caption{Wykres funkcji odchylenia Allana dla sygnału osi X żyroskopu}
+		\label{fig:appx:allan:deviationPlot}
+	\end{figure}
+\end{savenotes}
+		
 Aby na podstawie wyznaczonej wariancji określić charakterystyki szumów należy obliczyć odchylenie Allana $\sigma(\tau) = \sqrt{\sigma^2(\tau)}$ i~przeanalizować przebieg tej funkcji na wykresie w~skali logarytmicznej (przykładowy wykres odchylania Allana dla żyroskopu przedstawia wykres z rysunku \ref{fig:appx:allan:deviationPlot}). Wykres ten zawiera informacje o~5 różnych rodzajach szumu jaki zawarty jest w~badanym sygnale:
-
+		
 \begin{enumerate}
 	\item {\emph{Quantization noise} -- szum wprowadzony w~trakcie konwersji sygnału analogowego na cyfrowy i~spowodowany przez różnice pomiędzy faktyczną wartością sygnału, a~wartością wynikającą z~punktu, w~którym nastąpiło próbkowanie.}
 	\item {\emph{Angle (velocity) random walk} -- szum wysokiej częstotliwości obserwowalny nawet w~czasie krótkich pomiarów. Jego występowanie znacząco obniża dokładność prowadzonych obliczeń.}
@@ -26,13 +28,15 @@ Aby na podstawie wyznaczonej wariancji określić charakterystyki szumów należ
 	\item {\emph{Rate random walk} -- szum wysokiej częstotliwości pojawiający się w~pomiarach w~dłuższym okresie czasu. Jego pochodzenie nie jest do końca znane.}
 	\item {\emph{Rate ramp} -- systematycznie pojawiający się błąd pomiarów, którego wartość zależna jest od czasu działania. Pomiary zakłócone tego rodzaju szumem nie są w~stanie powrócić do wartości początkowych.}	
 \end{enumerate}
-
+		
 Powyższe zakłócenia pomiarów zawarte są na wykresie odchylenia jako obszary, w~których kąt nachylenia wykresu do osi $X$ jest zbliżony do kąta nachylenia prostej o~współczynniku kierunkowym $\alpha$ wynoszącym odpowiednio: $-1, -0.5, 0, 0.5 , 1$. Obszary te są widoczne na wykresie z rysunku \ref{fig:appx:allan:slopes}.
-\begin{savenotes}\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.6\textwidth]{images/slopes.png}
-	\caption[Obszary szumów na wykresie odchylenia Allana]{Obszary szumów na wykresie odchylenia Allana \cite{s120202219}}
-	\label{fig:appx:allan:slopes}
-\end{figure}\end{savenotes}
-
+\begin{savenotes}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.6\textwidth]{images/slopes.png}
+		\caption[Obszary szumów na wykresie odchylenia Allana]{Obszary szumów na wykresie odchylenia Allana \cite{s120202219}}
+		\label{fig:appx:allan:slopes}
+	\end{figure}
+\end{savenotes}
+				
 Nie zawsze wykres funkcji $\sigma(\tau)$ musi zawierać wszystkie 5 obszarów co oznacza, że niektóre rodzaje szumów mogą nie występować.
