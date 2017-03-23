@@ -66,7 +66,7 @@ W zakresie pojedynczego modułu inercyjnego szacowanie położenia stawu odbywa 
 %[Fixed](szkoda, że na rysunku do którego się odwołujesz sa inne oznaczenia niż używasz w~tekście i~we wzorze)
 . Oszacowanie pozycji stawu $P^F_t$ odbywa się z~pewnym interwałem czasowym $\Delta t$ określającym czas pomiędzy kolejnymi aktualizacjami pomiarów kontrolera Kinect będacego jednocześnie interwałem czasowym dla procesu decymacji sygnału urządzeń inercyjnych. Dodatkowymi parametrami wykorzystywanymi w~procesie łączenia danych z~modułu inercyjnego z~pomiarai Kinecta są pozycje obu stawów barkowych uzyskane za pomoca kontrolera Kinect ($P^K_{sh_L,t}, P^K_{sh_R,t}$) pozwalające oszacować jak obrócona względem Kinecta jest śledzona postać, pozycja stawu rodzica w~globalnym układzie współrzędnych będąca wynikiem osobnej fuzji danych ($P^F_{j-1,t}$), a~także długość kości $l$ na której umieszczony jest moduł inercyjny.
 %[Fixed](a co z~interwałem czasowym urządzenia inercyjnego). 
-Biorąc pod uwagę powyższe, oszacowanie pozycji wybranego stawu przez omawianą hybrydową metodę śledzenia ruchu człowieka można wyrazić za pomocą wzoru \eqref{eq:methodFormula}.
+Biorąc pod uwagę powyższe, oszacowanie pozycji wybranego stawu przez omawianą hybrydową metodę śledzenia ruchu człowieka można wyrazić za pomocą wzoru \ref{eq:methodFormula}.
 %[Fixed] mam zastzrzeżenie, czy ten wzór powinien mieć tylko dwa stawy czy może więcej oraz czy częstotliwość pomiaru kinecta jest właściwym argumentem bo przecież dla poojedynczego pomiaru pozycji stawu nie jest istotny interwał pracy Kinecta, czy może kwestie opóźnień przesyłu danych pomiędzy urządzeniami czy inne aspekty synchronizacji/opóxnień - uzpełnione o~dodatkowe parametry które faktycznie można przyjąć że są wejściowymi. co do kwestii opóźnień to można rozwiązać to dwojako: albo A,G,T są de facto buforami poszczególnych pomiarów zebranymi w~czasei \delat t i~wewnątrz metody wybieramy odpowiedni uwzględniając przesunięcie czasowe które wchodzi jako parametr; albo przyjmujemy że A,G,T są już tymi wybranymi, wyrównanymi czasowo do P^K. Do artykułu MMS poszła wersja pierwotna
 \begin{equation}
 	f(A,G,T,P_{j-1,t}^K,P_{j,t}^K,\Delta t, P^F_{j-1,t}, P^K_{sh_L,t},P^K_{sh_R,t},l) => P^F_{j,t} = [p_{j,x}^F,p_{j,y}^F,p_{j,z}^F]_t
@@ -84,7 +84,7 @@ Biorąc pod uwagę powyższe, oszacowanie pozycji wybranego stawu przez omawian�
 %P_shR^K, P_shL^K - położenie stawów barkowych z~kinecta do obliczenia orientacji względem kamery 
 
 
-Wzór \eqref{eq:methodFormula} odnosi się do każdego modułu inercyjnego zbudowanego z~pary czujników: akcelerometru i~żyroskopu, umieszczonego na ciele pomiędzy dwoma kolejnymi stawami, których pozycje oszacowane przez kontroler Kinect są argumentami metody. W~przypadku śledzenia ruchu więcej niż jednego stawu, powyższą metodę należy wykonać zgodnie z~ustaloną hierarchią stawów rozpoczynając od przyjętego korzenia. Oszacowana w~wyniku fuzji pozycja stawu $P^F_{j,t}$ określa położenie danego stawu w~globalnym układzie współrzędnych prezentowanego systemu śledzenia ruchu, który jest tożsamy z~układem współrzędnych kontrolera Kinect.
+Wzór \ref{eq:methodFormula} odnosi się do każdego modułu inercyjnego zbudowanego z~pary czujników: akcelerometru i~żyroskopu, umieszczonego na ciele pomiędzy dwoma kolejnymi stawami, których pozycje oszacowane przez kontroler Kinect są argumentami metody. W~przypadku śledzenia ruchu więcej niż jednego stawu, powyższą metodę należy wykonać zgodnie z~ustaloną hierarchią stawów rozpoczynając od przyjętego korzenia. Oszacowana w~wyniku fuzji pozycja stawu $P^F_{j,t}$ określa położenie danego stawu w~globalnym układzie współrzędnych prezentowanego systemu śledzenia ruchu, który jest tożsamy z~układem współrzędnych kontrolera Kinect.
 %[Fixed]po tym zdaniu śmiem przypuszczać, że podstawowym Twoim problemem jest śledzenie stawu dziecka względem stawu rodzica a~nie pozycji stawu w~zewnętrznym układzie wspólrzednych. Trzeba to wyjaśnić 
 
 \section{Format danych używany przez urządzenia pomiarowe}
@@ -95,7 +95,7 @@ Przykładowo w~przypadku śledzenia ruchu prawej ręki są to oba stawy barkowe,
 %[Fixed](istotne jest podanie w~jakim układzie wspólrzędnych?!)
 oraz informacje o~stanie śledzenia tego stawu: \emph{Tracked}, \emph{Interferred} albo \emph{NotTracked}.
 %[Fixed](podać jakie moga być stany!). 
-Na podstawie współrzędnych stawów barkowych postaci obliczany jest kąt obrotu sylwetki względem Kinecta (wzór \eqref{eq:characteristics:kinect:bodyRotationAngle}. Dodatkowo każdy pakiet danych zawiera informacje o~swoim numerze, znacznik czasu wygenerowany przez kontroler Kinect oraz godzinę odebrania danych na komputerze, do którego podłączone jest to urządzenie.
+Na podstawie współrzędnych stawów barkowych postaci obliczany jest kąt obrotu sylwetki względem Kinecta (wzór \ref{eq:characteristics:kinect:bodyRotationAngle}. Dodatkowo każdy pakiet danych zawiera informacje o~swoim numerze, znacznik czasu wygenerowany przez kontroler Kinect oraz godzinę odebrania danych na komputerze, do którego podłączone jest to urządzenie.
 
 \subsection{Czujniki inercyjne}
 Moduł inercyjny zbudowany został z~czujników inercyjnych: akcelerometru i~żyroskopu, podłączonych bezpośrednio do jednostki centralnej opartej na platformie Arduino (rys. \ref{fig:device:circuitDiagram}). Zadaniem jednostki centralnej jest odczyt danych z~czujników, sformatowanie ich i~wysłanie z~wykorzystaniem technologii Bluetooth do komputera PC, gdzie następuje dalsze ich przetwarzanie. Odczyt pakietu danych z~pojedynczego modułu obejmuje zestaw pomiarów udostępnionych przez żyroskop (3 wartości obrotu, po jednej dla każdej z~osi), zastaw pomiarów z~akcelerometru (3 wartości przyspieszenia) oraz pomiaru temperatury czujników. Wszystkie pomiary przesyłane są jako 16-bitowe liczby całkowite ze znakiem i~pomiary ze wszystkich podłączonych modułów wysyłane są do komputera PC jednocześnie. Przesyłane wartości muszą być następnie skonwertowane do jednostek odpowiadających wielkościom fizycznym mierzonym przez poszczególne czujniki tj. dla żyroskopu są to stopnie na sekundę ($\degree/s$), dla akcelerometru -- jednostki przyspieszenia grawitacyjnego ($g$), które można również przeliczyć na jednostki przyspieszenia $m/_{s^2}$
@@ -134,7 +134,7 @@ Jak już zostało to zaznaczone wcześniej, w~trakcie prowadzonych eksperymentó
 \end{table} 		
  
 
-Konwersja pomiaru temperatury czujników ($T_{raw}$) do wartości wyrażonej w~$\degree C$ ($T_{deg}$) wymaga zastosowania wzoru \eqref{eq:hybrid:tempEquation} wynikającego ze specyfikacji zastosowanego układu elektronicznego IvenSense MPU-6050. Wartości stałe zastosowane w~tym wzorze związane są z~rozdzielczością pomiarów wykorzystanego w~tym układzie elektronicznym termometru (wartość = 340.0) oraz ze stałego przesunięcia dla temperatury $0 \degree C$ (wartość = 36.53)
+Konwersja pomiaru temperatury czujników ($T_{raw}$) do wartości wyrażonej w~$\degree C$ ($T_{deg}$) wymaga zastosowania wzoru \ref{eq:hybrid:tempEquation} wynikającego ze specyfikacji zastosowanego układu elektronicznego IvenSense MPU-6050. Wartości stałe zastosowane w~tym wzorze związane są z~rozdzielczością pomiarów wykorzystanego w~tym układzie elektronicznym termometru (wartość = 340.0) oraz ze stałego przesunięcia dla temperatury $0 \degree C$ (wartość = 36.53)
 
 \begin{equation}
 	T_{deg} = 36.53 + T_{raw} / 340.0
@@ -160,7 +160,7 @@ działa iteracyjnie (indeks iteracji = $s$) tak długo, dopóki jakikolwiek elem
 jest większy od elementu o~tym samym indeksie w~macierzy akceptowalnych błędów pomiaru ($[A_{th}\quad G_{th}]^T = [[a_{x,th},a_{y,th},a_{z,th}]^T\quad[g_{x,th},g_{y,th},g_{z,th}]^T]^T $)
 %[Fixed](skąd się wzięła wielkość v skoro wczesniej nie była podana). 
 W rezultacie elementy macierzy $cor$ pozwalają uzyskać pomiary w~każdej z~osi z~założoną dokładnością.
-Przyjmując, że macierz $[A_0\quad G_0]$ zawiera oczekiwane wartości pomiarów dla akcelerometru i~żyroskopu a~$[A\quad G]_{s,i}$ jest sekwencją $n$ kolejnych pomiarów obu czuzjników dla iteracji $s$, średnie błędy pomiarów wyznaczone s zgodnie ze wzorem \eqref{eq:hybrid:IMUCalibration:1} natomiast macierz współczynników korekty wyznaczona jest na podstawie wzoru \eqref{eq:hybrid:IMUCalibration:2}. Wyznaczone w~ten sposób współczynniki wykorzystywane są następnie to ciągłej korekty pomiarów uzyskiwanych z~akcelerometrów i~żyroskopów. Kalibracja modułu zajmuje zwykle około 10 iteracji, natomiast zdarzały się sytuacje, w~których trwało to ponad 2 razy dłużej. Było to zazwyczaj spowodowane poruszeniem modułu w~trakcie kalibracji.
+Przyjmując, że macierz $[A_0\quad G_0]$ zawiera oczekiwane wartości pomiarów dla akcelerometru i~żyroskopu a~$[A\quad G]_{s,i}$ jest sekwencją $n$ kolejnych pomiarów obu czuzjników dla iteracji $s$, średnie błędy pomiarów wyznaczone s zgodnie ze wzorem \ref{eq:hybrid:IMUCalibration:1} natomiast macierz współczynników korekty wyznaczona jest na podstawie wzoru \ref{eq:hybrid:IMUCalibration:2}. Wyznaczone w~ten sposób współczynniki wykorzystywane są następnie to ciągłej korekty pomiarów uzyskiwanych z~akcelerometrów i~żyroskopów. Kalibracja modułu zajmuje zwykle około 10 iteracji, natomiast zdarzały się sytuacje, w~których trwało to ponad 2 razy dłużej. Było to zazwyczaj spowodowane poruszeniem modułu w~trakcie kalibracji.
 
 \begin{equation}
 	\begin{bmatrix} \bar{A} \\ \bar{G} \end{bmatrix}_s =
@@ -183,7 +183,7 @@ Przyjmując, że macierz $[A_0\quad G_0]$ zawiera oczekiwane wartości pomiarów
 
 Kolejnym krokiem jest inicjalizacja filtru Madgwicka łączącego dane z~czujników inercyjnych w~celu wyznaczenia ich orientacji w~przestrzeni. Łączenie to ma na celu ograniczenie dryfu żyroskopu za pomocą pomiarów akcelerometru, a~następnie wyznaczenie orientacji przestrzennej modułu inercyjnego. W~literaturze najczęściej spotykanym filtrem wykorzystywanym do tego celu jest filtr Kalmana \cite{Sasiadek2000, Sabatini2011, Mau2005, Qingming2014} (opis filtrów Kalmana można znaleźć w~dodatku \ref{chap:appx:filters}). W~roku 2010 Sebastian Madgwick opublikował raport ze swoich badań, w~którym przedstawił wzór autorskiego filtra łączącego dane z~akcelerometru i~żyroskopu oraz wariant uzupełniony o~dane z~magnetometru,  przedstawiający orientację urządzenia pomiarowego zbudowanego z~tych czujników w~postaci kwaternionów \cite{Madgwick2010, Madgwick2011}. W~przytoczonych pracach opublikowane zostały także wyniki testów porównujących zaproponowany filtr z~filtrem Kalmana, z~których wynika, że filtr Madgwicka osiąga lepsze wyniki niż filtr Kalmana w~wyznaczaniu orientacji przestrzennej na podstawie pomiarów z~akcelerometru, żyroskopu i~opcjonalnie z~magnetometru. W~opisywanej w~tym rozdziale autorskiej hybrydowej metodzie śledzenia ruchu kończyn 
 %[Fixed](dodałem kończyn, bo to chyba jest precyzyjniej) 
-człowieka, wykorzystany został filtr Madgwicka ($m(\ldots)$) opisany wzorem \eqref{eq:hybrid:magwickFormula}. 
+człowieka, wykorzystany został filtr Madgwicka ($m(\ldots)$) opisany wzorem \ref{eq:hybrid:magwickFormula}. 
 
 \begin{equation}
 	Q^I_t = m(Q^I_{t-1}, A, G, \Delta t, f_m) 
@@ -200,7 +200,7 @@ gdzie
 %[Fixed]upewnij się, że powyższe oznaczenia dla czujników sa spójne z~wczesniejszymi oznaczeniami
 Inicjalizacja filtru Madgwicka odbywa się poprzez jego wielokrotne zastosowanie dla uśrednionych pomiarów z~czujników inercyjnych znajdujących się i~dokonujących pomiary w~stanie spoczynku. W~trakcie inicjalizacji filtru Madgwicka powinien być on zastosowany taką liczbę razy jakiej liczności była próbka do wyznaczenia uśrednionych wartości pomiarów czujników tj. jeśli średnie wartości pomiarów były wyznaczone z~próbki zawierającej 1000 wartości to w~ramach inicjalizacji filtr Madgwicka powinien być zastosowany 1000-krotnie dla uśrednionych danych.\\
 
-Zgodnie z~zaleceniami twórcy tej metody, w~trakcie inicjalizacji, wartość współczynnika filtracji $f_m$ powinna być relatywnie wysoka. W~opisywanej metodzie, w~trakcie tego procesu $f_m = 2$. Po zakończeniu inicjalizacji współczynnik $f_m$ zostaje wyznaczony wg wzoru \eqref{eq:hybrid:magwickBetaFormula}. Jest on zależny od średniej wartości szumu błądzenia $\widetilde{\omega}$ (ARW) wyznaczonego dla żyroskopu na podstawie wariancji Allana (dodatek \ref{chap:appx:allan}). W~przypadku wykorzystanych czujników wartość ARW wynosi $\widetilde{\omega} = 0.009$, więc współczynnik $f_m = 0.082$
+Zgodnie z~zaleceniami twórcy tej metody, w~trakcie inicjalizacji, wartość współczynnika filtracji $f_m$ powinna być relatywnie wysoka. W~opisywanej metodzie, w~trakcie tego procesu $f_m = 2$. Po zakończeniu inicjalizacji współczynnik $f_m$ zostaje wyznaczony wg wzoru \ref{eq:hybrid:magwickBetaFormula}. Jest on zależny od średniej wartości szumu błądzenia $\widetilde{\omega}$ (ARW) wyznaczonego dla żyroskopu na podstawie wariancji Allana (dodatek \ref{chap:appx:allan}). W~przypadku wykorzystanych czujników wartość ARW wynosi $\widetilde{\omega} = 0.009$, więc współczynnik $f_m = 0.082$
 
 \begin{equation}
 	f_m = \sqrt{\frac{3}{4}\widetilde{\omega}}
@@ -231,7 +231,7 @@ Wyznaczając orientację przestrzenną modułu inercyjnego zbudowanego jedynie z
 						
 \end{figure}
 
-Zanim jednak dane z~czujników IMU zostaną połączone za pomocą filtru Madgwicka, pomiary uzyskane za pomocą akcelerometru poddane są korekcie ze względu na aktualną temperaturę pracy sensora. Wzór \eqref{eq:hybrid:temperatureCorrection} przedstawia sposób korekty pomiaru z~akcelerometru  $A$ w~określonej temperaturze $T$. Temperatura $T_0$ to temperatura neutralna, która wg specyfikacji wykorzystanego układu elektronicznego oraz na podstawie własnych badań 
+Zanim jednak dane z~czujników IMU zostaną połączone za pomocą filtru Madgwicka, pomiary uzyskane za pomocą akcelerometru poddane są korekcie ze względu na aktualną temperaturę pracy sensora. Wzór \ref{eq:hybrid:temperatureCorrection} przedstawia sposób korekty pomiaru z~akcelerometru  $A$ w~określonej temperaturze $T$. Temperatura $T_0$ to temperatura neutralna, która wg specyfikacji wykorzystanego układu elektronicznego oraz na podstawie własnych badań 
 %[Fixed](napisał bym 1-2 zdania bo to Twój wkład, którego nie mozna przemilczeć. Czy inni też korygowali dane z~akcelerometru na podstawie temperatury. Jeśli nie to to jest Twój wkład w~metodę.)
 dotyczących wpływu temperatury na dokładność pomiarów czujników inercyjnych, wynosi $25\degree C$ (wykres na rys. \ref{fig:characteristics:imu:temp}). W~znanej autorowi niniejszej dysertacji literaturze przedmiotu, korekta taka nie była uwzględniania lub autorzy tych publikacji nie zamieścili stosownej informacji o~tym fakcie.
 
@@ -244,7 +244,7 @@ Również dane dotyczące położenia w~przestrzeni wybranych stawów szkieletu,
 %[Fixed](z premedytacją usuwam słowa klatka/ramka, bo one mogą być niezrozumiałe w~przypadku pomiarów z~czujników) 
 Przykładowo przy częstotliwości pracy kontrolera Kinect wynoszącej 30 Hz przemieszczenie się stawu o~kilkanaście centymetrów pomiędzy dwoma kolejnymi oszacowaniami może wskazywać błąd wyznaczania pozycji lub błąd pomiaru. 
 %[Fixed](a co z~bardzo szybkim ruchem? może trzeba złagodzić stanowczość przekazu) 
-Aby ograniczyć wpływ opisanych szumów na dalsze etapy działania opracowanej przeze mnie hybrydowej metody śledzenia ruchu, pozycje wybranych stawów, których ruch jest śledzony, zostały poddane filtracji dolnoprzepustowej za pomocą filtra wykładniczego I-go rzędu. Jego działanie opiera się na komplementarnym łączeniu ze sobą danych zaszumionych ($P^K_{j,t}$) pobranych w~chwili $t$ z~wynikiem działania filtra w~chwili $t-1$ ($P'^K_{j,t-1}$) przy zastosowaniu współczynnika filtracji $f_{LPF}$ zgodnie ze wzorem \eqref{eq:hybrid:kinect:lpf}. Przykład danych dotyczący położenia stawu łokciowego przed i~po zastosowaniu omówionego filtra wykładniczego I-go rzędu przedstawiają wykresy \ref{fig:hybrid:kinect:noised} oraz \ref{fig:hybrid:kinect:denoised}.
+Aby ograniczyć wpływ opisanych szumów na dalsze etapy działania opracowanej przeze mnie hybrydowej metody śledzenia ruchu, pozycje wybranych stawów, których ruch jest śledzony, zostały poddane filtracji dolnoprzepustowej za pomocą filtra wykładniczego I-go rzędu. Jego działanie opiera się na komplementarnym łączeniu ze sobą danych zaszumionych ($P^K_{j,t}$) pobranych w~chwili $t$ z~wynikiem działania filtra w~chwili $t-1$ ($P'^K_{j,t-1}$) przy zastosowaniu współczynnika filtracji $f_{LPF}$ zgodnie ze wzorem \ref{eq:hybrid:kinect:lpf}. Przykład danych dotyczący położenia stawu łokciowego przed i~po zastosowaniu omówionego filtra wykładniczego I-go rzędu przedstawiają wykresy \ref{fig:hybrid:kinect:noised} oraz \ref{fig:hybrid:kinect:denoised}.
 
 \begin{equation}
 	\label{eq:hybrid:kinect:lpf}
@@ -255,13 +255,13 @@ Aby ograniczyć wpływ opisanych szumów na dalsze etapy działania opracowanej 
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics{images/kinectElbowRaw.png}	
+		\includegraphics[width=\linewidth]{images/kinectElbowRaw.png}	
 		\caption{Pomiar bezpośredni -- zaszumiony}
 		\label{fig:hybrid:kinect:noised}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics{images/kinectElbowFiltered.png}	
+		\includegraphics[width=\linewidth]{images/kinectElbowFiltered.png}	
 		\caption{Pomiar odszumiony}
 		\label{fig:hybrid:kinect:denoised}
 	\end{subfigure}				
@@ -279,7 +279,7 @@ wpływu wartości współczynnika filtracji na dokładność oszacowania pozycji
 	\label{fig:hybrid:kinect:lpf}
 \end{figure}
 
-Korekcie muszą zostać poddane także oszacowania odległości, w~jakiej znajdują się wybrane stawy od kontrolera Kinect. Zgodnie ze wzorami \eqref{eq:characteristics:kinect:distanceAccuracyPoly} i~\eqref{eq:characteristics:kinect:distanceAccuracyCoef} definiującymi model błędu szacowania odległości pomiędzy osobą, której ruch jest śledzony a~Kinectem, funkcja korygująca ten błąd przybiera postać wzoru \eqref{eq:distCorr}, gdzie wartość $z$ to oszacowanie odległości podlegająca korekcie 
+Korekcie muszą zostać poddane także oszacowania odległości, w~jakiej znajdują się wybrane stawy od kontrolera Kinect. Zgodnie ze wzorami \ref{eq:characteristics:kinect:distanceAccuracyPoly} i~\ref{eq:characteristics:kinect:distanceAccuracyCoef} definiującymi model błędu szacowania odległości pomiędzy osobą, której ruch jest śledzony a~Kinectem, funkcja korygująca ten błąd przybiera postać wzoru \ref{eq:distCorr}, gdzie wartość $z$ to oszacowanie odległości podlegająca korekcie 
 %[Fixed](oszacowanie odległości) 
 a $z'$ to wartość skorygowana. Formuła korygująca oszacowanie odległości wykonane przez kontroler Kinect jest efektem własnego eksperymentu opisanego szerzej w~rozdziale \ref{sssection:distanceEstimation}.
 %[Fixed] (trzeba napisać, ze jest ona wynikiem Twoich badań i~jedno zdanie na czym polegały, albo gdzie można znaleźć więcej informacji).
@@ -292,7 +292,7 @@ a $z'$ to wartość skorygowana. Formuła korygująca oszacowanie odległości w
 
 \section{Synchronizacja czasowa}
 
-Aby dane reprezentujące położenie badanego stawu na podstawie czujników inercyjnych oraz kontrolera Kinect mogły być poprawnie złączone, powinny zostać najpierw zsynchronizowane w~czasie. Jest to proces, który powinien zostać przeprowadzony przed każdą sesją śledzenia ruchu, np. przed konkretną sekwencją ćwiczeń do wykonania. Synchronizacja czasowa ma na celu określenie przesunięcia czasowego jakie występuje pomiędzy oszacowaniami położenia tych samych stawów w~trakcie tego samego ruchu za pomocą każdego z~urządzeń pomiarowych osobno -- czujników inercyjnych i~kontrolera Kinect. Do wyznaczenia przesunięcia czasowego pomiędzy sygnałem uzyskiwanym z~czujników inercyjnych ($I(t)$) a~tym z~kontrolera Kinect ($K(t)$) wykorzystywany został algorytm korelacji wzajemnej (\emph{ang. cross--correlation}) określony wzorem \eqref{eq:cross-cor:1}. Parametr $\tau$ odpowiada za opóźnienie jednego sygnału względem drugiego. Aby wyznaczyć jakie jest przesunięcie czasowe ($\tau_{max}$) pomiędzy dwoma sygnałami należy znaleźć taką wartość argumentu $\tau$ dla którego wartość funkcji korelacji wzajemnej pomiędzy badanymi sygnałami jest największa (wzór \eqref{eq:cross-cor:2}). Aby można było skutecznie wyznaczyć tę wartość, oba sygnały muszą posiadać tę samą częstotliwość próbkowania. Spełnienie tego warunku uzyskano poprzez obniżenie częstotliwości próbkowania sygnału uzyskanego z~czujników inercyjnych ze 100Hz  do 30Hz t.j. została ona zrównana do tej, z~jaką pracuje Kinect. Pomiary z~czujników inercyjnych są tymczasowo buforowane i~gdy zostanie pobrany pakiet danych 
+Aby dane reprezentujące położenie badanego stawu na podstawie czujników inercyjnych oraz kontrolera Kinect mogły być poprawnie złączone, powinny zostać najpierw zsynchronizowane w~czasie. Jest to proces, który powinien zostać przeprowadzony przed każdą sesją śledzenia ruchu, np. przed konkretną sekwencją ćwiczeń do wykonania. Synchronizacja czasowa ma na celu określenie przesunięcia czasowego jakie występuje pomiędzy oszacowaniami położenia tych samych stawów w~trakcie tego samego ruchu za pomocą każdego z~urządzeń pomiarowych osobno -- czujników inercyjnych i~kontrolera Kinect. Do wyznaczenia przesunięcia czasowego pomiędzy sygnałem uzyskiwanym z~czujników inercyjnych ($I(t)$) a~tym z~kontrolera Kinect ($K(t)$) wykorzystywany został algorytm korelacji wzajemnej (\emph{ang. cross--correlation}) określony wzorem \ref{eq:cross-cor:1}. Parametr $\tau$ odpowiada za opóźnienie jednego sygnału względem drugiego. Aby wyznaczyć jakie jest przesunięcie czasowe ($\tau_{max}$) pomiędzy dwoma sygnałami należy znaleźć taką wartość argumentu $\tau$ dla którego wartość funkcji korelacji wzajemnej pomiędzy badanymi sygnałami jest największa (wzór \ref{eq:cross-cor:2}). Aby można było skutecznie wyznaczyć tę wartość, oba sygnały muszą posiadać tę samą częstotliwość próbkowania. Spełnienie tego warunku uzyskano poprzez obniżenie częstotliwości próbkowania sygnału uzyskanego z~czujników inercyjnych ze 100Hz  do 30Hz t.j. została ona zrównana do tej, z~jaką pracuje Kinect. Pomiary z~czujników inercyjnych są tymczasowo buforowane i~gdy zostanie pobrany pakiet danych 
 %[Fixed](nie leży mi słowo ramka. Pomyśl nad pakietem danych tak jak wpisałem) 
 z Kinecta, pomiary z~modułów inercyjnych zgromadzone w~tymczasowym buforze 
 %[Fixed?](jakiego bufora?) 
@@ -308,7 +308,7 @@ zostają poddane filtrowi medianowemu, aby wyeliminować ewentualne krótkotrwa�
 
 Wyznaczona wartość przesunięcia w~czasie pomiędzy sygnałami $\tau_{max}$ wykorzystywana jest następnie do modyfikacji wartości znacznika określającego czas odebrania danych z~modułu inercyjnego przez komputer PC. Tak zmodyfikowany znacznik czasu wykorzystywany jest do wyznaczenia pomiarów z~czujników inercyjnych odpowiadających pomiarom uzyskanym z~kontrolera Kinect. Metoda określająca odpowiadające sobie pomiary z~kilku sygnałów na podstawie czasów otrzymania wartości każdego z~badanych sygnałów nazywana jest decymacją \cite{Hinton2001}.
 %[Fixed](jakaś referencja?). 
-Przyjmując, że $t_k$ jest znacznikiem czasowym otrzymania na komputerze PC danych z~kontrolera Kinect, a~$t_i()$ to znaczniki czasowe danych  otrzymanych z~czujników inercyjnych i~umieszczonych w~buforze, wówczas wybór próbki danych pomiarowych z~czujników inercyjnych skorelowanych z~danymi z~kontrolera Kinect wyrażony jest wzorem \eqref{eq:dec}, gdzie $i_{res}$ to numer próbki umieszczonej w~buforze danych.
+Przyjmując, że $t_k$ jest znacznikiem czasowym otrzymania na komputerze PC danych z~kontrolera Kinect, a~$t_i()$ to znaczniki czasowe danych  otrzymanych z~czujników inercyjnych i~umieszczonych w~buforze, wówczas wybór próbki danych pomiarowych z~czujników inercyjnych skorelowanych z~danymi z~kontrolera Kinect wyrażony jest wzorem \ref{eq:dec}, gdzie $i_{res}$ to numer próbki umieszczonej w~buforze danych.
 % (nie rozumiem kiedy co i~jak jest umieszczane w~buforze). Pomiędzy kolejnymi odczytami danych kinecta buforujemy pomiary IMU i~do ich znacznika czasowego dodajemy przesunięcie \tau_{max}. Jak dostaniemy pomiary Kinectowe to w~buforze danych IMU wybieramy ten którego zmodyfikowany znacznik czasowy jast najbliższy znacznikowi pomiaru Kinectowego. dzięki temu sygnały się zbliżają do siebie w~sensie opóźnień czasowych.
 
 \begin{equation}
@@ -325,11 +325,11 @@ Strumienie danych pochodzące z~poszczegółnych sensorów, zsynchronizowane cza
 Wykorzystanie położenia stawów szkieltu w~procesie łączenia sygnałów z~obu źródeł dodatkowo utrudnia fakt niedokładności w~oszacowaniu modelu szkieletowego za pomocą kontrolera Kinect. Model ten nie ma zdefiniowanych długości poszczególnych kości na stałe (choćby na czas pojedynczej sesji śledzenia) i~są one determinowane przez oszacowanie położenia kolejnych stawów, obarczonych zauważalną zmiennością w~czasie. To z~kolei skutkuje tym, że długości poszczególnych kości modelu szkieletowego, oszacowanego przez kontroler Kinect, różnią się nawet o~kilka $cm$ pomiędzy kolejnymi pomiarami .\\
 %[Fixed](znowu usunąłem klatki)
 
-Dane z~obu źródeł (kontroler Kinect i~moduł inercyjny) zawierają informacje o~orientacji przestrzennej wyrażone w~kwaternionach, jednak dalsze obliczenia mające na celu połączenie tych informacji są bardziej intuicyjne przy reprezentacji w~postaci kątów Eulera. Konwersja taka przeprowadzona jest zgodnie ze wzorem \eqref{eq:appx:rot:quatToEuler}, a~w~jej wyniku wartości obrotów wokół każdej z~osi układu współrzędnych danego urządzenia pomiarowego, które składają się na orientację przestrzenną danej kości, są wyrażone bezpośrednio. Reprezentacja w~postani kątów Eulera ułatwia także konwersję tychże informacji o~obrotach do wspólnego, globalnego układu współrzędnych co jest niezbędne, żeby można było je w~dalszych krokach łączyć. 
+Dane z~obu źródeł (kontroler Kinect i~moduł inercyjny) zawierają informacje o~orientacji przestrzennej wyrażone w~kwaternionach, jednak dalsze obliczenia mające na celu połączenie tych informacji są bardziej intuicyjne przy reprezentacji w~postaci kątów Eulera. Konwersja taka przeprowadzona jest zgodnie ze wzorem \ref{eq:appx:rot:quatToEuler}, a~w~jej wyniku wartości obrotów wokół każdej z~osi układu współrzędnych danego urządzenia pomiarowego, które składają się na orientację przestrzenną danej kości, są wyrażone bezpośrednio. Reprezentacja w~postani kątów Eulera ułatwia także konwersję tychże informacji o~obrotach do wspólnego, globalnego układu współrzędnych co jest niezbędne, żeby można było je w~dalszych krokach łączyć. 
 %[Fixed](którego?)
 Informacje o~orientacji kości wyznaczone na podstawie danych pomiarowych z~czujników inercyjnych oraz kontrolera Kinect są od siebie niezależne oraz zawierają uzupełniające się informacje. Wzajemna niezależność i~uzupełnianie się danych umożliwia ich połączenie w~sposób komplementarny. Łącząc dane w~sposób komplementarny każdej z~wartości podlegającej łączeniu przypisane zostają wagi, których suma wynosi $1$, a~następnie są one ze sobą sumowane z~uwzględnieniem wag określających poziom istotności poszczególnych wartości. Wynik sumowania reprezentuje wartość złączonych danych wejściowych. \\
  
-%Łączenie komplementarne dla $n$ źródeł przedstawia wzór \eqref{eq:complementaryFilter}.
+%Łączenie komplementarne dla $n$ źródeł przedstawia wzór \ref{eq:complementaryFilter}.
 %[Fixed]skoro łaczone sa kąty to po co wprowadziać znowu x, który w~pracy oznaczał juz chyba wszystko
 %\begin{equation}
 %x^F = \sum_{i=1}^{n}{w_i x_i}
@@ -337,7 +337,7 @@ Informacje o~orientacji kości wyznaczone na podstawie danych pomiarowych z~czuj
 %\end{equation}
 
 
-Prezentowana w~niniejszej dysertacji hybrydowa metoda śledzenia ruchu kończyn człowieka łączy ze sobą dane pochodzące z~dwóch źródeł. Dane te są w~postaci trójelementowych wektorów orientacji $E = \begin{bmatrix} \phi &  \theta & \psi \end{bmatrix}$, gdzie każdy z~elementów oznacza obrót wokół pojedynczej osi układu współrzędnych. Wektor ten stanowi reprezentację orientacji przestrzennej segmentu szkieletu w~postaci kątów Eulera, wyznaczoną przez konwersję kwaternionów otrzymanych na podstawie pomiarów czujników inercyjnych i~kontrolera Kinect. Wagi wykorzystywane w~procesie łączenia danych są wyznaczane indywidualnie dla każdego z~elementów wektora. Przyjmując, że wagi $w_\phi , w_\theta , w_\psi$ oznaczają poziom istotności informacji otrzymanych na podstawie pomiarów czujników inercyjnych ($E^I = \begin{bmatrix}  \phi^I &  \theta^I &  \psi^I \end{bmatrix}$) wówczas komplementarne łączenie ich z~danymi otrzymanymi z~kontrolera Kinect ($E^K = \begin{bmatrix}  \phi^K &  \theta^K &  \psi^K \end{bmatrix}$) dla danej chwili $t$ przedstawia wzór \eqref{eq:hybrid:reliableFusion}
+Prezentowana w~niniejszej dysertacji hybrydowa metoda śledzenia ruchu kończyn człowieka łączy ze sobą dane pochodzące z~dwóch źródeł. Dane te są w~postaci trójelementowych wektorów orientacji $E = \begin{bmatrix} \phi &  \theta & \psi \end{bmatrix}$, gdzie każdy z~elementów oznacza obrót wokół pojedynczej osi układu współrzędnych. Wektor ten stanowi reprezentację orientacji przestrzennej segmentu szkieletu w~postaci kątów Eulera, wyznaczoną przez konwersję kwaternionów otrzymanych na podstawie pomiarów czujników inercyjnych i~kontrolera Kinect. Wagi wykorzystywane w~procesie łączenia danych są wyznaczane indywidualnie dla każdego z~elementów wektora. Przyjmując, że wagi $w_\phi , w_\theta , w_\psi$ oznaczają poziom istotności informacji otrzymanych na podstawie pomiarów czujników inercyjnych ($E^I = \begin{bmatrix}  \phi^I &  \theta^I &  \psi^I \end{bmatrix}$) wówczas komplementarne łączenie ich z~danymi otrzymanymi z~kontrolera Kinect ($E^K = \begin{bmatrix}  \phi^K &  \theta^K &  \psi^K \end{bmatrix}$) dla danej chwili $t$ przedstawia wzór \ref{eq:hybrid:reliableFusion}
 
 \begin{equation} E^F_t = 
 	\begin{bmatrix}  \phi^F \\  \theta^F \\  \psi^F \end{bmatrix}_t = 
@@ -349,7 +349,7 @@ Prezentowana w~niniejszej dysertacji hybrydowa metoda śledzenia ruchu kończyn 
 \end{equation}
 %[Fixed]w powyzszych rozwazaniach posługujesz się kątami i~to jest zrozumiałe, to po co wczesniej przy łączeniu kompementarnym są ixy? -- już nie ma :)
 
-Wzór \eqref{eq:hybrid:reliableFusion} jest wykorzystywany zawsze wtedy, kiedy dane podlegające łączeniu są dobrej jakości i~możemy je uznać za prawidłowe. W~takiej sytuacji współczynniki wag $w_\phi , w_\theta , w_\psi$ są wartościami stałymi dobranymi eksperymentalnie przez autora i~wynoszącymi odpowiednio $0.98,0.05,0.65$.\\
+Wzór \ref{eq:hybrid:reliableFusion} jest wykorzystywany zawsze wtedy, kiedy dane podlegające łączeniu są dobrej jakości i~możemy je uznać za prawidłowe. W~takiej sytuacji współczynniki wag $w_\phi , w_\theta , w_\psi$ są wartościami stałymi dobranymi eksperymentalnie przez autora i~wynoszącymi odpowiednio $0.98,0.05,0.65$.\\
 %[Fixed](skąd te wartości? Podać ich źródło.)\\
 Waga $w_\phi$ odpowiada za obrót wokół osi przechodzącej wzdłuż ciała ($X$, rys. \ref{fig:characteristics:kinect:space}, rys. \ref{fig:handAxes}).
 %[Fixed](konieczne odwołanie do rysunkku, który powinien te wszystkie układy i~szkielet przedstawić na początku jednoznacznie i~potem konsekwentnie stosować). -- nie wiem czy moga być dwa obrazki i~też nie wiem na którym lepiej widać
@@ -373,9 +373,9 @@ Rysunek \ref{fig:handAxes} przedstawia układ współrzędnych wraz z~obrotami o
 %na rysunku brakuje szerszego kontekstu jak uustawiony jest Kinect i~jak sa zdefiniowane pozostałe układy współrzędnych
 
 Określenie czy oszacowania kątów uzyskane za pomocą kontrolera Kinect są wystarczającej jakości do łączenia ich z~oszacowaniami kątów uzyskanymi z~czujników inercyjnych wykonywane jest każdorazowo na podstawie kryteriów związanych z~realizowanym ruchem. \\
-Pierwszym kryterium branym pod uwagę jest obrót całej sylwetki względem kamery, liczony jako kąt $\alpha$ pomiędzy linią barków a~kamerą w~płaszczyźnie $X$--$Z$ (rys. \ref{fig:characteristics:kinect:bodyRotationAngle}) zgodnie ze wzorem \eqref{eq:characteristics:kinect:bodyRotationAngle}. Na podstawie zbadanych wcześniej charakterystyk obu urządzeń wiadomo, że dane które można wiarygodnie wykorzystać do łączenia są możliwe do uzyskania tylko gdy sylwetka nie jest obrócona o~więcej niż $50\degree$. Oprócz wartości kąta obrotu sylwetki brane jest także pod uwagę odchylenie standardowe estymacji tego obrotu. Przyjmując, że $\alpha()$
+Pierwszym kryterium branym pod uwagę jest obrót całej sylwetki względem kamery, liczony jako kąt $\alpha$ pomiędzy linią barków a~kamerą w~płaszczyźnie $X$--$Z$ (rys. \ref{fig:characteristics:kinect:bodyRotationAngle}) zgodnie ze wzorem \ref{eq:characteristics:kinect:bodyRotationAngle}. Na podstawie zbadanych wcześniej charakterystyk obu urządzeń wiadomo, że dane które można wiarygodnie wykorzystać do łączenia są możliwe do uzyskania tylko gdy sylwetka nie jest obrócona o~więcej niż $50\degree$. Oprócz wartości kąta obrotu sylwetki brane jest także pod uwagę odchylenie standardowe estymacji tego obrotu. Przyjmując, że $\alpha()$
 %[Fixed](dlaczego znowu x przecież kąty majhą swoje oznaczenia może chociaż alfa?)
-to zbiór wartości oszacowań kąta obrotu sylwetki z~ostatnich $3s$ (ok. 90 elementów w~zbiorze) a~$\bar{\alpha}$ to średnia arytmetyczna elementów w~tym zbiorze, wówczas odchylenie standardowe $\sigma_\alpha$ definiuje wzór \eqref{eq:stdDev}.
+to zbiór wartości oszacowań kąta obrotu sylwetki z~ostatnich $3s$ (ok. 90 elementów w~zbiorze) a~$\bar{\alpha}$ to średnia arytmetyczna elementów w~tym zbiorze, wówczas odchylenie standardowe $\sigma_\alpha$ definiuje wzór \ref{eq:stdDev}.
 
 \begin{equation}
 	\sigma_\alpha = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}{(\alpha(i) - \bar{\alpha})^2}}
@@ -395,7 +395,7 @@ wraz z~odchyleniem standardowym uzyskiwanych oszacowań spowodowane jest faktem,
 	\label{fig:hybrid:kinect:kinectRotationVariance}
 \end{figure}
 
-Oprócz obrotu całej postaci, ocenie podlega także stabilność pomiarów samych stawów. Pierwszym parametrem jaki brany jest pod uwagę jest stan śledzenia poszczególnych stawów, który może przyjąć jedną z~3 wartości opisanych szerzej w~podrozdziale \ref{ssec:characteristics:kinect:limitation}. Wartość \emph{NotTracked} jest od razu traktowana jako wskazanie, że dane związane z~danym stawem (jego pozycja, ale także orientacja kości związanych z~nim) są niewiarygodne. W~przypadku pozostałych 2 możliwych stanów śledzenia stawu sprawdzany jest poziom szumu za pomocą filtru górnoprzepustowego w~postaci \eqref{eq:hybrid:kinect:hpf}. 
+Oprócz obrotu całej postaci, ocenie podlega także stabilność pomiarów samych stawów. Pierwszym parametrem jaki brany jest pod uwagę jest stan śledzenia poszczególnych stawów, który może przyjąć jedną z~3 wartości opisanych szerzej w~podrozdziale \ref{ssec:characteristics:kinect:limitation}. Wartość \emph{NotTracked} jest od razu traktowana jako wskazanie, że dane związane z~danym stawem (jego pozycja, ale także orientacja kości związanych z~nim) są niewiarygodne. W~przypadku pozostałych 2 możliwych stanów śledzenia stawu sprawdzany jest poziom szumu za pomocą filtru górnoprzepustowego w~postaci \ref{eq:hybrid:kinect:hpf}. 
 
 \begin{equation}
 	n^K_{j,t} = f_{HPF} n^K_{j,t-1} + f_{HPF} (P^K_{j,t} - P^K_{j,t-1}) 
@@ -404,35 +404,35 @@ Oprócz obrotu całej postaci, ocenie podlega także stabilność pomiarów samy
 
 gdzie:
 \begin{conditions}
-	n^K_{j,t} & poziom szumu w~aktualnym oszacowaniu położenia danego stawu \\
-	n^K_{j,t-1} & poziom szumu w~poprzednim oszacowaniu położenia danego stawu \\
-	P^K_{j,t} & położenie stawu w~aktualnym oszacowaniu \\
-	P^K_{j,t-1} & położenie stawu w~poprzednim oszacowaniu \\
-	f_{HPF} & współczynnik filtracji  $f_{HPF} = 0.01$ \\
+	n^K_{j,t} & poziom szumu $n$ w~aktualnym oszacowaniu położenia danego stawu $j$ w czasie $t$ dla Kinecta,\\
+	n^K_{j,t-1} & poziom szumu $n$ w~poprzednim oszacowaniu położenia danego stawu $j$ w czasie $t-1$ dla Kinecta,\\
+	P^K_{j,t} & położenie $P$ stawu $j$ w~aktualnym oszacowaniu $t$ dla Kinecta,\\
+	P^K_{j,t-1} & położenie  $P$ stawu $j$ w~poprzednim oszacowaniu $t-1$ dla Kinecta, \\
+	f_{HPF} & współczynnik filtracji  $f_{HPF} = 0.01$. \\
 \end{conditions}
 
 \begin{figure}%[!htb]
 	\centering 
 	\begin{subfigure}[b]{0.79\textwidth}
 		\centering
-		\includegraphics{images/Fig09.png}	
+		\includegraphics[width=\linewidth]{images/Fig09.png}	
 		\caption{Staw śledzony ze statusem \emph{Tracked}}
 		\label{fig:hybrid:kinect:hpfNotOccluded}
 	\end{subfigure}	
 			
 	\begin{subfigure}[b]{0.79\textwidth}
 		\centering
-		\includegraphics{images/Fig10.png}
+		\includegraphics[width=\linewidth]{images/Fig10.png}
 		\caption{Staw śledzony ze statusami \emph{Tracked} i~\emph{Interferred} (oznaczone owalem)}
 		\label{fig:hybrid:kinect:hpfOccluded}
 	\end{subfigure}	
-	\caption{Wynik działania filtru górnoprzepustowego (wz. \eqref{eq:hybrid:kinect:hpf}) w~stosunku do położenia wybranych stawów w~przestrzeni w~osi $Z$ dla stawu śledozonego ze stałym statusem \emph{Tracked} (a) oraz zmiennym statusem \emph{Tracked} i~\emph{Interferred} (b)}
+	\caption{Wynik działania filtru górnoprzepustowego (wz. \ref{eq:hybrid:kinect:hpf}) w~stosunku do położenia wybranych stawów w~przestrzeni w~osi $Z$ dla stawu śledozonego ze stałym statusem \emph{Tracked} (a) oraz zmiennym statusem \emph{Tracked} i~\emph{Interferred} (b)}
 	\label{fig:hybrid:kinect:hpfResults}
 \end{figure}
 
-Wykresy \ref{fig:hybrid:kinect:hpfNotOccluded} i~\ref{fig:hybrid:kinect:hpfOccluded} przedstawiają wynik działania filtru górnoprzepustowego dla oszacowania położenia stawu nadgarstkowego w~przypadku kiedy staw cały czas posiadał status śledzenia \emph{Tracked} oraz kiedy w~trakcie wykonywanego ruchu status zmieniał się na \emph{Interferred}. Dla zachowania przejrzystości, wykresy przedstawiają wspomniany wynik dla położenia stawu wyznaczonego wzdłuż jednej z~osi. Na wykresie \ref{fig:hybrid:kinect:hpfOccluded} zostały zaznaczone (w jaki sposób zaznaczone?) te miejsca kiedy nastąpiła zmiana statusu śledzenia. Na wspomnianych wykresach widać, że poziom szumu pozostaje niski dla oszacowania położenia stawu kiedy status jego śledzenia przyjmuje wartość \emph{Tracked}. W~innym przypadku poziom szumu wzrasta wielokrotnie i~utrzymuje się do momentu ponownego przyjęcia statusu  \emph{Tracked}. W~wartości oszacowania położenia stawu widoczne jest to w~postaci zauważalnego efektu drgania danego stawu. Na podstawie przeprowadzonych badań własnych, w~metodzie śledzenia ruchu opisywanej w~niniejszej dysertacji jako graniczną wartość zaszumienia danych pomiarowych kontrolera Kinect ($n^K$), dla których możliwe jest ich łączenie z~danymi uzyskanymi z~czujników inercyjnych na podstawie wzoru \eqref{eq:hybrid:reliableFusion}, autor przyjął $|n^K| \le 0.0004$\\
+Wykresy z rysunków \ref{fig:hybrid:kinect:hpfNotOccluded} i~\ref{fig:hybrid:kinect:hpfOccluded} przedstawiają wynik działania filtru górnoprzepustowego dla oszacowania położenia stawu nadgarstkowego w~przypadku kiedy staw cały czas posiadał status śledzenia \emph{Tracked} oraz kiedy w~trakcie wykonywanego ruchu status zmieniał się na \emph{Interferred}. Dla zachowania przejrzystości, wykresy przedstawiają wspomniany wynik dla położenia stawu wyznaczonego wzdłuż jednej z~osi. Na wykresie z rysunku \ref{fig:hybrid:kinect:hpfOccluded} zostały zaznaczone owalami te miejsca, w~których nastąpiła zmiana statusu śledzenia. Na wspomnianych wykresach widać, że poziom szumu pozostaje niski dla oszacowania położenia stawu, kiedy status jego śledzenia przyjmuje wartość \emph{Tracked}. W~innym przypadku poziom szumu wzrasta wielokrotnie i~utrzymuje się do momentu ponownego przyjęcia statusu  \emph{Tracked}. W~wartości oszacowania położenia stawu widoczne jest to w~postaci zauważalnego efektu drgania danego stawu. Na podstawie przeprowadzonych badań własnych, w~metodzie śledzenia ruchu, opisywanej w~niniejszej dysertacji, jako graniczną wartość zaszumienia danych pomiarowych kontrolera Kinect ($n^K$), dla których możliwe jest ich łączenie z~danymi uzyskanymi z~czujników inercyjnych na podstawie wzoru \ref{eq:hybrid:reliableFusion}, autor przyjął $|n^K| \le 0.0004$.\\
 
-W przypadku, kiedy położenie stawów wyznaczone przez kontroler Kinect nie może być uznane za wiarygodne (zazwyczaj spowodowane jest to okluzją, \ref{ssec:characteristics:kinect:limitation}), równanie \eqref{eq:hybrid:reliableFusion} ulega modyfikacji i~przyjmuje postać jak w~\eqref{eq:hybrid:unreliableFusion} 
+W przypadku, kiedy położenie stawów, wyznaczone przez kontroler Kinect, nie może być uznane za wiarygodne (zazwyczaj spowodowane jest to okluzją, \ref{ssec:characteristics:kinect:limitation}), równanie \ref{eq:hybrid:reliableFusion} ulega modyfikacji i~przyjmuje postać jak w~równaniu \ref{eq:hybrid:unreliableFusion} 
 
 \begin{equation} 
 	\label{eq:hybrid:unreliableFusion}
@@ -445,13 +445,13 @@ W przypadku, kiedy położenie stawów wyznaczone przez kontroler Kinect nie mo�
 \end{equation}
 
 
-W tym przypadku zmianie ulegają wartości części wag z~jakimi zostają połączone dane. O ile wartość $w_\phi$ nie ulega zmianie i~wynosi $0.98$, o~tyle pozostałe dwie wagi są zależne od czasu i~wyrażają się wzorem \ref{eq:dynamicWeight}.
+W tym przypadku zmianie ulegają wartości części wag, z~jakimi zostają połączone dane. O ile wartość $w_\phi$ nie ulega zmianie i~wynosi $0.98$, o~tyle pozostałe dwie wagi są zależne od czasu i~wyrażają się wzorem \ref{eq:dynamicWeight}.
 \begin{equation}
-	w_{\theta} = w_,\psi = f(t_{szum}) = (1-\frac{t_{szum}}{10}) * 0.65
+	w_{\theta} = w_{\psi} = f(t_{szum}) = (1-\frac{t_{szum}}{10}) * 0.65
 	\label{eq:dynamicWeight}
 \end{equation}
 
-Wartość $t_{szum}$ oznacza czas trwania okresu niepewności pomiarów. Jeśli czas, w~którym utrzymuje się niepewność pomiarów kontrolera Kinect przekracza $10s$ wówczas wartość $t_{szum}$ pozostaje przy wartości $10$. Skutkuje to tym, że po upływie tego czasu, orientacja przestrzenna poszczególnych kości, a~co za tym idzie położenie stawów, nie będzie aktualizowane za wyjątkiem obrotu wokół osi $X$ (kąt $\phi$). \\
+Wartość $t_{szum}$ oznacza czas trwania okresu niepewności pomiarów. Jeśli czas, w~którym utrzymuje się niepewność pomiarów kontrolera Kinect, przekracza $10s$ wówczas wartość $t_{szum}$ pozostaje przy wartości $10$. Skutkuje to tym, że po upływie tego czasu, orientacja przestrzenna poszczególnych kości, a~co za tym idzie położenie stawów, nie będzie aktualizowane za wyjątkiem obrotu wokół osi $X$ (kąt $\phi$). \\
 
 \input{images/method}
 Poszczególne etapy metody opisanej powyżej przedstawione są na diagramie z~rysunku \ref{fig:hybrid:methodDiagram} i~odzwierciedlają kroki opisane w~niniejszym rozdziale.
