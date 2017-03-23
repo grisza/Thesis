@@ -36,28 +36,28 @@ Markery pasywne, wykorzystywane w~optycznych systemach śledzenia ruchu, mogą r
 Zamieszczony w~dalszej części pracy opis budowy i~zasad działania optycznego systemu śledzenia ruchu z~pasywnymi markerami zostanie przedstawiony na podstawie systemu firmy Vicon\footnote{Wybór ten został podyktowany dostępem do takowego systemu w~Centrum Technologii Informatycznych Politechniki Łódzkiej.} zainstalowanego na Politechnice Łódzkiej. 
 Analizowany system firmy Vicon jest systemem wielokamerowym, który wykorzystuje wyspecjalizowane kamery cyfrowe video, o~wysokiej rozdzielczości matrycy (4 MPix dla rozważanego systemu), wyposażone w~filtr przepuszczający zakres światła podczerwonego. Każda z~kamer wyposażona jest równocześnie w~kierunkowe źródło światła emitujące fale z~zakresu światła podczerwonego. System Vicon dostępny na Politechnice Łódzkiej zbudowany jest z~10 takich kamer umieszczonych dookoła pomieszczenia laboratoryjnego tak jak jest to pokazane na rysunku \ref{fig:literature:vicon:lutSetup}, gdzie elementy oznaczone IR1..10 to kamery wyposażone w~filtr podczerwony, RGB1 i~RGB2 to dwie kamery video pozwalające rejestrować tradycyjny obraz kolorowy oraz stanowisko komputerowe oznaczone jako PC. System posiada swoją funkcjonalność w~tzw. przestrzeni roboczej śledzenia (ang. \textsl{tracking volume}). Jest to przestrzeń wyznaczona przez bryły widzenia kamer. Technicznie każdy marker w~przestrzeni roboczej powinien być widoczny jednocześnie przez 3 kamery, aby możliwe było precyzyjne określenie jego pozycji. Ruchy wykonywane poza przestrzenią roboczą nie są śledzone przez system lub obarczone są błędnymi wynikami.
 
-\begin{figure}[!htp]
+\begin{savenotes}\begin{figure}[!htp]
 	\centering	
 	\includegraphics[width=0.75\textwidth]{images/viconSetup.png}
 	\caption{Rysunek przedstawiający konfigurację sprzętową systemu Vicon dostępnego na Politechnice Łódzkiej.}
 	\label{fig:literature:vicon:lutSetup}
-\end{figure}
+\end{figure}\end{savenotes}
 
 Kamery wykorzystane w~systemie Vicon posiadają filtr przepuszczający jedynie fale z~zakresu światła podczerwonego, co pozwala na stosunkowo łatwe wyodrębnienie z~rejestrowanego obrazu markerów odbijających światło podczerwone. Markery są elementami pokrytymi farbą odbijającą padające na nie światło w~kierunku źródła emisji promieni. Ponieważ w~przypadku zastosowanych kamer źródło światła jest umieszczone tuż obok obiektywu, oświetlone markery stanowią najjaśniejsze punkty na rejestrowanym obrazie. Na rysunku \ref{fig:literature:qualisys:markers} zaprezentowany został przykładowy zestaw markerów wykorzystywanych w~omawianym systemie śledzenia ruchu, natomiast na rysunku \ref{fig:literature:vicon:markers} widać aktora w~kombinezonie, przy którym owe markery są przymocowane. Markery wykorzystywane są do oznaczenia części ciała człowieka, których ruch będzie śledzony.
 
-\begin{figure}[!htp]
+\begin{savenotes}\begin{figure}[!htp]
 	\centering	
 	\includegraphics[width=0.75\textwidth]{images/markers-suits-600x450.png}
-	\caption{Zestaw znaczników pasywnych w~systemie Vicon umieszczonych na ciele aktora w~trakcie sesji śledzenia ruchu \footfullcite{footnote:ViconMarkersSet}}
+	\caption[Zestaw znaczników pasywnych w~systemie Vicon umieszczonych na ciele aktora w~trakcie sesji śledzenia ruchu]{Zestaw znaczników pasywnych w~systemie Vicon umieszczonych na ciele aktora w~trakcie sesji śledzenia ruchu \footfullcite{footnote:ViconMarkersSet}}
 	\label{fig:literature:vicon:markers}
-\end{figure}
+\end{figure}\end{savenotes}
 
-\begin{figure}[!htp]
+\begin{savenotes}\begin{figure}[!htp]
 	\centering	
 	\includegraphics[width=0.75\textwidth]{images/super-spherical-markers-hero.jpg}
-	\caption{Pasywne markery wykorzystywane w~optycznych systemach śledzenia ruchu\footfullcite{footnote:QulisysMarkers}}		
+	\caption[Pasywne markery wykorzystywane w~optycznych systemach śledzenia ruchu]{Pasywne markery wykorzystywane w~optycznych systemach śledzenia ruchu\footfullcite{footnote:QulisysMarkers}}		
 	\label{fig:literature:qualisys:markers}
-\end{figure}
+\end{figure}\end{savenotes}
 
 Oprócz kamer i~markerów, istotnym elementem optycznego systemu śledzenia ruchu jest oprogramowanie obsługujące system. Jest ono odpowiedzialne za synchroniczną analizę sekwencji obrazów zarejestrowanych przez kamery tak, aby możliwe było określenie położenia każdego z~markerów w~przestrzeni trójwymiarowej układu odniesienia. W~przypadku systemu Vicon, dostępnego na Politechnice Łódzkiej, rekonstrukcja przestrzeni trójwymiarowej odbywa się na podstawie sekwencji obrazów z~maksymalnie 10 kamer. Aby możliwe było wyznaczenie położenia markera w~przestrzeni trójwymiarowej musi być on \textsl{widziany} przez minimum 3 kamery w~tym samym czasie. Pozwala to na precyzyjne wyznaczenie jego wszystkich współrzędnych za pomocą triangulacji. Jednakże zbudowanie profesjonalnego systemu śledzenia ruchu złożonego jedynie z~3 kamer byłoby niewystarczające ze względu na możliwość przysłonięcia markerów przez części ciała w~trakcie wykonywania ruchu. Zwiększenie liczby kamer pozwala na obserwowanie sceny przez większą ich liczbę, co zwiększa prawdopodobieństwo, że w~trakcie nawet złożonych ruchów przynajmniej 3 kamery zarejestrują każdy z~markerów. Dodatkowo redundancja danych, dla lepiej widocznych markerów, sprzyja zwiększeniu dokładności wyznaczania ich pozycji. Oczywiście może się zdarzyć, że pomimo zastosowania wielu kamer marker zostanie zauważony przez mniej niż 3 kamery. W~takiej sytuacji rolą oprogramowania jest oszacowanie przybliżonego położenia danego markera, przykładowo na podstawie jego relacji do położenia innych markerów i~ich trajektorii ruchu.\\
 
@@ -131,35 +131,35 @@ Czujniki te najczęściej wykorzystywane są w~konfguracji para akcelerometr--ż
 Wykorzystywanie tych czujników w~parze lub trójce ma na celu połączenie ze sobą ich sygnałów i~dzięki temu zmniejszenie wpływu szumów na pomiary uzyskiwane przez każdy z~nich z~osobna. Metody łączenia ze sobą sygnałów z~czujników inercyjnych oraz magnetometru, a także identyfikacja szumów jakie na nie działają, od wielu lat są przedmiotem badań uczonych ze wszystkich ośrodków badawczych zajmujących się śledzeniem i~analizą ruchu i~są wciąż kontynuowane. Jako przykłady prac związanych z~tym zagadnieniem można przytoczyć chociażby propozycję wykorzystania transformaty Fouriera do badania szumu magnetometrów w~zakresie niskich częstotliwości $(0Hz, 5Hz]$. Badania te były prowadzone przez zespół włoskich naukowców pod przewodnictwem Maurizio Candidiego już w~latach 70-tych XX wieku \cite{Candidi1974} na potrzeby przemysłu kosmicznego. W~latach 90-tych zaszumienie danych z czujników inercyjnych: akcelerometru i~żyroskopu oraz metod kompensacji tych szumów było obiektem badań przedstawionych przez S. Woolvena i~D. B. Reida z~Uniwersytetu w~Ontario \cite{Woolven1994}. Autorzy w swoim artykule zaproponowali łączenie danych z~dwóch wspomnianych czujników inercyjnych za pomocą filtru Kalmana jako jednej z~metod kompensacji ich szumów. Wśród współczesnych badań znaleźć można propozycję zastosowania falek do odszumiania pomiarów czujników inercyjnych (ElSheimy  \cite{ElSheimy2004}). Zastosowanie ich w~kontekście systemu nawigacji inercyjnej (INS) pozwoliło zmniejszyć niemal dziesięciokrotnie wariancję wyznaczonego kierunku poruszania się nawigowanego obiektu oraz trzykrotnie przyspieszyć ustabilizowanie się estymacji obranego kierunku ruchu. W~dotychczas dyskutowanych publikacjach, metodą łączenia danych z~wykorzystywanych czujników był filtr Kalmana. Jego główną wadą jest jednak wysoka złożoność obliczeniowa spowodowana wykorzystaniem rachunku macierzowego. W~2015 roku Pasquale Daponte wraz ze swoim zespołem przedstawili publikację badającą, alternatywną do filtru Kalmana, metodę łączenia danych z~czujników inercyjnych i~magnetycznych \cite{Daponte2015}. Obiektem ich badań była metoda zmniejszającego się gradientu wykorzystywana wcześniej przez Roberta Mahony'ego \cite{Mahony2005a} oraz Sebastiana Madgwicka \cite{Madgwick2011}. Autorzy dyskutowanego artykułu wskazali trzy główne zalety badanej przez nich metody w porównaniu do wykorzystywanego powszechnie filtru Kalmana: mniejsza złożoność obliczeniowa, szybsza stabilizacja uzyskiwanych wyników i~ich lepsza stabilność w~czasie. Dodatkowo zwrócili uwagę na wykorzystanie kwarternionów przez badany przez nich algorytm zamiast kątów Eulera, co z~kolei ma wpływ na możliwość szerszego wykorzystania otrzymanych wyników w~dalszych obliczeniach oraz uniknięcia niejednoznaczności obrotów. \\
 Warto zauważyć, że zarówno moduł zbudowany z~pary czujników inercyjnych jak i~moduł zawierający akcelerometr, żyroskop oraz magnetometr określają jak względem poszczególnych osi obrócony jest dany moduł. W~przypadku wykorzystania tylko czujników inercyjnych, możliwe jest określenie obrotu wokół dwóch osi prostopadłych do osi wyznaczonej przez siłę grawitacji. Na rysunku \ref{fig:literature:imu:coordination} są to osie X i~Y. W~przypadku wykorzystania również magnetometru możliwe jest określenie obrotów wokół każdej z~tych osi. Warto również zauważyć, że układ współrzędnych połączonych czujników, w~jakim przedstawione są obroty wokół każdej z~osi, odpowiada osiom w~układzie współrzędnych Ziemi. Oznacza to, że w~przypadku wykorzystania wszystkich trzech czujników, możliwe jest określenie orientacji modułu względem czterech stron świata (obrót wokół osi Z) oraz względem płaszczyzny Ziemi (obroty względem osi X i~Y).
 
-\begin{figure}[!htp]
+\begin{savenotes}\begin{figure}[!htp]
 	\centering	
 	\includegraphics[width=0.75\textwidth]{images/IMUAxes.png}
 	\caption{Układ współrzędnych dla czujników inercyjnych i~magnetycznych.}
 	\label{fig:literature:imu:coordination}
-\end{figure}
+\end{figure}\end{savenotes}
 
 Nie ma natomiast możliwości precyzyjnego określenia położenia modułu w~przestrzeni na podstawie jedynie akcelerometru, żyroskopu i~magnetometru na podstawie przemieszczenia wyznaczonego metodami zliczeniowymi. Spowodowane jest to znaczącymi szumami występującymi w~pomiarach, a~przez to niską dokładnością uzyskiwanych wyników. Fakt ten ma wpływ na sposób budowania systemów śledzenia opartych na takich urządzeniach. W~przypadku śledzenia ruchu człowieka wymagane jest uzupełnienie pomiarów poprzez zdefiniowanie hierarchicznego modelu szkieletu ludzkiego, zawierającego informację o~długościach poszczególnych kości. Umożliwia to oszacowanie położenia poszczególnych stawów na podstawie orientacji czujników umieszczonych na poszczególnych częściach ciała. W~związku z~tym, duży wpływ na dokładność śledzenia ruchu w~systemach wykorzystujących czujniki inercyjne i~magnetyczne ma dokładność pomiaru długości poszczególnych kości.\\
 Przykładem komercyjnej implementacji takiego systemu może być rozwiązanie zaproponowane przez firmę Xsens, które z~powodzeniem wykorzystywane jest zarówno do śledzenia ruchu na potrzeby animacji \footfullcite{footnote:XsensEnt}, jak i~do analizy ruchu u sportowców \footfullcite{footnote:XsensSport1}\footfullcite{footnote:XsensSport2}, czy w~procesie rehabilitacji motorycznej \footfullcite{footnote:XsensRehab}. Dinu i in. w~swojej pracy \cite{Dinu2016} porównał dokładność systemu Xsens z~systemem Vicon w~kilku przypadkach użycia. Pierwszym z~nich było porównanie pozycji stawów oszacowanych za pomocą systemów Xsens i~Vicon dla znanej obu systemom pozy związanej z~procesem kalibracji. Przyjmując pomiary Vicona jako referencyjne, autorzy wyznaczyli średniokwadratowy błąd szacowania położenia stawów przez system XSens na wartość poniżej $0.5mm$. Należy jednak pamiętać, że oba systemy ''wiedziały'' jak będą wyglądały pozy w~jakich będzie stał użytkownik. W~przypadku śledzenia dowolnego ruchu błąd oszacowania występujący między systemami śledzenia XSens i~Vicon wzrósł w~zależności od osi do niemal $5.5mm$,
 
 Widzimy więc, że systemy śledzenia ruchu oparte o~czujniki inercyjne i~magnetyczne, przy wykorzystaniu odpowiedniej jakości urządzeń pomiarowych i~dokładnym modelu kości są w~stanie dość precyzyjnie śledzić ruch postaci i~pozycjonować jej stawy w~przestrzeni. Jednak na przykładzie zastosowań sportowych \footfullcite{footnote:XsensSport1}\footfullcite{footnote:XsensSport2} należy zauważyć, że układy IMU i~MARG nie są wystarczające do oszacowania położenia śledzonej postaci na scenie, a~jedynie do odtworzenia jej pozy. Aby śledzić przemieszczenie się całej postaci wykorzystywany jest dodatkowy system umożliwiający lokalizowanie obiektów w~przestrzeni. W~zależności od powierzchni na jakiej odbywa się ruch może być to system GPS, czy systemy oparte o~technologię LPM (\emph{ang. local position measurement}). GPS przeznaczony jest do lokalizowania postaci na bardzo dużej powierzchni w~warunkach zewnętrznych, przy dokładności określenia położenia rzędu kilku metrów\footnote{Według danych zamieszczonych na \url{http://www.gps.gov/} dokładność systemu GPS może wynieść do $3.5m$.}. Technologie LPM pozwalają na użycie ich zarówno wewnątrz budynków, jak i~na zewnątrz, wymagają jednak dodatkowych urządzeń obserwujących określony obszar, na którym odbywa się ruch. Jako przykład realizacji systemu LPM może posłużyć system firmy Inmotio\footfullcite{footnote:inmotio} wykorzysujący technologię radiową RFID (identyfikacja radiowa, \emph{ang. Radio-frequency identification}), która pozwala określić położenie śledzonej postaci na podstawie triangulacji oraz pomiaru mocy sygnału pomiędzy stacjami bazowymi a~odbiornikiem. Przykładowa konfiguracja takiego systemu widoczna jest na rysunku \ref{fig:literature:footnote:inmotio:setup}). Szczegółowy opis działania systemu Xsens można znaleźć w~pracy Roetenberg i in. \cite{Roetenberg2009}.
 
-\begin{figure}[!htp]
+\begin{savenotes}\begin{figure}[!htp]
 	\centering	
 	\includegraphics[width=0.75\textwidth]{images/lpm.png}
-	\caption{Przykładowa konfiguracja systemu LPM firmy Inmotio\footfullcite{footnote:inmotio}}	
+	\caption[Przykładowa konfiguracja systemu LPM firmy Inmotio]{Przykładowa konfiguracja systemu LPM firmy Inmotio\footfullcite{footnote:inmotio}}	
 	\label{fig:literature:footnote:inmotio:setup}	
-\end{figure}
+\end{figure}\end{savenotes}
 
 Systemy śledzenia ruchu oparte o~czujniki inercyjne i~magnetycze są także obiektem prac badawczych mających na celu poprawę dokładności śledzenia ruchu. Zhou i~Hu \cite{Zhou2005,Zhou2006} zaproponowali, na podstawie badań opartych o śledzenia ruchu stawów ręki, wykorzystanie algorytmu symulowanego wyżarzania w~celu zmniejszenia błędów pomiarowych czujników oraz zastosowali rozszerzony filtr Kalmana do połączenia sygnałów z~sensorów. Na potrzeby badania swojej metody, Zhou i~Hu wykorzystali komercyjny, inercyjny system śledzenia ruchu firmy Xsens, natomiast dane referencyjne uzyskali za pomocą wizyjnego systemu śledzenia ruchu firmy Vicon. Zaproponowana przez nich metoda pozwoliła na poprawienie dokładności śledzenia ruchu stawów ręki o~$26\%$ z~około $2.3 cm$ do $1.7 cm$.\\
 
 W przypadku systemów śledzenia ruchu człowieka opartych o~IMU i~MARG wpływ na dokładność wyznaczenia położenia poszczególnych stawów ma umiejscowienie czujników na ciele. Badania na ten temat prowadzili m.in. Vanegas i~Stirling \cite{Vanegas2015}. Badania te wykazały, że optymalnym miejscem umieszczenia tego typu sensorów są okolice środka masy danej części ciała lub obiektu. W~przypadku umieszczenia czujników na ciele człowieka pomocne okazują się być wyniki badań prowadzonych w~połowie lat 90-tych przez Paolo de Leva z~Uniwersytetu stanu Indiana. De Leva w~swojej pracy, dotyczącej badań nad środkami mas poszczególnych części ciała\cite{DeLeva1996}, rozwinął wcześniejsze badania Zatsiorskiego i~Seluyanova \cite{549} i~wyznaczył położenie poszczególnych środków mas. Rysunek \ref{fig:centerOfMass} przedstawia diagram rozmieszczenia środków mas dla każdej z~części ciała według badań de Leva.
 
-\begin{figure}[!htp]
+\begin{savenotes}\begin{figure}[!htp]
 	\centering	
 	\includegraphics[width=0.75\textwidth]{images/centerOfMass.png}
-	\caption{Rozmieszczenie środków mas poszczególnych części ciała człowieka według propozycji de Leva\cite{DeLeva1996}}	
+	\caption[Rozmieszczenie środków mas poszczególnych części ciała człowieka według propozycji de Leva]{Rozmieszczenie środków mas poszczególnych części ciała człowieka według propozycji de Leva\cite{DeLeva1996}}	
 	\label{fig:centerOfMass}	
-\end{figure}
+\end{figure}\end{savenotes}
 
 \subsubsection*{Systemy elektromagnetyczne (radiowe)}
 Elektromagnetyczne systemy śledzenia ruchu opierają się o~pomiar strumienia elektromagentycznego wytworzonego między nadajnikiem umieszczonym na ciele postaci, której ruch jest śledzony, a~odbiornikami, które otaczają obszar, na którym odbywa się śledzenie ruchu. Zarówno nadajnik jak i~odbiorniki zbudowane są z~kilku prostopadłych cewek, co pozwala na śledzenie ruchu w~6 stopniach swobody (położenie oraz obroty). Dokładne położenie nadajnika w~przestrzeni wyznaczone jest za pomocą triangulacji uzyskiwanych pomiarów. Elektromagnetyczne systemy śledzenia ruchu są podatne na zakłócenia wynikające z~obecności elementów metalowych lub magnetycznych w~pobliżu obszaru, na którym odbywa się śledzenie. W~szczególności źródłem  takiego zakłócenia mogą być stalowe elementy konstrukcyjne budynku gdzie znajduje się system śledzenia (np. pręty zbrojeniowe w~stropie czy ścianach). 
@@ -170,12 +170,12 @@ Akustyczne systemy śledzenia opierają się na pomiarze czasu przemieszczania s
 \subsubsection*{Systemy mechaniczne}
 Mechaniczne systemy śledzenia ruchu różnią się znacznie od poprzednio opisanych systemów choćby ze względu na ich ingerencję w~swobodę ruchu jaki może wykonać śledzona osoba. Podstawowym urządzeniem wykorzystywnym w~mechanicznych systemach śledzenia ruchu, jest strój nazywany egzoszkieletem, zbudowany z~szeregu czujników mechanicznych i~elektromechanicznych, np. potencjometrów, których zadaniem jest odzwierciedlenie pozy jaką przyjmuje śledzona osoba. Przykładem egzoszkieletu może być układ mechaniczny będący elementem systemu śledzenia ruchu Gypsy \footfullcite{footnote:gypsy}. Egzoszkielet został~zaprezentowany na rysunku \ref{fig:literature:footnote:gypsy:full}.
 
-\begin{figure}[!htp]
+\begin{savenotes}\begin{figure}[!htp]
 	\centering	
 	\includegraphics[height=6cm]{images/gypsy7_full.jpg}
 	\caption{Egzoszkielet dla systemu MoCap Gypsy}	
 	\label{fig:literature:footnote:gypsy:full}
-\end{figure}
+\end{figure}\end{savenotes}
 
 Niewątpliwą zaletą mechanicznych systemów śledzenia ruchu jest to, że jedynym urządzeniem z~jakiego się składa taki system to wspomniany egzoszkielet. Nie jest on podatny na zakłócenia swojego działania przez elementy znajdujące się w~otoczeniu, czy przysłanianie się części ciała w~trakcie ruchu. Mechaniczne systemy śledzenia ruchu zazwyczaj są w~stanie pracować w~czasie rzeczywistym. Niestety, wadą jest, wspomniane już wcześniej, ograniczenie swobody wykonywanego ruchu, co powoduje, że nie każdy rodzaj ruchu (np. dynamiczne ćwiczenia gimnastyczne) może być śledzony za pomocą układów mechanicznych .
 
@@ -187,7 +187,7 @@ Nie istnieje jeden standardowy model postaci, gdyż w~zależności od zastosowa�
 Model kinematyczny szkieletu postaci opisany jest za pomocą struktury przedstawiającej relacje między poszczególnymi stawami połączonymi ze sobą segmentami reprezentującymi kości. Każdy ze stawów opisany jest przez tzw. stopnie swobody definiujące w~jaki sposób segmenty (kości) połączone danym stawem mogą się wzajemnie poruszać. Teoretycznie maksymalna liczba stopni swobody danego stawu może wynosić 6, co oznacza, że staw może przesunąć się wzdłuż każdej z~3 osi $X, Y$ i~$Z$ układu współrzędnych oraz obracać się wokół każdej z~nich, jednak w~praktyce zakres ruchomości stawów człowieka jest ograniczony i~osobniczo różny. W~związku z~tym pozycja każdego ze stawów jest determinowana stopniem swobody jego rodzica. Zatem wiedząc, że staw łokciowy ma jeden stopień swobody, ruch kości przedramienia jest ograniczony tylko do jednej płaszczyzny, a~względna możliwa pozycja stawu nadgarstkowego znajduje się na łuku o~promieniu równym długości kości przedramienia.\\
 Model kinematyczny jest zazwyczaj definiowany jako hierarchiczny układ stawów co oznacza, że wielkości opisujące dany staw są wielkościami względnymi w~odniesieniu do stawu bezpośrednio go poprzedzającego (nadrzędnego) w~hierarchii. Aby wyznaczyć wartości absolutne danego stawu, niezbędne jest przyrostowe złożenie informacji ze wszystkich stawów w~łańcuchu kinematycznym, począwszy od stawu głównego (korzenia). Korzeniem nazywamy jeden wyszczególniony staw modelu hierarchicznego, do którego doczepione są łańcuchy kinematyczne wszystkich pozostałych stawów. Korzeń może, ale nie musi mieć swojego odpowiednika w~stawach szkieletu ludzkiego. Jako przykład można przytoczyć propozycję uproszczonego modelu szkieletowego człowieka wraz z~przedstawieniem hierarchii poszczególnych segmentów oraz ich stopni swobody zaproponowaną przez Kwolek i in.\cite{Kwolek2014} i~przedstawioną na rys. \ref{fig:literature:skeletonModelHierarchy}. W~modelu kinematycznym, w~którym określona jest hierarchia jego stawów, układ współrzędnych, w~którym opisane są obroty i~położenie danego stawu, ma swój początek w~stawie poprzedzającym go (staw rodzica). Sprawia to, że wartości przypisane do poszczególnych stawów są wielkościami względnymi.
 
-\begin{figure}[!htb]
+\begin{savenotes}\begin{figure}[!htb]
 	\centering
 	\begin{minipage}{.2\textwidth}
 		\centering
@@ -199,9 +199,9 @@ Model kinematyczny jest zazwyczaj definiowany jako hierarchiczny układ stawów 
 			\input{images/modelHierarchyTree.tex}
 		}
 	\end{minipage}
-	\caption{Uproszczony hierarchiczny model szkieletowy człowieka (lewo) wraz z~diagramem przedstawiającym hierarchię poszczególnych elementów(prawo)\cite{Kwolek2014}}
+	\caption[Uproszczony hierarchiczny model szkieletowy człowieka wraz z~diagramem przedstawiającym hierarchię poszczególnych elementów]{Uproszczony hierarchiczny model szkieletowy człowieka (lewo) wraz z~diagramem przedstawiającym hierarchię poszczególnych elementów(prawo)\cite{Kwolek2014}}
 	\label{fig:literature:skeletonModelHierarchy}
-\end{figure}
+\end{figure}\end{savenotes}
 
 Oprócz stopni swobody pojedynczego stawu, definiuje się również stopień swobody całego modelu kinematycznego. Taka wielkość rozumiana jest jako suma stopni swobody wszystkich jego elementów. W~przypadku pełnego opisu modelu postaci możemy mieć zatem do czynienia z~modelem kinematycznym, który posiada zdefiniowanych ponad 50 stopni swobody \cite{Agarwal2006}. Nie zawsze jednak potrzebne są modele zawierające pełen opis stopni swobody. Okazuje się, że do śledzenia większości ruchów człowieka wystarczający jest model uproszczony definiujący około 30 stopni swobody \cite{Sigal2006,Kwolek2011}.\\
 
@@ -211,12 +211,12 @@ O ile model kinematyczny szkieletu jest w~stanie jednoznacznie opisać pozę, w~
 Modele kształtu ciała, podobnie jak modele kinematyczne, możemy określać w~przestrzeni dwu-- lub trójwymiarowej. Zwykle wystarczające jest przybliżone odwzorowanie kształtu poszczególnych części ciała za pomocą figur geometrycznych (modele 2D) lub brył (modele 3D). Pozwala to zwizualizować budowę ciała postaci, której ruch jest śledzony, bez zbytniego obciążania procesora komputera, na którym odbywa się przetwarzanie danych pozyskanych z~systemu śledzenia. Dokładne odwzorowanie budowy ciała postaci jest możliwe dzięki wykorzystaniu popularnych przestrzennych reprezentacji geometrycznych (np.: siatka trójkątna 3D), jednak ich wykorzystanie może wpłynąć negatywnie na wydajność systemu. \\
 Niezależnie jakie reprezentacje geometryczne wykorzystujemy, istotne jest takie przedstawienie kształtu ciała, aby odpowiednio zwizualizować przynajmniej śledzone ruchy. Przykładowo, jeśli wykorzystujemy trójwymiarowy uproszczony model zbudowany z~kul i~cylindrów trudne będzię zwizualizowanie niektórych obrotów ciała, przykładowo rotacji dłoni i~nadgarstka jak na rys. \ref{fig:literature:wristRotation}.\\
 		
-\begin{figure}[!htp]
+\begin{savenotes}\begin{figure}[!htp]
 	\centering	
 	\includegraphics[height=6cm]{images/Wrist_joint_rotation.png}
 	\caption{Rotacja wewnętrzna (pronacja) i~zewnętrzna (supinacja) dłoni.}	
 	\label{fig:literature:wristRotation}
-\end{figure}
+\end{figure}\end{savenotes}
 
 W praktyce to w~jaki sposób aktor będzie reprezentowany w~systemie komputerowym ściśle powiązane jest z~przeznaczeniem danego systemu. Inna reprezentacja będzie konieczna dla śledzenia i~rozpoznawania pozy w~jakiej znajduje się aktor, a~inaczej jeśli śledzimy jego położenie w~przestrzeni. I~tak możemy wyróżnić następujące sposoby reprezentowania postaci:
 	
@@ -237,17 +237,17 @@ Metody wyznaczania położenia oraz obrotu stawów w~modelu szkieletowym mogą s
 \subsubsection*{Wyznaczanie położenia stawów w~optycznych systemach śledzenia ruchu z~markerami}
 Optyczne systemy śledzenia ruchu kończyn stosujące markery, są przykładem systemów, w~którym określenie położenia stawów odbywa się przez śledzenie ruchu markerów bezpośrednio przymocowanych do ciała śledzonej postaci. Aby możliwe było określenie położenia oraz obrotu danego stawu, każdy staw musi być oznaczony przez minimum 2 markery. Komercyjnie dostępne, optyczne systemy śledzenia ruchu stosujące markery posiadają zazwyczaj zdefiniowane schematy rozmieszczenia markerów na ciele człowieka, tak aby móc na ich podstawie automatycznie określić niezbędne paramtery dla każdego ze stawów. Rysunek \ref{fig:literature:vicon:markerPlacement} przedstawia przykładowy schemat rozmieszczenia markerów wykorzystany w~systemie śledzenia firmy Vicon. Szczegółowy opis akronimów wykorzystanych do oznaczenia markerów można znaleźć w~dokumentacji systemu Vicon \cite{ViconGaitPlacement}.
 		
-\begin{figure}[!htp]
+\begin{savenotes}\begin{figure}[!htp]
 	\centering	
 	\includegraphics[width=0.75\textwidth]{images/markerPlacement.jpg}
-	\caption{Rysunek przedstawiający schemat umieszczania markerów na ciele człowieka w~systemie śledzenia ruchu firmy Vicon\cite{ViconGaitPlacement}}
+	\caption[Rysunek przedstawiający schemat umieszczania markerów na ciele człowieka w~systemie śledzenia ruchu firmy Vicon]{Schemat umieszczania markerów na ciele człowieka w~systemie śledzenia ruchu firmy Vicon\cite{ViconGaitPlacement}}
 	\label{fig:literature:vicon:markerPlacement}
-\end{figure}
+\end{figure}\end{savenotes}
 		
 Kolejnym krokiem po wyznaczeniu położenia poszczególnych markerów, na podstawie obrazów z~kamer, jest interpretacja tych danych w~taki sposób, aby uzyskać opis stanu stawów, które są reprezentowane graficznie przez pojedyncze punkty posiadajace informacje nie tylko o~swoim położeniu, ale także orientacji przestrzennej. Interpretacja ta odbywa się bądź to na podstawie obliczeń matematycznych, wynikających wprost z~położenia przestrzennego wyznaczonych punktów i~relacji między nimi, lub na podstawie przyjętego modelu biomechanicznego ciała ludzkiego. 
 Przykładem sposobu wyznaczania położenia stawu na podstawie wzajemnej relacji pomiędzy stawami, może być proces wyznaczania położenia kości miedniczej (\emph{ang. pelvis}). Rysunek \ref{fig:literature:vicon:pelvisPlacement} pokazuje umiejscowienie markerów wykorzystywanych do wyznaczenia pozycji stawu reprezentującego kość miedniczą. Według dokumentacji \cite{ViconModelingInstruction} położenie kości miedniczej jest szacowane jako średnia arytmetyczna punktów RASI i~LASI (rys. \ref{fig:literature:vicon:pelvisPlacementA}). Jeśli jeden z~tych dwóch punktów jest niewidoczny, wówczas położenie stawu reprezentującego kość miedniczą jest wyznaczane jako wierzchołek trójkąta prostokątnego, którego przeciwprostokątną wyznaczają punkty SACR oraz jeden z~widocznych RASI lub LASI.
 
-\begin{figure}[!htb]
+\begin{savenotes}\begin{figure}[!htb]
 	\captionsetup{singlelinecheck=off}
 	\centering
 	\begin{subfigure}[b]{0.45\textwidth}
@@ -264,9 +264,9 @@ Przykładem sposobu wyznaczania położenia stawu na podstawie wzajemnej relacji
 		\label{fig:literature:vicon:pelvisPlacementB}
 	\end{subfigure}
 				
-\caption{Rysunek przedstawiający wyznaczenie położenia kości miedniczej na potrzeby modelu szkieletowego na podstawie położenia markerów w~systemie Vicon\cite{ViconModelingInstruction}}
+\caption[Wyznaczenie położenia kości miedniczej na potrzeby modelu szkieletowego na podstawie położenia markerów w~systemie Vicon]{Rysunek przedstawiający wyznaczenie położenia kości miedniczej na potrzeby modelu szkieletowego na podstawie położenia markerów w~systemie Vicon\cite{ViconModelingInstruction}}
 	\label{fig:literature:vicon:pelvisPlacement}
-\end{figure}
+\end{figure}\end{savenotes}
 
 Przykładem wyznaczania położenia stawu modelu szkieletowego na podstawie biomachanicznego modelu szkieletu ludzkiego, może być schemat wyznaczania położenia stawów biodrowych. Opierając się na pracy Davies i in. \cite{Davis1991} do wyznaczenia położenia stawów zostały wykorzystane informacje o~szerokości miednicy, długości kości udowej postaci, której ruch jest śledzony, oraz współczynników skalujących i~stałych zdefiniowanych we wspomnianej pracy. Równania \\ref{eq:hipEquation:Xcoordinate}--\\ref{eq:hipEquation:Zcoordinate} przedstawiają przykład wyznaczania współrzędnych położenia dla prawego biodra.
 		
@@ -303,12 +303,12 @@ Możliwe jest zdefiniowanie tylko fragmentu modelu szkieletowego, zawierającego
 
 W inercyjnych i~magnetycznych systemach śledzenia ruchu markery wyposażone w~odpowiednie czujniki umieszczane są na powierzchni ciała osoby (wzdłuż kości), której ruch jest śledzony. Czujniki inercyjne działają najlepiej jeśli umieszczone są blisko środka masy poruszającego się obiektu. Wyznaczeniem środków mas kości człowieka zajmują się między innymi badacze z~zakresu biomechaniki, a~przykładem efektów tych prac może być diagram wyznaczający środki mas kości zaprezentowany w~pracy Paolo de Leva \cite{DeLeva1996} i przedstawiony na rysunku \ref{fig:centerOfMass}.\\
 		
-\begin{figure}[!htp]
+\begin{savenotes}\begin{figure}[!htp]
 	\centering	
 	\includegraphics[width=0.75\textwidth]{images/imuArm.png}
 	\caption{Przykładowy schemat umieszczenia markerów inercyjnych na potrzeby śledzenia ruchu ręki.}
 	\label{fig:literature:imuMarkerPlacementSample}
-\end{figure}
+\end{figure}\end{savenotes}
 		
 Rysunek \ref{fig:literature:imuMarkerPlacementSample} pokazuje przykładowy sposób umieszczenia markerów inercyjnego systemu śledzenia ruchu na powierzchni ręki, tak aby ich położenie możliwie pokrywało się ze środkiem mas poszczególnych segmentów kończyny. Moduły inercyjne, dostarczające informacje o~swojej orientacji w~przestrzeni, nie przekazują wprost informacji o~położeniu konkretnych stawów, a~jedynie określają jaki obrót, względem jakiegoś stanu początkowego, wykonała kończyna, do której te moduły zostały przymocowane. Posługując się przykładowym schematem z~rysunku \ref{fig:literature:imuMarkerPlacementSample}, przyjmijmy staw barkowy (3) jako korzeń. Chcąc określić położenie stawu łokciowego (4), niezbędna jest informacja o~orientacji przestrzennej modułu inercyjnego umieszczonego na ramieniu (1), oraz długość kości ramieniowej, która łączy stawy barkowy i~łokciowy. Mając te dwie informacje należy dokonać obrotu wektora o~długości takiej, jak długość kości ramieniowej, do orientacji, w~jakiej znajduje się rozważany moduł (1). Wówczas punkt początkowy hierarchicznego modelu szkieletowego ręki reprezentuje staw barkowy i~znajduje się w~umownym punkcie $(0 , 0 , 0)$, natomiast punkt końcowy reprezentuje staw łokciowy, a~jego współrzędne $(X , Y , Z)$ odpowiadają położeniu tego stawu w~przestrzeni. Wyznaczenie położenia stawu nadgarstkowego (5) odbywa się analogicznie, przy czym punktem początkowym jest położenie stawu łokciowego (4), a,~modułem którego orientacja jest brana pod uwagę, jest sensor umieszczony na przedramieniu (2). W~przypadku systemów śledzenia ruchu wykorzystujących moduły inercyjne, w~których położenie stawów nie jest wyznaczane wprost z~uzyskanych pomiarów, ale mymaga dodatkowych obliczeń i~transformacji geometrycznych, istotne jest zachowanie hierarchii wykorzystywanego modelu szkieletowego i~wykonywanie obliczeń zgodnie z~tą hierarchią.\\
 W przypadku konieczności budowania modelu szkieletowego na podstawie przekształceń geometrycznych, jak ma to miejsce w~przypadku inercyjnych systemów śledzenia ruchu, istotnym jest wykorzystanie odpowiedniej reprezentacji orientacji tak, aby wykonywanie obliczeń matematycznych było jak najprostsze i~dawało jednoznaczne wyniki.
@@ -318,12 +318,12 @@ Na przykładzie kotrolera Microsoft Kinect można przedstawić jeden z~możliwyc
 		
 Kontroler Kinect wykorzystuje mechanizm uczenia maszynowego, dzięki któremu możliwe jest rozpoznawanie poszczególnych części ciała śledzonej postaci na podstawie obrazu mapy głębi. Zastosowana w~kontrolerze metoda uczenia maszynowego opiera się na algorytmie losowych lasów decyzyjnych\cite{Criminisi2011}, który podlegał wcześniejszemu procesowi uczenia. W~celu nauczenia algorytmów decyzyjnych, zastosowanych w~kontrolerze Kinect, przygotowano bazę ponad miliona wzorców różnych póz, w~jakich może się znajdować śledzona postać wraz z~oznaczonymi częściami ciała. Zestaw zdjęć zastosowany do uczenia algorytmu składał się z~blisko stu tysięcy zdjęć póz rzeczywistych postaci, uzupełnionych pomiarami z~systemu śledzenia ruchu o~wysokiej dokładności oraz z~kilkuset tysięcy wzorcowych zdjęć cyfrowych postaci wygenerowanych (wyrenderowanych) komputerowo. Odpowiednio wytrenowany algorytm zyskał gotowość do rozpoznawania i~klasyfikowania elementów przedstawionego obrazu jako części ciała człowieka. Wykorzystując między innymi wzajemne położenie elementów (pojedyncze punkty lub grupy punktów -- obszary) występujących na mapie głębi, algorytm szacuje, które z~nich należą do tej samej części ciała. Efektem działania algorytmu losowych lasów decyzyjnych jest tzw. mapa części ciała (ang. \emph{body parts map}), której przykład przedstawiony jest jako drugi krok na schemacie widocznym na rysunku \ref{fig:literature:kinect:classificationSteps}.
 		
-\begin{figure}[!htp]
+\begin{savenotes}\begin{figure}[!htp]
 	\centering	
 	\includegraphics[width=0.75\textwidth]{images/KinectRecognitionSteps.jpg}
 	\caption{Schemat przedstawiający kolejne kroki wyznaczania modelu szkieletowego na podstawie mapy głębi.}
 	\label{fig:literature:kinect:classificationSteps}
-\end{figure}
+\end{figure}\end{savenotes}
 		
 Mapa części ciała stanowi podstawę dla kolejnego kroku wyznaczania modelu szkieletowego, jakim jest oszacowanie położenia stawów w~przestrzeni trójwymiarowej. Segmenty, z~których składa się mapa części ciała, przetworzone są algorytmem \emph{mean shift} \cite{Comaniciu2003}, co w~efekcie daje oszacowanie położenia poszczególnych stawów. Połączenie ich zgodnie ze zdefiniowaną hierarchią wyznacza model szkieletowy śledzonej postaci. Warto zaznaczyć, że większość tych operacji zaimplementowana została jako oprogramowanie wbudowane procesora firmy Prime Sense.\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
@@ -332,12 +332,12 @@ Warto zwrócić uwagę, że proces wyznaczania mapy głębi i~reprezentacji szki
 		
 Kinect wykorzystuje reprezentację ciała użytkownika w~postaci szkieletowej. Składa się ona z~20 jednopunktowych węzłów, które w~dużej mierze pokrywają się ze stawami ludzkiego szkieletu (rys. \ref{fig:characteristics:kinect:skeleton}). Każdy z~węzłów posiada swoje współrzędne w~przestrzeni trójwymiarowej związanej z~kontrolerem wyrażone w~metrach, gdzie punktem (0,0,0) jest projektor podczerwieni w~kontrolerze Kinect. Rysunek \ref{fig:characteristics:kinect:space} przedstawia układ współrzędnych wykorzystywany w~Kinekcie do określenie położenia stawów. 
 		
-\begin{figure}
+\begin{savenotes}\begin{figure}
 	\centering
 	\includegraphics[width=0.6\textwidth]{images/skeletonSpace.png}
-	\caption{Układ współrzędnych wykorzystywany w~kontrolerze Microsoft Kinect \footfullcite{footnote:msdn:kinectCoordSpace2016}}
+	\caption[Układ współrzędnych wykorzystywany w~kontrolerze Microsoft Kinect]{Układ współrzędnych wykorzystywany w~kontrolerze Microsoft Kinect \footfullcite{footnote:msdn:kinectCoordSpace2016}}
 	\label{fig:characteristics:kinect:space}
-\end{figure}
+\end{figure}\end{savenotes}
 		
 
 \subsection{Reprezentacja rotacji obiektu w~przestrzeni}\label{chap:orientstionRep}
@@ -353,26 +353,26 @@ Istnieje wiele metod reprezentowania jak zorientowany w~przestrzeni jest obiekt 
 \subsubsection*{Kąty Eulera} \label{sec:orientstionRep:euler}
 Reprezentacja ta jest najbardziej intuicyjną z~powszechnie używanych, ponieważ przedstawia ona 3 wartości kątów o~jakie nastąpił obrót względem odpowiednich osi układów współrzędnych. W~zależności od dziedziny w~jakiej określana jest orientacja obiektu, przyjęta jest nieco inna konwencja nazewnicza poszczególnych kątów. Jest to związane z~układem odniesienia jaki jest przyjęty do określania obrotów: relatywny, w~którym obrót mierzony jest względem arbitralnie wybranego układu (\emph{body--fixed coordinate system}, rys.\ref{fig:appx:rot:eulerRel}) lub absolutny względem kierunków ziemi (\emph{ang. world coordinate system}, rys.\ref{fig:appx:rot:eulerAbs}). Tabela \ref{tab:appx:rot:eulerNames} zawiera powszechnie przyjęte konwencje oznaczania obrotów.
 				
-\begin{figure}[!htb]
+\begin{savenotes}\begin{figure}[!htb]
 	\captionsetup{singlelinecheck=off}
 	\centering
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{images/nasaAircraft.png}	
-		\caption{Relatywny \footfullcite{footnote:nasa2016}}
+		\caption[Kąty Eulera w relatywnym układzie współrzędnych]{Relatywny \footfullcite{footnote:nasa2016}}
 		\label{fig:appx:rot:eulerRel}
 	\end{subfigure}
 					
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{images/eulerAbsolute.png}		
-		\caption{Absolutny \\footfullcite{footnote:Baker2015}}
+		\caption[Kąty Eulera w absolutnym układzie współrzędnych]{Absolutny \footfullcite{footnote:Baker2015}}
 	\label{fig:appx:rot:eulerAbs}
 	\end{subfigure}
 				
 	\caption{Kąty Eulera względem przyjętego układu współrzędnych}
 		\label{fig:appx:rot:euler}
-\end{figure}
+\end{figure}\end{savenotes}
 
 
 \begin{table}
@@ -542,12 +542,12 @@ Pierwsza wersja kontrolera ruchu Microsoft Kinect została oficjalnie udostępni
 \subsubsection*{Budowa kontrolera}
 Śledzenie ruchu za pomocą tego urządzenia oparte jest o~system wizyjny zbudowany z~dwóch kamer z~matrycami CMOS oraz z~projektora światła podczerwonego. Jedna z~kamer odpowiada za rejestrowanie tradycyjnego obrazu RGB, natomiast druga, wraz z~projektorem, tworzy sensor głębi, który potrafi określić, w~jakiej odległości od Kinecta znajdują się obiekty na scenie. Obie kamery działają z~częstotliwością nie przekraczającą 30 fps (ang. \textsl{frames per second}). Ponadto urządzenie posiada cztery mikrofony, a~głównym komponentem odpowiedzialnym za przetwarzanie i~interpretację zarejestrowanych obrazów wejściowych jest dedykowany procesor opracowany i~wyprodukowany przez izraelską firmę Prime Sense. Firma ta jest także autorem algorytmu rozpoznającego ruchy i~gesty użytkownika na podstawie zarejestrowanych przez kamery sygnałów wejściowych. Rysunek \ref{fig:characteristics:kinect:inside} przedstawia uproszczony schemat budowy tego kontrolera. 
 		
-\begin{figure}
+\begin{savenotes}\begin{figure}
 	\centering
 	\includegraphics[width=0.95\textwidth]{images/kinectSchema.png}
-	\caption{Uproszczony schemat budowy kontrolera Microsoft Kinect v.1 \footfullcite{footnote:kinectFixit2016}}
+	\caption[Uproszczony schemat budowy kontrolera Microsoft Kinect v.1]{Uproszczony schemat budowy kontrolera Microsoft Kinect v.1 \footfullcite{footnote:kinectFixit2016}}
 	\label{fig:characteristics:kinect:inside} 
-\end{figure}
+\end{figure}\end{savenotes}
 		
 Według oficjalnej dokumentacji \footfullcite{footnote:kinectSpec2016} Kinect pracuje poprawnie, gdy obiekt (postać) znajduje się w~odległości od $0.8m$ do $4m$ od urządzenia oraz zawiera się w~polu widzenia urządzenia: $57\degree$ w~orientacji poziomej i~$43\degree$ w~orientacji pionowej. Oficjalny zakres pracy urządzenia przedstawia rysunek \ref{fig:characteristics:kinect:range}. Dla odległości mniejszej niż $0.4m$ i~większej niż $8m$ Kinect nie zwraca żadnych wyników pozwalających określić czy jakiś obiekt znajduje się przed nim czy nie. Oficjalna dokumentacja nie zawiera jednak informacji o~ewentualnej niejednorodności precyzji działania w~obszarze pracy. Można by więc przypuszczać, że urządzenie działa jednakowo precyzyjnie w~dowolnym miejscu znajdującym się w~zakresie roboczym urządzenia \footnote{Eksperymenty badawcze weryfikujące to przypuszczenie zostały zawarte w~dalszej części niiejszego rozdziału \ref{sssection:distanceEstimation}}. Specyfikacja udostępniona na stronach MSDN \footnote{MSDN -- \emph{\textbf{M}icro\textbf{s}oft \textbf{D}eveloper \textbf{N}etwork}, portal internetowy zawierający dokumentacje i~poradniki głownie dla programistów korzystających z~produktów i~narzędzi firmy Microsoft. dostępny pod adresem \url{http://https://msdn.microsoft.com}}
 przedstawia prawdopodobnie pewien uśredniony lub minimalny zakres pracy, ponieważ zgodnie z~obserwacjami użytkowników \footfullcite{footnote:stack:kinect2011} oraz badaniami porównawczymi \cite{DiFilippo2015} okazuje się, że poszczególne serie produkcyjne urządzenia mogą mieć nieco inne zakresy pracy. Występowanie różnic w~zakresie działania pomiędzy poszczególnymi egemplarzami kontrolera Kinect zostało także przewidziane w~oficjalnym SDK przygotowanym przez firmę Microsoft\footfullcite{footnote:msdn:kinectSDKConstants2016}. Analizując kod źródłowy SDK urządzenia można zauważyć rozbieżność pomiędzy dokumentacją dotyczącą maksymalnych zakresów działania, a~faktyczną implementacją. Jako przykład można podać wartość kąta widzenia kamery urządzenia w~pionie: według dokumentacji wynosi on $43\degree$, natomiast faktyczna implementacja podaje różne wartości dla kamer głębi i~RGB, a~wynoszą one odpowiednio $45.6\degree$ i~$48.6\degree$. 
@@ -555,25 +555,25 @@ przedstawia prawdopodobnie pewien uśredniony lub minimalny zakres pracy, poniew
 \input{images/kinectOperationRangeSpec}
 		
 \subsubsection*{Wyznaczanie mapy głębi}
-Sposób w~jaki Kinect określa odległość w~jakiej umieszczone są przed nim obiekty opiera się o~rozpoznawanie zniekształceń ściśle zdefiniowanego wzorca świetlnego, którym została oświetlona scena (ang. \emph{structured light}). W~tym procesie biorą udział jedynie projektor oraz kamera IR, natomiast obraz z~kamery RGB nie jest wykorzystywany na żadnym etapie określania odległości. Technika ta jest wykorzystywana powszechnie przykładowo w~skanerach 3D \footfullcite{footnote:david2016}\footfullcite{footnote:lmi2016}. Dokładne działanie kontrolera Kinect nie zostało oficjalnie ujawnione publicznie przez firmę Microsoft. Możliwe jest jednakże przedstawienie przybliżonego działania tego kontrolera dzięki niezależnym badaniom (np. MacCormick \cite{MacCormick2011}) oraz analizie zgłoszeń patentowych \cite{patent:20080106746,patent:20100020078,patent:20100118123} należących do producenta procesora wykorzystanego do budowy kontrolera Kinect -- firmy Prime Sense.
+Sposób w~jaki Kinect określa odległość w~jakiej umieszczone są przed nim obiekty opiera się o~rozpoznawanie zniekształceń ściśle zdefiniowanego wzorca świetlnego, którym została oświetlona scena (ang. \emph{structured light}). W~tym procesie biorą udział jedynie projektor oraz kamera IR, natomiast obraz z~kamery RGB nie jest wykorzystywany na żadnym etapie określania odległości. Technika ta jest wykorzystywana powszechnie przykładowo w~skanerach 3D \footfullcite{footnote:david2016} \footfullcite{footnote:lmi2016}. Dokładne działanie kontrolera Kinect nie zostało oficjalnie ujawnione publicznie przez firmę Microsoft. Możliwe jest jednakże przedstawienie przybliżonego działania tego kontrolera dzięki niezależnym badaniom (np. MacCormick \cite{MacCormick2011}) oraz analizie zgłoszeń patentowych \cite{patent:20080106746,patent:20100020078,patent:20100118123} należących do producenta procesora wykorzystanego do budowy kontrolera Kinect -- firmy Prime Sense.
 		
 W pierwszym kroku cała scena zostaje oświetlona zbiorem punktów za pomocą projektora światła podczerwonego (rys. \ref{fig:characteristics:kinect:nightVision}) zgodnie ze ściśle określonym wzorcem (rys. \ref{fig:characteristics:kinect:dotPattern}). Wzorzec ten nie został nigdy oficjalnie opublikowany przez firmy Prime Sense, czy Microsoft, natomiast wzorzec zamieszczony na rysunku \ref{fig:characteristics:kinect:dotPattern} został wyznaczony przez Andreasa Reichingera, doktoranta na Uniwersytecie Technicznym w~Wiedniu. Na swoim blogu opublikował on dokładny opis sposobu wyznaczania zamieszczonego wzorca\footfullcite{footnote:reichinger2011}.
 		
-\begin{figure}
+\begin{savenotes}\begin{figure}
 	\centering
 	\begin{minipage}[b]{0.48\linewidth}
 		\centering   
 		\includegraphics[width=\textwidth]{images/kinectNightVision.jpg}	
-		\caption{Scena oświetlona promieniami IR\footfullcite{footnote:flatley2011}}
+		\caption[Scena oświetlona promieniami IR]{Scena oświetlona promieniami IR\footfullcite{footnote:flatley2011}}
 		\label{fig:characteristics:kinect:nightVision}
 	\end{minipage}
 	\begin{minipage}[b]{0.48\linewidth}
 		\centering 
 		\includegraphics[width=\textwidth]{images/kinect-pattern_3x3.png}
-		\caption{Wzorzec oświetlenia sceny przez kontroler Kinect \footfullcite{footnote:reichinger2011}}
+		\caption[Wzorzec oświetlenia sceny przez kontroler Kinect]{Wzorzec oświetlenia sceny przez kontroler Kinect \footfullcite{footnote:reichinger2011}}
 		\label{fig:characteristics:kinect:dotPattern}
 	\end{minipage}	
-\end{figure}
+\end{figure}\end{savenotes}
 		
 Pełen wzorzec zbudowany jest z~9 powtarzających się regionów w~układzie 3x3 o~rozmiarze 211x165 punktów co daje pełen rozmiar 633x495 punktów. Około $11\%$ z~tych punktów jest jasna przy czym jasność ta nie jest jednorodna. Wyraźnie można zauważyć, że część punktów jest jaśniejsza od pozostałych. Ponadto w~punkcie centralnym każdego z~regionów (jak i~całego wzorca) znajduje się najjaśniejszy z~punktów. Dodatkowo wzorzec ten jest skośnie symetryczny, co oznacza niewrażliwość na obrócenie urządzenia~o~$180\degree$.\\
 		
@@ -593,7 +593,7 @@ Kinect przez ponad 5 lat dostępności na rynku jest obiektem badań związanych
 \paragraph*{Oświetlenie sceny}
 Jednym z~podstawowych ograniczeń jakie występują w~tym urządzeniu jest wrażliwość na światło słoneczne. Jak to zostało wcześniej opisane, jedynym źródłem danych wykorzystywanym do budowy mapy głębi, a~także do stworzenia modelu szkieletowego jest kamera z~filtrem podczerwieni oraz wzorzec punktów podczerwonych emitowanych przez wbudowany projektor. Światło słoneczne natomiast składa się z~pełnego spektrum barw zarówno z~zakresu widzialnego jak i~niewidzialnego dla człowieka. Oznacza to, że promienie słoneczne mogą wprowadzić dodatkowe punkty na scenie, które nie należą do wzorca, a~będą zarejestrowane przez kamerę. Zarejestrowanie przez kamerę podczerwoną kontrolera Kinect punktów spoza przyjętego wzorca prowadzi do niepoprawnego zbudowania mapy głębi wykorzystywanej w~procesie wyznaczania modelu szkieletowego. Rysunek \ref{fig:characteristics:kinect:depthMap} przedstawia mapę głębi zbudowaną wewnątrz pomieszczenia \ref{fig:characteristics:kinect:depthMapA} oraz na zewnątrz w~dwóch przypadkach, w~miejscu zacienionym \ref{fig:characteristics:kinect:depthMapB} oraz w~pełnym słońcu \ref{fig:characteristics:kinect:depthMapC}. 
 		
-\begin{figure}[!htb]
+\begin{savenotes}\begin{figure}[!htb]
 	\captionsetup{singlelinecheck=off}
 	\centering
 	\begin{subfigure}[b]{0.3\textwidth}
@@ -619,7 +619,7 @@ Jednym z~podstawowych ograniczeń jakie występują w~tym urządzeniu jest wraż
 				
 	\caption{Mapa głębi ręki w~różnych warunkach oświetleniowych\cite{Suarez2012}.}
 	\label{fig:characteristics:kinect:depthMap}
-\end{figure}
+\end{figure}\end{savenotes}
 
 		
 Jak widać na przykładzie z~rysunku \ref{fig:characteristics:kinect:depthMap}, Kinect nie był w~stanie zbudować prawidłowej mapy w~przypadku oświetlenia sceny światłem słonecznym. \\
@@ -646,12 +646,12 @@ W praktyce, najczęściej położenie stawów jest oznaczone jako \emph{Interfer
 		
 Szczególne przypadki okluzji występują, gdy użytkownik skieruje wyprostowaną kończynę w~kierunku kamery Kinecta lub obróci się cała jego sylwetka względem płaszczyzny obserwacji kontrolera Kinect. Analizując pierwszy scenariusz najłatwiej przedstawić go na przykładzie ruchu ręki. Trzymając ją na wprost kamery kontrolera Kinect, wyprostowaną w~łokciu, w~pełni widoczny jest tylko staw nadgarstkowy, a~także dłoń. Praktycznie całkowitemu przysłonięciu ulegają zaś łokieć i~staw barkowy. 
 		
-\begin{figure}[!htb]
+\begin{savenotes}\begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.5\textwidth]{images/kinectAngle.png}
 	\caption{Kąt obrotu użytkownika względem Kinecta}
 	\label{fig:characteristics:kinect:bodyRotationAngle}
-\end{figure}
+\end{figure}\end{savenotes}
 		
 W trakcie badań własnych przeprowadzony został eksperyment, którego celem było oszacowanie przy jakim kącie obrotu ciała śledzonej postaci względem kontrolera Kinect następuje praktyczna utrata zdolności śledzenia przez kontroler. Eksperyment polegał na obracaniu się postaci wokół własnej osi w~tzw. pozycji \emph{T--pose}, co oznacza, obie ręce wyprostowane w~łokciach i~wyprostowane w~bok, tak że sylwetka przypomina literę "`T"'. W~trakcie wykonywania ruchu mierzony był kąt obrotu $\alpha$ pomiędzy linią barków ($P_{{Sh}_L, P_{{Sh}_R}}$) a~płaszczyzną obserwacji (rys. \ref{fig:characteristics:kinect:bodyRotationAngle}). Kąt ten jest wyznaczony w~przestrzeni dwuwymiarowej i~wyrażony jest wzorem \\ref{eq:characteristics:kinect:bodyRotationAngle}. Wszystkie współrzędne użyte w~tym wzorze wyrażone są w~układzie współrzędnych Kinecta (rys. \ref{fig:characteristics:kinect:space}).
 
@@ -677,7 +677,7 @@ W wyniku eksperymentu okazało się, że przy kącie obrotu $\alpha$ powyżej $5
 Wykres na rysunku \ref{fig:characteristics:kinect:bodyRotationChart} przedstawia status śledzenia lewego i~prawego barku (linie przerywane) w~zależności od kąta obrotu $\alpha$ wyznaczonego na podstawie pomiarów Kinecta (linia ciągła). Stan śledzenia stawu \emph{Tracked} reprezentowany jest przez wartość liczbową $1$ (wartość na prawej osi pionowej) natomiast stan \emph{Interferred} przez wartość $0.5$. Obrót wykonywany był w~kierunku przeciwnym do ruchu wskazówek zegara co oznacza, że prawa strona ciała była cały czas widoczna dla urządzenia śledzącego ruch. Jak widać na tym wykresie, przy kącie zbliżonym do $50\degree$ status śledzenia zaczyna zmieniać się gwałtownie, aby ustalić swoją wartość po przekroczeniu rzeczonego kąta. W~przedziale od $50\degree$ do $90\degree$ można zaobserwować duże wahania pomiaru, co jest spowodowane błędnym szacowaniem położenia lewego barku.\\ 
 Wykres przedstawiony na rysunku \ref{fig:characteristics:kinect:kinectRightHandElbowAngle} pokazuje również zmianę wartości kąta mierzonego w~łokciu prawej ręki $\beta$ (rys. \ref{fig:characteristics:kinect:bodyRotationAngle}) w~trakcie wykonywania obrotu. Ręka przez cały czas trwania obrotu była wyprostowana w~łokciu i~stanowiła przedłużenie linii pomiędzy barkami (\emph{T--pose}). Jak widać na wykresie, pomimo pełnej widoczności prawej ręki przez kamery Kinecta przy obrocie w~zakresie  $50\degree < \alpha \le 90\degree$ , pomiar kąta $\beta$ jest niestabilny, a~jego wartość nie jest nawet zbliżona do wartości kąta wyprostowanej w~łokciu ręki ($170\degree-180\degree$). 
 				
-\begin{figure}[!htb]
+\begin{savenotes}\begin{figure}[!htb]
 	\captionsetup{singlelinecheck=off}
 	\centering
 	\begin{subfigure}[b]{0.8\textwidth}
@@ -694,7 +694,7 @@ Wykres przedstawiony na rysunku \ref{fig:characteristics:kinect:kinectRightHandE
 	\label{fig:characteristics:kinect:kinectRightHandElbowAngle}
 	\end{subfigure}				
 	\caption{Pomiary zależne od kąta obrotu względem Kinecta [źródło własne]}
-\end{figure}
+\end{figure}\end{savenotes}
 
 
 \subsubsection*{Szacowanie odległości pomiędzy kontrolerem Kinect, a~śledzoną postacią}\label{sssection:distanceEstimation}
@@ -743,7 +743,7 @@ Na podstawie pomiarów uzyskanych w~trakcie eksperymentu opisanego powyżej, mac
 		
 \pgfplotsset{width=12cm,compat=1.8}
 		
-\begin{figure}
+\begin{savenotes}\begin{figure}
 	\centering
 	\begin{tikzpicture}
 		\begin{axis}[
@@ -778,9 +778,9 @@ Na podstawie pomiarów uzyskanych w~trakcie eksperymentu opisanego powyżej, mac
 		\end{axis}
 	\end{tikzpicture}	
 									
-	\caption{Przybliżenie dokładności pomiaru głębi względem odległości śledzonej postaci od kontrolera Kinect [żródło własne].}
+	\caption[Przybliżenie dokładności pomiaru głębi względem odległości śledzonej postaci od kontrolera Kinect]{Przybliżenie dokładności pomiaru głębi względem odległości śledzonej postaci od kontrolera Kinect [żródło własne].}
 	\label{fig:characteristics:kinect:distanceAccuracy}
-\end{figure}
+\end{figure}\end{savenotes}
 		
 Należy zauważyć, że zaprezentowana na wykresie \ref{fig:characteristics:kinect:distanceAccuracy} charakterystyka oszacowania odległości pomiędzy kontrolerem Kinect a~użytkownikiem dotyczy obszaru roboczego tego kontrolera (rys. \ref{fig:characteristics:kinect:range}). W~związku z~tym dokładność oszacowania pozycji poszczególnych stawów w~modelu szkieletowym użytkownika jest uzależniona od tego gdzie on się znajduje i~należy to uwzględnić w~prowadzonych obliczeniach aby wykazane niedokładności skorygować. Jest to o~tyle istotne, że na podstawie uzyskanych wyników, przestrzeń, w~której szacowanie odległości pomiędzy użytkownikiem a~Kinectem jest zbliżone do faktycznej odległości, wynosi jedynie $0.3m$ pomiędzy $2m$, a~$2.3m$ od kamery.  
 
@@ -791,7 +791,7 @@ Należy zauważyć, że zaprezentowana na wykresie \ref{fig:characteristics:kine
 Urządzenia inercyjne są czujnikami, których działanie opiera się na obserwacji i~mierzeniu wielkości fizycznych, jakie działają na te czujniki w~trakcie ruchu oraz w~spoczynku. Wyróżniamy dwa podstawowe czujniki inercyjne: akcelerometr mierzący przyspieszenia liniowe oraz żyroskop mierzący prędkości kątowe. Choć urządzenia te są znane i~stosowane od dawna, dopiero z~chwilą ich implementacji w~formie mikroukładów elektromechanicznych (MEMS -- \emph{microelectromechanical systems}) stały się one powszechnie dostępne i~stosowane np. w~telefonach, czy systemach nawigacji wewnątrz budynków (INS -- \emph{indoor navigation systems}). W~badaniach przedstawionych w~niniejszej pracy, wykorzystany został układ o~symbolu MPU-6050 firmy InvenSense integrujący oba te czujniki (tabela \ref{tab:characteristics:mpu:spec} zawiera podstawowe parametry pracy tego układu). Układ ten oprócz wcześniej wspomnianych czujników posiada wbudowany termometr oraz procesor ruchu pozwalający na przetworzenie danych pomiarowych i~udostępnienie ich w~postaci kwaternionu reprezentującego orientację układu w~przestrzeni. Algorytm wyznaczania orientacji układu zaimplementowany w~tym procesorze nie został jednak opublikowany w~żadnej dokumentacji, w~związku z~czym funkcjonalność ta nie była wykorzystywana w~badaniach.
 		
 \begin{table}[!htp]
-	\caption{Zestawienie podstawowych parametrów pracy układu MPU-6050\footfullcite{footnote:ivenSense:MPU6050}}
+	\caption[Zestawienie podstawowych parametrów pracy układu MPU-6050]{Zestawienie podstawowych parametrów pracy układu MPU-6050\footfullcite{footnote:ivenSense:MPU6050}}
 	\label{tab:characteristics:mpu:spec}
 	\noindent
 	\small
@@ -813,12 +813,12 @@ Urządzenia inercyjne są czujnikami, których działanie opiera się na obserwa
 		
 We wszystkich badaniach w~niniejszej pracy wykorzystujących czujniki inercyjne, są one skonfigurowane do pracy w~zakresie  $\pm4g$ dla akcelerometru oraz $\pm500\degree/s$dla żyroskopu. Zakresy te zostały wybrane na podstawie specyfikacji komercyjnie dostępnego urządzenia pozwalającego na śledzenie ruchu -- Nintendo WiiRemote.
 		
-\begin{figure}[!htp]
+\begin{savenotes}\begin{figure}[!htp]
 	\centering 
 	\includegraphics[width=0.35\textwidth]{images/imuCoordinationSpace.eps}	
 	\caption{Układ współrzędnych wykorzystywany w~czujnikach MPU--6050}
 	\label{fig:characteristics:imu:space}
-\end{figure}
+\end{figure}\end{savenotes}
 		
 		
 \subsubsection*{Akcelerometr}
@@ -826,25 +826,25 @@ Akcelerometr mierzy siłę działającą na niego w~dowolnym z~trzech kierunków
 %([Fixed] obiekt czy czujnik?) 
 ($1g =9.80665^m/_{s^2}$). Ze względu na to, że siła grawitacji działa na wszystkie obiekty nieustannie, akcelerometr leżący horyzontalnie na płaskiej powierzchni i~nie poruszający się, będzie wskazywał wartość $1g$ wzdłuż osi równoległej do wektora grawitacji i~$0g$ w~pozostałych dwóch osiach. Pomijając wpływ szumów na odczyty pomiarów z~akcelerometru, jeśli dla nieporuszajacego się czujnika wartości pomiaru będą inne niż podane powyżej, oznacza to, że czujnik jednak nie leży w~pozycji horyzontalnej. Pomiar wynoszący $0g$ we wszystkich trzech osiach oznacza, że dany obiekt spada swobodnie w~orientacji idealnie horyzontalnej.\\
 				
-\begin{figure}[!htb]
+\begin{savenotes}\begin{figure}[!htb]
 	\captionsetup{singlelinecheck=off}
 	\centering
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{images/memsAccelerometerStructure.png}	
-		\caption{Struktura wewnętrzna \footfullcite{footnote:memsAccStructure2016}}
+		\caption[Struktura wewnętrzna akcelerometru]{Struktura wewnętrzna \footfullcite{footnote:memsAccStructure2016}}
 		\label{fig:characteristics:imu:acc:memsA}
 	\end{subfigure}
 					
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{images/memsAccelerometerIdea.png}		
-		\caption{Wizualizacja budowy \footfullcite{footnote:memsAccIdea2016}}
+		\caption[Wizualizacja budowy akcelerometru]{Wizualizacja budowy \footfullcite{footnote:memsAccIdea2016}}
 	\label{fig:characteristics:imu:acc:memsB}
 	\end{subfigure}				
 		\caption{Struktura wewnętrzna akcelerometru w~technologii MEMS}
 	\label{fig:characteristics:imu:acc:mems}
-\end{figure}
+\end{figure}\end{savenotes}
 
 
 Zastosowany w~tym układzie akcelerometr jest czujnikiem typu pojemnościowego. Oznacza to, że jego wewnętrzna struktura opiera się na układzie ruchomych półprzewodnikowych belek ułożonych pomiędzy analogicznymi, nieruchomymi belkami, które tym samym tworzą układ kondensatorów (rys. \ref{fig:characteristics:imu:acc:mems}). Pomiędzy dwiema sąsiednimi nieruchomymi belkami znajduje się dokłądnie jedna belka ruchoma tworząc w~ten sposób parę dwóch kondensatorów o~zmiennych pojemnościach $C_1$ i~$C_2$. Siła działająca na czujnik powoduje przesunięcie się ruchomej belki w~kierunku przyłożonej siły o~dystans $d$. Przyjmując dystans pomiędzy nieruchomymi belkami a~belką ruchomą w~czasie spoczynku jako $d_0$ to przy powierzchni belek oznaczonej jako $s$ i~stałej dielektrycznej materiału z~którego wykonane są belki $\epsilon$, pojemności $C_1$ i~$C_2$ określone są wzorem \\ref{eq:characteristics:imu:acc:capacitor}.
@@ -890,25 +890,25 @@ Szczegółowy opis budowy i~działania akcelerometrów zbudowanych w~architektur
 \subsubsection*{Żyroskop}
 Budowa wykorzystanego żyroskopu, podobnie jak akcelerometru, opiera się na układzie kondensatorów o~zmiennej pojemności, jednak w~tym przypadku są one dodatkowo wprawione w~drgania. Działanie takiego żyroskopu opiera się na efekcie Coriolisa \footfullcite{footnote:memsAccIdea2016}. Budowę i~uproszczony sposób działania czujnika przedstawia rysunek \ref{fig:characteristics:imu:gyro:mems}. Wykorzystane urządzenie mierzy prędkość kątową wokół 3 osi wyrażoną w~stopniach na sekundę ($^\degree/_s$), odpowiadającą konwencji nazewniczej związanej z~reprezentacją obrotów w~postaci kątów Eulera (rozdział \ref{chap:orientstionRep}). 
 		
-\begin{figure}[!htb]
+\begin{savenotes}\begin{figure}[!htb]
 	\captionsetup{singlelinecheck=off}
 	\centering
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{images/memsGyroscopeStructure.jpg}	
-		\caption{Struktura wewnętrzna \footfullcite{footnote:memsGyroStructure2016}}
+		\caption[Struktura wewnętrzna żyroskopu]{Struktura wewnętrzna \footfullcite{footnote:memsGyroStructure2016}}
 		\label{fig:characteristics:imu:gyro:memsA}
 	\end{subfigure}
 					
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{images/memsGyroscopeIdea.jpg}		
-		\caption{Wizualizacja budowy \footfullcite{footnote:memsAccIdea2016}}
+		\caption[Wizualizacja budowy żyroskopu]{Wizualizacja budowy \footfullcite{footnote:memsAccIdea2016}}
 	\label{fig:characteristics:imu:gyro:memsB}
 	\end{subfigure}				
 		\caption{Struktura wewnętrzna żyroskopu w~technologii MEMS}
 	\label{fig:characteristics:imu:gyro:mems}
-\end{figure}
+\end{figure}\end{savenotes}
 		
 \subsection{Ograniczenia w~działaniu czujników inercyjnych}
 Ograniczenia w~działaniu obu czujników inercyjnych można rozdzielić na te dotyczące ogólnie urządzeń stworzonych w~architekturze MEMS, a~tym samym wynikające z~ich budowy i~właściwości fizycznych, oraz na te charakterystyczne dla poszczególnych rodzajów czujników związane z~ich działaniem np.: szum danych, czy wpływ temperatury urządzenia na uzyskiwane pomiary.
@@ -919,12 +919,12 @@ Pomiary dostarczane przez oba czujniki zawierają szum, który w~znaczący spos�
 \paragraph*{Temperatura pracy}
 Jednym z~czynników wpływających na jakość pomiarów uzyskiwanych za pomocą czujników tworzonych w~architekturze MEMS jest temperatura pracy tych urządzeń. Jej wpływ na uzyskiwane wyniki, jak w~swojej analizie wskazują Liu et al. \cite{Liu2007, Liu2015}, mają 3 czynniki: moduł Younga, deformacja materiału pod wpływem temperatury oraz naprężenia materiału. Każdy z~tych czynników wpływa na możliwości przepływu prądu w~omawianych układach, co bezpośrednio wpływa na jakość interpretacji zgromadzonych ładunków w~kondensatorach układów MEMS. Zgodnie ze specyfikacją układu MPU-6050, temperatura neutralna dla ich pracy to 25 $\degree C$, a~błąd związany z~temperaturą urządzenia zmienia się nieliniowo. Zmiana temperatury układów MEMS wynika z~temperatury otoczenia, w~której pracują oraz z~naturalnego wydzielania się ciepła podczas pracy. W~wyniku własnych eksperymentów udało się zaobserwować wpływ zmiany temperatury na uzyskane pomiary przyspieszenia ziemskiego w~zakresie temperatur 10-50 $\degree C$ (rys. \ref{fig:characteristics:imu:temp}). Ponieważ temperatura pracy urządzeń umieszczonych przy ciele stabilizuje się przy 32 $\degree C$, czynnik ten musi być wzięty pod uwagę i~skorygowany przed obliczeniami bazującymi na danych akcelerometru. Podobnej zależności nie zaobserwowano w~przypadku używanych żyroskopów. Prawdopodobną przyczyną jest fakt, że temperatura wpływa na sygnały o~niskiej częstotliwości, które są odfiltrowane w~trakcie odczytu pomiarów. Wynika to z~faktu, że prawidłowy sygnał, jaki rejestrowany jest przez żyroskop, powinien mieć wysoką częstotliwość, a~w~związku z~tym cały sygnał przetwarzany jest filtrem górnoprzepustowym. W~takim przypadku szum niskiej częstotliwości jest w~dużym stopniu usunięty z~uzyskiwanych pomiarów.
 		
-\begin{figure}
+\begin{savenotes}\begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{images/temp.png}
-	\caption{Pomiar przyspieszenia ziemskiego w~przedziale temperatur 10-50$\degree C$ [źródło własne]}
+	\caption[Pomiar przyspieszenia ziemskiego w~przedziale temperatur 10-50$\degree C$]{Pomiar przyspieszenia ziemskiego w~przedziale temperatur 10-50$\degree C$ [źródło własne]}
 	\label{fig:characteristics:imu:temp}
-\end{figure}
+\end{figure}\end{savenotes}
 		
 \paragraph*{Niepełna informacja o~obrotach}
 Do precyzyjnego określenia orientacji, w~przestrzeni urządzenia pomiarowego złożonego z~czujników inercyjnych i~magnetycznych, nie powinno się bazować jedynie na pojedynczym czujniku (np. wyłącznie na żyroskopie), ale należy połączyć ze sobą sygnały (ang. \emph{data fusion}) z~kilku różnych czujników np: akcelerometru i~żyroskopu, czy żyroskopu i~magnetometru. Wynika to z~szumów jakie występują w~mierzonych sygnałach i~konieczności ich odfiltrowania. Ponieważ charakterystyki szumów i~sygnałów mierzonych przez każdy z~czujników różnią się od siebie, to właśnie zsynchronizowane łączenie danych daje rezultaty lepsze niż np. zastosowanie filtracji na pojedynczym sygnale. Jakość uzyskanych wyników takiego łączenia danych jest zależna od wybranej metody (rozdział \ref{chap:appx:filters}) oraz posiadanej wiedzy dotyczącej charakterystyk urządzeń. W~przypadku zastosowania pary akcelerometr -- żyroskop, pomimo tego, że każdy z~nich jest urządzeniem 3-osiowym, możliwe jest wyznaczenie orientacji jedynie względem 2 osi. Ograniczenie to wynika z~pomiarów, jakie można uzyskać z~akcelerometru. Aby móc połączyć ze sobą dane z~obu czujników, zarówno akcelerometr jak i~żyroskop muszą udostępnić dane dotyczące obrotów wokół tych samych osi. O ile żyroskop faktycznie dokonuje pomiaru prędkości kątowych wokół wszystkich 3 osi, o~tyle akcelerometr podaje informację o~tym jak czujnik jest obrócony tylko względem dwóch osi. Dla akcelerometru, obrót wokół osi działania siły grawitacji (obrót względem osi $Z$ na rys. \ref{fig:characteristics:imu:space}) jest niemierzalny, ponieważ obrót taki nie zmienia wartości z~jaką ta siła działa na czujnik w~danej chwili. Z tego zaś powodu, orientacja względem osi działania siły grawitacji nie jest wyznaczona drogą łączenia danych z~akcelerometru i~żyroskopu, a~jedynie może być wyznaczona na podstawie całkowania prędkości kątowej zmierzonej przez sam żyroskop, co jest obarczone znaczącymi błędami z~uwagi na zaszumienie danych. W~związku z~tym nie bierze się tej wartości pod uwagę w~obliczeniach i~przyjmuje się, że urządzenia oparte tylko na parze czujników inercyjnych określają orientację względem dwóch osi.\\
@@ -967,12 +967,12 @@ Cechą wspólną powyższych metod jest to, że podstawą ich działania były p
 		
 Kolejną grupę hybrydowych metod łączących sygnały inercyjne z~sygnałami kontrolera Kinect stanowią metody, które wykorzystują w~sposób ciągły oba te źródła. Wymagają one ciągłego analizowania obu sygnałów i~na podstawie ich jakości decydują z~jakim stopniem istotności je połączyć. W~2014 roku Feng i~Murray-Smith \cite{Murray-Smith2014} zaprezentowali metodę łączenia tych danych za pomocą zmodyfikowanego filtru Kalmana potrafiącego działać na sygnałach o~różnej częstotliwości (ang. \emph{milti--rate Kalman Filter} \cite{Dhuli2009}). Wybór takiego filtra został podyktowany tym, że częstotliwość pracy Kinecta to 30Hz, a~użytego układu MARG to 90Hz i~połączenie ich sygnałów klasyczną wersją filtra wymagałaby wyrównania tych częstotliwości. Feng i~Murray-Smith wykorzystali w~swojej pracy wariant filtra liniowego, natomiast Armesto i~Smyth dla podobnego zadania wykorzystali warianty odpowiednio EKF\cite{Armesto01062007} i~UKF\cite{Smyth2007}. Zastosowanie modyfikacji metody łączenia danych, uwzględniającej różne częstotliwości łączonych sygnałów, pozwoliło uzyskać lepszą reaktywność na zmiany zachodzące w~śledzonym ruchu. Różnicę w~czasie reakcji na zakończenie ruchu widać na rysunku \ref{fig:literature:feng}. Moment zakończenia ruchu uwzględniony został w~przedziale czasowym pomiędzy $3s$ a~$3.4s$. Niebieski wykres pokazuje oszacowanie położenia wykorzystujące klasyczny filtr Kalmana, natomiast czerwony wykres przedstawia oszacowanie położenia z~wykorzystaniem zmodyfikowanego filtru.
 		
-\begin{figure}[!htp]
+\begin{savenotes}\begin{figure}[!htp]
 	\centering 
 	\includegraphics[width=0.95\textwidth]{images/Fig03.png}	
-	\caption{Szacowanie położenia stawu z~użyciem klasycznego filtra Kalmana (niebieski) i~filtru Kalmana dostosowanego do różnych częstotliwości (czerwony) \cite{Murray-Smith2014}}
+	\caption[Szacowanie położenia stawu z~użyciem klasycznego filtra Kalmana i~filtru Kalmana dostosowanego do różnych częstotliwości]{Szacowanie położenia stawu z~użyciem klasycznego filtra Kalmana (niebieski) i~filtru Kalmana dostosowanego do różnych częstotliwości (czerwony) \cite{Murray-Smith2014}}
 	\label{fig:literature:feng}
-\end{figure}
+\end{figure}\end{savenotes}
 		
 Na podstawie wykresów zamieszczonych w~artykule Fanga i~Murray-Smitha można oszacować, że zaproponowana przez nich metoda określa pozycję stawów z~dokładnością $1.5 cm$ -- $2 cm$. Opublikowane diagramy pokazują jedynie wykresy wygenerowane przez zaledwie $5s$, więc problematyczne staje się oszacowanie jak zachowa się ta metoda w~dłuższym okresie. Widać także, że metoda wykorzystująca modyfikację filtru Kalmana uwzględniającą zróżnicowanie częstotliwości łączonych sygnałów szybiej reaguje na zmiany w~wykonywanym ruchu niż metoda oparta o~klasyczną implementację filtru Kalmana (ma mniejszą bezwładność).\\
 

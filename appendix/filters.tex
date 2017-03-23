@@ -59,7 +59,7 @@ Wartością, którą filtr zwraca jako wynik swojego działania jest $\widehat{x
 
 Obie fazy wykonywane są cyklicznie, a~kompletny algorytm przedstawia schemat z rysunku \ref{fig:appx:KF:algorithm}.
 
-\begin{figure}
+\begin{savenotes}\begin{figure}
 	\centering
 	\begin{tikzpicture}[>=latex']
 		\tikzset{block/.style= {draw, rectangle, align=center,minimum width=4cm,minimum height=1cm},
@@ -106,7 +106,7 @@ Obie fazy wykonywane są cyklicznie, a~kompletny algorytm przedstawia schemat z 
 	\end{tikzpicture}
 	\caption{Schemat działania filtru Kalmana}
 	\label{fig:appx:KF:algorithm}
-\end{figure}
+\end{figure}\end{savenotes}
 
 Filtr Kalmana, dzięki swojej budowie, może być używany nie tylko w~procesie odszumiania sygnału. Drugim ważnym i~popularnym jego zastosowaniem jest łączenie ze sobą sygnałów z~różnych źródeł. Wówczas wartości jednego z~nich wykorzystywane są w~fazie predykacji, a~drugiego w~fazie korekcji.
 
@@ -211,7 +211,7 @@ Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został 
 \newcommand{\derv}{\huge$\frac{d}{dt}$}
 
 
-\begin{figure}[!htb]
+\begin{savenotes}\begin{figure}[!htb]
 	\centering 
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
@@ -286,7 +286,7 @@ Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został 
 	\end{subfigure}
 	\caption{Schemat działania filtru komplementarnego}
 	\label{fig:appx:CF:algorithm}					
-\end{figure}
+\end{figure}\end{savenotes}
 
 gdzie:
 \begin{itemize}
@@ -304,7 +304,7 @@ Podobnie jak w~przypadku filtru Kalmana, istnieje także wariant filtra kompleme
 Na bazie tych prac w~2010 roku Sebastian Madgwick opracował autorską metodę \cite{Madgwick2010,Madgwick2011} integracji danych z~czujników inercyjnych i~magnetycznych w~celu wyznaczenia orientacji w~przestrzeni obserwowanego obiektu. Algorytm ten według opublikowanych wyników eksperymentów wykazuje większą dokładność niż algorytm oparty o~filtr Kalmana. Analizując budowę tego filtra oraz schemat zamieszczony w~publikacji autora warto zauważyć jego analogię do schematu filtra komplementarnego (rys. \ref{fig:appx:CF:algorithmA}).
 %Rysunek \ref{fig:appx:Madg:algorithm} przedstawia schemat działania filtru Madgwicka. Warto zauważyć, że analogię w~jego budowie do schematu filtra komplementarnego \ref{fig:appx:CF:algorithmA}.
 
-%\begin{figure}[!htb]
+%\begin{savenotes}\begin{figure}[!htb]
 %	\centering 
 
 %		\begin{tikzpicture}[auto, thick, node distance=2cm, >=triangle 45]
@@ -337,4 +337,4 @@ Na bazie tych prac w~2010 roku Sebastian Madgwick opracował autorską metodę \
 %		\end{tikzpicture}
 %		\label{fig:appx:Madg:algorithm}
 %
-%	\end{figure}
+%	\end{figure}\end{savenotes}
