@@ -3,7 +3,7 @@
 \usepackage[OT4]{fontenc}
 \usepackage[MeX]{polski}
 \usepackage[polish]{babel}
-\usepackage[style=ieee, citestyle=numeric-comp,backend=biber,sorting=none]{biblatex}
+\usepackage[style=ieee, citestyle=numeric-comp,backend=biber,sorting=none, defernumbers=true]{biblatex}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{amsmath}
@@ -50,10 +50,15 @@
 \usepackage{indentfirst}
 \usepackage{MnSymbol}%
 \usepackage{wasysym}%
+\usepackage{footnote}
+%\makesavenoteenv{figure}
+\makesavenoteenv{tabular}
+\makesavenoteenv{table}
 
 \addbibresource{main.bib}
 \npdecimalsign{.}
 \nprounddigits{2}
+
 
 \DeclareGraphicsExtensions{.eps}
 \usetikzlibrary{patterns}
@@ -152,7 +157,7 @@
 \input{summary.tex}
 
 \appendix
-\part{Dodatki}
+\part*{Dodatki}
 \renewcommand{\thechapter}{\Alph{chapter}}
 \input{appendix/filters.tex}
 \input{appendix/allan.tex}
@@ -161,12 +166,7 @@
 \addtocontents{toc}{\bigskip}
 
 \backmatter
-%\bibliographystyle{ddabbrv}
-%\bibliographystyle{ieeetr}
-%\bibliographystyle{plunsrt}
-
-\printbibliography
-%[heading=bibintoc]
+\printbibliography[notkeyword=footnote, resetnumbers=true]
 
 \listoffigures
 \listoftables
