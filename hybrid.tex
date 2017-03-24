@@ -4,7 +4,7 @@ Prezentowana w~niniejszej dysertacji hybrydowa metoda śledzenia ruchu człowiek
 Proces łączenia danych uzyskanych z~kontrolera Kinect i~z czujników inercyjnych podzielony został na kilka etapów, z~których część jest wykonana jedynie na samym początku, a~część jest powtarzana w~trakcie śledzenia ruchu. Schemat kolejnych kroków przetwarzania danych prezentuje diagram na rysunku \ref{fig:hybrid:stepsSequence}. Kroki te zostały omówione w~dalszej części niniejszego rozdziału.\\
 
 \begin{savenotes}
-	\begin{figure}[hbp]
+	\begin{figure}[h]
 		\begin{minipage}{.5\textwidth}
 			\centering	
 			\scalebox{0.8}{
@@ -181,7 +181,7 @@ Oszacowanie orientacji w~osi $Z$ odbywa się jedynie na podstawie danych pomiaro
 Wyznaczając orientację przestrzenną modułu inercyjnego zbudowanego jedynie z~akcelerometru i~żyroskopu należy mieć na uwadze układ odniesienia dla otrzymywanych wartości. Oszacowanie będące wynikiem działania filtru Madgwicka dla osi $X$ i~$Y$ wykorzystuje jako swój punkt odniesienia wektor siły grawitacji, co oznacza że te dwie wartości będą wskazywały orientację względem grawitacji ziemskiej. Orientacja względem osi $Z$, oszacowana jedynie na podstawie pomiarów żyroskopu, co do zasady wyraża obrót w~stosunku do pozycji początkowej, w~jakiej znajdował się moduł w~trakcie inicjalizacji filtru Madgwicka. Sposobem na ustabilizowanie oszacowania orientacji wokół osi $Z$ i~odniesienia go względem grawitacji Ziemi byłoby uzupełnienie urządzenia pomiarowego o~magnetometr. \\
 		
 \begin{savenotes}
-	\begin{figure}[hbp]
+	\begin{figure}[h]
 													
 		\centering 
 		\includegraphics[width=0.75\textwidth]{images/imumeasuredAngles.png}
@@ -190,7 +190,7 @@ Wyznaczając orientację przestrzenną modułu inercyjnego zbudowanego jedynie z
 	\end{figure}
 \end{savenotes}
 \begin{savenotes}
-	\begin{figure}[hbp]
+	\begin{figure}[h]
 		\centering 
 		\includegraphics[width=0.75\textwidth]{images/imuDrift.png}
 		\caption{Wykres przedstawiający dryf oszacowania kąta obrotu modułu inercyjnego wokół osi $Z$}
@@ -214,7 +214,7 @@ Również dane dotyczące położenia w~przestrzeni wybranych stawów szkieletu,
 \end{equation}
 						
 \begin{savenotes}
-	\begin{figure}[hbp]
+	\begin{figure}[h]
 		\centering
 		\begin{subfigure}[b]{0.49\textwidth}
 			\centering
@@ -235,7 +235,7 @@ Również dane dotyczące położenia w~przestrzeni wybranych stawów szkieletu,
 Wartość współczynnika filtracji $f_{LPF}$ została wyznaczona w~drodze prowadzonych badań własnych i~została ustalona na $0.065$. Przeprowadzone przeze mnie badanie wpływu wartości współczynnika filtracji na dokładność oszacowania pozycji stawów, za pomocą kontrolera Kinect, polegało na wyznaczeniu średniego błędu oszacowania pozycji stawów między wskazaniami kontrolera Kinect, a~danymi referencyjnymi uzyskanymi z~systemu śledzenia ruchu firmy Vicon. W~trakcie badania były wykonywane ruchy samych kończyn jak i~całego ciała, śledzone równocześnie przez system Vicon jak i~kontroler Kinect. Następnie wyznaczany był średni błąd oszacowania pozycji dla wybranych stawów z~wykorzystaniem filtra oraz bez niego, a~także z~różnymi wartościami współczynnika $f_{LPF}$. Rysunek \ref{fig:hybrid:kinect:lpf} przedstawia wykres zależoności uzyskanego średniego błędu oszacowania pozycji stawów w~zależności od wartości współczynnika filtracji $f_{LPF}$. 
 								
 \begin{savenotes}
-	\begin{figure}[hbp]
+	\begin{figure}[h]
 		\centering 
 		\includegraphics[width=0.75\textwidth]{images/kinectPosErrorAlpha.png}
 		\caption{Wykres przedstawiający średni błąd pozycjonowania stawów za pomocą kontrolera Kinect w~zależności od współczynnika filtracji $\alpha$}
@@ -300,7 +300,7 @@ Waga $w_\psi$ określa poziom istotności informacji o~obrocie wokół osi skier
 Rysunek \ref{fig:handAxes} przedstawia układ współrzędnych wraz z~obrotami odpowiadającymi każdej z~osi tego układu, w~odniesieniu do ręki człowieka.
 										
 \begin{savenotes}
-	\begin{figure}[hbp]
+	\begin{figure}[h]
 		\centering	
 		\includegraphics[width=0.5\textwidth]{images/handAxes.jpg}	
 		\caption{Odniesienie globalnego układu współrzędnych $XYZ$ wraz z~obrotami $\phi , \theta , \psi$ do ręki człowieka}
@@ -319,7 +319,7 @@ Pierwszym kryterium branym pod uwagę jest obrót całej sylwetki względem kame
 Branie pod uwagę zarówno wartości estymacji obrotu sylwetki wraz z~odchyleniem standardowym uzyskiwanych oszacowań spowodowane jest faktem, że w~momencie wystąpienia okluzji jednego lub obu stawów barkowych i~błędów oszacowania ich położenia, następuje błędne oszacowanie wartości obrotu. W~praktyce oznacza to, że wyznaczony kąt obrotu sylwetki może przyjąć dowolną wartość. Przykład szacowania kąta obrotu sylwetki względem kontrolera Kinect przedstawia wykres z rysunku \ref{fig:hybrid:kinect:kinectRotationVariance}. W~trakcie tego eksperymentu badawczego wykonywany był obrót postaci względem kontrolera Kinect do kąta $90\degree$ i~powrót do pozycji równoległej do urządzenia pomiarowego, czyli do kąta $0\degree$. Przy obrocie sylwetki nie przekraczającym $50\degree$ odchylenie standardowe oszacowań z~przyjętego okresu czasu nie przekracza wartości $1.5\degree$. W~związku z~tym w~opisywanej w~niniejszej dysertacji hybrydowej metodzie śledzenia ruchu kończyn człowieka, autor przyjął, że pomiar obrotu postaci w~stosunku do kontrolera Kinect jest wiarygodny, jeśli oszacowanie jego kąta obrotu jest $\alpha \le 50\degree$ przy odchyleniu standardowym $\sigma_\alpha\le 1.5 \degree$.
 												
 \begin{savenotes}
-	\begin{figure}[hbp]
+	\begin{figure}[h]
 		\centering
 																												
 		\includegraphics[width=0.75\textwidth]{images/kinectRotationStdDev.png}
@@ -346,7 +346,7 @@ gdzie:
 \end{conditions}
 														
 \begin{savenotes}
-	\begin{figure}[hbp]
+	\begin{figure}[h]
 		\centering 
 		\begin{subfigure}[b]{0.79\textwidth}
 			\centering
