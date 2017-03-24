@@ -60,7 +60,7 @@ Wartością, którą filtr zwraca jako wynik swojego działania jest $\widehat{x
 Obie fazy wykonywane są cyklicznie, a~kompletny algorytm przedstawia schemat z rysunku \ref{fig:appx:KF:algorithm}.
 
 \begin{savenotes}
-	\begin{figure}
+	\begin{figure}[hbp]
 		\centering
 		\begin{tikzpicture}[>=latex']
 			\tikzset{block/.style= {draw, rectangle, align=center,minimum width=4cm,minimum height=1cm},
@@ -166,7 +166,7 @@ Filtr EKF okazał się skuteczny dla filtracji sygnałów nieliniowych jednak ko
 \label{sec:appx:filters:UKF}
 \nomenclature{UKF}{Bezśladowy filtr Kalmana}
 W 1995 w~wyniku prac prowadzonych przez S. Juliera, J. Uhlmanna i~H. Durrant-Whyte\'a została opublikowana \cite{Julier1995} metoda filtrowania sygnałów nieliniowych oparta o~analizę danych statystycznych filtrowanego sygnału. Realizowana jest ona poprzez zastosowanie przekształcenia bezśladowego operującego na rozkładzie prawdopodobieństwa filtrowanego sygnału, ponieważ mniej kosztowne, a~jednocześnie dokładniejsze jest aproksymowanie takich danych, niż funkcji nieliniowych \cite{Uhlmann94}.
-Względem EKF, w~przypadku tego algorytmu, występuje dodatkowy krok --- wyznaczenie punktów sigma (równanie \ref{eq:appx:UKF:ph0}). 
+Względem EKF, w~przypadku tego algorytmu, występuje dodatkowy krok -- wyznaczenie punktów sigma (równanie \ref{eq:appx:UKF:ph0}). 
 		
 \begin{equation}
 	\chi^\alpha_{k-1} = [\widehat{x}^\alpha_{k-1} \widehat{x}^\alpha_{k-1}\pm\sqrt{(L+\lambda)P^\alpha_{k-1}}] \label{eq:appx:UKF:ph0}
@@ -214,7 +214,7 @@ Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został 
 		
 		
 \begin{savenotes}
-	\begin{figure}[!htb]
+	\begin{figure}[hbp]
 		\centering 
 		\begin{subfigure}[b]{0.49\textwidth}
 			\centering
@@ -309,7 +309,7 @@ Na bazie tych prac w~2010 roku Sebastian Madgwick opracował autorską metodę \
 %Rysunek \ref{fig:appx:Madg:algorithm} przedstawia schemat działania filtru Madgwicka. Warto zauważyć, że analogię w~jego budowie do schematu filtra komplementarnego \ref{fig:appx:CF:algorithmA}.
 				
 %\begin{savenotes}
-%\begin{figure}[!htb]
+%\begin{figure}[hbp]
 	%	\centering 
 					
 	%		\begin{tikzpicture}[auto, thick, node distance=2cm, >=triangle 45]

@@ -5,7 +5,7 @@ Eksperymenty badawcze wyryfikujące charakterystyki sensorów, jak również dok
 Obszar roboczy, na którym dokonywane były pomiary ruchu, został zamknięty w~przestrzeni (prostopadłościanu) obserwowanej przez kamery systemu Vicon, której obrys podstawy zbliżony był do kwadratu $4m$x$4m$. W~trakcie kalibracji systemu referencyjnego punkt początkowy $\left(0, 0, 0\right)$ został zdefiniowany w~miejscu, w~którym został umieszczony kontroler Kinect. W~trakcie trwania eksperymentu, badany użytkownik stał w~odległości ok. $2m$ od Kinecta, czyli w~odległości, w~której działa on najbardziej dokładnie.  Pełne rozmieszczenie urządzeń na scenie prezentuje rysunek \ref{fig:experiments:scene}. Prostokąty dookoła obszaru roboczego oznaczone V1 -- V10 to kamery systemu Vicon.
 
 \begin{savenotes}
-	\begin{figure}[!htp]
+	\begin{figure}[hbp]
 		\centering
 		\includegraphics[width=0.7\textwidth]{images/scene.png}
 		\caption{Schemat rozmieszczenia elementów sceny w~laboratorium}
@@ -17,7 +17,7 @@ Obszar roboczy, na którym dokonywane były pomiary ruchu, został zamknięty w~
 Eksperymenty badawcze, opisane w~niniejszej pracy, zostały przeprowadzone na przykładzie ruchu ręki, a~oszacowaniu położenia w~przestrzeni podlega staw łokciowy oraz nadgarstkowy prawej ręki. Nie ogranicza to jednak możliwości zastosowania opracowanej w~pracy metody do śledzenia pozostałych kończyn. Markery niezbędne do prawidłowego działania systemu śledzenia ruchu firmy Vicon zostały umieszczone według schematu zamieszczonego na rysunku \ref{fig:experiments:viconArm}
 		
 \begin{savenotes}
-	\begin{figure}[!htp]
+	\begin{figure}[hbp]
 		\centering
 		\includegraphics[width=0.6\textwidth]{images/Fig11.png}
 		\caption{Schemat romieszczenia markerów na ręce zgodny z~zaleceniami systemu Vicon}
@@ -35,7 +35,7 @@ Oprócz markerów niezbędnych dla poprawnego działania systemu Vicon na przedr
 Każdy z~ruchów ręki był wykonany przez troje aktorów i~wykonany w~dwóch seriach po 5 powtórzeń. Każda seria stanowiła osobną sesję śledzenia co oznacza, że każdy ruch został zarejestrowany w~6 sesjach (3 osoby po 2 sesje śledzenia na każde ćwiczenie). Podzielenie całego ćwiczenia na serie z~mniejszą liczbą powtórzeń związane było z~efektem zmęczenia aktorów, jakie było widoczne wraz z~kolejnymi powtórzeniami. Ćwiczenia jakie należało wykonać zostały dobrane w~taki sposób, aby sprawdzić opisaną metodę zarówno w~sytuacjach, w~których kontroler Kinect i~czujniki inercyjne działają w~uprzywilejowanym dla nich zakresie pracy jak i~w~takich, w~których jedno z~urządzeń posiada istotne ograniczenia w~działaniu. Wszystkie sekwencje rozpoczynały się od pozycji wyjściowej z~rękami rozłożonymi na boki w tak zwanej pozycji T (\emph{ang. T--pose}. Następnie, wykonywano zgięcie rąk w~łokciu ku górze (w płaszczyźnie XY) i~ich wyprostowanie w~celu zsynchronizowania pomiarów Kinecta i~czujników inercyjnych w~czasie. Po sekwencji synchronizującej następowały właściwe ćwiczenia, w~których każde powtórzenie zaczynało i~kończyło się pozycją T (\emph{ang. T--pose}). Wykonywane ćwiczenia prezentuje rysunek \ref{fig:experiments:poses}.
 				
 \begin{savenotes}
-	\begin{figure}[!htp]
+	\begin{figure}[hbp]
 		\centering
 		\includegraphics[width=\textwidth]{images/poses.png}
 		\caption{Ćwiczenia wykonywane w~ramach eksperymentu}
@@ -108,17 +108,15 @@ Pierwsze ćwiczenie, jakie zostało wykonane z~użyciem omawianej metody, to zgi
 		Średnia $\overline{RMSE}$ & 2.2200       & 2.7605       & 3.2961           & 2.5779       & 3.0350       & 3.5414           \\
 		Odchylenie                 & 0.0727       & 0.0141       & 0.1230           & 0.0585       & 0.0603       & 0.1216           \\
 		\bottomrule
-	\end{tabular} 
-																					
+	\end{tabular} 																					
 \end{table} 
 						
-Ćwiczenie polegające na wielokrotnym zgięciu ręki w~łokciu do góry, zgodnie z~przewidywaniami, dla obu urządzeń pomiarowych nie były trudne. Przez cały czas trwania ćwiczenia stawy były poprawnie identyfikowane i~w~pełni śledzone przez kontroler Kinect. Także czujniki inercyjne były w~stanie zarejestrować w~pełni  wykonywany ruch. Obie porównywane ze sobą metody łączące dane uzyskiwały podobne wyniki, a~zakres szacowanego przez nie ruchu był zbliżony do tego wykonywanego w rzeczywistości. Widoczne było natomiast zróżnicowanie w~dopasowaniu szkieletu do ciała ze względu na przyjęty model długości kości. W~metodzie Kalkbrennera miała miejsce częsta zmiana tego oszacowania, co wpływało na to, że śledzony staw potrafił zmienić swoje położenie podczas gdy postać pozostawała w bezruchu, a~także potrafił znaleźć się poza konturem postaci. W~przypadku metody autora niniejszej rozprawy, zauważalne były częste, jednak niewielkie, fluktuacje oszacowania pozycji stawów, jednak nie wpływały one na błąd szacowania w~takim stopniu jak zmienna długość segmentów reprezentujących kości. Wydaje się również, że to właśnie brak stałego modelu długości kości w~metodzie Kalkbrennera ma największy wpływ na różnicę uzyskiwanych wyników w ćwiczeniu 1. \\
-%([TODO] pojawia się jedynie analiza pozycji a~co z~czasem?? Brak poza tym dokładnej deklaracji jak w~Twojej metodzie przyjęty jest model kostny.) -- chyba nie bardzo rozumiem
+Ćwiczenie polegające na wielokrotnym zgięciu ręki w~łokciu do góry, zgodnie z~przewidywaniami, dla obu urządzeń pomiarowych nie były trudne. Przez cały czas trwania ćwiczenia stawy były poprawnie identyfikowane i~w~pełni śledzone przez kontroler Kinect. Także czujniki inercyjne były w~stanie zarejestrować w~pełni  wykonywany ruch. Obie porównywane ze sobą metody łączące dane uzyskiwały podobne wyniki, a~zakres szacowanego przez nie ruchu był zbliżony do tego wykonywanego w rzeczywistości. Widoczne było natomiast zróżnicowanie w~dopasowaniu szkieletu do ciała ze względu na przyjęty model długości kości. W~metodzie Kalkbrennera miała miejsce częsta zmiana tego oszacowania, co wpływało na to, że śledzony staw potrafił zmienić swoje położenie podczas gdy postać pozostawała w bezruchu, a~także potrafił znaleźć się poza konturem postaci. W~przypadku metody autora niniejszej rozprawy, zauważalne były częste, jednak niewielkie, fluktuacje wartości oszacowanych pozycji stawów. Były one jednak na tyle niewielkie, że nie wpływały w istotny sposób na wartość błędu średniokwadratowego uzyskanego szacowania w przeciwieństwie do wpływu na ten błąd zmiennej długości segmentów reprezentujących kości wykorzystywanych w metodzie Kalkbrennera. Wydaje się również, że to właśnie brak stałego modelu długości kości w~metodzie Kalkbrennera ma największy wpływ na różnicę uzyskiwanych wyników w ćwiczeniu 1. \\
 						
 W omawianym ćwiczeniu ruch wykonywany był głównie przez przedramię, czyli istotne i~zamierzone zmiany położenia były widoczne na stawie nadgarstkowym. Wykresy \ref{fig:experiments:first:wristX}, \ref{fig:experiments:first:wristY},\ref{fig:experiments:first:wristZ} pokazują położenie stawu nadgarstkowego w~każdej z~3 osi w~trakcie wykonywania ruchu. Widać na nich wyraźną różnicę w~stabilności pomiarów objawiającą się ciągłymi drganiami widocznymi na wykresie łączenia danych za pomocą metody Kalkbrennera.
 						
 \begin{savenotes}
-	\begin{figure}[!htb]
+	\begin{figure}[hbp]
 		\centering
 		\includegraphics[width=0.9\linewidth]{images/100/Slide4.png}
 		\caption{Wykres przedstawiający położenie stawu nadgarstkowego w~osi X}
@@ -128,7 +126,7 @@ W omawianym ćwiczeniu ruch wykonywany był głównie przez przedramię, czyli i
 								
 								
 \begin{savenotes}
-	\begin{figure}[!htb]
+	\begin{figure}[hbp]
 		\centering
 		\includegraphics[width=0.9\linewidth]{images/100/Slide5.png}
 		\caption{Wykres przedstawiający położenie stawu nadgarstkowego w~osi Y}
@@ -137,7 +135,7 @@ W omawianym ćwiczeniu ruch wykonywany był głównie przez przedramię, czyli i
 \end{savenotes}
 										
 \begin{savenotes}
-	\begin{figure}[!htb]
+	\begin{figure}[hbp]
 		\centering
 		\includegraphics[width=0.9\linewidth]{images/100/Slide6.png}
 		\caption{Wykres przedstawiający położenie stawu nadgarstkowego w~osi Z}
@@ -148,7 +146,7 @@ W omawianym ćwiczeniu ruch wykonywany był głównie przez przedramię, czyli i
 Rysunki \ref{fig:experiments:first:raw} oraz \ref{fig:experiments:first:fused} wizualizują ruch ręki podczas tego ćwiczenia. W~przypadku obu metod łączenia danych widać poprawę pozycjonowania stawów względem danych otrzymanych bezpośrednio z~urządzeń pomiarowych. 
 												
 \begin{savenotes}
-	\begin{figure}[!htb]
+	\begin{figure}[hbp]
 		\captionsetup{singlelinecheck=off}
 		\centering
 		\begin{subfigure}[b]{0.65\textwidth}
@@ -231,7 +229,7 @@ W obu ćwiczeniach, w~trakcie wykonywania ruchu, następował moment, w~którym 
 Ze względu na to, że kontroler Kinect, pomimo utraty możliwości śledzenia dowolnego stawu, wciąż estymuje jego położenie, zasadne jest sprawdzanie czy fuzja pomiarów dostarczonych przez kontroler Kinect z~pomiarami urządzeń inercyjnych nie sprawi, że ostateczna estymacja położenia stawu stanie się zbyt niedokładna. Metoda Kalkbrennera co prawda dokonuje takiego sprawdzenia w~trakcie stosowania filtru Kalmana, jednak widoczne było podążanie szacunkowych wartości położenia stawu za skokami danych z~Kinecta. Oznacza to, że wpływ pomiarów kontrolera Kinect na ostateczną estymację jest znaczący i~zastosowana w~metodzie Kalkbrennera zmiana stopnia ich istotności, w~procesie łączenia danych, jest niewystarczająca na ograniczenie negatywnego wpływu niedokładności kontrolera Kinect.
 														
 \begin{savenotes}
-	\begin{figure}[!htb]
+	\begin{figure}[hbp]
 		\centering
 		\includegraphics[width=0.8\linewidth]{images/300/Slide3_focus.png}
 		\caption{Wykres przedstawiający podążanie wyznaczania pozycji stawu za pomiarami Kinecta w~trakcie wykonywania ćwiczenia 3}
@@ -240,7 +238,7 @@ Ze względu na to, że kontroler Kinect, pomimo utraty możliwości śledzenia d
 \end{savenotes}
 																
 \begin{savenotes}
-	\begin{figure}[!htb]
+	\begin{figure}[hbp]
 		\captionsetup{singlelinecheck=off}
 		\centering
 		\begin{subfigure}[b]{0.65\textwidth}
@@ -263,7 +261,7 @@ Ze względu na to, że kontroler Kinect, pomimo utraty możliwości śledzenia d
 \end{savenotes}
 %[Fixed]zlikwidować takie wypunktowanie w~podpisie rysunku. 
 \begin{savenotes}
-	\begin{figure}[!htb]
+	\begin{figure}[hbp]
 		\captionsetup{singlelinecheck=off}
 		\centering
 		\begin{subfigure}[b]{0.65\textwidth}
@@ -321,7 +319,7 @@ Celem ostatniego ćwiczenia było sprawdzenie stabilności pomiarów w~przypadku
 Podobnie jak w~ćwiczeniu 1 tak i~w~ćwiczeniu 4 oba urządzenia były w~stanie przez cały czas trwania eksperymentu śledzić ruchy wykonywane przez śledzonego aktora. Jednak podobnie jak we wspomnianym ćwiczeniu, zmianie ulegały długości segmentów kości i~miało to przełożenie na działanie metody Kalkbrennera. Wizualizacje łańcuchów kinematycznych przedstawione na rysunku \ref{fig:experiments:four} pokazują, że Kinect, mimo pełnej widoczności całej ręki, miał trudność z~poprawnym określeniem jej pozycji w~osi pionowej. Mimo to obie metody były w~stanie wyznaczyć pozycje stawów z~lepszą dokładnością niż każde z~urządzeń pomiarowych osobno.
 																				
 \begin{savenotes}
-	\begin{figure}[!htb]
+	\begin{figure}[hbp]
 		\captionsetup{singlelinecheck=off}
 		\centering
 		\begin{subfigure}[b]{0.49\textwidth}
@@ -346,7 +344,7 @@ Podobnie jak w~ćwiczeniu 1 tak i~w~ćwiczeniu 4 oba urządzenia były w~stanie 
 Wykresy estymacji położenia stawu łokciowego (rys. \ref{fig:experiments:four:elbowZ}) oraz nadgarstkowego (rys. \ref{fig:experiments:four:wristZ}) pozwalają zaobserwować wpływ stabilności pomiarów jednego stawu na drugi. Jest to szczególnie widoczne w~wykresie metody Kalkbrennera, gdzie amplituda drgań pozycji nadgarstka jest widocznie większa niż w~przypadku drgań łokcia. 
 																						
 \begin{savenotes}
-	\begin{figure}[!htb]
+	\begin{figure}[hbp]
 		\centering
 		\begin{subfigure}[b]{0.65\textwidth}
 			\centering
@@ -369,18 +367,12 @@ Wykresy estymacji położenia stawu łokciowego (rys. \ref{fig:experiments:four:
 																								
 Ćwiczenia wykonywane w~ramach eksperymentów miały za zadanie sprawdzić działanie metody autora niniejszej pracy, a~także metody Kalkbrennera w~sytuacji, gdy jeden z~czujników przestaje być wiarygodny oraz kiedy otrzymywane dane są degradowane w~czasie. Dla kontrastu weryfikacja dokładności porównywanych metod, dokonana została także na bazie ćwiczenia, które dla obu urządzeń pomiarowych może być nazywane neutralnym (ćwiczenie 1).\\
 																								
-Porównane ze sobą zostały 3 wartości wyznaczone przez dwie metody: metodę Kalkbrennera i~metodę łączącą dane opartą o~obroty kości. Wartościami porównywanymi były: położenie stawu łokciowego, położenie stawu nadgarstkowego oraz kąt zgięcia ręki w~łokciu ($\beta$). Błąd oszacowania pozycji stawów w~przestrzeni może być wykorzystany jako wskaźnik na ile dana metoda mogłaby być wykorzystana tam gdzie dochodzi do interakcji pomiędzy estymowanym modelem a~otoczeniem. Jako przykład można podać środowisko wirtualne, w~którym znajdują się obiekty którymi można manipulować. Każdy taki obiekt ma swoje ściśle określone położenie w~przestrzeni, a~estymacja pozycji stawów jest niezędna żeby określić czy doszło już do interakcji z~takim obiektem czy nie.
+Porównane ze sobą zostały 3 wartości wyznaczone przez dwie metody: metodę Kalkbrennera i~metodę łączącą dane opartą o~obroty kości. Wartościami porównywanymi były: położenie stawu łokciowego, położenie stawu nadgarstkowego oraz kąt zgięcia ręki w~łokciu ($\beta$). Błąd oszacowania pozycji stawów w~przestrzeni (wz. \ref{eq:experiments:average}) może być wykorzystany jako wskaźnik na ile dana metoda mogłaby być wykorzystana tam gdzie istotne może być wykrycie czy dochodzi do interakcji pomiędzy estymowanym modelem a~otoczeniem. Jako przykład można podać środowisko wirtualne, w~którym znajdują się obiekty którymi można manipulować. Każdy taki obiekt ma swoje ściśle określone położenie w~przestrzeni, a~estymacja pozycji stawów jest niezędna żeby określić czy doszło już do interakcji z~takim obiektem czy nie.
 																								 
 Trzecia wartość -- kąt zgięcia ręki w~łokciu ($\beta$) -- jest uniezależniona od przyjętych długości kości i~ewentualnych błędów w~pomiarach tych długości. Określa ona wzajemną orientację pomiędzy kością przedramienia a~ramieniem w~zakresie stopnia swobody stawu łokciowego. Ona też pozwala na zweryfikowanie badanych metod śledzenia na potrzeby kontroli zakresu ruchu stawu łokciowego, co może być przydatne w~procesie rehabilitacji ruchowej. \\ 
-																								
-Wykresy z~rysunków \ref{fig:experiments:elbow:summary}, \ref{fig:experiments:wrist:summary} oraz \ref{fig:experiments:angle:summary} pokazują podsumowanie porównania uśrednionych wartości błędu uzyskanych oszacowań ($\overline{RMSE}$) za pomocą metody Kalkbrennera oraz metody autora tej pracy.
-%([TODO] teraz czuje, że metoda powinna mieć jakiś skrót, np. od angielskiej jej nazwy, którą pewnie trzeba wymyśleć - Oriented-based Hybrid Motion Tracking -> OHMT => najbliżej jest MOTH tylko jak? / Jest jeszcze HOMT -> Hybrid, Oriented-based Motion Tracking tylko ten skrótowiec występuje też w~slangu: http://www.urbandictionary.com/define.php?term=H.O.M.T. ). 
-Widać na~nich poprawę w~wyznaczaniu położenia stawu łokciowego do 18\%, nadgarstowego do 16\% oraz zdolności szacowania kąta zgięcia ręki w~łokciu do 11\%. Z~przedstawionych wyników wynika większa poprawa w~wyznaczaniu pozycji łokcia niż w~przypadku nadgarstka. Spowodowane jest to kumulowaniem się błędów własnych estymacji położenia nadgarstka, jak i~błędów estymacji położenia łokcia. Jest to cecha charakterystyczna stosowania hierarchicznego modelu ciała człowieka. Dla przyjętej hierarchicznej reprezentacji układu kostnego postaci, czym badany staw jest bardziej odległy od punktu początkowego (korzenia) tym dokładność estymacji jego położenia jest mniejsza i~mniejsze są możliwości jej poprawy.\\
-																								
-Na wykresie z~rysunku \ref{fig:experiments:angle:summary}, reprezentującym szacowanie kąta zgięcia ręki w~łokciu, widać mniejszą poprawę błędu szacowania pomiędzy obiema badanymi metodami, niż miało to miejsce w~przypadku szacowania pozycji stawów. Na tej podstawie można wyciągnąć wniosek, że obie porównywane metody: Kalkbrennera oraz autorska, w~podobny sposób są w~stanie oszacować wzajemną orientację kości przedramienia i~ramienia. Łącząc to z~wyraźnym zmniejszeniem błędu szacowania pozycji stawów przez metodę opartą na łączeniu obrotów kości i~dodatkowo wykorzystującą (w przeciwieństwie do metody Kalkbrennera) stałą wartość długości kości, można przyjać, że to właśnie przyjęte wartości długości poszczególnych segmentów modelu szkieletowego mają decydujący wpływ na błąd szacowania pozycji stawów. Poprawienie szacowania wartości kąta zgięcia ręki świadczy natomiast o~zmniejszeniu występowania drgań poszczególnych segmentów modelu szkieletowego wyznaczonego przez metodę autora tej pracy.
-																								
-\begin{savenotes}
-	\begin{figure}[!htb]
+
+			\begin{savenotes}
+	\begin{figure}[hbp]
 		\centering
 		\begin{tikzpicture}
 			\begin{axis}[
@@ -419,7 +411,7 @@ Na wykresie z~rysunku \ref{fig:experiments:angle:summary}, reprezentującym szac
 \end{savenotes}
 																										
 \begin{savenotes}
-	\begin{figure}[!htb]
+	\begin{figure}[hbp]
 		\centering
 		\begin{tikzpicture}
 			\begin{axis}[
@@ -457,9 +449,14 @@ Na wykresie z~rysunku \ref{fig:experiments:angle:summary}, reprezentującym szac
 		\label{fig:experiments:wrist:summary}
 	\end{figure}
 \end{savenotes}
-																												
+
+Wykresy z~rysunków \ref{fig:experiments:elbow:summary}, \ref{fig:experiments:wrist:summary} oraz \ref{fig:experiments:angle:summary} pokazują podsumowanie porównania uśrednionych wartości błędu uzyskanych oszacowań ($\overline{RMSE}$) za pomocą metody Kalkbrennera oraz metody autora tej pracy.
+%([TODO] teraz czuje, że metoda powinna mieć jakiś skrót, np. od angielskiej jej nazwy, którą pewnie trzeba wymyśleć - Oriented-based Hybrid Motion Tracking -> OHMT => najbliżej jest MOTH tylko jak? / Jest jeszcze HOMT -> Hybrid, Oriented-based Motion Tracking tylko ten skrótowiec występuje też w~slangu: http://www.urbandictionary.com/define.php?term=H.O.M.T. ). 
+Widać na~nich poprawę w~wyznaczaniu położenia stawu łokciowego do 18\%, nadgarstowego do 16\% oraz zdolności szacowania kąta zgięcia ręki w~łokciu do 11\%. Z~przedstawionych wyników wynika większa poprawa w~wyznaczaniu pozycji łokcia niż w~przypadku nadgarstka. Spowodowane jest to kumulowaniem się błędów własnych estymacji położenia nadgarstka, jak i~błędów estymacji położenia łokcia. Jest to cecha charakterystyczna stosowania hierarchicznego modelu ciała człowieka. Dla przyjętej hierarchicznej reprezentacji układu kostnego postaci, czym badany staw jest bardziej odległy od punktu początkowego (korzenia) tym dokładność estymacji jego położenia jest mniejsza i~mniejsze są możliwości jej poprawy.\\
+
+																															
 \begin{savenotes}
-	\begin{figure}[!htb]
+	\begin{figure}[hbp]
 		\centering
 		\begin{tikzpicture}
 			\begin{axis}[
@@ -498,3 +495,6 @@ Na wykresie z~rysunku \ref{fig:experiments:angle:summary}, reprezentującym szac
 		\label{fig:experiments:angle:summary}
 	\end{figure}
 \end{savenotes}
+
+
+Również na wykresie z~rysunku \ref{fig:experiments:angle:summary}, reprezentującym wyniki szacowania kąta zgięcia ręki w~łokciu za pomocą obu metod, widać zmniejszenie błędu wyników uzyskiwanych przez metodę opisywaną w niniejszej dysertacji. Sugeruje to, że łącząc ze sobą informacje o orientacji kości, możliwe jest dokładniejsze odtworzenie pozy, w jakiej znajduje się śledzona postać, niż ma to miejsce w przypadku łączenia informacji o pozycjach stawów. Precyzyjne oszacowanie wzajemnej orientacji pomiędzy poszczególnymi kośćmi, z jednoczesnym wykorzystaniem modelu szkieletowego, o stałych wartościach długości poszczególnych segmentów, ma bezpośrednie przełożenie na wielkość uzyskiwanego błędu. Można przyjąć, że kombinacja tych dwóch cech: łączenie ze sobą informacji o obrotach kości oraz definicja długości kości zakładająca niezmienność tych wartości, mają decydujący wpływ na błąd szacowania pozycji stawów. Jednocześnie, poprawienie szacowania wartości kąta zgięcia ręki wpływa na zmniejszenie ilości występujących drgań poszczególnych segmentów modelu szkieletowego wyznaczonego przez metodę autora tej pracy.
