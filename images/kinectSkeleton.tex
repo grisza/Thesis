@@ -1,5 +1,5 @@
 \begin{savenotes}
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
 		\scriptsize
 		\begin{tikzpicture}[scale=0.75]
@@ -9,71 +9,71 @@
 					11 & Kręgosłup      \\
 					12 & Środek barków  \\
 					13 & Głowa           \\
-																																																																																									 	
+																																																																																														 	
 					20 & Lewe biodro      \\
 					21 & Lewe kolano      \\
 					22 & Lewa kostka      \\
 					23 & Lewa stopa       \\
-																																																																																									 	
+																																																																																														 	
 					30 & Prawe biodro     \\
 					31 & Prawe kolano     \\
 					32 & Prawa kostka     \\
 					33 & Prawa stopa      \\
-																																																																																									 	
+																																																																																														 	
 					40 & Lewy bark        \\
 					41 & Lewy łokieć    \\
 					42 & Lewy nadgarstek  \\
 					43 & Lewa dłoń      \\
-																																																																																									 	
+																																																																																														 	
 					50 & Prawy bark       \\
 					51 & Prawy łokieć   \\
 					52 & Prawy nadgarstek \\
 					53 & Prawa dłoń     
-																																																																																									 	
+																																																																																														 	
 				\end{tabular} };
-																																															
+																																																		
 			\tikzset{
 				joint/.style	= {draw, very thin, circle}
 			}
-																																																
+																																																			
 			\draw  
 			node at (0,0) [joint, fill=gray!40](hipCenter){10}
-																																																
+																																																			
 			node at (-1,-1) [joint, fill=green!40](hipLeft){20}
 			node at (-1.5,-3.5) [joint, fill=green!40](kneeLeft){21}
 			node at (-1.5,-6)[joint, fill=green!40](ankleLeft){22}
 			node at (-2.5,-6.5)[joint, fill=green!40](footLeft){23}
-																																																
+																																																			
 			node at (1,-1)[joint, fill=blue!40](hipRight){30}
 			node at (1.5,-3.5)[joint, fill=blue!40](kneeRight){31}
 			node at (1.5,-6)[joint, fill=blue!40](ankleRight){32}
 			node at (2.5,-6.5)[joint, fill=blue!40](footRight){33}
-																																																
+																																																			
 			node at (0,1) [joint, fill=gray!40](spine){11}
-																																																
+																																																			
 			node at (0,4) [joint, fill=gray!40](shoulderCenter){12}
-																																																
+																																																			
 			node at (-1,3.5) [joint, fill=red!40](shoulderLeft){40}
 			node at (-1.7,1.5) [joint, fill=red!40](elbowLeft){41}
 			node at (-1.9,-0.5) [joint, fill=red!40](wristLeft){42}
 			node at (-2.4,-1.3)[joint, fill=red!40](handLeft){43}
-																																																
+																																																			
 			node  at (1,3.5) [joint, fill=yellow!40](shoulderRight){50}
 			node at (1.7,1.5) [joint, fill=yellow!40](elbowRight){51}
 			node at (1.9,-0.5) [joint, fill=yellow!40](wristRight){52}
 			node at (2.4,-1.3) [joint, fill=yellow!40](handRight){53}
-																																																
+																																																			
 			node  at (0,5.5)[joint, fill=gray!40](head){13};
-																																																
+																																																			
 			\draw
 			(head) -- (shoulderCenter)
-																																																
+																																																			
 			(shoulderCenter) -- (shoulderLeft) -- (elbowLeft) -- (wristLeft) -- (handLeft)        
 			(shoulderCenter) -- (shoulderRight) -- (elbowRight) -- (wristRight) -- (handRight)  
 			(shoulderCenter) -- (spine)
-																																																
+																																																			
 			(spine) -- (hipCenter)
-																																																
+																																																			
 			(hipCenter) -- (hipLeft) -- (kneeLeft) -- (ankleLeft) -- (footLeft)        
 			(hipCenter) -- (hipRight) -- (kneeRight) -- (ankleRight) -- (footRight);
 		\end{tikzpicture}
