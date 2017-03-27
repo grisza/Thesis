@@ -37,38 +37,38 @@ Zamieszczony w~dalszej części pracy opis budowy i~zasad działania optycznego 
 Analizowany system firmy Vicon jest systemem wielokamerowym, który wykorzystuje wyspecjalizowane kamery cyfrowe video, o~wysokiej rozdzielczości matrycy (4 MPix dla rozważanego systemu), wyposażone w~filtr przepuszczający zakres światła podczerwonego. Każda z~kamer wyposażona jest równocześnie w~kierunkowe źródło światła emitujące fale z~zakresu światła podczerwonego. System Vicon dostępny na Politechnice Łódzkiej zbudowany jest z~10 takich kamer umieszczonych dookoła pomieszczenia laboratoryjnego tak jak jest to pokazane na rysunku \ref{fig:literature:vicon:lutSetup}, gdzie elementy oznaczone IR1..10 to kamery wyposażone w~filtr podczerwony, RGB1 i~RGB2 to dwie kamery video pozwalające rejestrować tradycyjny obraz kolorowy oraz stanowisko komputerowe oznaczone jako PC. System posiada swoją funkcjonalność w~tzw. przestrzeni roboczej śledzenia (ang. \textsl{tracking volume}). Jest to przestrzeń wyznaczona przez bryły widzenia kamer. Technicznie każdy marker w~przestrzeni roboczej powinien być widoczny jednocześnie przez 3 kamery, aby możliwe było precyzyjne określenie jego pozycji. Ruchy wykonywane poza przestrzenią roboczą nie są śledzone przez system lub obarczone są błędnymi wynikami.
 
 \begin{savenotes}
-		
+			
 	\begin{figure}[h]
 		\centering	
 		\includegraphics[width=0.75\textwidth]{images/viconSetup.png}
 		\caption{Rysunek przedstawiający konfigurację sprzętową systemu Vicon dostępnego na Politechnice Łódzkiej.}
 		\label{fig:literature:vicon:lutSetup}
 	\end{figure}
-	
+		
 \end{savenotes}
 	
 Kamery wykorzystane w~systemie Vicon posiadają filtr przepuszczający jedynie fale z~zakresu światła podczerwonego, co pozwala na stosunkowo łatwe wyodrębnienie z~rejestrowanego obrazu markerów odbijających światło podczerwone. Markery są elementami pokrytymi farbą odbijającą padające na nie światło w~kierunku źródła emisji promieni. Ponieważ w~przypadku zastosowanych kamer źródło światła jest umieszczone tuż obok obiektywu, oświetlone markery stanowią najjaśniejsze punkty na rejestrowanym obrazie. Na rysunku \ref{fig:literature:qualisys:markers} zaprezentowany został przykładowy zestaw markerów wykorzystywanych w~omawianym systemie śledzenia ruchu, natomiast na rysunku \ref{fig:literature:vicon:markers} widać aktora w~kombinezonie, przy którym owe markery są przymocowane. Markery wykorzystywane są do oznaczenia części ciała człowieka, których ruch będzie śledzony.
 	
 \begin{savenotes}
-		
+			
 	\begin{figure}[h]
 		\centering	
 		\includegraphics[width=0.65\textwidth]{images/markers-suits-600x450.png}
 		\caption[Zestaw znaczników pasywnych w~systemie Vicon umieszczonych na ciele aktora w~trakcie sesji śledzenia ruchu]{Zestaw znaczników pasywnych w~systemie Vicon umieszczonych na ciele aktora w~trakcie sesji śledzenia ruchu \footfullcite{footnote:ViconMarkersSet}}
 		\label{fig:literature:vicon:markers}
 	\end{figure}
-	
+		
 \end{savenotes}
 		
 \begin{savenotes}
-		
+			
 	\begin{figure}[h]
 		\centering	
 		\includegraphics[width=0.65\textwidth]{images/super-spherical-markers-hero.jpg}
 		\caption[Pasywne markery wykorzystywane w~optycznych systemach śledzenia ruchu]{Pasywne markery wykorzystywane w~optycznych systemach śledzenia ruchu\footfullcite{footnote:QulisysMarkers}}		
 		\label{fig:literature:qualisys:markers}
 	\end{figure}
-	
+		
 \end{savenotes}
 			
 Oprócz kamer i~markerów, istotnym elementem optycznego systemu śledzenia ruchu jest oprogramowanie obsługujące system. Jest ono odpowiedzialne za synchroniczną analizę sekwencji obrazów zarejestrowanych przez kamery tak, aby możliwe było określenie położenia każdego z~markerów w~przestrzeni trójwymiarowej układu odniesienia. W~przypadku systemu Vicon, dostępnego na Politechnice Łódzkiej, rekonstrukcja przestrzeni trójwymiarowej odbywa się na podstawie sekwencji obrazów z~maksymalnie 10 kamer. Aby możliwe było wyznaczenie położenia markera w~przestrzeni trójwymiarowej musi być on \textsl{widziany} przez minimum 3 kamery w~tym samym czasie. Pozwala to na precyzyjne wyznaczenie jego wszystkich współrzędnych za pomocą triangulacji. Jednakże zbudowanie profesjonalnego systemu śledzenia ruchu złożonego jedynie z~3 kamer byłoby niewystarczające ze względu na możliwość przysłonięcia markerów przez części ciała w~trakcie wykonywania ruchu. Zwiększenie liczby kamer pozwala na obserwowanie sceny przez większą ich liczbę, co zwiększa prawdopodobieństwo, że w~trakcie nawet złożonych ruchów przynajmniej 3 kamery zarejestrują każdy z~markerów. Dodatkowo redundancja danych, dla lepiej widocznych markerów, sprzyja zwiększeniu dokładności wyznaczania ich pozycji. Oczywiście może się zdarzyć, że pomimo zastosowania wielu kamer marker zostanie zauważony przez mniej niż 3 kamery. W~takiej sytuacji rolą oprogramowania jest oszacowanie przybliżonego położenia danego markera, przykładowo na podstawie jego relacji do położenia innych markerów i~ich trajektorii ruchu.\\
@@ -98,14 +98,14 @@ System śledzenia ruchu człowieka, zaimplementowany w~kontrolerze Microsoft Kin
 			
 W swoim artykule Brooks i~Czarowicz \cite{Brooks2012} porównują podstawowe cechy systemów Organic Motion oraz systemu wbudowanego w~kontroler Microsoft Kinect v1. W~tabeli \ref{tab:literature:markerless:comparison} znajduje się skrócone porównanie tych dwóch systemów. 
 			
-\begin{table}[!htp]
+\begin{table}[h]
 	\caption{Porównanie cech charakterystycznych systemu Organic Motion oraz systemu wbudowanego w~kontroler Microsoft Kinect v1}
 	\label{tab:literature:markerless:comparison}
 	\footnotesize
 	\noindent
 	\centering
 	\begin{tabular}{|l|c|c|}
-																								
+																										
 		\hline 
 		                                 & \textbf{Kinect} & \textbf{Organic Motion} \\ 
 		\hline 
@@ -283,14 +283,14 @@ Przykładem sposobu wyznaczania położenia stawu na podstawie wzajemnej relacji
 			\caption{Położenie markerów}
 			\label{fig:literature:vicon:pelvisPlacementA}
 		\end{subfigure}
-																										
+																												
 		\begin{subfigure}[b]{0.45\textwidth}
 			\centering
 			\includegraphics[width=\linewidth]{images/pelvisEstimationB.jpg}		
 			\caption{Położenie wyznaczonego stawu kości miedniczej}
 			\label{fig:literature:vicon:pelvisPlacementB}
 		\end{subfigure}
-																									
+																											
 		\caption[Wyznaczenie położenia kości miedniczej na potrzeby modelu szkieletowego na podstawie położenia markerów w~systemie Vicon]{Rysunek przedstawiający wyznaczenie położenia kości miedniczej na potrzeby modelu szkieletowego na podstawie położenia markerów w~systemie Vicon\cite{ViconModelingInstruction}}
 		\label{fig:literature:vicon:pelvisPlacement}
 	\end{figure}
@@ -397,14 +397,14 @@ Reprezentacja orientacji obiektu za pomocą kątów Eulera jest najbardziej intu
 			\caption[Kąty Eulera w relatywnym układzie współrzędnych]{Relatywny \footfullcite{footnote:nasa2016}}
 			\label{fig:appx:rot:eulerRel}
 		\end{subfigure}
-																																		
+																																				
 		\begin{subfigure}[b]{0.45\textwidth}
 			\centering
 			\includegraphics[width=\linewidth]{images/eulerAbsolute.png}		
 			\caption[Kąty Eulera w absolutnym układzie współrzędnych]{Absolutny \footfullcite{footnote:Baker2015}}
 			\label{fig:appx:rot:eulerAbs}
 		\end{subfigure}
-																																	
+																																			
 		\caption{Kąty Eulera względem przyjętego układu współrzędnych}
 		\label{fig:appx:rot:euler}
 	\end{figure}
@@ -640,21 +640,21 @@ Kinect przez ponad 5 lat dostępności na rynku jest obiektem badań związanych
 			\caption{Wewnątrz pomieszczenia}
 			\label{fig:characteristics:kinect:depthMapA}
 		\end{subfigure}
-				\hfill																																				
+		\hfill																																				
 		\begin{subfigure}[b]{0.3\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{images/kinecOutdoorShade.png}		
 			\caption{Na zewnątrz pomieszczenia w~cieniu}
 			\label{fig:characteristics:kinect:depthMapB}
 		\end{subfigure}
-			\hfill																																
+		\hfill																																
 		\begin{subfigure}[b]{0.3\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{images/kinecOutdoorFull.png}		
 			\caption{Na zewnątrz pomieszczenia w~świetle słonecznym}
 			\label{fig:characteristics:kinect:depthMapC}
 		\end{subfigure}
-																																							
+																																									
 		\caption[Mapa głębi ręki w~różnych warunkach oświetleniowych]{Mapa głębi ręki w~różnych warunkach oświetleniowych\cite{Suarez2012}.}
 		\label{fig:characteristics:kinect:depthMap}
 	\end{figure}
@@ -724,7 +724,7 @@ Wykres przedstawiony na rysunku \ref{fig:characteristics:kinect:kinectRightHandE
 			\caption{Stan śledzenia stawów podczas obrotu ciała \emph{(T-pose)} względem kontrolera}
 			\label{fig:characteristics:kinect:bodyRotationChart}
 		\end{subfigure}
-																																												
+																																														
 		\begin{subfigure}[b]{0.8\textwidth}
 			\centering
 			\includegraphics[width=\linewidth]{images/kinectRightHandElbowAngle.png}		
@@ -796,7 +796,7 @@ Na podstawie pomiarów uzyskanych w~trakcie eksperymentu opisanego powyżej, mac
 					ymajorgrids=true,
 					grid style=dashed,
 				]
-																																																																						
+																																																																										
 				\addplot+[
 					only marks,
 					scatter,
@@ -806,7 +806,7 @@ Na podstawie pomiarów uzyskanych w~trakcie eksperymentu opisanego powyżej, mac
 				coordinates {
 					(0.85,-0.10)(1.00,-0.07)(1.20,-0.06)(1.40,-0.04)(1.60,-0.03)(1.80,-0.02)(1.96, 0.00)(2.08, 0.00)(2.20, 0.00)(2.32, 0.00)(2.50, 0.02)(2.70, 0.04)(2.90, 0.06)(3.10, 0.07)(3.35, 0.12)
 				};
-																																																																						
+																																																																										
 				\addplot [
 					dashed,
 					domain=0.5:3.8, 
@@ -817,7 +817,7 @@ Na podstawie pomiarów uzyskanych w~trakcie eksperymentu opisanego powyżej, mac
 				\legend{$y = 0.02x^3 - 0.11x^2 + 0.27x - 0.25$}
 			\end{axis}
 		\end{tikzpicture}	
-																																																		
+																																																				
 		\caption[Przybliżenie dokładności pomiaru głębi względem odległości śledzonej postaci od kontrolera Kinect]{Przybliżenie dokładności pomiaru głębi względem odległości śledzonej postaci od kontrolera Kinect [żródło własne].}
 		\label{fig:characteristics:kinect:distanceAccuracy}
 	\end{figure}
@@ -831,7 +831,7 @@ Należy zauważyć, że zaprezentowana na wykresie \ref{fig:characteristics:kine
 																																									
 Urządzenia inercyjne są czujnikami, których działanie opiera się na obserwacji i~mierzeniu wielkości fizycznych, jakie działają na te czujniki w~trakcie ruchu oraz w~spoczynku. Wyróżniamy dwa podstawowe czujniki inercyjne: akcelerometr mierzący przyspieszenia liniowe oraz żyroskop mierzący prędkości kątowe. Choć urządzenia te są znane i~stosowane od dawna, dopiero z~chwilą ich implementacji w~formie mikroukładów elektromechanicznych (MEMS -- \emph{microelectromechanical systems}) stały się one powszechnie dostępne i~stosowane na przukład w~telefonach, czy systemach nawigacji wewnątrz budynków (INS -- \emph{indoor navigation systems}). W~badaniach przedstawionych w~niniejszej pracy, wykorzystany został układ o~symbolu MPU-6050 firmy InvenSense integrujący oba te czujniki (tabela \ref{tab:characteristics:mpu:spec} zawiera podstawowe parametry pracy tego układu). Układ ten oprócz wcześniej wspomnianych czujników posiada wbudowany termometr oraz procesor ruchu pozwalający na przetworzenie danych pomiarowych i~udostępnienie ich w~postaci kwaternionu reprezentującego orientację układu w~przestrzeni. Algorytm wyznaczania orientacji układu, zaimplementowany w~tym procesorze, nie został jednak opublikowany w~żadnej dokumentacji, w~związku z~czym funkcjonalność ta nie była wykorzystywana w~badaniach.
 																																									
-\begin{table}[!htp]
+\begin{table}[h]
 	\caption[Zestawienie podstawowych parametrów pracy układu MPU-6050]{Zestawienie podstawowych parametrów pracy układu MPU-6050\footfullcite{footnote:ivenSense:MPU6050}}
 	\label{tab:characteristics:mpu:spec}
 	\noindent
@@ -879,7 +879,7 @@ Akcelerometr mierzy siłę działającą na niego w~dowolnym z~trzech kierunków
 			\caption[Struktura wewnętrzna akcelerometru]{Struktura wewnętrzna \footfullcite{footnote:memsAccStructure2016}}
 			\label{fig:characteristics:imu:acc:memsA}
 		\end{subfigure}
-																																																		
+																																																				
 		\begin{subfigure}[b]{0.45\textwidth}
 			\centering
 			\includegraphics[width=\linewidth]{images/memsAccelerometerIdea.png}		
@@ -945,7 +945,7 @@ Budowa wykorzystanego żyroskopu, podobnie jak akcelerometru, opiera się na uk�
 			\caption[Struktura wewnętrzna żyroskopu]{Struktura wewnętrzna \footfullcite{footnote:memsGyroStructure2016}}
 			\label{fig:characteristics:imu:gyro:memsA}
 		\end{subfigure}
-																																																				
+																																																						
 		\begin{subfigure}[b]{0.45\textwidth}
 			\centering
 			\includegraphics[width=\linewidth]{images/memsGyroscopeIdea.jpg}		

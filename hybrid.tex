@@ -7,41 +7,7 @@ Proces łączenia danych uzyskanych z~kontrolera Kinect i~z czujników inercyjny
 	\begin{figure}[h]
 		\begin{minipage}{.5\textwidth}
 			\centering	
-			\scalebox{0.8}{
-				\begin{tikzpicture} [
-						auto,
-						decision/.style = { diamond, draw=black, thick, fill=black!20,
-							text width=5em, text badly centered,
-							inner sep=1pt, rounded corners },
-						block/.style    = { rectangle, draw=black, thick, 
-							fill=black!20, text width=10em, text centered,
-							rounded corners, minimum height=2em },
-						line/.style     = { draw, thick, ->, shorten >=2pt },
-					]
-					% Define nodes in a~matrix
-					\matrix [column sep=5mm, row sep=10mm] {
-						\node [block] (block1) {Inicjalizacja czujników inercyjnych}; \\                    
-						\node [block] (block2) {Inicjalizacja filtrów łączących dane z~akcelerometru i~żyroskopu}; \\
-						\node (null1) {};  \\
-						\node [block] (block3) {Odszumienie danych z~czujników inercyjnych oraz z~kontrolera Kinect}; \\
-						\node [decision] (inSync) {Czy dane zostały zsynchronizowane?}; \\
-						\node [block] (block4) {Synchronizacja czasowa sygnałów z~czujników inercyjnych oraz z~kontrolera Kinect}; \\
-						\node [block] (block5) {Łączenie danych z~czujników inercyjnych oraz z~kontrolera Kinect}; \\
-						\node [block] (block6) {Oszacowanie położenia stawów}; \\                    
-					};
-					% connect all nodes defined above
-					\begin{scope} [every path/.style=line]
-						\path (block1)        --    (block2);
-						\path (block2)      --   (block3);
-						\path (block3)      --    (inSync);
-						\path (inSync)  --++  (-3,0) node [near start] {Tak} |- (block5);
-						\path (inSync)  --++  (3,0) node [near start] {Nie} |- (block4);
-						\path (block4)      --    (block5);
-						\path (block5)      --    (block6);
-						\path (block6)      --++  (4,0) node [near start] {} |-  (null1);
-					\end{scope}			
-				\end{tikzpicture}
-			}	
+			\input{images/methodStepsAlgorithm}
 			\caption{Sekwencja kroków przetwarzania danych w~omawianej metodzie łączenia danych.}
 			\label{fig:hybrid:stepsSequence}
 		\end{minipage}
@@ -83,7 +49,7 @@ Moduł inercyjny zbudowany został z~czujników inercyjnych (IMU1 i IMU2): akcel
 		
 \input{images/arduino}
 		
-\begin{table}[!htp]
+\begin{table}[h]
 	\centering
 	\caption{Współczynniki konwersji bezpośrednich pomiarów akcelerometru w~zależności od zakresu pracy}
 	\label{tab:hybrid:accRangeFactors} 
@@ -96,7 +62,7 @@ Moduł inercyjny zbudowany został z~czujników inercyjnych (IMU1 i IMU2): akcel
 		$\pm16g$                    & $2048$         \\ \hline
 	\end{tabular}
 \end{table}
-\begin{table}[!htp]
+\begin{table}[h]
 	\centering
 	\caption{Współczynniki konwersji bezpośrednich pomiarów żyroskopu w~zależności od zakresu pracy}	
 	\label{tab:hybrid:gyroRangeFactors}	
@@ -129,10 +95,10 @@ Kalibracja czujników inercyjnych przebiega dwuetapowo w~następującej kolejno�
 	\item {Inicjalizacja filtru Madgwicka wyznaczającego orientację sensora na podstawie danych z~czujników inercyjnych.}
 \end{enumerate}
 		
-Krok pierwszy służy do wyznaczenia macierzy współczynników korekty ($cor = [cor_A \quad cor_G]^T = [[c_{AX},c_{AY},c_{AZ}]\quad[c_{GX},c_{GY},c_{GZ}]]^T $) pomiarów spoczynkowych ($G, A$) dla każdego modułu inercyjnego indywidualnie. W~trakcie tego kroku kalibrowane czujniki należy umieścić możliwie jak najbardziej poziomo tak, żeby oś $Z$ sensora była równoległa do kierunku działania siły grawitacji. Dla czujników znajdujących się w~takim właśnie położeniu można określić jakich wartości pomiarów należy oczekiwać ($A_0 = [0,0,1]$ dla akcelerometru oraz $G_0 = [0,0,0]$ dla żyroskopu). W~praktyce jednak, ze względu na zaszumienie danych i~brak możliwości całkowitego ich oczyszczenia, wartości idealne nie są osiągalne. W~związku z~tym, algorytm odpowiedzialny za kalibrację działa iteracyjnie ($s$ -- indeks iteracji) tak długo, dopóki jakikolwiek element macierzy średnich błędów pomiarów czujników inercyjnych ($[\bar{A}\quad \bar{G}]^T = [[\bar{a_x},\bar{a_y},\bar{a_z}]^T\quad[\bar{g_x},\bar{g_y},\bar{g_z}]^T]^T$) jest większy od elementu o~tym samym indeksie w~macierzy akceptowalnych błędów pomiaru ($[A_{th}\quad G_{th}]^T = [[a_{x,th},a_{y,th},a_{z,th}]^T\quad[g_{x,th},g_{y,th},g_{z,th}]^T]^T $, stop nastepuje gdy prawdą jest następujący warunek: $\bar{a_x}\leq a_{x,th} \land \bar{a_y} \leq a_{y,th} \land \bar{a_z} \leq a_{z,th} \land \bar{g_x} \leq g_{x,th} \land \bar{g_y} \leq g_{y,th} \land \bar{g_z} \leq g_{z,th}$). W rezultacie elementy macierzy $cor$ pozwalają uzyskać pomiary w~każdej z~osi z~założoną dokładnością. Przyjmując, że macierz $[A_0\quad G_0]$ zawiera oczekiwane wartości pomiarów dla akcelerometru i~żyroskopu, a~$[A\quad G]_{s,i}$ to $n$ kolejnych pomiarów obu czujników dla iteracji $s$, średnie błędy pomiarów wyznaczone są zgodnie ze wzorem \ref{eq:hybrid:IMUCalibration:1}, natomiast macierz współczynników korekty $cor$ wyznaczona jest na podstawie wzoru \ref{eq:hybrid:IMUCalibration:2}. Wyznaczone w~ten sposób współczynniki $c_{AX},c_{AY},c_{AZ},c_{GX},c_{GY},c_{GZ}$ wykorzystywane są następnie do ciągłej korekty pomiarów uzyskiwanych z~akcelerometrów i~żyroskopów. Kalibracja modułu zajmuje zwykle około 10 iteracji, natomiast zdarzały się sytuacje, w~których trwało to ponad 2 razy dłużej. Było to zazwyczaj spowodowane poruszeniem modułu w~trakcie kalibracji.
+Krok pierwszy służy do wyznaczenia macierzy współczynników korekty ($cor = [cor_A \quad cor_G]^T = [[c_{AX},c_{AY},c_{AZ}]\quad[c_{GX},c_{GY},c_{GZ}]]^T $) pomiarów spoczynkowych ($G, A$) dla każdego modułu inercyjnego indywidualnie. W~trakcie tego kroku kalibrowane czujniki należy umieścić możliwie jak najbardziej poziomo tak, żeby oś $Z$ sensora była równoległa do kierunku działania siły grawitacji. Dla czujników znajdujących się w~takim właśnie położeniu można określić jakich wartości pomiarów należy oczekiwać ($A_0 = [0,0,1]$ dla akcelerometru oraz $G_0 = [0,0,0]$ dla żyroskopu). W~praktyce jednak, ze względu na zaszumienie danych i~brak możliwości całkowitego ich oczyszczenia, wartości idealne nie są osiągalne. W~związku z~tym, algorytm odpowiedzialny za kalibrację działa iteracyjnie ($s$ -- indeks iteracji) tak długo, dopóki jakikolwiek element macierzy średnich błędów pomiarów czujników inercyjnych ($[\overline{A}\quad \overline{G}]^T = [[\overline{a_x},\overline{a_y},\overline{a_z}]^T\quad[\overline{g_x},\overline{g_y},\overline{g_z}]^T]^T$) jest większy od elementu o~tym samym indeksie w~macierzy akceptowalnych błędów pomiaru ($[A_{th}\quad G_{th}]^T = [[a_{x,th},a_{y,th},a_{z,th}]^T\quad[g_{x,th},g_{y,th},g_{z,th}]^T]^T $, stop nastepuje gdy prawdą jest następujący warunek: $\overline{a_x}\leq a_{x,th} \land \overline{a_y} \leq a_{y,th} \land \overline{a_z} \leq a_{z,th} \land \overline{g_x} \leq g_{x,th} \land \overline{g_y} \leq g_{y,th} \land \overline{g_z} \leq g_{z,th}$). W rezultacie elementy macierzy $cor$ pozwalają uzyskać pomiary w~każdej z~osi z~założoną dokładnością. Przyjmując, że macierz $[A_0\quad G_0]$ zawiera oczekiwane wartości pomiarów dla akcelerometru i~żyroskopu, a~$[A\quad G]_{s,i}$ to $n$ kolejnych pomiarów obu czujników dla iteracji $s$, średnie błędy pomiarów wyznaczone są zgodnie ze wzorem \ref{eq:hybrid:IMUCalibration:1}, natomiast macierz współczynników korekty $cor$ wyznaczona jest na podstawie wzoru \ref{eq:hybrid:IMUCalibration:2}. Wyznaczone w~ten sposób współczynniki $c_{AX},c_{AY},c_{AZ},c_{GX},c_{GY},c_{GZ}$ wykorzystywane są następnie do ciągłej korekty pomiarów uzyskiwanych z~akcelerometrów i~żyroskopów. Kalibracja modułu zajmuje zwykle około 10 iteracji, natomiast zdarzały się sytuacje, w~których trwało to ponad 2 razy dłużej. Było to zazwyczaj spowodowane poruszeniem modułu w~trakcie kalibracji.
 		
 \begin{equation}
-	\begin{bmatrix} \bar{A} \\ \bar{G} \end{bmatrix}_s =
+	\begin{bmatrix} \overline{A} \\ \overline{G} \end{bmatrix}_s =
 	\begin{cases}
 		\frac{1}{n}\sum_{i=1}^{n}{\begin{bmatrix}A \\ G\end{bmatrix}_{s,i}} & s = 1\\
 		\frac{1}{n}\sum_{i=1}^{n}{\begin{bmatrix}A \\ G\end{bmatrix}_{s,i} - \begin{bmatrix}cor_A\\ cor_G\end{bmatrix}_{s-1}} &  s > 1
@@ -144,12 +110,19 @@ Krok pierwszy służy do wyznaczenia macierzy współczynników korekty ($cor = 
 	\footnotesize
 	cor_s = \begin{bmatrix}cor_A\\ cor_G\end{bmatrix}_s =
 	\begin{cases}
-		\frac{1}{8}\left(\begin{bmatrix}A_0                                                                          \\ G_0\end{bmatrix} - \begin{bmatrix}\bar{A}\\ \bar{G}\end{bmatrix}_1\right) & s = 1\\
-		cor_{s-1} - diag(\frac{1}{a_{x,th}},\frac{1}{a_{y,th}},\frac{1}{a_{z,th}},\frac{1}{g_{x,th}},\frac{1}{g_{y,th}},\frac{1}{g_{z,th}}) \left(\begin{bmatrix}A_0 \\ G_0\end{bmatrix} - \begin{bmatrix}\bar{A}\\ \bar{G}\end{bmatrix}_1\right) & s > 1
+		\frac{1}{8}\left(\begin{bmatrix}A_0                                                                                                                          \\ G_0\end{bmatrix} - \begin{bmatrix}\overline{A}\\ \overline{G}\end{bmatrix}_1\right) & s = 1\\
+		cor_{s-1} - diag(\frac{1}{a_{x,th}},\frac{1}{a_{y,th}},\frac{1}{a_{z,th}},\frac{1}{g_{x,th}},\frac{1}{g_{y,th}},\frac{1}{g_{z,th}}) \left(\begin{bmatrix}A_0 \\ G_0\end{bmatrix} - \begin{bmatrix}\overline{A}\\ \overline{G}\end{bmatrix}_n\right) & s > 1
 	\end{cases}
 	\label{eq:hybrid:IMUCalibration:2}
 \end{equation}
 		
+
+	\begin{figure}[h]
+		
+			\input{images/calibrationAlgorithm.tex}
+	\end{figure}
+
+
 Kolejnym krokiem jest inicjalizacja filtru Madgwicka łączącego dane z~czujników inercyjnych w~celu wyznaczenia ich orientacji w~przestrzeni. Łączenie to ma na celu ograniczenie dryfu żyroskopu za pomocą pomiarów akcelerometru, a~następnie wyznaczenie orientacji przestrzennej modułu inercyjnego. W~literaturze najczęściej spotykanym filtrem wykorzystywanym do tego celu jest filtr Kalmana \cite{Sasiadek2000, Sabatini2011, Mau2005, Qingming2014} (opis filtrów Kalmana znajduje się w~dodatku \ref{chap:appx:filters}). W~roku 2010 Sebastian Madgwick opublikował raport ze swoich badań, w~którym przedstawił wzór autorskiego filtru łączącego dane z~akcelerometru i~żyroskopu oraz wariant uzupełniony o~dane z~magnetometru,  przedstawiający orientację urządzenia pomiarowego w chwili $t$, zbudowanego z~tych czujników, w~postaci kwaternionów \cite{Madgwick2010, Madgwick2011} ($Q_t^I$). W~przytoczonych pracach opublikowane zostały także wyniki testów porównujących zaproponowany filtr z~filtrem Kalmana, z~których wynika, że filtr Madgwicka osiąga lepsze wyniki niż filtr Kalmana w~wyznaczaniu orientacji przestrzennej na podstawie pomiarów z~akcelerometru, żyroskopu i~opcjonalnie z~magnetometru. W~opisywanej w~tym rozdziale autorskiej hybrydowej metodzie śledzenia ruchu kończyn człowieka, wykorzystany został filtr Madgwicka ($m(\ldots)$) opisany wzorem \ref{eq:hybrid:magwickFormula}. 
 		
 \begin{equation}
@@ -182,7 +155,7 @@ Wyznaczając orientację przestrzenną modułu inercyjnego zbudowanego jedynie z
 		
 \begin{savenotes}
 	\begin{figure}[h]
-													
+																			
 		\centering 
 		\includegraphics[width=0.75\textwidth]{images/imumeasuredAngles.png}
 		\caption{Wykres przedstawiający uśrednione wartości oszacowania kąta obrotu wokół osi $X$ i~$Y$ za pomocą modułu inercyjnego}
@@ -195,7 +168,7 @@ Wyznaczając orientację przestrzenną modułu inercyjnego zbudowanego jedynie z
 		\includegraphics[width=0.75\textwidth]{images/imuDrift.png}
 		\caption{Wykres przedstawiający dryf oszacowania kąta obrotu modułu inercyjnego wokół osi $Z$}
 		\label{fig:hybrid:imu:drift}
-														
+																				
 	\end{figure}
 \end{savenotes}
 						
@@ -309,10 +282,10 @@ Rysunek \ref{fig:handAxes} przedstawia układ współrzędnych wraz z~obrotami o
 \end{savenotes}
 												
 Określenie czy oszacowania kątów, uzyskane za pomocą kontrolera Kinect, są wystarczającej jakości do łączenia ich z~oszacowaniami kątów uzyskanymi z~czujników inercyjnych, wykonywane jest każdorazowo na podstawie kryteriów związanych z~realizowanym ruchem. \\
-Pierwszym kryterium branym pod uwagę jest obrót całej sylwetki względem kamery, liczony jako kąt $\alpha$ pomiędzy linią barków a~kamerą w~płaszczyźnie $X$--$Z$ (rys. \ref{fig:characteristics:kinect:bodyRotationAngle}) zgodnie ze wzorem \ref{eq:characteristics:kinect:bodyRotationAngle}. Na podstawie zbadanych wcześniej charakterystyk obu urządzeń wiadomo, że dane które można wiarygodnie wykorzystać do łączenia są możliwe do uzyskania tylko gdy sylwetka nie jest obrócona o~więcej niż $50\degree$. Oprócz wartości kąta obrotu sylwetki brane jest także pod uwagę odchylenie standardowe estymacji tego obrotu. Przyjmując, że $\alpha[]$ to zbiór wartości oszacowań kąta obrotu sylwetki z~ostatnich $3s$ (ok. 90 elementów w~zbiorze) a~$\bar{\alpha}$ to średnia arytmetyczna elementów w~tym zbiorze, wówczas odchylenie standardowe $\sigma_\alpha$ definiuje wzór \ref{eq:stdDev}.
+Pierwszym kryterium branym pod uwagę jest obrót całej sylwetki względem kamery, liczony jako kąt $\alpha$ pomiędzy linią barków a~kamerą w~płaszczyźnie $X$--$Z$ (rys. \ref{fig:characteristics:kinect:bodyRotationAngle}) zgodnie ze wzorem \ref{eq:characteristics:kinect:bodyRotationAngle}. Na podstawie zbadanych wcześniej charakterystyk obu urządzeń wiadomo, że dane które można wiarygodnie wykorzystać do łączenia są możliwe do uzyskania tylko gdy sylwetka nie jest obrócona o~więcej niż $50\degree$. Oprócz wartości kąta obrotu sylwetki brane jest także pod uwagę odchylenie standardowe estymacji tego obrotu. Przyjmując, że $\alpha[]$ to zbiór wartości oszacowań kąta obrotu sylwetki z~ostatnich $3s$ (ok. 90 elementów w~zbiorze) a~$\overline{\alpha}$ to średnia arytmetyczna elementów w~tym zbiorze, wówczas odchylenie standardowe $\sigma_\alpha$ definiuje wzór \ref{eq:stdDev}.
 												
 \begin{equation}
-	\sigma_\alpha = \sqrt{\frac{1}{n}\sum_{i=1}^{n}{(\alpha[i] - \bar{\alpha})^2}}
+	\sigma_\alpha = \sqrt{\frac{1}{n}\sum_{i=1}^{n}{(\alpha[i] - \overline{\alpha})^2}}
 	\label{eq:stdDev}
 \end{equation}
 												
@@ -321,10 +294,10 @@ Branie pod uwagę zarówno wartości estymacji obrotu sylwetki wraz z~odchylenie
 \begin{savenotes}
 	\begin{figure}[h]
 		\centering
-																												
+																																		
 		\includegraphics[width=0.75\textwidth]{images/kinectRotationStdDev.png}
 		\caption{Odchylenie standardowe estymacji kąta obrotu postaci względem Kinecta}
-																											
+																																	
 		\label{fig:hybrid:kinect:kinectRotationVariance}
 	\end{figure}
 \end{savenotes}
@@ -354,7 +327,7 @@ gdzie:
 			\caption{Staw śledzony ze statusem \emph{Tracked}}
 			\label{fig:hybrid:kinect:hpfNotOccluded}
 		\end{subfigure}	
-																					
+																											
 		\begin{subfigure}[b]{0.79\textwidth}
 			\centering
 			\includegraphics[width=\linewidth]{images/Fig10.png}
