@@ -5,30 +5,30 @@
 			text width=5em, text badly centered,
 			inner sep=1pt, rounded corners },
 		block/.style    = { rectangle, draw=black, thick, 
-			fill=black!20, text width=10em, text centered,
+			fill=black!20, text width=13em, text centered,
 			rounded corners, minimum height=2em },
 		line/.style     = { draw, thick, ->, shorten >=2pt },
 	]
 	% Define nodes in a~matrix
-	\matrix [column sep=5mm, row sep=10mm] {
+	\begin{scope} 
 		\node [block] (block1) {Inicjalizacja czujników inercyjnych}; \\                    
-		\node [block] (block2) {Inicjalizacja filtrów łączących dane z~akcelerometru i~żyroskopu}; \\
-		\node (null1) {};  \\
-		\node [block] (block3) {Odszumienie danych z~czujników inercyjnych oraz z~kontrolera Kinect}; \\
-		\node [decision] (inSync) {Czy dane zostały zsynchronizowane?}; \\
-		\node [block] (block4) {Synchronizacja czasowa sygnałów z~czujników inercyjnych oraz z~kontrolera Kinect}; \\
-		\node [block] (block5) {Łączenie danych z~czujników inercyjnych oraz z~kontrolera Kinect}; \\
-		\node [block] (block6) {Oszacowanie położenia stawów}; \\                    
-	};
+		\node [block, below=of block1] (block2) {Inicjalizacja filtrów łączących dane z~akcelerometru i~żyroskopu}; \\
+		\node [block, below=of block2] (block3) {Odszumienie danych z~czujników inercyjnych oraz z~kontrolera Kinect}; \\
+		\node [above=of block3, below, yshift=-0.5cm](null1) {};  \\
+		\node [decision, below=of block3] (inSync) {Czy dane zostały zsynchronizowane?}; \\
+		\node [block, below=of inSync, xshift=3.5cm] (block4) {Synchronizacja czasowa sygnałów z~czujników inercyjnych oraz z~kontrolera Kinect}; \\
+		\node [block, below=of inSync, xshift=-3.5cm] (block5) {Łączenie danych z~czujników inercyjnych oraz z~kontrolera Kinect}; \\
+		\node [block, below=of inSync, yshift=-3.5cm] (block6) {Oszacowanie położenia stawów}; \\                    
+	\end{scope}
 	% connect all nodes defined above
 	\begin{scope} [every path/.style=line]
 		\path (block1)        --    (block2);
 		\path (block2)      --   (block3);
 		\path (block3)      --    (inSync);
-		\path (inSync)  --++  (-3,0) node [near start] {Tak} |- (block5);
-		\path (inSync)  --++  (3,0) node [near start] {Nie} |- (block4);
-		\path (block4)      --    (block5);
-		\path (block5)      --    (block6);
-		\path (block6)      --++  (4,0) node [near start] {} |-  (null1);
+		\path (inSync)  --++  (-3,0) node [near start, above] {Tak} -| (block5.north);
+		\path (inSync)  --++  (3,0) node [near start, above] {Nie} -| (block4.north);
+		\path (block5.south)   --++  (0,-1) node {}  -|    (block6.north);
+		\path (block4.west) -- (block5.east);
+		\path (block6)      --++  (9,0) node [near start] {} |-  (null1);
 	\end{scope}			
 \end{tikzpicture}
