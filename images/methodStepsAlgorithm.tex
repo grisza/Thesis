@@ -28,7 +28,7 @@
 		\path (inSync)  --++  (-3,0) node [near start, above] {Tak} -| (block5.north);
 		\path (inSync)  --++  (3,0) node [near start, above] {Nie} -| (block4.north);
 		\path (block5.south)   --++  (0,-1) node {}  -|    (block6.north);
-		\path (block4.west) -- (block5.east);
+		\path (block4.west) |- (block5.east);
 		\path (block6)      --++  (9,0) node [near start] {} |-  (null1);
 	\end{scope}			
 \end{tikzpicture}

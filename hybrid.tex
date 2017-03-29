@@ -3,19 +3,19 @@
 Prezentowana w~niniejszej dysertacji hybrydowa metoda śledzenia ruchu człowieka, wykorzystuje dwa rodzaje urządzeń pomiarowych: kontroler Microsoft Kinect oraz czujniki inercyjne - akcelerometr i~żyroskop, których charakterystyki zostały przedstawione w~rozdziale \ref{chap:characteristics}. Mając na uwadze dokładność danych przesyłanych przez każde z~zastosowanych urządzeń pomiarowych oraz ograniczenia w~ich działaniu, takie jak wrażliwość na występowanie okluzji sensora głębi, czy ograniczona liczba stopni swobody układów inercyjnych, opracowana przeze mnie hybrydowa metoda śledzenia ruchu człowieka umożliwia ograniczenie wpływu niedoskonałości każdego ze składowych urządzeń. Autorskie połączenie danych (\emph{ang. data fusion}) z~kontrolera Kinect i~czujników inercyjnych poprawia precyzję szacowania położenia stawów, a~co za tym idzie wpływa korzystnie na precyzję śledzenia wykonywanego przez użytkownika ruchu. Ograniczenie wpływu niedoskonałości każdego z~wykorzystanych urządzeń pomiarowych na dokładność śledzenia ruchu możliwe jest dzięki temu, że są one względem siebie w~pewnym stopniu komplementarne to znaczy, że niedoskonałości występujące w~jednym urządzeniu i~wpływające przykładowo na przerwy w śledzeniu ruchu w~jednej z~płaszczyzn mogą zostać ograniczone przez wykorzystanie możliwości śledzenia ruchu w~tej płaszczyźnie przez drugie z~urządzeń.\\
 Proces łączenia danych uzyskanych z~kontrolera Kinect i~z czujników inercyjnych podzielony został na kilka etapów, z~których część jest wykonana jedynie na samym początku, a~część jest powtarzana w~trakcie śledzenia ruchu. Schemat kolejnych kroków przetwarzania danych prezentuje diagram na rysunku \ref{fig:hybrid:stepsSequence}. Kroki te zostały omówione w~dalszej części niniejszego rozdziału.\\
 
-	\begin{figure}[H]
-	
-			\input{images/methodStepsAlgorithm}
-			\caption{Sekwencja kroków przetwarzania danych w~omawianej metodzie łączenia danych.}
-			\label{fig:hybrid:stepsSequence}
-		
-			\end{figure}
-	\begin{figure}[H]
-			\centering			
-			\includegraphics[width=0.75\textwidth]{images/joints.png}
-			\caption{Przykład hierarchii stawów dla modelu szkieletowego ręki.}		
-			\label{fig:hybrid:jointsHierarchy}		
-	\end{figure}
+\begin{figure}[!htb]
+			
+	\input{images/methodStepsAlgorithm}
+	\caption{Sekwencja kroków przetwarzania danych w~omawianej metodzie łączenia danych.}
+	\label{fig:hybrid:stepsSequence}
+				
+\end{figure}
+\begin{figure}[!htb]
+	\centering			
+	\includegraphics[width=0.75\textwidth]{images/joints.png}
+	\caption{Przykład hierarchii stawów dla modelu szkieletowego ręki.}		
+	\label{fig:hybrid:jointsHierarchy}		
+\end{figure}
 
 		
 Zadaniem, omawianej w~niniejszym rozdziale, hybrydowej metody śledzenia ruchu człowieka jest oszacowanie w~chwili czasu $t$ położenia wybranego stawu $j$ szkieletu postaci ($P^F_{j,t} = [p^F_{j,x}, p^F_{j,y}, p^F_{j,z}]_t$, $F$ -- \emph{ang. Fused})  w~przestrzeni trójwymiarowej opisanej w referencyjnym układzie współrzędnych $X Y Z$, tożsamym z~układem współrzędnych kontrolera Kinect. W zakresie pojedynczego modułu inercyjnego szacowanie położenia stawu odbywa się na podstawie pomiaru sił działających na akcelerometr w~każdej z~trzech osi ($A = [a_x, a_y, a_z]$), pomiaru prędkości kątowych z~jakimi porusza się żyroskop względem każdej z~osi ($G = [g_x, g_y, g_z]$) oraz aktualnej temperatury pracy czujników inercyjnych ($T$). Pomiary uzyskane z~akcelerometru oraz żyroskopu wyrażone są w~układzie współrzędnych modułu inercyjnego (rys. \ref{fig:characteristics:imu:space}). W~przypadku kontrolera Kinect pobierane są pozycje dwóch stawów, stawu $j$ którego pozycja będzie szacowana ($P^K_{j} = [p^K_{j,x}, p^K_{j,y}, p^K_{j,z}]$, $K$--Kinect) oraz stawu $j-1$ będącego jego rodzicem w~modelu szkieletowym Kinecta (rys. \ref{fig:hybrid:jointsHierarchy}), $P^K_{j-1} = [p^K_{j-1,x},p^K_{j-1,y}, p^K_{j-1,z}]$. Fuzja danych z czujników inercyjnych ($A$ oraz $G$) oraz z~kontrolera Kinecta ($P^K_j$) pozwala oszacować pozycję stawu $j$ w~danej chwili $t$ ($P^F_{j,t}$) i~odbywa się z~pewnym interwałem czasowym $\Delta t$, określającym czas pomiędzy kolejnymi aktualizacjami pomiarów kontrolera Kinect, będacego jednocześnie interwałem czasowym dla procesu decymacji sygnału urządzeń inercyjnych. Dodatkowymi parametrami wykorzystywanymi w~procesie łączenia danych z~modułu inercyjnego z~pomiarami Kinecta są pozycje obu stawów barkowych uzyskane za pomoca kontrolera Kinect ($P^K_{sh_L,t}, P^K_{sh_R,t}$). Pozwalają one oszacować jak śledzona postać jest obrócona względem Kinecta, jak również pozycję stawu rodzica ($P^F_{j-1,t}$) w~globalnym układzie współrzędnych, będącą wynikiem osobnej fuzji danych, a~także długość kości $l$, na której umieszczony jest moduł inercyjny. Biorąc pod uwagę powyższe, oszacowanie pozycji wybranego stawu $j$, przez omawianą hybrydową metodę śledzenia ruchu człowieka, można wyrazić za pomocą wzoru \ref{eq:methodFormula}.
@@ -43,37 +43,46 @@ Wzór \ref{eq:methodFormula} odnosi się do każdego modułu inercyjnego zbudowa
 Kontroler Kinect w~ramach pakietu pomiarów, rejestrowanego z~częstotliwością $30 Hz$, udostępnia 3 kategorie danych dotyczących obserwowanej sceny: obraz z~kamery RGB, mapę głębi sceny oraz model szkieletowy postaci widocznej na scenie. Kontroler Kinect może jednocześnie zrekonstruować modele szkieletowe dwóch postaci i~śledzić ich kolejne pozy, rejestrując tym samym ich ruch. W~zależności od potrzeb, aplikacja wykorzystująca kontroler Kinect może uzyskać wszystkie 3 kategorie danych jednocześnie lub wybrać tylko te z~nich, które potrzebuje do swojego działania. Opisywana w~niniejszej dysertacji hybrydowa metoda śledzenia ruchu kończyn człowieka bazuje na informacji dotyczącej modelu szkieletowego śledzonej postaci wybierając z~pełnego modelu tylko informacje związane z~wybranymi stawami reprezentującymi śledzoną kończynę oraz te, na podstawie których można określić wiarygodność pomiarów uzyskanych za pomocą kontrolera Kinect. Przykładowo w~przypadku śledzenia ruchu prawej ręki są to oba stawy barkowe, prawy staw łokciowy oraz prawy staw nadgarstkowy. Każdy staw $j$ reprezentowany jest przez 3 współrzędne ($P^K_j = [p^K_{j,x}, p^K_{j,y}, p^K_{j,z}]$) określające jego położenie w~przestrzeni w~układzie współrzędnych kontrolera Kinect oraz informacje o~stanie śledzenia tego stawu: \emph{Tracked}, \emph{Interferred} albo \emph{NotTracked}. Na podstawie współrzędnych stawów barkowych postaci obliczany jest kąt obrotu sylwetki względem Kinecta (wzór \ref{eq:characteristics:kinect:bodyRotationAngle}. Dodatkowo każdy pakiet danych zawiera informacje o~swoim numerze, znacznik czasu wygenerowany przez kontroler Kinect oraz godzinę odebrania danych na komputerze, do którego podłączone jest to urządzenie.
 		
 \subsection{Czujniki inercyjne}
-Moduł inercyjny zbudowany został z~czujników inercyjnych (IMU1 i IMU2): akcelerometru i~żyroskopu, podłączonych bezpośrednio do jednostki centralnej opartej na platformie Arduino. Częstotliwość odczytu danych z czujników kontrolowana jest przez zewnętrzny moduł zegara (RTC DS3230) również podłączony bezpośrednio do Arduino. Zadaniem jednostki centralnej jest odczyt danych z~czujników, sformatowanie ich i~wysłanie z~wykorzystaniem technologii Bluetooth (BT HC-05) do komputera PC, gdzie następuje dalsze ich przetwarzanie (uproszczony schemat urządzenia do pomiaru danych inercyjnych\footnote{Urządzenie do pomiaru danych inercyjnych jest urządzeniem zaprojektowanym i wykonanym przez autora nieniejszej dysertacji.} przedstawia rys. \ref{fig:device:circuitDiagram}). Odczyt pakietu danych z~pojedynczego modułu obejmuje zestaw pomiarów udostępnionych przez żyroskop (3 wartości obrotu $G = [g_x, g_y, g_z]$, po jednej dla każdej z~osi), zastaw pomiarów z~akcelerometru (3 wartości przyspieszenia $A = [a_x, a_y, a_z]$) oraz pomiaru temperatury czujników $T$. Wszystkie pomiary przesyłane są jako 16-bitowe liczby całkowite ze znakiem i~pomiary ze wszystkich podłączonych modułów wysyłane są do komputera PC jednocześnie. Przesyłane wartości muszą być następnie skonwertowane do jednostek odpowiadających wielkościom fizycznym mierzonym przez poszczególne czujniki. Dla żyroskopu są to stopnie na sekundę ($\degree/s$), dla akcelerometru -- jednostki przyspieszenia grawitacyjnego ($g$), które można również przeliczyć na jednostki przyspieszenia $m/_{s^2}$, a~dla temperatury stopnie Celsjusza ($\degree C$). W~przypadku danych z~czujników inercyjnych konwersja polega na podzieleniu wartości bezpośredniego odczytu z~czujników przez współczynniki odpowiednie dla zakresu pracy tych czujników. Tabele \ref{tab:hybrid:accRangeFactors} oraz \ref{tab:hybrid:gyroRangeFactors} przedstawiają zestawienie współczynników konwersji $f_A$ i~$f_G$ wykorzystywanych do konwersji pomiarów odpowiednio z~akcelerometru i~żyroskopu. Jak już zostało to zaznaczone wcześniej, w~trakcie prowadzonych eksperymentów badawczych, zakres pracy akcelerometru został ustalony na $\pm4g$, natomiast żyroskopu na $\pm500\degree/s$. Jako zakresy pracy czujników modułów inercyjnych przyjęto podobne wartości do tych zastosowanych w~kontrolerze ruchu Nintendo Wii Remote Plus. 
-		
-\input{images/arduino}
-		
-\begin{table}[h]
+Moduł inercyjny zbudowany został z~czujników inercyjnych (IMU1 i IMU2): akcelerometru i~żyroskopu, podłączonych bezpośrednio do jednostki centralnej opartej na platformie Arduino. Częstotliwość odczytu danych z czujników kontrolowana jest przez zewnętrzny moduł zegara (RTC DS3230) również podłączony bezpośrednio do Arduino\footnote{Arduino -- platforma programistyczna dla systemów wbudowanych, \url{www.arduino.cc}}. Zadaniem jednostki centralnej jest odczyt danych z~czujników, sformatowanie ich i~wysłanie z~wykorzystaniem technologii Bluetooth (BT HC-05) do komputera PC, gdzie następuje dalsze ich przetwarzanie (uproszczony schemat urządzenia do pomiaru danych inercyjnych\footnote{Urządzenie do pomiaru danych inercyjnych jest urządzeniem zaprojektowanym i wykonanym przez autora nieniejszej dysertacji.} przedstawia rys. \ref{fig:device:circuitDiagram}). Odczyt pakietu danych z~pojedynczego modułu obejmuje zestaw pomiarów udostępnionych przez żyroskop (3 wartości obrotu $G = [g_x, g_y, g_z]$, po jednej dla każdej z~osi), zastaw pomiarów z~akcelerometru (3 wartości przyspieszenia $A = [a_x, a_y, a_z]$) oraz pomiaru temperatury czujników $T$. Wszystkie pomiary przesyłane są jako 16-bitowe liczby całkowite ze znakiem i~pomiary ze wszystkich podłączonych modułów wysyłane są do komputera PC jednocześnie. Przesyłane wartości muszą być następnie skonwertowane do jednostek odpowiadających wielkościom fizycznym mierzonym przez poszczególne czujniki. Dla żyroskopu są to stopnie na sekundę ($\degree/s$), dla akcelerometru -- jednostki przyspieszenia grawitacyjnego ($g$), które można również przeliczyć na jednostki przyspieszenia $m/_{s^2}$, a~dla temperatury stopnie Celsjusza ($\degree C$). W~przypadku danych z~czujników inercyjnych konwersja polega na podzieleniu wartości bezpośredniego odczytu z~czujników przez współczynniki odpowiednie dla zakresu pracy tych czujników. Tabele \ref{tab:hybrid:accRangeFactors} oraz \ref{tab:hybrid:gyroRangeFactors} przedstawiają zestawienie współczynników konwersji $f_A$ i~$f_G$ wykorzystywanych do konwersji pomiarów odpowiednio z~akcelerometru i~żyroskopu. Jak już zostało to zaznaczone wcześniej, w~trakcie prowadzonych eksperymentów badawczych, zakres pracy akcelerometru został ustalony na $\pm4g$, natomiast żyroskopu na $\pm500\degree/s$. Jako zakresy pracy czujników modułów inercyjnych przyjęto podobne wartości do tych zastosowanych w~kontrolerze ruchu Nintendo Wii Remote Plus. 
+	
+\begin{figure}[!htb]
 	\centering
-	\caption{Współczynniki konwersji bezpośrednich pomiarów akcelerometru w~zależności od zakresu pracy}
-	\label{tab:hybrid:accRangeFactors} 
-	\begin{tabular}{|l|c|}
-		\hline
-		Zakres pomiaru              & Współczynnik \\ \hline
-		$\pm2g$                     & $16384$        \\ \hline
-		\rowcolor{black!20} $\pm4g$ & $8192$         \\ \hline
-		$\pm8g$                     & $4096$         \\ \hline
-		$\pm16g$                    & $2048$         \\ \hline
-	\end{tabular}
+	\rotatebox{-90}{
+		\input{images/arduino}
+	}
+	\caption{Schemat budowy urządzenia pomiarowego opartego o~komputer Arduino.}	
+	\label{fig:device:circuitDiagram}
+\end{figure}
+		
+\begin{table}[!htb]
+	\caption{Współczynniki konwersji bezpośrednich pomiarów akcelerometru (a) i żyroskopu (b) w~zależności od przyjętego zakresu pracy}
+	\begin{subtable}{.5\linewidth}
+		\centering
+		\caption{Akcelerometr}
+		\label{tab:hybrid:accRangeFactors} 
+		\begin{tabular}{|l|c|}
+			\hline
+			Zakres pomiaru              & Współczynnik \\ \hline
+			$\pm2g$                     & $16384$        \\ \hline
+			\rowcolor{black!20} $\pm4g$ & $8192$         \\ \hline
+			$\pm8g$                     & $4096$         \\ \hline
+			$\pm16g$                    & $2048$         \\ \hline
+		\end{tabular}
+	\end{subtable}%
+	\begin{subtable}{.5\linewidth}
+		\centering
+		\caption{Żyroskop}
+		\label{tab:hybrid:gyroRangeFactors}	
+		\begin{tabular}{|l|c|}
+			\hline
+			Zakres pomiaru                        & Współczynnik \\ \hline
+			$\pm250\frac{\degree}{s}$             & $131.0$        \\ \hline
+			\rowcolor{black!20} $\pm500\degree/s$ & $65.5$         \\ \hline
+			$\pm1000\frac{\degree}{s}$            & $32.8$         \\ \hline
+			$\pm2000\frac{\degree}{s}$            & $16.4$         \\ \hline
+		\end{tabular}
+	\end{subtable} 
 \end{table}
-\begin{table}[h]
-	\centering
-	\caption{Współczynniki konwersji bezpośrednich pomiarów żyroskopu w~zależności od zakresu pracy}	
-	\label{tab:hybrid:gyroRangeFactors}	
-	\begin{tabular}{|l|c|}
-		\hline
-		Zakres pomiaru                        & Współczynnik \\ \hline
-		$\pm250\frac{\degree}{s}$             & $131.0$        \\ \hline
-		\rowcolor{black!20} $\pm500\degree/s$ & $65.5$         \\ \hline
-		$\pm1000\frac{\degree}{s}$            & $32.8$         \\ \hline
-		$\pm2000\frac{\degree}{s}$            & $16.4$         \\ \hline
-	\end{tabular}
-\end{table} 		
-		 
 		
 Konwersja pomiaru temperatury czujników ($T_{raw}$) do wartości wyrażonej w~$\degree C$ ($T_{deg}$) wymaga zastosowania wzoru \ref{eq:hybrid:tempEquation} wynikającego ze specyfikacji zastosowanego układu elektronicznego IvenSense MPU-6050. Wartości stałe zastosowane w~tym wzorze związane są z~rozdzielczością pomiarów wykorzystanego w~tym układzie elektronicznym termometru (wartość = 340.0) oraz ze stałego przesunięcia dla temperatury $0 \degree C$ (wartość = 36.53)
 		
@@ -115,7 +124,7 @@ Krok pierwszy służy do wyznaczenia macierzy współczynników korekty ($cor = 
 \end{equation}
 		
 
-\begin{figure}[H]
+\begin{figure}[!htb]
 	%\centering
 	\scalebox{0.5}{		
 		\input{images/calibrationAlgorithm.tex}
@@ -156,8 +165,8 @@ Oszacowanie orientacji w~osi $Z$ odbywa się jedynie na podstawie danych pomiaro
 Wyznaczając orientację przestrzenną modułu inercyjnego zbudowanego jedynie z~akcelerometru i~żyroskopu należy mieć na uwadze układ odniesienia dla otrzymywanych wartości. Oszacowanie będące wynikiem działania filtru Madgwicka dla osi $X$ i~$Y$ wykorzystuje jako swój punkt odniesienia wektor siły grawitacji, co oznacza że te dwie wartości będą wskazywały orientację względem grawitacji ziemskiej. Orientacja względem osi $Z$, oszacowana jedynie na podstawie pomiarów żyroskopu, co do zasady wyraża obrót w~stosunku do pozycji początkowej, w~jakiej znajdował się moduł w~trakcie inicjalizacji filtru Madgwicka. Sposobem na ustabilizowanie oszacowania orientacji wokół osi $Z$ i~odniesienia go względem grawitacji Ziemi byłoby uzupełnienie urządzenia pomiarowego o~magnetometr. \\
 		
 \begin{savenotes}
-	\begin{figure}[H]
-																					
+	\begin{figure}[!htb]
+																									
 		\centering 
 		\includegraphics[width=0.75\textwidth]{images/imumeasuredAngles.png}
 		\caption{Wykres przedstawiający uśrednione wartości oszacowania kąta obrotu wokół osi $X$ i~$Y$ za pomocą modułu inercyjnego}
@@ -165,12 +174,12 @@ Wyznaczając orientację przestrzenną modułu inercyjnego zbudowanego jedynie z
 	\end{figure}
 \end{savenotes}
 \begin{savenotes}
-	\begin{figure}[H]
+	\begin{figure}[!htb]
 		\centering 
 		\includegraphics[width=0.75\textwidth]{images/imuDrift.png}
 		\caption{Wykres przedstawiający dryf oszacowania kąta obrotu modułu inercyjnego wokół osi $Z$}
 		\label{fig:hybrid:imu:drift}
-																						
+																										
 	\end{figure}
 \end{savenotes}
 						
@@ -189,7 +198,7 @@ Również dane dotyczące położenia w~przestrzeni wybranych stawów szkieletu,
 \end{equation}
 						
 \begin{savenotes}
-	\begin{figure}[H]
+	\begin{figure}[!htb]
 		\centering
 		\begin{subfigure}[b]{0.49\textwidth}
 			\centering
@@ -210,7 +219,7 @@ Również dane dotyczące położenia w~przestrzeni wybranych stawów szkieletu,
 Wartość współczynnika filtracji $f_{LPF}$ została wyznaczona w~drodze prowadzonych badań własnych i~została ustalona na $0.065$. Przeprowadzone przeze mnie badanie wpływu wartości współczynnika filtracji na dokładność oszacowania pozycji stawów, za pomocą kontrolera Kinect, polegało na wyznaczeniu średniego błędu oszacowania pozycji stawów między wskazaniami kontrolera Kinect, a~danymi referencyjnymi uzyskanymi z~systemu śledzenia ruchu firmy Vicon. W~trakcie badania były wykonywane ruchy samych kończyn jak i~całego ciała, śledzone równocześnie przez system Vicon jak i~kontroler Kinect. Następnie wyznaczany był średni błąd oszacowania pozycji dla wybranych stawów z~wykorzystaniem filtra oraz bez niego, a~także z~różnymi wartościami współczynnika $f_{LPF}$. Rysunek \ref{fig:hybrid:kinect:lpf} przedstawia wykres zależoności uzyskanego średniego błędu oszacowania pozycji stawów w~zależności od wartości współczynnika filtracji $f_{LPF}$. 
 								
 \begin{savenotes}
-	\begin{figure}[H]
+	\begin{figure}[!htb]
 		\centering 
 		\includegraphics[width=0.75\textwidth]{images/kinectPosErrorAlpha.png}
 		\caption{Wykres przedstawiający średni błąd pozycjonowania stawów za pomocą kontrolera Kinect w~zależności od współczynnika filtracji $\alpha$}
@@ -275,7 +284,7 @@ Waga $w_\psi$ określa poziom istotności informacji o~obrocie wokół osi skier
 Rysunek \ref{fig:handAxes} przedstawia układ współrzędnych wraz z~obrotami odpowiadającymi każdej z~osi tego układu, w~odniesieniu do ręki człowieka.
 										
 \begin{savenotes}
-	\begin{figure}[H]
+	\begin{figure}[!htb]
 		\centering	
 		\includegraphics[width=0.5\textwidth]{images/handAxes.jpg}	
 		\caption{Odniesienie globalnego układu współrzędnych $XYZ$ wraz z~obrotami $\phi , \theta , \psi$ do ręki człowieka}
@@ -294,12 +303,12 @@ Pierwszym kryterium branym pod uwagę jest obrót całej sylwetki względem kame
 Branie pod uwagę zarówno wartości estymacji obrotu sylwetki wraz z~odchyleniem standardowym uzyskiwanych oszacowań spowodowane jest faktem, że w~momencie wystąpienia okluzji jednego lub obu stawów barkowych i~błędów oszacowania ich położenia, następuje błędne oszacowanie wartości obrotu. W~praktyce oznacza to, że wyznaczony kąt obrotu sylwetki może przyjąć dowolną wartość. Przykład szacowania kąta obrotu sylwetki względem kontrolera Kinect przedstawia wykres z rysunku \ref{fig:hybrid:kinect:kinectRotationVariance}. W~trakcie tego eksperymentu badawczego wykonywany był obrót postaci względem kontrolera Kinect do kąta $90\degree$ i~powrót do pozycji równoległej do urządzenia pomiarowego, czyli do kąta $0\degree$. Przy obrocie sylwetki nie przekraczającym $50\degree$ odchylenie standardowe oszacowań z~przyjętego okresu czasu nie przekracza wartości $1.5\degree$. W~związku z~tym w~opisywanej w~niniejszej dysertacji hybrydowej metodzie śledzenia ruchu kończyn człowieka, autor przyjął, że pomiar obrotu postaci w~stosunku do kontrolera Kinect jest wiarygodny, jeśli oszacowanie jego kąta obrotu jest $\alpha \le 50\degree$ przy odchyleniu standardowym $\sigma_\alpha\le 1.5 \degree$.
 												
 \begin{savenotes}
-	\begin{figure}[H]
+	\begin{figure}[!htb]
 		\centering
-																																				
+																																								
 		\includegraphics[width=0.75\textwidth]{images/kinectRotationStdDev.png}
 		\caption{Odchylenie standardowe estymacji kąta obrotu postaci względem Kinecta}
-																																			
+																																							
 		\label{fig:hybrid:kinect:kinectRotationVariance}
 	\end{figure}
 \end{savenotes}
@@ -321,7 +330,7 @@ gdzie:
 \end{conditions}
 														
 \begin{savenotes}
-	\begin{figure}[H]
+	\begin{figure}[!htb]
 		\centering 
 		\begin{subfigure}[b]{0.79\textwidth}
 			\centering
@@ -329,7 +338,7 @@ gdzie:
 			\caption{Staw śledzony ze statusem \emph{Tracked}}
 			\label{fig:hybrid:kinect:hpfNotOccluded}
 		\end{subfigure}	
-																													
+																																	
 		\begin{subfigure}[b]{0.79\textwidth}
 			\centering
 			\includegraphics[width=\linewidth]{images/Fig10.png}
