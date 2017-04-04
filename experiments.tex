@@ -25,14 +25,14 @@ Eksperymenty badawcze, opisane w~niniejszej pracy, zostały przeprowadzone na pr
 	\end{figure}
 \end{savenotes}
 				
-Sposób umieszczenia markerów został zaczerpnięty ze schematu ich rozmieszczenia zawartego w~instrukcji do systemu Vicon, jednak poszerzony został o~dodatkowe markery tak, aby nadgarstek i~łokieć śledzony był za pomocą 4 znaczników, a~ramię za pomocą 3. Aby móc skutecznie porównać ze sobą położenie stawów, wyznaczonych na podstawie pomiarów z~kontrolera Kinect i~z czujników inercyjnych, z~tymi wyznaczonymi przez system śledzenia ruchu Vicon, współrzędne śledzonych markerów, reprezentujące wybrany staw, muszą być uśrednione, tak żeby na ich podstawie obliczyć współrzędne stawów analizowanej kończyny. Do dokładnego wyznaczenia pojedynczego punktu reprezentującego staw, pomocne jest oszacowanie położenia 3 markerów. Dzięki zastosowaniu uzupełniających markerów do układu rekomendowanego przez firmę Vicon, udało się znacznie ograniczyć liczbę pomiarów, na których były widoczne mniej niż 3 markery, przez co precyzja śledzenia ruchu kończyn była większa. System śledzenia ruchu Vicon, w~wykorzystanej konfiguracji, dostarczał pomiary co 10 ms -- działał z~częstotliwością 100 Hz.  \\ 
+Sposób umieszczenia markerów został zaczerpnięty ze schematu ich rozmieszczenia zawartego w~instrukcji do systemu Vicon, jednak poszerzony został o~dodatkowe markery tak, aby nadgarstek i~łokieć śledzony był za pomocą czterech znaczników, a~ramię za pomocą trzech. Aby móc skutecznie porównać ze sobą położenie stawów, wyznaczonych na podstawie pomiarów z~kontrolera Kinect i~z czujników inercyjnych, z~tymi wyznaczonymi przez system śledzenia ruchu Vicon, współrzędne śledzonych markerów, reprezentujące wybrany staw, muszą być uśrednione, tak żeby na ich podstawie obliczyć współrzędne stawów analizowanej kończyny. Do dokładnego wyznaczenia pojedynczego punktu reprezentującego staw, pomocne jest oszacowanie położenia trzech markerów. Dzięki zastosowaniu uzupełniających markerów do układu rekomendowanego przez firmę Vicon, udało się znacznie ograniczyć liczbę pomiarów, na których były widoczne mniej niż trzy markery, przez co precyzja śledzenia ruchu kończyn była większa. System śledzenia ruchu Vicon, w~wykorzystanej konfiguracji, dostarczał pomiary co 10 ms -- działał z~częstotliwością 100 Hz.  \\ 
 %([NotFixed] można coś wspomnieć o~ksiązkowej dokładności tego systemu i~że może pracować z~wieksza częstotliwością tylko że nie jest to potrzebne) -- nie znalazłem nigdzie dokładności dla tego konkretnego modelu kamer\\
 				
-Oprócz markerów niezbędnych dla poprawnego działania systemu Vicon na przedramieniu i~ramieniu, w~połowie ich długości, zostały umieszczone czujniki inercyjne. Czujniki te, aby możliwie wiernie rejestrowały ruchy kończyn zostały przymocowane do skóry za pomocą taśmy klejącej oraz dodatkowo dociśnięte elastycznymi opaskami. Dzięki temu były one w~stanie wykonywać obroty wraz z~kończynami minimalizując względne przesunięcia. Zostały one umieszczone na wierzchniej stronie ręki, tam gdzie jest relatywnie cienka warstwa mięśni i~ścięgien. Dzięki temu czujniki w~większym stopniu reagowały na obroty kości i~były mniej wrażliwe na pracę otaczających je tkanek (wpływ ruchu między innymi skóry, ścięgień i~mięśni na badanie ruchu kości można znaleźć w~\cite{Sati2016,Reinschmidt2016}).
+Oprócz markerów niezbędnych dla poprawnego działania systemu Vicon na przedramieniu i~ramieniu, w~połowie ich długości, zostały umieszczone czujniki inercyjne. Czujniki te, aby możliwie wiernie rejestrować ruchy kończyn zostały przymocowane do skóry za pomocą taśmy klejącej oraz dodatkowo dociśnięte elastycznymi opaskami. Dzięki temu były one w~stanie wykonywać obroty wraz z~kończynami minimalizując względne przesunięcia. Zostały one umieszczone na wierzchniej stronie ręki, tam gdzie jest relatywnie cienka warstwa mięśni i~ścięgien. Dzięki temu czujniki w~większym stopniu reagowały na obroty kości i~były mniej wrażliwe na pracę otaczających je tkanek (wpływ ruchu między innymi skóry, ścięgień i~mięśni na badanie ruchu kości można znaleźć w~\cite{Sati2016,Reinschmidt2016}).
 				
 \section{Badanie ruchu}
 				
-Każdy z~ruchów ręki był wykonany przez troje aktorów i~wykonany w~dwóch seriach po 5 powtórzeń. Każda seria stanowiła osobną sesję śledzenia co oznacza, że każdy ruch został zarejestrowany w~6 sesjach (3 osoby po 2 sesje śledzenia na każde ćwiczenie). Podzielenie całego ćwiczenia na serie z~mniejszą liczbą powtórzeń związane było z~efektem zmęczenia aktorów, jakie było widoczne wraz z~kolejnymi powtórzeniami. Ćwiczenia jakie należało wykonać zostały dobrane w~taki sposób, aby sprawdzić opisaną metodę zarówno w~sytuacjach, w~których kontroler Kinect i~czujniki inercyjne działają w~uprzywilejowanym dla nich zakresie pracy jak i~w~takich, w~których jedno z~urządzeń posiada istotne ograniczenia w~działaniu. Wszystkie sekwencje rozpoczynały się od pozycji wyjściowej z~rękami rozłożonymi na boki w tak zwanej pozycji T (\emph{ang. T--pose}. Następnie, wykonywano zgięcie rąk w~łokciu ku górze (w płaszczyźnie XY) i~ich wyprostowanie w~celu zsynchronizowania pomiarów Kinecta i~czujników inercyjnych w~czasie. Po sekwencji synchronizującej następowały właściwe ćwiczenia, w~których każde powtórzenie zaczynało i~kończyło się pozycją T (\emph{ang. T--pose}). Wykonywane ćwiczenia prezentuje rysunek \ref{fig:experiments:poses}.
+Każdy z~ruchów ręki był wykonany przez trzech aktorów i~wykonany w~dwóch seriach po pięć powtórzeń. Każda seria stanowiła osobną sesję śledzenia co oznacza, że każdy ruch został zarejestrowany w~sześciu sesjach (3 osoby po 2 sesje śledzenia na każde ćwiczenie). Podzielenie całego ćwiczenia na serie z~mniejszą liczbą powtórzeń związane było z~efektem zmęczenia aktorów, jakie było widoczne wraz z~kolejnymi powtórzeniami. Ćwiczenia jakie należało wykonać zostały dobrane w~taki sposób, aby sprawdzić opisaną metodę zarówno w~sytuacjach, w~których kontroler Kinect i~czujniki inercyjne działają w~uprzywilejowanym dla nich zakresie pracy jak i~w~takich, w~których jedno z~urządzeń posiada istotne ograniczenia w~działaniu. Wszystkie sekwencje rozpoczynały się od pozycji wyjściowej z~rękami rozłożonymi na boki w tak zwanej pozycji T (\emph{ang. T--pose}). Następnie, wykonywano zgięcie rąk w~łokciu ku górze (w płaszczyźnie XY) i~ich wyprostowanie w~celu zsynchronizowania pomiarów Kinecta i~czujników inercyjnych w~czasie. Po sekwencji synchronizującej następowały właściwe ćwiczenia, w~których każde powtórzenie zaczynało i~kończyło się pozycją T (\emph{ang. T--pose}). Wykonywane ćwiczenia prezentuje rysunek \ref{fig:experiments:poses}.
 				
 \begin{savenotes}
 	\begin{figure}[!htb]
@@ -63,7 +63,7 @@ Błąd estymacji pozycji stawów, w~pojedynczej sesji wykonywanego ruchu, zosta�
 	\label{eq:experiments:RMSE}
 \end{equation}
 						
-Błędy szacowania pozycji stawów oraz kąta zgięcia stawu łokciowego zostały wyznaczone dla opisywanej w~niniejszej dysertacji metody łączenia danych, opartej na obrotach kości ($P^{F,O}_j$,$\beta^{F,O}$) oraz dla analogicznych oszacowań uzyskanych za pomocą metody o~najniższym opisanym w~literaturze błędzie szacowania położenia stawów -- tak zwanej metodzie Kalkbrenera i in. \cite{Kalkbrenner2014}. Metoda Kalkbrenera wykorzystuje  dane o pozycjach poszczególnych stawów, które są łączone celem zniwelowania niedokładności ($P^{F,P}_j$,$\beta^{F,P}$). \\
+Błędy szacowania pozycji stawów oraz kąta zgięcia stawu łokciowego zostały wyznaczone dla opisywanej w~niniejszej dysertacji metody łączenia danych, opartej na obrotach kości ($P^{F,O}_j$,$\beta^{F,O}$) oraz dla analogicznych oszacowań uzyskanych za pomocą metody o~najniższym opisanym w~literaturze błędzie szacowania położenia stawów -- metodzie Kalkbrenera i in. \cite{Kalkbrenner2014}. Metoda Kalkbrenera wykorzystuje  dane o pozycjach poszczególnych stawów, które są łączone celem zniwelowania niedokładności ($P^{F,P}_j$,$\beta^{F,P}$). \\
 						
 Każda z~sesji śledzenia konkretnego ruchu składała się z~5 nieprzerywanych powtórzeń tego samego ruchu. Dla każdej z~takich sesji zostały wyliczone wartości błędu średniokwadratowego każdego z~wyżej wymienionych oszacowań (pozycje stawów łokciowego ($P^F_E, j = E$  \emph{ang. Elbow}) i~nadgarstkowego ($P^F_W, j = W$ \emph{ang. Wrist}) oraz kąt zgięcia łokcia $\beta^F$). Całkowity błąd szacowania metody został określony jako średnia arytmetyczna błedów śrdniokwadratowych ($\overline{RMSE}$) ze wszystkich sześciu sesji śledzenia ruchu (indeks sesji śledzenia -- $s$) dla danego stawu (łokcia $E$ lub nadgarstka $W$) lub kąta $\beta$ (wz. \ref{eq:experiments:average}).
 						
@@ -155,14 +155,14 @@ Rysunki \ref{fig:experiments:first:raw} oraz \ref{fig:experiments:first:fused} w
 			\caption{Wizualizacja ruchu bezpośrednio z~urządzeń pomiarowych}
 			\label{fig:experiments:first:raw}
 		\end{subfigure}
-																																			
+																															
 		\begin{subfigure}[b]{0.65\textwidth}
 			\centering
 			\includegraphics[width=\linewidth]{images/100/Fused.png}		
 			\caption{Wizualizacja ruchu po złączeniu danych z~urządzeń pomiarowych}
 			\label{fig:experiments:first:fused}	
 		\end{subfigure}
-																																		
+																														
 		\caption[Wizualizacja ruchu ręki w~ćwiczeniu 1]{Wizualizacja ruchu ręki w~ćwiczeniu 1.  Kolory: czarny -- Vicon, niebieski -- czujniki inercyjne, zielony -- Kinect, szary -- metoda Kalkbrennera, pomarańczowy -- metoda autorska}	
 		\label{fig:experiments:first}
 	\end{figure}
@@ -194,7 +194,7 @@ Rysunki \ref{fig:experiments:first:raw} oraz \ref{fig:experiments:first:fused} w
 		Odchylenie                 & 0.1048       & 0.0931       & 0.6244           & 0.1075       & 0.1049       & 0.7634           \\
 		\bottomrule
 	\end{tabular} 
-																																				
+																																		
 \end{table} 
 														
 \begin{table}[h]
@@ -216,12 +216,12 @@ Rysunki \ref{fig:experiments:first:raw} oraz \ref{fig:experiments:first:fused} w
 		4                          & 2.7347       & 3.0278       & 14.7809          & 3.1662       & 3.5129       & 16.4055          \\
 		5                          & 2.2166       & 2.5777       & 16.7666          & 2.7412       & 3.0710       & 15.7460          \\
 		\midrule
-																																																												
+																																																								
 		Średnia $\overline{RMSE}$ & 2.5096       & 2.8484       & 14.0833          & 2.9451       & 3.3229       & 14.7121          \\
 		Odchylenie                 & 0.2370       & 0.2486       & 1.5507           & 0.0836       & 0.1937       & 1.5653           \\
 		\bottomrule
 	\end{tabular} 
-																																				
+																																		
 \end{table} 
 														
 W obu ćwiczeniach, w~trakcie wykonywania ruchu, następował moment, w~którym jeden lub dwa stawy stawały się niewidoczne dla kontrolera Kinect, a~co za tym idzie, obie metody musiały bazować tylko na jednym źródle danych. Metoda opracowana przez autora niniejszej pracy nie wykorzystywała  w~trakcie łączenia danych pomiarów uzyskanych z~niepewnego źródła i~stopniowo wstrzymywała aktualizację estymowanego położenia stawu. Natomiast metoda Kalkbrennera wykorzystywała w~dalszym ciągu dane z~kontrolera Kinect zmieniając jedynie jego stopień istotności (rys. \ref{fig:experiments:sec:follow}). 
@@ -247,14 +247,14 @@ Ze względu na to, że kontroler Kinect, pomimo utraty możliwości śledzenia d
 			\caption{Wizualizacja ruchu bezpośrednio z~urządzeń pomiarowych}
 			\label{fig:experiments:sec:raw}
 		\end{subfigure}
-																																							
+																																			
 		\begin{subfigure}[b]{0.65\textwidth}
 			\centering
 			\includegraphics[width=\linewidth]{images/200/Fused.png}		
 			\caption{Wizualizacja ruchu po złączeniu danych z~urządzeń pomiarowych}
 			\label{fig:experiments:sec:fused}
 		\end{subfigure}
-																																						
+																																		
 		\caption[Wizualizacja ruchu ręki w~ćwiczeniu 2]{Wizualizacja ruchu ręki w~ćwiczeniu 2.  Kolory: czarny -- Vicon, niebieski -- czujniki inercyjne, zielony -- Kinect, szary -- metoda Kalkbrennera, pomarańczowy -- metoda autorska}	
 		\label{fig:experiments:sec}
 	\end{figure}
@@ -270,14 +270,14 @@ Ze względu na to, że kontroler Kinect, pomimo utraty możliwości śledzenia d
 			\caption{Wizualizacja ruchu bezpośrednio z~urządzeń pomiarowych}
 			\label{fig:experiments:th:raw}
 		\end{subfigure}
-																																									
+																																					
 		\begin{subfigure}[b]{0.65\textwidth}
 			\centering
 			\includegraphics[width=\linewidth]{images/300/Fused.png}		
 			\caption{Wizualizacja ruchu po złączeniu danych z~urządzeń pomiarowych}
 			\label{fig:experiments:th:fused}	
 		\end{subfigure}
-																																								
+																																				
 		\caption[Wizualizacja ruchu ręki w~ćwiczeniu 3]{Wizualizacja ruchu ręki w~ćwiczeniu 3.  Kolory: czarny -- Vicon, niebieski -- czujniki inercyjne, zielony -- Kinect, szary -- metoda Kalkbrennera, pomarańczowy -- metoda autorska}	
 		\label{fig:experiments:th}
 	\end{figure}
@@ -308,12 +308,12 @@ Celem ostatniego ćwiczenia było sprawdzenie stabilności pomiarów w~przypadku
 		5                          & 2.5827       & 2.4711       & 4.3170           & 2.4692       & 2.7876       & 4.8454           \\
 		6                          & 2.1827       & 2.4813       & 4.0222           & 2.3609       & 2.7499       & 4.2690           \\
 		\midrule
-																																																																		
+																																																														
 		Średnia $\overline{RMSE}$ & 2.2688       & 2.5058       & 4.1118           & 2.4715       & 2.7889       & 4.6549           \\
 		Odchylenie                 & 0.1526       & 0.0758       & 0.2842           & 0.0836       & 0.0483       & 0.3173           \\
 		\bottomrule
 	\end{tabular} 
-																																										
+																																								
 \end{table} 
 																				
 Podobnie jak w~ćwiczeniu 1 tak i~w~ćwiczeniu 4 oba urządzenia były w~stanie przez cały czas trwania eksperymentu śledzić ruchy wykonywane przez śledzonego aktora. Jednak podobnie jak we wspomnianym ćwiczeniu, zmianie ulegały długości segmentów kości i~miało to przełożenie na działanie metody Kalkbrennera. Wizualizacje łańcuchów kinematycznych przedstawione na rysunku \ref{fig:experiments:four} pokazują, że Kinect, mimo pełnej widoczności całej ręki, miał trudność z~poprawnym określeniem jej pozycji w~osi pionowej. Mimo to obie metody były w~stanie wyznaczyć pozycje stawów z~lepszą dokładnością niż każde z~urządzeń pomiarowych osobno.
@@ -328,14 +328,14 @@ Podobnie jak w~ćwiczeniu 1 tak i~w~ćwiczeniu 4 oba urządzenia były w~stanie 
 			\caption{Wizualizacja ruchu bezpośrednio z~urządzeń pomiarowych}
 			\label{fig:experiments:four:raw}
 		\end{subfigure}
-																																											
+																																							
 		\begin{subfigure}[b]{0.49\textwidth}
 			\centering
 			\includegraphics[width=\linewidth]{images/400/Fused.png}		
 			\caption{Wizualizacja ruchu po złączeniu danych z~urządzeń pomiarowych}
 			\label{fig:experiments:four:fused}	
 		\end{subfigure}
-																																										
+																																						
 		\caption[Wizualizacja ruchu ręki w~ćwiczeniu 4]{Wizualizacja ruchu ręki w~ćwiczeniu 4.  Kolory: czarny -- Vicon, niebieski -- czujniki inercyjne, zielony -- Kinect, szary -- metoda Kalkbrennera, pomarańczowy -- metoda autorska}	
 		\label{fig:experiments:four}
 	\end{figure}
@@ -437,7 +437,7 @@ Trzecia wartość -- kąt zgięcia ręki w~łokciu ($\beta$) -- jest uniezależn
 					(ex 2,2.9) +- (0.0, 0.12)
 					(ex 3,2.8) +- (0.0, 0.2)
 				(ex 4,2.5) +- (0.0, 0.07)};
-																																																																																																					
+																																																																																													
 				\legend{Metoda Kalkbrennera, Metoda autorska}
 				\node at (axis cs:ex 1,4){\textcolor{black}{r = 8\%}};
 				\node at (axis cs:ex 2,4){\textcolor{black}{r = 16\%}};
@@ -483,7 +483,7 @@ Widać na~nich poprawę w~wyznaczaniu położenia stawu łokciowego do 18\%, nad
 					(ex 2,13.35)+- (0.0, 0.65)
 					(ex 3,14.08)+- (0.0, 1.55)
 				(ex 4,4.11)  +- (0.0, 0.29)};
-																																																																																																							
+																																																																																															
 				\legend{Metoda Kalkbrennera, Metoda autorska}
 				\node at (axis cs:ex 1,16){\textcolor{black}{r = 6\%}};
 				\node at (axis cs:ex 2,16){\textcolor{black}{r = 8\%}};

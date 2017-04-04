@@ -4,7 +4,6 @@ Istotnym etapem przetwarzania sygnałów jest ich filtracja. Zazwyczaj celem tej
 
 \section*{Liniowy filtr Kalmana (KF - \emph{ang. Kalman filter})}
 \label{sec:appx:filters:KF}
-\nomenclature{KF}{Liniowy filtr Kalmana}
 Liniowy filtr Kalmana jest oryginalną metodą filtracji sygnału opracowana i~opisaną przez Rudolpha E. Kalmana w~1960 \cite{Kalman1960} i~1961 \cite{KalmanBucy1961}. Metoda ta pozwala na oszacowanie wartości kolejnych pomiarów tylko na podstawie bieżących danych oraz modelu matematycznego obserwowanego zjawiska. Działanie filtra możemy podzielić na dwie następujące bezpośrednio po sobie fazy: 
 \begin{enumerate}
 	\item Predykacji,
@@ -86,7 +85,7 @@ Obie fazy wykonywane są cyklicznie, a~kompletny algorytm przedstawia schemat z 
 					\end{itemize}}                                                    
 				\end{tabular} 
 			};
-																																																						
+																																																
 			\node [block, right =1cm of predicate] (correction)      
 			{  
 				\begin{tabular}{l}
@@ -115,7 +114,6 @@ Filtr Kalmana, dzięki swojej budowie, może być używany nie tylko w~procesie 
 		
 \section*{Rozszerzony filtr Kalmana (EKF - \emph{ang. Extended Kalman Filter})}
 \label{sec:appx:filters:EKF}
-\nomenclature{EKF}{Rozszerzony filtr Kalmana}
 Filtr Kalmana w~swojej pierwotnej formie stanowi optymalny estymator dla procesów o~charakterze liniowym. Filtracja sygnałów nieliniowych wymagała modyfikacji oryginalnej formuły i~prace takie zostały podjęte niemal natychmiast po opublikowaniu prac Rudolpha Kalmana. W~1962 Stanley F. Schmidt, jeden z~dyrektorów NASA zaangażowany w~program Apollo, wraz z~zespołem opublikował pracę zawierającą zmodyfikowaną formułę liniowego filtru Kalmana przetwarzającą dane nieliniowe \cite{smith1962application}. Działanie filtru opiera się na linearyzacji przetwarzanego sygnału za pomocą szeregu Taylora. Schemat działania jest analogiczny do tego przedstawionego na rysunku \ref{fig:appx:KF:algorithm}, jednak zmianie ulegają poszczególne równania. Faza estymacji opiera się na równaniach \ref{eq:appx:EKF:ph1a} i~\ref{eq:appx:EKF:ph1b}.
 		
 \begin{subequations}
@@ -164,7 +162,6 @@ Filtr EKF okazał się skuteczny dla filtracji sygnałów nieliniowych jednak ko
 		
 \section*{Bezśladowy filtr Kalmana (UKF - \emph{ang. Unscented Kalman Filter})}
 \label{sec:appx:filters:UKF}
-\nomenclature{UKF}{Bezśladowy filtr Kalmana}
 W 1995 w~wyniku prac prowadzonych przez S. Juliera, J. Uhlmanna i~H. Durrant-Whyte\'a została opublikowana \cite{Julier1995} metoda filtrowania sygnałów nieliniowych oparta o~analizę danych statystycznych filtrowanego sygnału. Realizowana jest ona poprzez zastosowanie przekształcenia bezśladowego operującego na rozkładzie prawdopodobieństwa filtrowanego sygnału, ponieważ mniej kosztowne, a~jednocześnie dokładniejsze jest aproksymowanie takich danych, niż funkcji nieliniowych \cite{Uhlmann94}.
 Względem EKF, w~przypadku tego algorytmu, występuje dodatkowy krok -- wyznaczenie punktów sigma (równanie \ref{eq:appx:UKF:ph0}). 
 		
@@ -226,20 +223,20 @@ Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został 
 					input/.style    = {coordinate}, % Input
 					output/.style   = {coordinate} % Output
 				}
-																																																																															
+																																																																							
 				\draw
 				node at (0,0)[right=-3mm]{\Large \textopenbullet}
 				node [input, name=xSignal] {} 
 				node at (4,0) [block] (lpf) {$G(s)$}
-																																																																															
+																																																																							
 				node at (0,-2)[right=-3mm]{\Large \textopenbullet}
 				node [input, below of=xSignal, name=ySignal] {} 
 				node at (4,-2)[block] (hpf) {$1-G(s)$}
-																																																																															
+																																																																							
 				node at (7, -1) [sum, name=suma]{\suma}
-																																																																															
+																																																																							
 				node [output, right of=suma](out) {} ;
-																																																																															
+																																																																							
 				\draw[->](xSignal) -- node {$x = z~+ n_1$}(lpf);
 				\draw[->](ySignal) -- node {$y = z~+ n_2$}(hpf);
 				\draw[->](hpf) -| node {}(suma);
@@ -249,7 +246,7 @@ Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został 
 			\caption{Wariant podstawowy}
 			\label{fig:appx:CF:algorithmA}			
 		\end{subfigure}
-																									
+																					
 		\begin{subfigure}[b]{0.49\textwidth}
 			\centering
 			\begin{tikzpicture}[auto, thick, node distance=2cm, >=triangle 45]
@@ -260,28 +257,28 @@ Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został 
 					input/.style    = {coordinate}, % Input
 					output/.style   = {coordinate} % Output
 				}
-																																																																															
+																																																																							
 				\draw
 				node at (0,0)[right=-3mm]{\Large \textopenbullet}
 				node [input, name=xSignal] {} 		
 				node at (3,0)[right=-2.5mm](point){\Large \textbullet}
-																																																																															
+																																																																							
 				node at (0,-2)[right=-3mm]{\Large \textopenbullet}		
 				node [input, below of=xSignal, name=ySignal] {} 
 				node at (3, -2) [sum, name=sum1]{$-$}
 				node at (6,-2)[block] (lpf) {$G(s)$}
-																																																																															
+																																																																							
 				node at (8, -1) [sum, name=sum2]{\suma}
-																																																																															
+																																																																							
 				node [output, right of=sum2](out) {} ;
-																																																																															
+																																																																							
 				\draw[->](xSignal) -- node {$x = z~+ n_1$}(point);
 				\draw[->](point) -- node {}(sum1);
 				\draw[->](point) -| node {}(sum2);
 				\draw[->](ySignal) -- node {$y = z~+ n_2$}(sum1);
 				\draw[->](sum1) -- node {$n_2-n_1$}(lpf);		
 				\draw[->](lpf) -| node {}(sum2);
-																																																																															
+																																																																							
 				\draw[->](sum2) -- node {$\widehat{z}$}(out);
 			\end{tikzpicture}
 			\caption{Wariant pracujący na szumie}

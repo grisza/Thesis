@@ -1,8 +1,11 @@
 \nomenclature{MoCap}{\emph{ang. Motion Capture} -- system śledzenia i~rejestrowania ruchu}
-\nomenclature{GPS}{\emph{ang. Global Postioning System} -- globalny system pozycjonowania}
+\nomenclature{GPS}{\emph{ang. Global Positioning System} -- globalny system pozycjonowania}
 \nomenclature{LPM}{\emph{ang. Local Position Measurement System} -- lokalny system pozycjonowania}
 \nomenclature{IMU}{\emph{ang. Inertial Measurement Unit} -- inercyjne jednostki pomiarowe: akcelerometr i~żyroskop}
 \nomenclature{MARG}{\emph{ang. Magnetic, Angular Rate, and Gravity} -- inercyjne jednostki pomiarowe: akcelerometr i~żyroskop wspierane przez magnetometr}
+\nomenclature{KF}{Liniowy filtr Kalmana}
+\nomenclature{EKF}{\emph{ang. Extended Kalman Filter} -- Rozszerzony filtr Kalmana}
+\nomenclature{UKF}{\emph{ang. Unscented Kalman Filter} -- Bezśladowy filtr Kalmana}
 \nomenclature{$\alpha$}{kąt obrotu sylwetki użytkownika względem kontrolera Kinect}
 \nomenclature{$\beta$}{kąt zgięcia ręki mierzony w~stawie łokciowym}
 \nomenclature{$\phi$}{kąt Eulera określający obrót wokół osi X}
@@ -13,7 +16,7 @@
 \nomenclature{$T$}{pomiar temperatury pracy modułu inercyjnego}
 \nomenclature{$T_0$}{neutralna temperatura pracy modułu inercyjnego wg specyfikacji}
 \nomenclature{$t$}{znacznik czasu otrzymanych pomiarów}
-\nomenclature{$t_szum$}{czas pozostwania pomiarów z~kontrolera Kinect uznawanych za niewiarygodne}
+\nomenclature{$t_{szum}$}{czas, w którym pomiary z~kontrolera Kinect pozostają uznawane za niewiarygodne}
 \nomenclature{$\Delta t$}{upływ czasu pomiędzy kolejnymi pomiarami}
 \nomenclature{$Q = [q_w, q_x, q_y, q_z]$}{orientacja przestrzenna w~postaci kwaternionowej}
 \nomenclature{$\blacksquare^F$}{indeks oznaczający estymaty będące wynikiem fuzji danych}
@@ -22,8 +25,8 @@
 \nomenclature{$P = [p_x, p_y, p_z]$}{położenie przestrzenne stawu}
 \nomenclature{$E = [\phi, \theta, \psi]$}{orientacja przestrzenna w~postaci kątów Eulera}
 \nomenclature{$f_T$}{współczynnik korekty temperatury}
-\nomenclature{$f_{LPF}$}{współczynnik filtracji pomiarów kontrolera Kinect wykorzystywany w~filtrze LPF}
-\nomenclature{$f_m$}{współczynnik filtracji filtru Madgwicka}
+\nomenclature{$f_{LPF}$}{współczynnik filtracji pomiarów z kontrolera Kinect, wykorzystywany w~filtrze LPF}
+\nomenclature{$f_m$}{współczynnik filtracji pomiarów z czujników inercyjnych, wykorzystywany w filtrze Madgwicka}
 \nomenclature{$w_\phi$}{waga wartości kąta Eulera $\phi$}
 \nomenclature{$w_\theta$}{waga wartości kąta Eulera $\theta$}
 \nomenclature{$w_\psi$}{waga wartości kąta Eulera $\psi$}
@@ -31,11 +34,11 @@
 \nomenclature{$G_{th}=[g_x,g_y,g_z]_{th}=[g_{x,th},g_{y,th},g_{z,th}]$}{maksymalny dopuszczalny błąd spoczynkowych pomiarów żyroskopu}
 \nomenclature{$A_0=[a_x,a_y,a_z]_0=[a_{x,0},a_{y,0},a_{z,0}]$}{oczekiwane wartości spoczynkowe pomiarów akcelerometru}
 \nomenclature{$G_0=[g_x,g_y,g_z]_0=[g_{x,0},g_{y,0},g_{z,0}]$}{oczekiwane wartości spoczynkowe pomiarów żyroskopu}
-\nomenclature{$\blacksquare_{sh_L}$}{indeks oznaczający staw barkowy lewy}
-\nomenclature{$\blacksquare_{sh_R}$}{indeks oznaczający staw barkowy prawy}
-\nomenclature{$\blacksquare_e$}{indeks oznaczający staw łokciowy}
-\nomenclature{$\blacksquare_w$}{indeks oznaczający staw nadgarstkowy}
-\nomenclature{$\blacksquare_j$}{indeks oznaczający wybrany staw}
+\nomenclature{$\blacksquare_{sh_L}$}{indeks oznaczający staw barkowy lewy \emph{ang. shoulder left}}
+\nomenclature{$\blacksquare_{sh_R}$}{indeks oznaczający staw barkowy prawy \emph{ang. shoulder right}}
+\nomenclature{$\blacksquare_e$}{indeks oznaczający staw łokciowy \emph{ang. elbow}}
+\nomenclature{$\blacksquare_w$}{indeks oznaczający staw nadgarstkowy \emph{ang. wrist}}
+\nomenclature{$\blacksquare_j$}{indeks oznaczający wybrany staw \emph{ang. joint}}
 \nomenclature{$\blacksquare_{j-1}$}{indeks oznaczający staw nadrzędny w~hierarchicznym modelu szkieletowym}
 \nomenclature{$m(A,G,f_m,\Delta t)$}{formuła filtru Madgwicka}
 \nomenclature{$\bar{A} = [\bar{a}_x, \bar{a}_y, \bar{a}_z ]$}{uśrednione wartości pomiarów z~akcelerometru}
@@ -44,13 +47,12 @@
 \nomenclature{$cor_G=[c_{gx},c_{gy},c_{gz}]$}{współczynniki korekty pomiarów żyroskopu}
 \nomenclature{$cor=[cor_A,cor_G]=[c_{ax},c_{ay},c_{az},c_{gx},c_{gy},c_{gz}]$}{współczynniki korekty pomiarów modułów inercyjnych}
 \nomenclature{$\tau$}{przesunięcie czasowe pomiędzy sygnałami}
-\nomenclature{$\tau_{max}$}{przesunięcie czasowe pomiędzy sygnałami dla którego korelacja pomiędzy nimi przyjmuje największą wartość}
-\nomenclature{$I$}{sygnał którego źródłem jest moduł inercyjny}
-\nomenclature{$I[t]$}{próbka sygnału którego źródłem jest moduł inercyjny w~chwili t}
-\nomenclature{$K$}{sygnał którego źródłem jest Kinect}
-\nomenclature{$K[t]$}{próbka sygnału którego źródłem jest Kinect w~chwili t}
+\nomenclature{$\tau_{max}$}{przesunięcie czasowe pomiędzy sygnałami, dla którego korelacja pomiędzy nimi przyjmuje największą wartość}
+\nomenclature{$I$}{sygnał, którego źródłem jest moduł inercyjny}
+\nomenclature{$I[t]$}{próbka sygnału, którego źródłem jest moduł inercyjny w~chwili t}
+\nomenclature{$K$}{sygnał, którego źródłem jest Kinect}
+\nomenclature{$K[t]$}{próbka sygnału, którego źródłem jest Kinect w~chwili t}
 \nomenclature{$I \ast K$}{korelacja wzajemna sygnałów o~źródłach w~module inercyjnym oraz kontrolerze Kinect}
-\nomenclature{$t_{noise}$}{czas pozostawania pomiarów kontrolera Kinecta jako niewiarygodnych}
 \nomenclature{$A'$}{skorygowany pomiar akcelerometru ze względu na temperaturę}
 \nomenclature{$P'$}{położenie przestrzenne stawu po filtracji}
 \nomenclature{$T_{raw}$}{pomiar temperatury w~formacie bezpośrednio odczytanym z~modułu inercyjnego}
