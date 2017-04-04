@@ -86,7 +86,7 @@ Obie fazy wykonywane są cyklicznie, a~kompletny algorytm przedstawia schemat z 
 					\end{itemize}}                                                    
 				\end{tabular} 
 			};
-																																																			
+																																																						
 			\node [block, right =1cm of predicate] (correction)      
 			{  
 				\begin{tabular}{l}
@@ -226,20 +226,20 @@ Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został 
 					input/.style    = {coordinate}, % Input
 					output/.style   = {coordinate} % Output
 				}
-																																																																											
+																																																																															
 				\draw
 				node at (0,0)[right=-3mm]{\Large \textopenbullet}
 				node [input, name=xSignal] {} 
 				node at (4,0) [block] (lpf) {$G(s)$}
-																																																																											
+																																																																															
 				node at (0,-2)[right=-3mm]{\Large \textopenbullet}
 				node [input, below of=xSignal, name=ySignal] {} 
 				node at (4,-2)[block] (hpf) {$1-G(s)$}
-																																																																											
+																																																																															
 				node at (7, -1) [sum, name=suma]{\suma}
-																																																																											
+																																																																															
 				node [output, right of=suma](out) {} ;
-																																																																											
+																																																																															
 				\draw[->](xSignal) -- node {$x = z~+ n_1$}(lpf);
 				\draw[->](ySignal) -- node {$y = z~+ n_2$}(hpf);
 				\draw[->](hpf) -| node {}(suma);
@@ -249,7 +249,7 @@ Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został 
 			\caption{Wariant podstawowy}
 			\label{fig:appx:CF:algorithmA}			
 		\end{subfigure}
-																							
+																									
 		\begin{subfigure}[b]{0.49\textwidth}
 			\centering
 			\begin{tikzpicture}[auto, thick, node distance=2cm, >=triangle 45]
@@ -260,28 +260,28 @@ Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został 
 					input/.style    = {coordinate}, % Input
 					output/.style   = {coordinate} % Output
 				}
-																																																																											
+																																																																															
 				\draw
 				node at (0,0)[right=-3mm]{\Large \textopenbullet}
 				node [input, name=xSignal] {} 		
 				node at (3,0)[right=-2.5mm](point){\Large \textbullet}
-																																																																											
+																																																																															
 				node at (0,-2)[right=-3mm]{\Large \textopenbullet}		
 				node [input, below of=xSignal, name=ySignal] {} 
 				node at (3, -2) [sum, name=sum1]{$-$}
 				node at (6,-2)[block] (lpf) {$G(s)$}
-																																																																											
+																																																																															
 				node at (8, -1) [sum, name=sum2]{\suma}
-																																																																											
+																																																																															
 				node [output, right of=sum2](out) {} ;
-																																																																											
+																																																																															
 				\draw[->](xSignal) -- node {$x = z~+ n_1$}(point);
 				\draw[->](point) -- node {}(sum1);
 				\draw[->](point) -| node {}(sum2);
 				\draw[->](ySignal) -- node {$y = z~+ n_2$}(sum1);
 				\draw[->](sum1) -- node {$n_2-n_1$}(lpf);		
 				\draw[->](lpf) -| node {}(sum2);
-																																																																											
+																																																																															
 				\draw[->](sum2) -- node {$\widehat{z}$}(out);
 			\end{tikzpicture}
 			\caption{Wariant pracujący na szumie}

@@ -4,11 +4,11 @@ Prezentowana w~niniejszej dysertacji hybrydowa metoda śledzenia ruchu człowiek
 Proces łączenia danych uzyskanych z~kontrolera Kinect i~z czujników inercyjnych podzielony został na kilka etapów, z~których część jest wykonana jedynie na samym początku, a~część jest powtarzana w~trakcie śledzenia ruchu. Schemat kolejnych kroków przetwarzania danych prezentuje diagram na rysunku \ref{fig:hybrid:stepsSequence}. Kroki te zostały omówione w~dalszej części niniejszego rozdziału.\\
 
 \begin{figure}[!htb]
-				
+					
 	\input{images/methodStepsAlgorithm}
 	\caption{Sekwencja kroków przetwarzania danych w~omawianej metodzie łączenia danych.}
 	\label{fig:hybrid:stepsSequence}
-					
+						
 \end{figure}
 \begin{figure}[!htb]
 	\centering			
@@ -166,7 +166,7 @@ Wyznaczając orientację przestrzenną modułu inercyjnego zbudowanego jedynie z
 		
 \begin{savenotes}
 	\begin{figure}[!htb]
-																											
+																													
 		\centering 
 		\includegraphics[width=0.75\textwidth]{images/imumeasuredAngles.png}
 		\caption{Wykres przedstawiający uśrednione wartości oszacowania kąta obrotu wokół osi $X$ i~$Y$ za pomocą modułu inercyjnego}
@@ -179,7 +179,7 @@ Wyznaczając orientację przestrzenną modułu inercyjnego zbudowanego jedynie z
 		\includegraphics[width=0.75\textwidth]{images/imuDrift.png}
 		\caption{Wykres przedstawiający dryf oszacowania kąta obrotu modułu inercyjnego wokół osi $Z$}
 		\label{fig:hybrid:imu:drift}
-																												
+																														
 	\end{figure}
 \end{savenotes}
 						
@@ -305,10 +305,10 @@ Branie pod uwagę zarówno wartości estymacji obrotu sylwetki wraz z~odchylenie
 \begin{savenotes}
 	\begin{figure}[!htb]
 		\centering
-																																										
+																																												
 		\includegraphics[width=0.75\textwidth]{images/kinectRotationStdDev.png}
 		\caption{Odchylenie standardowe estymacji kąta obrotu postaci względem Kinecta}
-																																									
+																																											
 		\label{fig:hybrid:kinect:kinectRotationVariance}
 	\end{figure}
 \end{savenotes}
@@ -338,7 +338,7 @@ gdzie:
 			\caption{Staw śledzony ze statusem \emph{Tracked}}
 			\label{fig:hybrid:kinect:hpfNotOccluded}
 		\end{subfigure}	
-																																			
+																																					
 		\begin{subfigure}[b]{0.79\textwidth}
 			\centering
 			\includegraphics[width=\linewidth]{images/Fig10.png}
