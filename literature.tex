@@ -71,8 +71,8 @@ Kamery wykorzystane w~systemie Vicon posiadają filtr przepuszczający jedynie f
 			
 Oprócz kamer i~markerów, istotnym elementem optycznego systemu śledzenia ruchu jest oprogramowanie obsługujące system. Jest ono odpowiedzialne za synchroniczną analizę sekwencji obrazów zarejestrowanych przez kamery tak, aby możliwe było określenie położenia każdego z~markerów w~przestrzeni trójwymiarowej układu odniesienia. W~przypadku systemu Vicon, dostępnego na Politechnice Łódzkiej, rekonstrukcja przestrzeni trójwymiarowej odbywa się na podstawie sekwencji obrazów z~maksymalnie 10 kamer. Aby możliwe było wyznaczenie położenia markera w~przestrzeni trójwymiarowej musi być on \textsl{widziany} przez minimum 3 kamery w~tym samym czasie. Pozwala to na precyzyjne wyznaczenie jego wszystkich współrzędnych za pomocą triangulacji. Jednakże zbudowanie profesjonalnego systemu śledzenia ruchu złożonego jedynie z~3 kamer byłoby niewystarczające ze względu na możliwość przysłonięcia markerów przez części ciała w~trakcie wykonywania ruchu. Zwiększenie liczby kamer pozwala na obserwowanie sceny przez większą ich liczbę, co zwiększa prawdopodobieństwo, że w~trakcie nawet złożonych ruchów przynajmniej 3 kamery zarejestrują każdy z~markerów. Dodatkowo redundancja danych, dla lepiej widocznych markerów, sprzyja zwiększeniu dokładności wyznaczania ich pozycji. Oczywiście może się zdarzyć, że pomimo zastosowania wielu kamer marker zostanie zauważony przez mniej niż 3 kamery. W~takiej sytuacji rolą oprogramowania jest oszacowanie przybliżonego położenia danego markera, na przykład na podstawie jego relacji do położenia innych markerów i~ich trajektorii ruchu.
 			
-Kolejnym ważnym elementem, za który odpowiada oprogramowanie systemu śledzenia ruchu jest etykietowanie (\emph{ang. labelling}) śledzonych markerów. Dzięki temu możliwe jest określenie wzajemnych relacji pomiędzy poszczególnymi markerami i~nadanie im dodatkowego znaczenia poza wyznaczeniem położenia w~przestrzeni na przykład: powiązania pomiędzy markerami, przypisanie kilku markerów do jednego obiektu na scenie itp. Proces ten, po wcześniejszym zdefiniowaniu wzajemnych relacji pomiędzy markerami, jest zazwyczaj automatyzowany i~wymaga korekty ze strony operatora systemu jedynie w~sytuacjach kiedy nie jest możliwa pełna rekonstrukcja sceny, na przykład gdy zbyt wiele markerów jest niewidocznych dla kamer i~oprogramowanie nie jest w~stanie oszacować ich położenia, a~co za tym idzie niemożliwe jest prawidłowe przypisanie zbioru etykiet.\\ 
-			
+Kolejnym ważnym elementem, za który odpowiada oprogramowanie systemu śledzenia ruchu jest etykietowanie (\emph{ang. labelling}) śledzonych markerów. Dzięki temu możliwe jest określenie wzajemnych relacji pomiędzy poszczególnymi markerami i~nadanie im dodatkowego znaczenia poza wyznaczeniem położenia w~przestrzeni na przykład: powiązania pomiędzy markerami, przypisanie kilku markerów do jednego obiektu na scenie itp. Proces ten, po wcześniejszym zdefiniowaniu wzajemnych relacji pomiędzy markerami, jest zazwyczaj automatyzowany i~wymaga korekty ze strony operatora systemu jedynie w~sytuacjach kiedy nie jest możliwa pełna rekonstrukcja sceny, na przykład gdy zbyt wiele markerów jest niewidocznych dla kamer i~oprogramowanie nie jest w~stanie oszacować ich położenia, a~co za tym idzie niemożliwe jest prawidłowe przypisanie zbioru etykiet.
+
 Rozpatrując śledzenie ruchu człowieka, istotne jest aby oprogramowanie było w~stanie kompensować różnicę między ruchem markerów jaki został zarejestrowany, a~ruchem postaci jaki został faktycznie wykonany. Szczególnie jest to widoczne w~przypadku obrotów kończyn wokół własnej osi. Aby jak najlepiej odzwierciedlić taki ruch, markery powinny być umieszczone bezpośrednio na ciele w~miejscach nie wrażliwych na przesunięcia względem układu kostnego człowieka - w~pobliżu kości, w~miejscach pozbawionych tkanki mięśniowej. Jednak i~to nie gwarantuje, że markery umieszczone na powierzchni ciała wykonają taki sam ruch jak kończyna. Badania mające na celu określenie różnicy pomiędzy ruchem jaki wykonywany jest przez kość lub staw, a~tym jak jest on widoczny na podstawie markerów umieszczonych na powierzchni skóry prowadzone były już w~latach 90-tych XX wieku \cite{Sati2016,Reinschmidt2016,Holden2016}. Reinschmidt i in. \cite{Reinschmidt2016} na przykładzie badania zgięcia kolana wykazał, że średnia różnica pomiędzy faktycznym ruchem kości, a~ruchem zarejestrowanym przez markery może wynosić od $4.1\degree$ do $5.3\degree$ w~zależności od osi, w~której ruch ten się odbywał. Sati i in. \cite{Sati2016} oraz Holden i in. \cite{Holden2016} uzyskali zbliżone rezultaty dodatkowo zauważając, że markery mogą ulec przesunięciu w~trakcie wykonywania ruchu nawet o~$2cm$ \cite{Sati2016}, co również może wypaczyć uzyskane wyniki.\\ 
 			
 Optyczne systemy śledzenia ruchu z~aktywnymi markerami działają i~są zbudowane w~analogiczny sposób do systemów z~markerami pasywnymi. Podstawową różnicą pomiędzy tymi dwoma systemami śledzenia ruchu jest to, że aktywne markery są źródłem światła co eliminuje konieczność wyposażenia całego systemu w~dodatkowe urządzenia do oświetlania sceny. Przykładem realizacji takiego systemu może być wielokamerowy system Impulse X2 firmy PhaseSpace \footfullcite{footnote:PhaseSpaceWebsite}.
@@ -87,7 +87,7 @@ Drugim rodzajem optycznego systemu śledzenia ruchu są systemy niewymagające z
 
 Systemy aktywne wykorzystują zróżnicowane techniki emisji światła do określenia odległości pomiędzy urządzeniem pomiarowym danego systemu a~obserwowanym obiektem. Przykładową techniką jest oświetlenie sceny ustrukturyzowaną mapą punktów świetlnych, której odkształcenie pozwala określić, w~jakiej odległości przed kamerą znajdują się dany obiekty. Technika ta jest wykorzystywana między innymi przez kontroler Microsoft Kinect v1 \footfullcite{footnote:flatley2011}, czy kamerę 3D systemu Intel RealSense \footfullcite{footnote:intelRealSenseWebsite}. Inną popularną techniką określania odległości w~jakiej znajduje się obserwowany obiekt, wykorzystywaną na przykład w~kontrolerze Microsoft Kinect v2 \footfullcite{footnote:kinect2Spec}, jest czas dotarcia wiązki światła do tego obiektu (\emph{ang. Time-of-Flight})\cite{Hansard2013}.
 			
-Zarówno w~systemach aktywnych jak i~pasywnych kluczowym etapem przetwarzania danych jest wyodrębnienie pierwszego planu i~oddzielenie go od tła. Metody wykorzystywane na tym etapie są często opisywane w~literaturze \cite{wang2003recent, rosenhahn2008markerless, guan2009estimating, surer2011markerless, corazza2006markerless}. Po separacji pierwszego planu zawierającego obraz śledzonej postaci od tła, kolejnym etapem jest estymacja modelu człowieka, który jest jego reprezentacją w~systemie komputerowym.\\ 
+Zarówno w~systemach aktywnych jak i~pasywnych kluczowym etapem przetwarzania danych jest wyodrębnienie pierwszego planu i~oddzielenie go od tła. Metody wykorzystywane na tym etapie są często opisywane w~literaturze \cite{wang2003recent, rosenhahn2008markerless, guan2009estimating, surer2011markerless, corazza2006markerless}. Po separacji pierwszego planu zawierającego obraz śledzonej postaci od tła, kolejnym etapem jest estymacja modelu człowieka, który jest jego reprezentacją w~systemie komputerowym. 
 			
 Optycznym, bezmarkerowym i~zarazem aktywnym systemem śledzenia ruchu, który niewątpliwie odniósł największy sukces komercyjny i~posiada największą rozpoznawalność jest system wbudowany w~kontroler Microsoft Kinect. Obecnie dostępne są dwie wersje tego kontrolera, które znacząco różnią się sposobem działania. Starsze z~urządzeń, Microsoft Kinect v1, swoje działanie opiera na ustrukturyzowanej mapie oświetlenia podczerwonego, natomiast Microsoft Kinect v2 mierzy czas dotarcia wiązki światła od kontrolera do śledzonej postaci. W~dalszej części niniejszej pracy (rozdział \ref{chap:characteristics}) szczegółowo zostało opisane działanie kontrolera Microsoft Kinect v1 z~uwagi na fakt, że opracowana autorska metoda śledzenia ruchu wykorzystuje to właśnie urządzenie. 
 			
@@ -414,9 +414,11 @@ Istnieje wiele metod reprezentowania orientacji obiektu w przestrzeni, i~każda 
 	\item Pary Osie-Kąt (\emph{ang. Axis--Angle}),
 	\item Kwaterniony.
 \end{itemize} 
+				
+Autorska metoda łączenia danych opisywana w niniejszej pracy wykorzystuje reprezentację obrotów w formie kątów Eulera oraz kwaternionów w związku z tym te dwie formy zostaną przybliżone w dalszej części pracy.
 																											
 \subsubsection*{Kąty Eulera} \label{sec:orientstionRep:euler}
-Reprezentacja orientacji obiektu za pomocą kątów Eulera jest najbardziej intuicyjną z~powszechnie używanych reprezentacji, ponieważ przedstawia ona 3 wartości kątów, o~jakie nastąpił obrót względem odpowiednich osi układów współrzędnych. Należy jednak pamiętać, że konwencje nazewnicze odnoszące się do poszczegónych kątów i osi różnią się w zależności od dziedziny w jakiej okreslana jest orientacja na przykład inych oznaczeń używa się w awiacji a innych w przypadku określenia obrotów kończyn w systemach śledzenia. Jest to związane z~układem odniesienia, jaki został przyjęty do określania obrotów. Możemy wyróżnić relatywny układ odniesienia, w~którym obrót mierzony jest względem arbitralnie wybranego układu (\emph{ang. body--fixed coordinate system}, rys.\ref{fig:appx:rot:eulerRel}), lub układ absolutny -- względem kierunków ziemi (\emph{ang. world coordinate system}, rys.\ref{fig:appx:rot:eulerAbs}). Tabela \ref{tab:appx:rot:eulerNames} zawiera powszechnie przyjęte konwencje oznaczania obrotów.
+Reprezentacja orientacji obiektu za pomocą kątów Eulera jest najbardziej intuicyjną z~powszechnie używanych reprezentacji, ponieważ przedstawia ona 3 wartości kątów, o~jakie nastąpił obrót względem odpowiednich osi układów współrzędnych. Należy jednak pamiętać, że konwencje nazewnicze odnoszące się do poszczegónych kątów i osi różnią się w zależności od dziedziny w jakiej okreslana jest orientacja na przykład inych oznaczeń używa się w awiacji a innych w przypadku określenia obrotów kończyn w systemach śledzenia. Jest to związane z~układem odniesienia, jaki został przyjęty do określania obrotów. Możemy wyróżnić relatywny układ odniesienia, w~którym obrót mierzony jest względem arbitralnie wybranego układu (\emph{ang. body--fixed coordinate system}, rys.\ref{fig:appx:rot:eulerRel}), lub układ absolutny -- względem kierunków ziemi (\emph{ang. world coordinate system}, rys.\ref{fig:appx:rot:eulerAbs}). Tabela \ref{tab:appx:rot:eulerNames} zawiera powszechnie przyjęte konwencje oznaczania obrotów. Nazwy osi układu współrzędnych w tabeli  \ref{tab:appx:rot:eulerNames} są zgodne z osiami układu współrzędnych zaprezentowanym na rysunku \ref{fig:appx:rot:eulerAbs}.
 																													
 \begin{savenotes}
 	\begin{figure}[!htb]
@@ -434,8 +436,7 @@ Reprezentacja orientacji obiektu za pomocą kątów Eulera jest najbardziej intu
 			\includegraphics[width=\textwidth]{images/eulerAbsolute.png}		
 			\caption[Kąty Eulera w absolutnym układzie współrzędnych]{Absolutny \footfullcite{footnote:Baker2015}}
 			\label{fig:appx:rot:eulerAbs}
-		\end{subfigure}
-																																													
+		\end{subfigure}																																			
 		\caption{Kąty Eulera względem przyjętego układu współrzędnych: relatywnego (a) oraz absolutnego (b)}
 		\label{fig:appx:rot:euler}
 	\end{figure}
@@ -450,72 +451,79 @@ Reprezentacja orientacji obiektu za pomocą kątów Eulera jest najbardziej intu
 		\hline
 		Oś & Układ Relatywny & Układ Absolutny & Symbol   & Prędkość kątowa \\
 		\hline
-		X   & \emph{bank}      & \emph{tilt}      & $\psi$   & \emph{roll}         \\
-		Y   & \emph{heading}   & \emph{azimuth}   & $\theta$ & \emph{yaw}          \\ 
-		Z   & \emph{attitude}  & \emph{elevation} & $\phi$   & \emph{pitch}        \\
+		X   & \emph{bank}      & \emph{tilt}      & $\phi$   & \emph{roll}         \\
+		Y   & \emph{heading}   & \emph{azimuth}   & $\psi$ 	 & \emph{yaw}          \\ 
+		Z   & \emph{attitude}  & \emph{elevation} & $\theta$ & \emph{pitch}        \\
 		\hline
 	\end{tabular} 
 \end{table}
 																													
-Chcąc prawidłowo interpretować podane wartości trzeba pamiętać, że określają one zawsze obroty względem określonych osi w~ściśle określonej kolejności. Spośród 27\footnote{osie w~sekwencji mogą się powtarzać więc na podstawie wzoru wariacji z powtórzeniami otrzymujemy $3^3 = 27$} możliwych kombinacji określających kolejność wykonywania rotacji wokół osi, jedynie 12 może być wykorzystane do zdefiniowania obrotów w~przestrzeni 3D \cite{Diebel2006}. Ograniczenie ilości możliwych do wykorzystania sekwencji obrotów, wynika z założenia, że dwa następujące po sobie obroty nie mogą być wykonane wokół tej samej osi. Dokładne opisy sekwencji wykonywanych obrotów można znaleźć w~pracach poświęconych zagadnieniu rotacji obiektów \cite{Pio1966, Diebel2006}. Innym utrudnieniem, które trzeba brać pod uwagę w~przypadku stosowania kątów Eulera wyrażonych w relatywnym układzie współrzędnych, jest występowanie niejednoznaczności przy obrotach w~orientacji pionowej ($ \phi=\pm90\degree $). W~takim wypadku wykonanie dowolnej innej rotacji powoduje niejednoznaczność względem której osi odbył się ruch. Sytuacja, o~której jest mowa nosi angielską nazwę \emph{gimbal lock}. W~przypadku implementacji komputerowej, taki przypadek wymaga szczególnej obsługi w~celu uniknięcia błędów zarówno interpretacyjnych jak i~matematycznych.
+Chcąc prawidłowo interpretować podane wartości trzeba pamiętać, że określają one zawsze obroty względem określonych osi w~ściśle określonej kolejności. Spośród 27\footnote{osie w~sekwencji mogą się powtarzać więc na podstawie wzoru wariacji z powtórzeniami otrzymujemy $3^3 = 27$} możliwych kombinacji określających kolejność wykonywania rotacji wokół osi, jedynie 12 może być wykorzystane do zdefiniowania obrotów w~przestrzeni 3D \cite{Diebel2006}. Ograniczenie ilości możliwych do wykorzystania sekwencji obrotów, wynika z założenia, że dwa następujące po sobie obroty nie mogą być wykonane wokół tej samej osi. Dokładne opisy sekwencji wykonywanych obrotów można znaleźć w~pracach poświęconych zagadnieniu rotacji obiektów \cite{Pio1966, Diebel2006}. Innym utrudnieniem, które trzeba brać pod uwagę w~przypadku stosowania kątów Eulera wyrażonych w relatywnym układzie współrzędnych, jest występowanie niejednoznaczności przy obrotach obiektu będacego w~orientacji pionowej ($\phi=\pm90\degree$, rys. \ref{fig:rot:euler:gimbal}) określanej jako blokada przegubu (\emph{ang. gimbal lock}). Przykład przedstawiony na rysunku \ref{fig:rot:euler:gimbal} pokazuje sytuajcę, w której w wyniku skierowania obiektu do orientacji pionowej, dwie z 3 osi obrotu stały się do siebie równoległe (osie rotacji i skrętu). Skutkuje to tym, że obracając obiekt wokół własnej osi (dokonując rotacji), nie ma pewności czy obrót został wykonany wokół osi rotacji czy skrętu. Może to prowadzić do poważnych błędów interpretacyjnych rzutujących na dalsze obliczenia.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.6\linewidth]{images/GimbalLock.png}
+	\caption[Obiekt znajdujący się w orientacji z blokadą przegubu]{Obiekt znajdujący się w orientacji z blokadą przegubu. Pierścień zewnętrzny (czerwony) - unoszenie, środkowy (zielony) - rotacja, wewnętrzny (niebieski) - skręt}
+	\label{fig:rot:euler:gimbal}
+\end{figure}
+
+%\subsubsection*{Macierze orientacji}
+%Reprezentacja orientacji w~postaci kątów Eulera jest intuicyjna z~punktu widzenia interpretacji przez człowieka, ale w systemach komputerowych, ze względu na chociażby problem blokady przegubu, wymaga implementacji dodatkowych mechanizmów zabezpieczających przed niepoprawną interpretacją danych. W~takim przypadku należy ją skonwertować do innej postaci -- dobrze sprawdzają się tu macierze obrotów względem każdej z~osi, opisane wzorami \ref{eq:appx:rot:rMatrix:rx}, \ref{eq:appx:rot:rMatrix:ry} oraz \ref{eq:appx:rot:rMatrix:rz}.
 																													
-\subsubsection*{Macierze orientacji}
-Reprezentacja orientacji w~postaci kątów Eulera jest intuicyjna z~punktu widzenia interpretacji przez człowieka, ale utrudnia ona obliczanie obrotów na bieżąco. W~takim przypadku należy ją skonwertować do innej postaci -- dobrze sprawdzają się tu macierze obrotów względem każdej z~osi, opisane wzorami \ref{eq:appx:rot:rMatrix:rx}, \ref{eq:appx:rot:rMatrix:ry} oraz \ref{eq:appx:rot:rMatrix:rz}.
-																													
-\begin{subequations}
-	\begin{align}
-		\mathbf{R_x(\alpha)} & = 
-		\begin{bmatrix}
-		1            & 0            & 0            \\
-		0            & cos(\alpha)  & sin(\alpha)  \\
-		0            & -sin(\alpha) & cos(\alpha)  
-		\end{bmatrix} 
-		\label{eq:appx:rot:rMatrix:rx} \\				
-		\mathbf{R_y(\alpha)} & = 
-		\begin{bmatrix}
-		cos(\alpha)  & 0            & -sin(\alpha) \\
-		0            & 1            & 0            \\
-		sin(\alpha)  & 0            & cos(\alpha)  
-		\end{bmatrix} 
-		\label{eq:appx:rot:rMatrix:ry} \\				
-		\mathbf{R_z(\alpha)} & = 
-		\begin{bmatrix}
-		cos(\alpha)  & sin(\alpha)  & 0            \\
-		-sin(\alpha) & cos(\alpha)  & 0            \\
-		0            & 0            & 1            
-		\end{bmatrix} 
-		\label{eq:appx:rot:rMatrix:rz}
-	\end{align}
-\end{subequations}
-																													
-Rotacja o~dowolne kąty względem każdej z~osi rozumiana jest jako iloczyn powyższych macierzy. Końcowa postać macierzy obrotu będąca wynikiem takiego iloczynu wyrażona jest wzorem \ref{eq:appx:rot:rMatrix:all}.
-																													
-\begin{equation}
-	\footnotesize
-	\begin{split}
-		&\mathbf{R(\phi,\theta,\psi)} = \mathbf{R_z(\psi)}\mathbf{R_y(\theta)}\mathbf{R_x(\phi)} =\\
-		&=	\begin{bmatrix}
-		cos(\theta)cos(\psi)   & cos(\phi)sin(\psi) + cos(\phi)sin(\theta)cos(\psi) & sin(\phi)sin(\psi) - cos(\phi)sin(\theta)cos(\psi) \\
-		-cos(\theta)sin(\psi)  & cos(\phi)cos(\psi) - sin(\phi)sin(\theta)sin(\psi) & sin(\phi)cos(\psi) + cos(\phi)sin(\theta)sin(\psi) \\
-		sin(\theta)            & 			-sin(\phi)cos(\theta) 		            & cos(\phi)cos(\theta)            
-		\end{bmatrix} 
-		\label{eq:appx:rot:rMatrix:all}
-	\end{split}
-\end{equation}
-																														
-\subsubsection*{Pary Osie-Kąt (\emph{ang. Axis--Angle})}
-Reprezentacja orientacji w~postaci pary Osie-Kąt odpowiada za określenie kierunku (osie) oraz wielkości obrotu (kąt). Zapisuje się ją jak we wzorze \ref{eq:appx:rot:angleAxis:form}
-																												
-\begin{equation}
-	\alpha\mathbf{e} = (\alpha, \begin{bmatrix}e_1 & e_2 & e_3\end{bmatrix})
-	\label{eq:appx:rot:angleAxis:form}
-\end{equation}
-																													
-przy założeniu, że wektor $\mathbf{e}$ jest wektorem o~długości 1. 
-Forma ta jest zbliżona do reprezentacji kwaternionowej, jednak nie można używać jej w~obliczeniach z~podobną łatwością.  
-																													
+%\begin{subequations}
+%	\begin{align}
+%		\mathbf{R_x(\alpha)} & = 
+%		\begin{bmatrix}
+%		1            & 0            & 0            \\
+%		0            & cos(\alpha)  & sin(\alpha)  \\
+%		0            & -sin(\alpha) & cos(\alpha)  
+%		\end{bmatrix} 
+%		\label{eq:appx:rot:rMatrix:rx} \\				
+%		\mathbf{R_y(\alpha)} & = 
+%		\begin{bmatrix}
+%		cos(\alpha)  & 0            & -sin(\alpha) \\
+%		0            & 1            & 0            \\
+%		sin(\alpha)  & 0            & cos(\alpha)  
+%		\end{bmatrix} 
+%		\label{eq:appx:rot:rMatrix:ry} \\				
+%		\mathbf{R_z(\alpha)} & = 
+%		\begin{bmatrix}
+%		cos(\alpha)  & sin(\alpha)  & 0            \\
+%		-sin(\alpha) & cos(\alpha)  & 0            \\
+%		0            & 0            & 1            
+%		\end{bmatrix} 
+%		\label{eq:appx:rot:rMatrix:rz}
+%	\end{align}
+%\end{subequations}
+%																													
+%Rotacja o~dowolne kąty względem każdej z~osi rozumiana jest jako iloczyn powyższych macierzy. Końcowa postać macierzy obrotu będąca wynikiem takiego iloczynu wyrażona jest wzorem \ref{eq:appx:rot:rMatrix:all}.
+%																													
+%\begin{equation}
+%	\footnotesize
+%	\begin{split}
+%		&\mathbf{R(\phi,\theta,\psi)} = \mathbf{R_z(\psi)}\mathbf{R_y(\theta)}\mathbf{R_x(\phi)} =\\
+%		&=	\begin{bmatrix}
+%		cos(\theta)cos(\psi)   & cos(\phi)sin(\psi) + cos(\phi)sin(\theta)cos(\psi) & sin(\phi)sin(\psi) - cos(\phi)sin(\theta)cos(\psi) \\
+%		-cos(\theta)sin(\psi)  & cos(\phi)cos(\psi) - sin(\phi)sin(\theta)sin(\psi) & sin(\phi)cos(\psi) + cos(\phi)sin(\theta)sin(\psi) \\
+%		sin(\theta)            & 			-sin(\phi)cos(\theta) 		            & cos(\phi)cos(\theta)            
+%		\end{bmatrix} 
+%		\label{eq:appx:rot:rMatrix:all}
+%	\end{split}
+%\end{equation}
+%																														
+%\subsubsection*{Pary Osie-Kąt (\emph{ang. Axis--Angle})}
+%Reprezentacja orientacji w~postaci pary Osie-Kąt odpowiada za określenie kierunku (osie) oraz wielkości obrotu (kąt). Zapisuje się ją jak we wzorze \ref{eq:appx:rot:angleAxis:form}
+%																												
+%\begin{equation}
+%	\alpha\mathbf{e} = (\alpha, \begin{bmatrix}e_1 & e_2 & e_3\end{bmatrix})
+%	\label{eq:appx:rot:angleAxis:form}
+%\end{equation}
+%																													
+%przy założeniu, że wektor $\mathbf{e}$ jest wektorem o~długości 1. 
+%Forma ta jest zbliżona do reprezentacji kwaternionowej, jednak nie można używać jej w~obliczeniach z~podobną łatwością.  
+%																													
 \subsubsection*{Kwaterniony}
-Ostatnią z~prezentowanych reprezentacji orientacji obiektu są kwaterniony. Są to liczby z~ciała liczb zespolonych, składające się z~części rzeczywistej oraz części urojonej. Część urojona reprezentowana jest przez 3 liczby określające wektor obrotu, zaś część rzeczywista składa się z jednej liczby określającej kąt obrotu wokół danego wektora obrotu. Jej zaletą jest łatwość i~zwięzłość zapisu operacji obrotu obiektu oraz składania sekwencji obrotów. Obarczone jest to jednak utrudnioną interpretacją tego zapisu przez człowieka. Aby na podstawie kwaternionu określić pod jakim kątem w~stosunku do poszczególnych osi układu znajduje się obiekt, należy dokonać szeregu operacji arytmetycznych. Ogólna postać kwaternionu wyrażona jest jak we wzorze \ref{eq:appx:rot:quat}:
+Reprezentacja orientacji w~postaci kątów Eulera jest intuicyjna z~punktu widzenia interpretacji przez człowieka, ale w systemach komputerowych, ze względu na chociażby problem blokady przegubu, wymaga implementacji dodatkowych mechanizmów zabezpieczających przed niepoprawną interpretacją danych. W związku z tym, zasadnym jest wykorzystywanie w systemach komputerowych innych sposobów reprezentacji obrotów, które nie są obarczone ewentualnymi błędami interpretacyjnymi. Jednym z możliwych rozwiązań jest wykorzystanie kwaternionów (zbiór kwaternionów oznaczany jest w matematyce jako $\mathbb{H}$) -- liczb z~ciała liczb zespolonych, składających się z~części rzeczywistej oraz części urojonej. Postać analityczną kwaternionu $q \in\mathbb{H}$ można przedstawić jako  $q = {q_0 + q_1 i + q_2 j + q_3 k : q_0, q_1, q_2, q_3 \in \mathbb{R}}$, gdzie $i^2 = j^2 = k^2 = -1$ \cite{Huerta2010}. Część urojona reprezentowana jest przez 3 liczby określające wektor obrotu ($ q_1, q_2, q_3$), zaś część rzeczywista składa się z jednej liczby określającej kąt obrotu wokół danego wektora obrotu ($q_0$). Zaletą kwaternionów jest łatwość i~zwięzłość zapisu operacji obrotu obiektu oraz składania sekwencji obrotów. Obarczone jest to jednak utratą możliwości łatwego odczytania przez człowieka wartości obrotów wokół każdej z osi układu współrzędnych. Kwaterniony przedstawione w postaci analitycznej rzadko są wykorzystywane w implementacjach komputerowych. W systemach komputerowych, często spotykana jest reprezentacja kwaternionów w postaci wektorów tak jak we wzorze \ref{eq:appx:rot:quat}:
 																													
 \begin{equation}
 	\label{eq:appx:rot:quat}
@@ -541,67 +549,56 @@ Ostatnią z~prezentowanych reprezentacji orientacji obiektu są kwaterniony. Są
 		e_3sin(\frac{\alpha}{2}) 
 	\end{bmatrix}
 \end{equation}
-gdzie $q_{0-1}, q_{w-z}, e_{1-3} \in \mathbb{R}, \alpha \in [-\pi \pi], \sqrt{e_1^2 + e_2^2 + e_3^2} = 1$
+, gdzie $q_w,q_x,q_y,q_z,e_1,e_2,e_3 \in \mathbb{R}, \alpha \in [-\pi, \pi], \sqrt{e_1^2 + e_2^2 + e_3^2} = 1$.
 																													
-Wartości kąta $\alpha$ oraz $e_{1-3}$ są tożsame z~reprezentacją w~postaci Osie-Kąt.
+Wartości kąta $\alpha$ oraz wektor $[e_1,e_2,e_3]$ są tożsame z~reprezentacją w~postaci Osie-Kąt.
 																													
-Wzór \ref{eq:appx:rot:quat} nie wyczerpuje wszystkich reprezentacji kwaternionów jakie występują w~literaturze. Widać na nim jednak, że określenie o~ile stopni obrócono obiekt jest przynajmniej trudne. Wybierając notację dla zapisu kwaternionów należy szczególnie zadbać o~określenie, która z~wartości w~wektorze odpowiada za część rzeczywistą, a~które za część urojoną. W~niniejszej pracy część rzeczywista reprezentowana jest przez element wektora oznaczony indeksem $0$ lub $w$. Wzór \ref{eq:appx:rot:quat} pokazuje też związek pomiędzy kwaternionem a~reprezentacją w~postaci pary Osie-Kąt.
+Wzór \ref{eq:appx:rot:quat} nie wyczerpuje jednak wszystkich reprezentacji kwaternionów jakie występują w~literaturze. Wybierając notację dla zapisu kwaternionów należy szczególnie zadbać o~określenie, która z~wartości w~wektorze odpowiada za część rzeczywistą, a~które za część urojoną. W~niniejszej pracy część rzeczywista reprezentowana jest przez element wektora oznaczony indeksem $0$ lub $w$. Wzór \ref{eq:appx:rot:quat} pokazuje też związek pomiędzy kwaternionem, a~reprezentacją w~postaci pary Osie-Kąt.
 																													
 Aby skutecznie dokonywać obliczeń za pomocą kwaternionów muszą być one znormalizowane, czyli spełniać zależność $\|\mathbf{q}\| = 1$.
 																													
 Opis operacji matematycznych oraz geometrycznych jakie wykonywane mogą być na kwaternionach można znaleźć w~szeregu publikacji (na przykład \cite{Dantam2014}) na ten temat, a~także w~podręcznikach akademickich dotyczących matematyki.
 																													
 \subsubsection*{Konwersje}
-Dla każdej z~powyższych reprezentacji orientacji istnieje możliwość dokonania konwersji na dowolną inną. Taka operacja może być przydatna jeśli chcemy, na przykład, prezentować aktualną orientację obiektu użytkownikowi, a~postać, która jest używana przy obliczeniach nie jest intuicyjnie interpretowalna przez człowieka. Z~uwagi na to, że w~niniejszej pracy do wyrażenia orientacji i~obrotów wykorzystane były dwie formy reprezentacji: kąty Eulera oraz kwaterniony, konwersja pomiędzy tymi dwoma reprezentacjami została przedstawiona poniżej.
-																													
-\subsubsection*{Kąty Eulera $\rightarrow$ Kwaternion}
-Przyjmując, że kąty Eulera wyrażone są przez sekwencję obrotów $Z-Y-X$ (\emph{ang. Tait–Bryan angles}), konwersja z~reprezentacji za pomocą kątów Eulera do reprezentacji za pomocą kwaternionów wyrażona jest wzorem \ref{eq:appx:rot:eulerToQuat}
+Dla każdej z~powyższych reprezentacji orientacji istnieje możliwość dokonania konwersji na dowolną inną. Taka operacja może być przydatna jeśli chcemy, na przykład, prezentować aktualną orientację obiektu użytkownikowi, a~postać, która jest używana przy obliczeniach nie jest intuicyjnie interpretowalna przez człowieka. Z~uwagi na to, że w~niniejszej pracy do wyrażenia orientacji przestrzennej kości wykorzystane były dwie formy reprezentacji: kąty Eulera oraz kwaterniony, konwersja pomiędzy tymi dwoma reprezentacjami została przedstawiona w niniejszym rozdziale.
+
+Przyjmując, że kąty Eulera wyrażone są przez sekwencję obrotów $\psi-\theta-\phi$ (\emph{ang. Tait–Bryan angles}) oraz $[\cos(\frac{\psi}{2}), 0, 0, \sin(\frac{\psi}{2})]^T$, $[\cos(\frac{\theta}{2}), 0, \sin(\frac{\theta}{2}), 0]^T$, $[\cos(\frac{\phi}{2}), \sin(\frac{\phi}{2}), 0, 0]^T$ to kwaterniony określające obroty o zadany kąt wokół każdej z osi układu współrzędnych indywidualnie, wówczas konwersja z~reprezentacji za pomocą kątów Eulera do reprezentacji w postaci kwaternionów wyrażona jest wzorem \ref{eq:appx:rot:eulerToQuat}:
 																													
 \begin{equation}
 	\label{eq:appx:rot:eulerToQuat}
+	q = 
 	\begin{bmatrix}
 		q_w \\
 		q_x \\
 		q_y \\
 		q_z 
 	\end{bmatrix} 
-	= 
+	= 	\begin{bmatrix}\cos(\frac{\psi}{2})\\ 0\\ 0\\ \sin(\frac{\psi}{2})\end{bmatrix}\begin{bmatrix}\cos(\frac{\theta}{2})\\ 0\\ \sin(\frac{\theta}{2})\\ 0\end{bmatrix}\begin{bmatrix}\cos(\frac{\phi}{2})\\ \sin(\frac{\phi}{2})\\ 0\\ 0\end{bmatrix} = 
 	\begin{bmatrix}
-		\cos{\frac{\psi}{2}}\cos{\frac{\theta}{2}}\cos{\frac{\phi}{2}}+\sin{\frac{\psi}{2}}\sin{\frac{\theta}{2}}\sin{\frac{\phi}{2}} \\
-		\cos{\frac{\psi}{2}}\cos{\frac{\theta}{2}}\sin{\frac{\phi}{2}}-\sin{\frac{\psi}{2}}\sin{\frac{\theta}{2}}\cos{\frac{\phi}{2}} \\
-		\cos{\frac{\psi}{2}}\sin{\frac{\theta}{2}}\cos{\frac{\phi}{2}}+\sin{\frac{\psi}{2}}\cos{\frac{\theta}{2}}\sin{\frac{\phi}{2}} \\
-		\sin{\frac{\psi}{2}}\cos{\frac{\theta}{2}}\cos{\frac{\phi}{2}}-\cos{\frac{\psi}{2}}\sin{\frac{\theta}{2}}\sin{\frac{\phi}{2}} 
+		\cos{\frac{\phi}{2}}\cos{\frac{\theta}{2}}\cos{\frac{\psi}{2}}+\sin{\frac{\phi}{2}}\sin{\frac{\theta}{2}}\sin{\frac{\psi}{2}} \\
+		\sin{\frac{\phi}{2}}\cos{\frac{\theta}{2}}\cos{\frac{\psi}{2}}-\cos{\frac{\phi}{2}}\sin{\frac{\theta}{2}}\sin{\frac{\psi}{2}} \\
+		\cos{\frac{\phi}{2}}\sin{\frac{\theta}{2}}\cos{\frac{\psi}{2}}+\sin{\frac{\phi}{2}}\cos{\frac{\theta}{2}}\sin{\frac{\psi}{2}} \\
+		\cos{\frac{\phi}{2}}\cos{\frac{\theta}{2}}\sin{\frac{\psi}{2}}-\sin{\frac{\phi}{2}}\sin{\frac{\theta}{2}}\cos{\frac{\psi}{2}} 
 	\end{bmatrix}
 \end{equation}
-																													
-\subsubsection*{Kwaternion $\rightarrow$ Kąty Eulera}
-Przy analogicznych założeniach co do sekwencji kątów Eulera, konwersja z~postaci kwaternionowej wyrażona jest wzorem \ref{eq:appx:rot:quatToEuler}.
-																													
-\begin{equation}	
-	\label{eq:appx:rot:quatToEuler}
-	\begin{matrix}
-		\begin{matrix}                                                   
-		\theta = arcsin(-2(q_x q_z-q_w q_y))                             \\
-		\psi = arctan2((q_y q_z + q_w q_x), \frac{1}{2}-(q_x^2 + q_y^2)) \\
-		\phi = arctan2((q_x q_y + q_w q_z), \frac{1}{2}-(q_y^2 + q_z^2)) 
-	\end{matrix} & \quad \text{if } 2(q_x q_z-q_w q_y) \ne \pm 1 \\
-	& \\	
-	& \\
-	\begin{matrix}
-		\theta = \frac{-\pi}{2}                                         \\
-		\phi + \psi = arctan2((q_x q_y - q_w q_z), (q_x q_z + q_w q_y)) 
-	\end{matrix} & \quad \text{if } 2(q_x q_z-q_w q_y) = +1 \\
-	& \\	
-	& \\
-	\begin{matrix}
-		\theta = \frac{\pi}{2}                                          \\
-		\phi - \psi = arctan2((q_x q_y - q_w q_z), (q_x q_z + q_w q_y)) 
-	\end{matrix} & \quad \text{if } 2(q_x q_z-q_w q_y) = -1 
-	\end{matrix}
-\end{equation}
+
+Zmiana sekwencji obrotów w postaci kątów Eulera	wpływa na kolejność wykonywanych mnożeń kwaternionów w czasie konwersji.
+
+Przy tożsamej sekwencji kątów Eulera jak przy poprzednio przedstawionej konwersji, konwersja z~postaci kwaternionowej ($q = [q_w, q_x, q_y, q_z]^T$) do kątów Eulera ($[\phi, \theta, \psi]^T$) wyrażona jest wzorem \ref{eq:appx:rot:quatToEuler}:
+		
+		\begin{equation}
+		\label{eq:appx:rot:quatToEuler}
+		\begin{bmatrix}\theta \\ \phi \\ \psi \end{bmatrix} =	
+		\begin{bmatrix}                                                   
+	arcsin(2(q_w q_y - q_x q_z))                             \\
+	arctan2(2(q_y q_z + q_w q_x), 1-2(q_x^2 + q_y^2)) \\
+	arctan2(2(q_x q_y + q_w q_z), 1-2(q_y^2 + q_z^2)) 
+	\end{bmatrix} 		
+		\end{equation}
+		
 																													
 \section{Charakterystyka wykorzystywanych urządzeń pomiarowych}\label{chap:characteristics}
-W niniejszej pracy zostały wykorzystane dwa typy urządzeń: kamera RGB-D w~postaci kontrolera ruchu Microsoft Kinect dla konsoli gier Microsoft XBox 360 oraz inercyjne czujniki ruchu (\emph{ang. Inertial Measurement Unit - IMU}): akcelerometr i~żyroskop. Ich powszechna dostępność sprawiła, że zagadnienie śledzenia ruchu ciała ludzkiego przestało być zarezerwowane jedynie dla profesjonalistów dysponujących drogim i~bardzo rozbudowanym systemem śledzenia oraz rejestrowania ruchu (\emph{ang. Motion Capture}, MoCap). Korzystając z~obu typów urządzeń należy zwrócić szczególną uwagę na charakterystykę ich działania oraz ograniczenia takie jak wrażliwość na okluzje sensora głebi, niedokładność pomiarów, czy wręcz ich brak, dla niektórch stopni swobody czujników inercyjnych. Świadomość ta jest niezbędna przy budowaniu algorytmów śledzenia ruchu w~oparciu o~wymienione urządzenia. 
+W niniejszej pracy zostały wykorzystane dwa typy urządzeń: kamera RGB-D w~postaci kontrolera ruchu Microsoft Kinect dla konsoli gier Microsoft XBox 360 oraz inercyjne czujniki ruchu (\emph{ang. Inertial Measurement Unit - IMU}): akcelerometr i~żyroskop. Ich powszechna dostępność sprawiła, że zagadnienie śledzenia ruchu ciała ludzkiego przestało być zarezerwowane jedynie dla profesjonalistów dysponujących drogim i~bardzo rozbudowanym systemem śledzenia oraz rejestrowania ruchu (\emph{ang. Motion Capture}). Korzystając z~obu typów urządzeń należy zwrócić szczególną uwagę na charakterystykę ich działania oraz ograniczenia takie jak wrażliwość na okluzje sensora głębi, niedokładność pomiarów, czy wręcz ich brak, dla niektórych stopni swobody czujników inercyjnych. Świadomość ta jest niezbędna przy budowaniu algorytmów śledzenia ruchu w~oparciu o~wymienione urządzenia. 
 																													
 \subsection{Kontroler Microsoft Kinect v. 1}\label{sec:characteristics:kinect}
 Pierwsza wersja kontrolera ruchu Microsoft Kinect została oficjalnie udostępniona do sprzedaży rynkowej w~2010 roku (wcześniej prezentowano prototypy pod nazwą kodową ''Project Natal''). Urządzenie to stało się pierwszym, powszechnie dostępnym, kontrolerem śledzącym ruch użytkownika bez wykorzystywania markerów, który odniósł faktyczny sukces komercyjny\footnote{W lutym 2013 łączna sprzedaż kontrolera Microsoft Kinect osiągnęła 24 miliony sztuk \footfullcite{footnote:kinectSales2013}}.  
