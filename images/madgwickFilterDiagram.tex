@@ -1,0 +1,47 @@
+\begin{tikzpicture}
+	
+
+	\begin{scope}
+		\node[dspnodeopen,dsp/label=left, xshift=-6cm] (accInput) {$\text{Akcelerometr}^S_{\hat{a}_t}$}; 
+	
+		\node[dspsquare, right=of accInput]                   (accFilter) {$\mathbf{J}^T_g(^S_E \hat{q}_{est, t-1})\mathbf{f}_g(^S_E \hat{q}_{est, t-1}, ^S\hat{a}_t)$};
+		\node[dspsquare, below=of accFilter]                   (accGrad) {$\frac{\nabla \mathbf{f}}{\norm{\nabla \mathbf{f}}}$};
+		\node[dspmixer, dsp/label=right, below=of accGrad]   (accMulti) {$-\beta$};	
+	
+		\node[dspadder, below=of accMulti, below=of accMulti,dsp/label=below]		               (adder) {};	
+		\node[dspsquare, left=of adder]                   (gyroFilter) {$\frac{1}{2}{^S_E \hat{q}_{est, t-1}}\otimes {^S{\omega_t}}$};	
+		\node[dspnodeopen,dsp/label=left, left=of gyroFilter, xshift=-1cm] (gyroInput) {$\text{Żyroskop}^S_{\omega_t}$}; %		
+		
+		\node[dspsquare, right=of adder]                   (integral) {$\int .dt$};
+		\node[dspsquare, right=of integral]                   (intGrad) {$\frac{\nabla \mathbf{q}}{\norm{\nabla \mathbf{q}}}$};
+		\node[dspnodefull, right=of intGrad]                 (outPoint) {};    
+		\node[dspsquare, above=of outPoint]                   (accDelay) {$\z^{-1}$};
+		\node[dspsquare, below=of outPoint]                   (gyroDelay) {$\z^{-1}$};
+		\node[dspnodefull, below=of integral]                 (gyroDelayPoint) {};    
+		\node[dspnodeopen,dsp/label=right, right=of outPoint] (output) {$^S_E \hat{q}_{est, t}$}; 
+	\end{scope}
+
+	\begin{scope}
+		\draw[dspconn] (accInput) -- (accFilter);
+		\draw[dspconn] (accFilter) -- (accGrad);
+		\draw[dspconn] (accGrad) -- (accMulti);
+		\draw[dspconn] (accMulti) -- (adder);
+		
+		\draw[dspconn] (gyroInput) -- (gyroFilter);
+		\draw[dspconn] (gyroFilter) -- (adder);
+		
+		\draw[dspconn] (adder) -- node[midway,below, yshift=-0.5cm] {$^S_E\dot{\mathbf{q}}_{est,t}$} (integral);
+		\draw[dspconn] (integral) -- (intGrad);
+		\draw[dspline] (intGrad) -- (outPoint);		
+		
+		\draw[dspconn] (outPoint) -- (output);		
+		\draw[dspconn] (outPoint) -- (gyroDelay);		
+		\draw[dspconn] (outPoint) -- (accDelay);		
+		
+		\draw[dspconn] (accDelay) |- (accFilter);
+		\draw[dspline] (gyroDelay.west) -- (gyroDelayPoint);
+		
+		\draw[dspconn] (gyroDelayPoint) -- (integral);
+		\draw[dspconn] (gyroDelayPoint) -| (gyroFilter);
+	\end{scope}
+\end{tikzpicture}

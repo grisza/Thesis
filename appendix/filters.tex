@@ -1,3 +1,6 @@
+% !TeX root = main.tex
+% !TeX spellcheck = pl_PL
+% !TeX encoding = UTF-8
 \chapter{Popularne metody filtracji i estymacji sygnałów pomiarowych}
 \label{chap:appx:filters}
 Istotnym etapem przetwarzania sygnałów jest ich filtracja. Zazwyczaj celem tej operacji jest usunięcie niepożądanego szumu z~uzyskanych pomiarów.~Znanych jest wiele metod filtracji, które weszły do powszechnego użytku, jednak szczególną grupą filtrów są filtry Kalmana.~Przez ponad 50 lat znalazły one zastosowanie w~przemyśle, a~także stały się obiektem wielu\footnote{W samej tylko bibliotece cyfrowej IEEE Xplore (\url{http://ieeexplore.ieee.org}) wyszukiwanie frazy ''Kalman filter'' zwraca około 25000 wyników.} badań i~opracowań naukowych \cite{Droleta,Welch2006, Kedzierski2007, Huo2014, Pandey2014}.
@@ -304,7 +307,20 @@ Zarówno wspomniany już Higgins, jak i~Brown \cite{BROWN1972} w~swoich artykuł
 Podobnie jak w~przypadku filtru Kalmana, istnieje także wariant filtra komplementarnego dla sygnałów nieliniowych. W~podobnym kontekście prace nad opracowaniem takiego filtra prowadził między innymi Robert Mahoney, który zaprezentował serię artykułów przedstawiających zarówno sam filtr, jak i~sposób jego projektowania oraz zastosowanie \cite{Baldwin2007,Mahony2005a,Mahony2008,Euston2008}. 
 Na bazie tych prac w~2010 roku Sebastian Madgwick opracował autorską metodę \cite{Madgwick2010,Madgwick2011} integracji danych z~czujników inercyjnych i~magnetycznych w~celu wyznaczenia orientacji w~przestrzeni obserwowanego obiektu. Algorytm ten według opublikowanych wyników eksperymentów wykazuje większą dokładność niż algorytm oparty o~filtr Kalmana. Analizując budowę tego filtra oraz schemat zamieszczony w~publikacji autora warto zauważyć jego analogię do schematu filtra komplementarnego (rys. \ref{fig:appx:CF:algorithmA}).
 %Rysunek \ref{fig:appx:Madg:algorithm} przedstawia schemat działania filtru Madgwicka. Warto zauważyć, że analogię w~jego budowie do schematu filtra komplementarnego \ref{fig:appx:CF:algorithmA}.
-				
+		
+		\begin{savenotes}
+			\begin{figure}[!htb]	
+				\centering
+				\scalebox{1}{													
+					\input{images/madgwickFilterDiagram.tex}
+				}
+				\caption{Diagram blokowy przedstawiający filtr Madgwicka dla czujników inercyjnych}
+				\label{fig:appx:Madg:algorithm}
+			\end{figure}
+			\end{savenotes}
+		
+		
+			
 %\begin{savenotes}
 %\begin{figure}[!htb]
 %	\centering 
