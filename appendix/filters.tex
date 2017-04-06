@@ -88,7 +88,7 @@ Obie fazy wykonywane są cyklicznie, a~kompletny algorytm przedstawia schemat z 
 					\end{itemize}}                                                    
 				\end{tabular} 
 			};
-																																																
+																																																						
 			\node [block, right =1cm of predicate] (correction)      
 			{  
 				\begin{tabular}{l}
@@ -226,20 +226,20 @@ Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został 
 					input/.style    = {coordinate}, % Input
 					output/.style   = {coordinate} % Output
 				}
-																																																																							
+																																																																															
 				\draw
 				node at (0,0)[right=-3mm]{\Large \textopenbullet}
 				node [input, name=xSignal] {} 
 				node at (4,0) [block] (lpf) {$G(s)$}
-																																																																							
+																																																																															
 				node at (0,-2)[right=-3mm]{\Large \textopenbullet}
 				node [input, below of=xSignal, name=ySignal] {} 
 				node at (4,-2)[block] (hpf) {$1-G(s)$}
-																																																																							
+																																																																															
 				node at (7, -1) [sum, name=suma]{\suma}
-																																																																							
+																																																																															
 				node [output, right of=suma](out) {} ;
-																																																																							
+																																																																															
 				\draw[->](xSignal) -- node {$x = z~+ n_1$}(lpf);
 				\draw[->](ySignal) -- node {$y = z~+ n_2$}(hpf);
 				\draw[->](hpf) -| node {}(suma);
@@ -249,7 +249,7 @@ Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został 
 			\caption{Wariant podstawowy}
 			\label{fig:appx:CF:algorithmA}			
 		\end{subfigure}
-																					
+																									
 		\begin{subfigure}[b]{0.49\textwidth}
 			\centering
 			\begin{tikzpicture}[auto, thick, node distance=2cm, >=triangle 45]
@@ -260,28 +260,28 @@ Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został 
 					input/.style    = {coordinate}, % Input
 					output/.style   = {coordinate} % Output
 				}
-																																																																							
+																																																																															
 				\draw
 				node at (0,0)[right=-3mm]{\Large \textopenbullet}
 				node [input, name=xSignal] {} 		
 				node at (3,0)[right=-2.5mm](point){\Large \textbullet}
-																																																																							
+																																																																															
 				node at (0,-2)[right=-3mm]{\Large \textopenbullet}		
 				node [input, below of=xSignal, name=ySignal] {} 
 				node at (3, -2) [sum, name=sum1]{$-$}
 				node at (6,-2)[block] (lpf) {$G(s)$}
-																																																																							
+																																																																															
 				node at (8, -1) [sum, name=sum2]{\suma}
-																																																																							
+																																																																															
 				node [output, right of=sum2](out) {} ;
-																																																																							
+																																																																															
 				\draw[->](xSignal) -- node {$x = z~+ n_1$}(point);
 				\draw[->](point) -- node {}(sum1);
 				\draw[->](point) -| node {}(sum2);
 				\draw[->](ySignal) -- node {$y = z~+ n_2$}(sum1);
 				\draw[->](sum1) -- node {$n_2-n_1$}(lpf);		
 				\draw[->](lpf) -| node {}(sum2);
-																																																																							
+																																																																															
 				\draw[->](sum2) -- node {$\widehat{z}$}(out);
 			\end{tikzpicture}
 			\caption{Wariant pracujący na szumie}
@@ -305,55 +305,127 @@ gdzie:
 Zarówno wspomniany już Higgins, jak i~Brown \cite{BROWN1972} w~swoich artykułach pokazali związek pomiędzy filtrem Kalmana i~filtrem komplementarnym. Wykazali tym samym, że może on stanowić mniej złożoną i~mniej kosztowną obliczeniowo alternatywę dla filtru Kalmana bez znaczącej utraty jakości uzyskanego wyniku. Zagadnienie, w~kontekście którego odbywały się badania nad tym filtrem, obejmowało problem integracji sygnałów z~urządzeń pozwalających wyznaczyć prędkości oraz kierunek ruchu obiektu (w tym przypadku chodziło o~poruszanie się pojazdów kosmicznych).
 \section*{Filtry Mahoney'a i~Madgwicka}
 Podobnie jak w~przypadku filtru Kalmana, istnieje także wariant filtra komplementarnego dla sygnałów nieliniowych. W~podobnym kontekście prace nad opracowaniem takiego filtra prowadził między innymi Robert Mahoney, który zaprezentował serię artykułów przedstawiających zarówno sam filtr, jak i~sposób jego projektowania oraz zastosowanie \cite{Baldwin2007,Mahony2005a,Mahony2008,Euston2008}. 
-Na bazie tych prac w~2010 roku Sebastian Madgwick opracował autorską metodę \cite{Madgwick2010,Madgwick2011} integracji danych z~czujników inercyjnych i~magnetycznych w~celu wyznaczenia orientacji w~przestrzeni obserwowanego obiektu. Algorytm ten według opublikowanych wyników eksperymentów wykazuje większą dokładność niż algorytm oparty o~filtr Kalmana. Analizując budowę tego filtra oraz schemat zamieszczony w~publikacji autora warto zauważyć jego analogię do schematu filtra komplementarnego (rys. \ref{fig:appx:CF:algorithmA}).
-%Rysunek \ref{fig:appx:Madg:algorithm} przedstawia schemat działania filtru Madgwicka. Warto zauważyć, że analogię w~jego budowie do schematu filtra komplementarnego \ref{fig:appx:CF:algorithmA}.
+Na bazie tych prac w~2010 roku Sebastian Madgwick opracował autorską metodę \cite{Madgwick2010,Madgwick2011} integracji danych z~czujników inercyjnych i~magnetycznych w~celu wyznaczenia orientacji w~przestrzeni obserwowanego obiektu. Algorytm ten, według opublikowanych wyników eksperymentów, wykazuje większą dokładność niż algorytm oparty o~filtr Kalmana.
+Pierwszym krokiem wykonywanym przez ten filtr jest wyznaczenie orientacji modułu inercyjnego na podstawie odczytów z żyroskopu oraz akcelerometru, a także wykorzystując dotychczasową estymację tego filtra. Przyjmując oznaczenia zaproponowane przez Madgwicka, $^S \omega = [0,\omega_x,\omega_y,\omega_z]$ wyraża dane otrzymane z~żyroskopu, natomiast pochodna kwaternionu opisującego zmianę orientacji czujnika inercyjnego względem Ziemi wyrażona jest wzorem \ref{eq:mad:11}:
+
+\begin{equation}
+	{^S_E \dot{q}} = \frac{1}{2}{^S_E \hat{\mathbf{q}}}\otimes {^S{\omega}}
+	\label{eq:mad:11}
+\end{equation}
+
+, gdzie ${^S_E \hat{\mathbf{q}} = [q_1,q_2,q_3,q_4]}$ \footnote{$q_4$ w tym przypadku oznacza część rzeczywistą kwaternionu} oznacza dotychczasową orientację czujnika. Wykorzystując wzór \ref{eq:mad:11}, możliwe jest określenie bieżącej orientacji czujnika względem Ziemi w~chwili czasowej $t$ ($^S_E{\mathbf{q}}_{\omega,t}$) za pomocą całkowania numerycznego pochodnej $^S_E\dot{\mathbf{q}}_{\omega,t}$ wyznaczonej na podstawie aktualnego odczytu danych żyroskopu i estymacji orientacji czujnika w chwili $t-1$ (${^S_E \hat{q}_{est, t-1}}$) zgodnie ze wzorem \ref{eq:mad:12}: 
+
+\begin{equation}
+	^S_E\dot{\mathbf{q}}_{\omega,t} = \frac{1}{2}{^S_E \hat{q}_{est, t-1}}\otimes {^S{\omega_t}}
+	\label{eq:mad:12}
+\end{equation}
+
+Przyjmując, ze $\Delta t$ oznacza czaj próbkowania, wówczas aktualna orientacja czujnika, wyznaczona na podstawie odczytów z żyroskopu, wyrażona jest wzorem ref{eq:mad:13}:
+\begin{equation}
+	^S_E{\mathbf{q}}_{\omega,t} = {^S_E \hat{q}_{est, t-1}}\otimes {^S_E\dot{\mathbf{q}}_{\omega,t}}\Delta t
+\end{equation}	
+
+Na podstawie pomiarów czujnika ${^S\hat{\mathbf{s}}} = [0,s_x,s_y,s_z]$ określającego kierunki sił działających w polu grawitacyjnym (akcelerometr) lub magnetycznym (magnetometr)  możliwe jest wyznaczenie orientacji czujnika w tym polu. W związku z tym, definiując referencyjny kierunek działania sił ${^E\hat{\mathbf{d}}} = [0,d_x,d_y,d_z]$, jednoznaczne wyznaczenie orientacji przestrzennej można przedstawić jako problem optymalizacji $\underset{{^S_E \hat{q}} \in \Re^4}{\min} \mathbf{f}({^S_E \hat{q}},{^E\hat{\mathbf{d}}} , {^S\hat{\mathbf{s}}})$ gdzie funkcja $\mathbf{f}()$ wyrażona wzorem \ref{eq:mad:15}:
+
+\begin{equation}
+	\begin{split}
+		&\mathbf{f}({^S_E \hat{q}},{^E\hat{\mathbf{d}}} , {^S\hat{\mathbf{s}}}) = {^S_E \hat{\mathbf{q}}}^* \otimes {^E\hat{\mathbf{d}}} \otimes {^S_E \hat{\mathbf{q}}} - {^S\hat{\mathbf{s}}} = \\
+		&\begin{bmatrix}
+			2d_x(1/2 - q_3^2 - q_4^2) + 2d_y(q_1 q_4 + q_2 q_3)+2d_z(q_2 q_4 - q_1 q_3) - s_x \\
+			2d_x(q_2 q_3 - q_1 q_4) + 2d_y(1/2 - q_2^2 - q_4^2)+2d_z(q_1 q_2 + q_3 q_4) - s_y \\
+			2d_x(q_1 q_3 + q_2 q_4) + 2d_y(q_3 q_4 + q_1 q_2)+2d_z(1/2 - q_2^2 - q_3^2) - s_z 
+		\end{bmatrix}
+	\end{split}
+	\label{eq:mad:15}
+\end{equation}
+
+wyznacza różnicę pomiędzy pomiarami czujnika, a wartościami referencyjnym. Symbol ${^S_E \hat{\mathbf{q}}}^*$ oznacza koniugację kwaternionu ${^S_E \hat{\mathbf{q}}}$.
+W przypadku omawianego filtru Madgwicka, metoda optymalizująca funkcję $\mathbf{f}()$ została zaimplementowana w formie iteracyjnej metody malejących gradientów zgodnie ze wzorem \ref{eq:mad:19}:
+\begin{equation}
+	{^S_E {q}_{k+1}} = {^S_E \hat{q}_{k}} - \mu \frac{\nabla \mathbf{f}({^S_E \hat{q}},{^E\hat{\mathbf{d}}} , {^S\hat{\mathbf{s}}})}{\norm{\nabla \mathbf{f}({^S_E \hat{q}},{^E\hat{\mathbf{d}}} , {^S\hat{\mathbf{s}}})}} , k = 0,1,2 \ldots n
+	\label{eq:mad:19}
+\end{equation}
+, gdzie $\mu$ oznacza rozmiar kroku przesunięcia danych pomiędzy iteracjami, natomiast gradient funkcji $\mathbf{f}()$ (wz. \ref{eq:mad:15}) przedstawia wzór \ref{eq:mad:20}
+
+\begin{equation}
+	\nabla \mathbf{f}({^S_E \hat{q}},{^E\hat{\mathbf{d}}} , {^S\hat{\mathbf{s}}}) = \mathbf{J}^T ({^S_E \hat{q}},{^E\hat{\mathbf{d}}})\mathbf{f}({^S_E \hat{q}},{^E\hat{\mathbf{d}}} , {^S\hat{\mathbf{s}}})
+	\label{eq:mad:20}
+\end{equation}
+
+, gdzie $\mathbf{J}({^S_E \hat{q}},{^E\hat{\mathbf{d}}})$ przedstawia Jakobian wyrażony wzorem \ref{eq:mad:22}.
+
+\begin{equation}
+	\begin{split}
+		&\mathbf{J}({^S_E \hat{q}},{^E\hat{\mathbf{d}}}) = \\
+		&\begin{bmatrix}
+			2d_y q_4 - 2d_z q_3  & 2d_y q_3 + 2d_z q_4            & -4d_x q_3 + 2d_y q_2 - 2d_z q_1 & -4d_x q_4 + 2d_y q_1 + 2d_z q_2 \\
+			-2d_x q_4 + 2d_z q_2 & 2d_x q_3 - 4d_y q_2 + 2d_z q_1 & 2d_x q_2 + 2d_z q_4             & -2d_x q_1 - 4d_y q_4 + 2d_z q_3 \\
+			2d_x q_3 - 2d_y q_2  & 2d_x q_4 - 2d_y q_1 - 4d_z q_2 & 2d_x q_1 + 2d_y q_4 - 4d_z q_3  & 2d_x q_2 + 2d_y q_3             
+		\end{bmatrix}
+	\end{split}
+	\label{eq:mad:22}
+\end{equation}
+
+Przyjmując, że wykorzystywanym czujnikiem jest akcelerometr (${^S\hat{\mathbf{a}}} = [0,a_x,a_y,a_z]$) działający w polu grawitacyjnym Ziemi ${^E\hat{\mathbf{g}}} = [0,0,0,1]$, wówczas funkcja ze wzoru \ref{eq:mad:15} przyjmuje postać jak we wzorze \ref{eq:mad:25}
+
+\begin{equation}
+	\mathbf{f}({^S_E \hat{q}},{^S\hat{\mathbf{a}}}) = 
+	\begin{bmatrix}
+		2(q_2 q_4 - q_1 q_3) - a_x   \\
+		2(q_1 q_2 + q_3 q_4) - a_y   \\
+		2(1/2 - q_2^2 + q_3^2) - a_z 
+	\end{bmatrix}
+	\label{eq:mad:25}
+\end{equation}
+
+natomiast Jakobian przyjmuje postać przedstawioną we wzorze \ref{eq:mad:26}
+
+\begin{equation}
+	\mathbf{J}_g({^S_E \hat{q}}) = 
+	\begin{bmatrix}
+		-2q_3 & 2q_4  & -2q_1 & 2q_2 \\
+		2q_2  & 2q_1  & 2q_4  & 2q_3 \\
+		0     & -4q_2 & -4q_3 & 0    
+	\end{bmatrix}
+	\label{eq:mad:26}
+\end{equation}
+
+Na podstawie wzorów \ref{eq:mad:19}, \ref{eq:mad:25}, \ref{eq:mad:26}, orientacja przestrzenna akcelerometru w~polu grawitacyjnym Ziemi w chwili $t$ wyrażona jest wzorem \ref{eq:mad:33}
+
+\begin{equation}
+	{^S_E {q}_{\nabla, t}} = {^S_E \hat{q}_{est, t-1}} - \mu_t\frac{\nabla \mathbf{f}}{\norm{\mathbf{f}}}
+	\label{eq:mad:33}
+\end{equation}
+
+, gdzie $\nabla \mathbf{f} = \mathbf{J}^T_g({^S_E \hat{q}_{est, t-1}})\mathbf{f}_g( {^S_E \hat{q}_{est, t-1}}, ^S \hat{\mathbf{a}}_t)$.
+
+Kolejnym krokiem po wyznaczeniu orientacji na podstawie żyroskopu oraz akcelerometru jest fuzja tych dwóch wartości. Madgwick przyjął jako metodę fuzji orientacji z obu źródeł za pomocą filtra komplementarnego zgodnie ze wzorem \ref{eq:mad:36}
+
+\begin{equation}
+	{^S_E \hat{q}_{est, t}} = \alpha_t {^S_E {q}_{\nabla, t}} + (1-\alpha_t){^S_E {q}_{\omega, t}} , 0 \le \alpha \le 1
+	\label{eq:mad:36}
+\end{equation}
+
+, gdzie $\alpha_t$ określa poziom istotności orientacji wyznaczonej na podstawie akcelerometru w danej chwili $t$. Wartość wagi $\alpha_t$ jest zmienna w czasie i jest wyznaczona na podstawie wzoru \ref{eq:mad:38}.
+
+\begin{equation}
+	\alpha_t = \frac{\beta}{\mu_t/{\Delta t} + \beta}
+	\label{eq:mad:38}
+\end{equation}
+
+Współczynnik $\beta$ jest określany na podstawie błędu pomiarów żyroskopu wyznaczonego za pomocą Wariancji Allana.
+
+Rysunek \ref{fig:appx:Madg:algorithm} przedstawia schemat blokowy filtru Madgwicka. Warto zauważyć analogię w~jego budowie do schematu filtra komplementarnego przedstawionego na rysunku \ref{fig:appx:CF:algorithmA}.
 		
-		\begin{savenotes}
-			\begin{figure}[!htb]	
-				\centering
-				\scalebox{1}{													
-					\input{images/madgwickFilterDiagram.tex}
-				}
-				\caption{Diagram blokowy przedstawiający filtr Madgwicka dla czujników inercyjnych}
-				\label{fig:appx:Madg:algorithm}
-			\end{figure}
-			\end{savenotes}
-		
-		
-			
-%\begin{savenotes}
-%\begin{figure}[!htb]
-%	\centering 
-					
-%		\begin{tikzpicture}[auto, thick, node distance=2cm, >=triangle 45]
-%		\tikzset{%
-%			block/.style    = {draw, thick, rectangle, minimum height = 3em,
-%				minimum width = 3em},
-%			sum/.style      = {draw, circle, node distance = 2cm}, % Adder
-%			input/.style    = {coordinate}, % Input
-%			output/.style   = {coordinate} % Output
-%		}
-							
-%		\draw
-%		node at (0,0)[right=-3mm]{\Large \textopenbullet}
-%		node [input, name=xSignal] {} 
-%		node at (4,0) [block] (lpf) {$G(s)$}
-%		
-%		node at (0,-2)[right=-3mm]{\Large \textopenbullet}
-%		node [input, below of=xSignal, name=ySignal] {} 
-%		node at (4,-2)[block] (hpf) {$1-G(s)$}
-%		
-%		node at (7, -1) [sum, name=suma]{\suma}
-%		
-%		node [output, right of=suma](out) {} ;
-%		
-%		\draw[->](xSignal) -- node {$x = z~+ n_1$}(lpf);
-%		\draw[->](ySignal) -- node {$y = z~+ n_2$}(hpf);
-%		\draw[->](hpf) -| node {}(suma);
-%		\draw[->](lpf) -| node {}(suma);
-%		\draw[->](suma) -- node {$\widehat{z}$}(out);
-%		\end{tikzpicture}
-%		\label{fig:appx:Madg:algorithm}
-%
-%	\end{figure}
-%	\end{savenotes}
+		\begin{landscape}
+\begin{savenotes}
+	\begin{figure}[!htb]	
+		\centering
+		\scalebox{1}{													
+			\input{images/madgwickFilterDiagram.tex}
+		}
+		\caption{Diagram blokowy przedstawiający filtr Madgwicka dla czujników inercyjnych}
+		\label{fig:appx:Madg:algorithm}
+	\end{figure}
+\end{savenotes}
+\end{landscape}

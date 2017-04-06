@@ -35,38 +35,38 @@ Zamieszczony w~dalszej części pracy opis budowy i~zasad działania optycznego 
 Analizowany system firmy Vicon jest systemem wielokamerowym, który wykorzystuje wyspecjalizowane kamery cyfrowe video, o~wysokiej rozdzielczości matrycy (4 MPix dla rozważanego systemu), wyposażone w~filtr przepuszczający zakres światła podczerwonego. Każda z~kamer wyposażona jest równocześnie w~kierunkowe źródło światła emitujące fale z~zakresu światła podczerwonego. System Vicon dostępny na Politechnice Łódzkiej zbudowany jest z~10 takich kamer umieszczonych dookoła pomieszczenia laboratoryjnego tak jak jest to pokazane na rysunku \ref{fig:literature:vicon:lutSetup}, gdzie elementy oznaczone IR1..10 to kamery wyposażone w~filtr podczerwony, RGB1 i~RGB2 to dwie kamery video pozwalające rejestrować tradycyjny obraz kolorowy oraz stanowisko komputerowe oznaczone jako PC. System posiada swoją funkcjonalność w~tzw. przestrzeni roboczej śledzenia (ang. \textsl{tracking volume}). Jest to przestrzeń wyznaczona przez bryły widzenia kamer. Technicznie każdy marker w~przestrzeni roboczej powinien być widoczny jednocześnie przez 3 kamery, aby możliwe było precyzyjne określenie jego pozycji. Ruchy wykonywane poza przestrzenią roboczą nie są śledzone przez system lub obarczone są błędnymi wynikami.
 
 \begin{savenotes}
-								
+										
 	\begin{figure}[!htb]
 		\centering	
 		\includegraphics[width=0.75\textwidth]{images/viconSetup.png}
 		\caption{Rysunek przedstawiający konfigurację sprzętową systemu Vicon dostępnego na Politechnice Łódzkiej. IR1..10 -- kamery z filtrem podczerwonym, RGB1, RGB2 -- kamery rejestrujący obraz kolorowy, PC -- stanowisko komputerowe ze specjalistycznym oprogramowaniem do obsługi systemu śledzenia.}
 		\label{fig:literature:vicon:lutSetup}
 	\end{figure}
-							
+									
 \end{savenotes}
 	
 Kamery wykorzystane w~systemie Vicon posiadają filtr przepuszczający jedynie fale z~zakresu światła podczerwonego, co pozwala na stosunkowo łatwe wyodrębnienie z~rejestrowanego obrazu markerów odbijających światło podczerwone. Markery są elementami pokrytymi farbą odbijającą padające na nie światło w~kierunku źródła emisji promieni. Ponieważ w~przypadku zastosowanych kamer źródło światła jest umieszczone tuż obok obiektywu, oświetlone markery stanowią najjaśniejsze punkty na rejestrowanym obrazie. Na rysunku \ref{fig:literature:qualisys:markers} zaprezentowany został przykładowy zestaw markerów wykorzystywanych w~omawianym systemie śledzenia ruchu, natomiast na rysunku \ref{fig:literature:vicon:markers} widać aktora w~kombinezonie, przy którym owe markery są przymocowane. Markery wykorzystywane są do oznaczenia części ciała człowieka, których ruch będzie śledzony.
 	
 \begin{savenotes}
-								
+										
 	\begin{figure}[!htb]
 		\centering	
 		\includegraphics[width=0.65\textwidth]{images/markers-suits-600x450.png}
 		\caption[Zestaw znaczników pasywnych w~systemie Vicon umieszczonych na ciele aktora w~trakcie sesji śledzenia ruchu]{Zestaw znaczników pasywnych w~systemie Vicon umieszczonych na ciele aktora w~trakcie sesji śledzenia ruchu \footfullcite{footnote:ViconMarkersSet}}
 		\label{fig:literature:vicon:markers}
 	\end{figure}
-							
+									
 \end{savenotes}
 		
 \begin{savenotes}
-								
+										
 	\begin{figure}[!htb]
 		\centering	
 		\includegraphics[width=0.65\textwidth]{images/super-spherical-markers-hero.jpg}
 		\caption[Pasywne markery wykorzystywane w~optycznych systemach śledzenia ruchu]{Pasywne markery wykorzystywane w~optycznych systemach śledzenia ruchu\footfullcite{footnote:QulisysMarkers}}		
 		\label{fig:literature:qualisys:markers}
 	\end{figure}
-							
+									
 \end{savenotes}
 			
 Oprócz kamer i~markerów, istotnym elementem optycznego systemu śledzenia ruchu jest oprogramowanie obsługujące system. Jest ono odpowiedzialne za synchroniczną analizę sekwencji obrazów zarejestrowanych przez kamery tak, aby możliwe było określenie położenia każdego z~markerów w~przestrzeni trójwymiarowej układu odniesienia. W~przypadku systemu Vicon, dostępnego na Politechnice Łódzkiej, rekonstrukcja przestrzeni trójwymiarowej odbywa się na podstawie sekwencji obrazów z~maksymalnie 10 kamer. Aby możliwe było wyznaczenie położenia markera w~przestrzeni trójwymiarowej musi być on \textsl{widziany} przez minimum 3 kamery w~tym samym czasie. Pozwala to na precyzyjne wyznaczenie jego wszystkich współrzędnych za pomocą triangulacji. Jednakże zbudowanie profesjonalnego systemu śledzenia ruchu złożonego jedynie z~3 kamer byłoby niewystarczające ze względu na możliwość przysłonięcia markerów przez części ciała w~trakcie wykonywania ruchu. Zwiększenie liczby kamer pozwala na obserwowanie sceny przez większą ich liczbę, co zwiększa prawdopodobieństwo, że w~trakcie nawet złożonych ruchów przynajmniej 3 kamery zarejestrują każdy z~markerów. Dodatkowo redundancja danych, dla lepiej widocznych markerów, sprzyja zwiększeniu dokładności wyznaczania ich pozycji. Oczywiście może się zdarzyć, że pomimo zastosowania wielu kamer marker zostanie zauważony przez mniej niż 3 kamery. W~takiej sytuacji rolą oprogramowania jest oszacowanie przybliżonego położenia danego markera, na przykład na podstawie jego relacji do położenia innych markerów i~ich trajektorii ruchu.
@@ -310,7 +310,7 @@ Przykładem sposobu wyznaczania położenia stawu na podstawie wzajemnej relacji
 \begin{savenotes}
 	\begin{figure}[!htb]
 		\centering
-																																		
+																																						
 		\begin{subfigure}[b]{0.45\textwidth}
 			\includegraphics[width=\textwidth]{images/pelvisEstimationB.jpg}		
 			\caption{Położenie wyznaczonego stawu kości miedniczej}
@@ -322,7 +322,7 @@ Przykładem sposobu wyznaczania położenia stawu na podstawie wzajemnej relacji
 			\caption{Położenie markerów}
 			\label{fig:literature:vicon:pelvisPlacementA}
 		\end{subfigure}
-		
+						
 		\caption[Wyznaczenie położenia kości miedniczej na potrzeby modelu szkieletowego na podstawie położenia markerów w~systemie Vicon]{Rysunek przedstawiający wyznaczenie położenia kości miedniczej (a) na potrzeby modelu szkieletowego na podstawie położenia markerów (b) w~systemie Vicon\cite{ViconModelingInstruction}}
 		\label{fig:literature:vicon:pelvisPlacement}
 	\end{figure}
@@ -452,7 +452,7 @@ Reprezentacja orientacji obiektu za pomocą kątów Eulera jest najbardziej intu
 		Oś & Układ Relatywny & Układ Absolutny & Symbol   & Prędkość kątowa \\
 		\hline
 		X   & \emph{bank}      & \emph{tilt}      & $\phi$   & \emph{roll}         \\
-		Y   & \emph{heading}   & \emph{azimuth}   & $\psi$ 	 & \emph{yaw}          \\ 
+		Y   & \emph{heading}   & \emph{azimuth}   & $\psi$   & \emph{yaw}          \\ 
 		Z   & \emph{attitude}  & \emph{elevation} & $\theta$ & \emph{pitch}        \\
 		\hline
 	\end{tabular} 
@@ -586,15 +586,15 @@ Zmiana sekwencji obrotów w postaci kątów Eulera	wpływa na kolejność wykony
 
 Przy tożsamej sekwencji kątów Eulera jak przy poprzednio przedstawionej konwersji, konwersja z~postaci kwaternionowej ($q = [q_w, q_x, q_y, q_z]^T$) do kątów Eulera ($[\phi, \theta, \psi]^T$) wyrażona jest wzorem \ref{eq:appx:rot:quatToEuler}:
 		
-		\begin{equation}
-		\label{eq:appx:rot:quatToEuler}
-		\begin{bmatrix}\theta \\ \phi \\ \psi \end{bmatrix} =	
-		\begin{bmatrix}                                                   
-	arcsin(2(q_w q_y - q_x q_z))                             \\
-	arctan2(2(q_y q_z + q_w q_x), 1-2(q_x^2 + q_y^2)) \\
-	arctan2(2(q_x q_y + q_w q_z), 1-2(q_y^2 + q_z^2)) 
+\begin{equation}
+	\label{eq:appx:rot:quatToEuler}
+	\begin{bmatrix}\theta \\ \phi \\ \psi \end{bmatrix} =	
+	\begin{bmatrix}                                                   
+		arcsin(2(q_w q_y - q_x q_z))                      \\
+		arctan2(2(q_y q_z + q_w q_x), 1-2(q_x^2 + q_y^2)) \\
+		arctan2(2(q_x q_y + q_w q_z), 1-2(q_y^2 + q_z^2)) 
 	\end{bmatrix} 		
-		\end{equation}
+\end{equation}
 		
 																													
 \section{Charakterystyka wykorzystywanych urządzeń pomiarowych}\label{chap:characteristics}
@@ -636,7 +636,7 @@ Według oficjalnej dokumentacji \footfullcite{footnote:kinectSpec2016} Kinect pr
 			\hfill
 			\input{Images/Figure1.legend.tex}               
 		\end{subfigure}
-																							
+																											
 		\caption[Poziomy i pionowy zakres pracy kontrolera Microsoft Kinect v.1]{Poziomy (a) i pionowy (b) zakres pracy kontrolera Microsoft Kinect v.1 (na podstawie \footfullcite{footnote:kinectSpec2016})}
 		\label{fig:characteristics:kinect:range}	
 	\end{figure}
@@ -705,7 +705,7 @@ Kinect przez ponad 5 lat dostępności na rynku jest obiektem badań związanych
 			\caption{Na zewnątrz pomieszczenia w~świetle słonecznym}
 			\label{fig:characteristics:kinect:depthMapC}
 		\end{subfigure}
-																																																			
+																																																							
 		\caption[Mapa głębi ręki w~różnych warunkach oświetleniowych]{Mapa głębi ręki w~różnych warunkach oświetleniowych\cite{Suarez2012}.}
 		\label{fig:characteristics:kinect:depthMap}
 	\end{figure}
@@ -778,7 +778,7 @@ Wykres przedstawiony na rysunku \ref{fig:characteristics:kinect:kinectRightHandE
 			\caption{Stan śledzenia stawów podczas obrotu ciała \emph{(T-pose)} względem kontrolera}
 			\label{fig:characteristics:kinect:bodyRotationChart}
 		\end{subfigure}
-		
+						
 		\hfill																																																
 		\begin{subfigure}[b]{0.9\textwidth}
 			\centering
@@ -840,7 +840,7 @@ przedstawia układ równań, w postaci macierzowej, pozwalający wyznaczyć wsp�
 	\begin{figure}[!htb]
 		\centering
 		\input{images/kinectDistanceError.tex}
-																																																														
+																																																																		
 		\caption[Przybliżenie dokładności pomiaru głębi względem odległości śledzonej postaci od kontrolera Kinect]{Przybliżenie dokładności pomiaru głębi względem odległości śledzonej postaci od kontrolera Kinect [źródło własne].}
 		\label{fig:characteristics:kinect:distanceAccuracy}
 	\end{figure}
