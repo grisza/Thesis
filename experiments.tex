@@ -57,16 +57,16 @@ Wszystkie pomiary zostały porównane z~pomiarami referencyjnymi zarejestrowanym
 Błąd estymacji pozycji stawów, w~pojedynczej sesji wykonywanego ruchu, został zdefiniowany jako pierwiastek kwadratowy z~błędu średniokwadratowego (RMSE -- \emph{ang. root mean square error}) odległości euklidesowej ($d_e()$) pomiędzy referencyjną pozycją danego stawu ($j$) zmierzoną w~systemie Vicon $P^V_j$, a~pozycją oszacowaną ($P^F_j$) i~jest wyrażony wzorem \ref{eq:experiments:RMSE}:
 
 \begin{equation}
-\centering
-RMSE^F_j = \sqrt{\frac{1}{n}\sum_{i=1}^{n}{d_e(P^V_{j,i}, P^F_{j,i})^2}}
-\label{eq:experiments:RMSE}
+	\centering
+	RMSE^F_j = \sqrt{\frac{1}{n}\sum_{i=1}^{n}{d_e(P^V_{j,i}, P^F_{j,i})^2}}
+	\label{eq:experiments:RMSE}
 \end{equation}
 
 Następnie została obliczona średnia arytmetyczna z~wyznaczonych błędów średniokwadratowych każdej z sesji śledzenia według wzoru \ref{eq:experiments:average}:
 
 \begin{equation}
-\overline{RMSE^F_j} = \frac{\sum_{s=1}^{6}{RMSE^F_{j,s}}}{6}
-\label{eq:experiments:average}
+	\overline{RMSE^F_j} = \frac{\sum_{s=1}^{6}{RMSE^F_{j,s}}}{6}
+	\label{eq:experiments:average}
 \end{equation}
 
 , w~celu wyznaczenia dokładności szacowania pozycji stawów w~każdym z~wykonanych ćwiczeń. Podobną metodologię określania błędu oszacowania badanej metody zastosowali w~swoich pracach między innymi Kassim i in. \cite{Kassim2008} oraz Tadano i in. \cite{Tadano2013}. W~analogiczny sposób do wzoru \ref{eq:experiments:RMSE} został oszacowany błąd wyznaczania kąta zgięcia stawu łokciowego $\beta$.
@@ -176,14 +176,14 @@ Rysunki \ref{fig:experiments:first:raw} oraz \ref{fig:experiments:first:fused} w
 			\caption{Wizualizacja ruchu bezpośrednio z~urządzeń pomiarowych}
 			\label{fig:experiments:first:raw}
 		\end{subfigure}
-																																			
+																																					
 		\begin{subfigure}[b]{0.75\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{images/100/Fused.png}		
 			\caption{Wizualizacja ruchu po złączeniu danych z~urządzeń pomiarowych}
 			\label{fig:experiments:first:fused}	
 		\end{subfigure}
-																																		
+																																				
 		\caption[Wizualizacja ruchu ręki w~ćwiczeniu 1]{Wizualizacja ruchu ręki w~ćwiczeniu 1.  Kolory: czarny -- Vicon, niebieski -- czujniki inercyjne, zielony -- Kinect, szary -- metoda Kalkbrennera, pomarańczowy -- metoda autorska (źródło: badania własne)}	
 		\label{fig:experiments:first}
 	\end{figure}
@@ -210,13 +210,13 @@ Rysunki \ref{fig:experiments:first:raw} oraz \ref{fig:experiments:first:fused} w
 		3                          & 2.3591       & 2.7377       & 12.7836          & 2.8575       & 3.2409       & 14.4970          \\
 		4                          & 2.4143       & 2.9260       & 13.3775          & 3.1409       & 3.5275       & 15.2791          \\
 		5                          & 2.4451       & 2.8774       & 13.4106          & 3.1591       & 3.4737       & 14.6086          \\
-		6						   & 2.5134	      & 2.7932	     & 13,3402          & 2.9532	   & 3,5042	      & 14.5012			 \\		
+		6                          & 2.5134       & 2.7932       & 13,3402          & 2.9532       & 3,5042       & 14.5012          \\		
 		\midrule
-		Średnia $\overline{RMSE}$ &2.4826    	  & 2.8673       & 13.3480          & 3.0613       & 3.4569       & 14.4957          \\
+		Średnia $\overline{RMSE}$ & 2.4826       & 2.8673       & 13.3480          & 3.0613       & 3.4569       & 14.4957          \\
 		Odchylenie                 & 0.1048       & 0.0931       & 0.6244           & 0.1075       & 0.1049       & 0.7634           \\
 		\bottomrule
 	\end{tabular} 
-																																				
+																																					
 \end{table} 
 														
 \begin{table}[h]
@@ -237,13 +237,13 @@ Rysunki \ref{fig:experiments:first:raw} oraz \ref{fig:experiments:first:fused} w
 		3                          & 2.7619       & 3.1413       & 13.1813          & 2.7030       & 3.1432       & 12.5385          \\
 		4                          & 2.7347       & 3.0278       & 14.7809          & 3.1662       & 3.5129       & 16.4055          \\
 		5                          & 2.2166       & 2.5777       & 16.7666          & 2.7412       & 3.0710       & 15.7460          \\
-		6						   & 2.1975		  & 2.6912		 & 13.4102 			& 2.7532	   & 2.9042	      & 14.6612			\\
+		6                          & 2.1975       & 2.6912       & 13.4102          & 2.7532       & 2.9042       & 14.6612          \\
 		\midrule																		
-		Średnia $\overline{RMSE}$  & 2.4576	  	  & 2.8222  	 & 13.9711 	        & 2.9131	   & 3.2531		  & 14.7036	          \\
-		Odchylenie                 & 0.2456		  & 0.2344  	 & 1.4376		    & 0.1893	   & 0.2358  	  & 1.4291           \\
+		Średnia $\overline{RMSE}$ & 2.4576       & 2.8222       & 13.9711          & 2.9131       & 3.2531       & 14.7036          \\
+		Odchylenie                 & 0.2456       & 0.2344       & 1.4376           & 0.1893       & 0.2358       & 1.4291           \\
 		\bottomrule
 	\end{tabular} 
-																																				
+																																					
 \end{table} 
 														
 W obu ćwiczeniach, w~trakcie wykonywania ruchu, następował moment, w~którym jeden lub dwa stawy stawały się niewidoczne dla kontrolera Kinect, a~co za tym idzie, obie metody musiały bazować tylko na jednym źródle danych. Metoda opracowana przez autora niniejszej pracy nie wykorzystywała  w~trakcie łączenia danych pomiarów uzyskanych z~niepewnego źródła i~stopniowo wstrzymywała aktualizację estymowanego położenia stawu. Natomiast metoda Kalkbrennera wykorzystywała w~dalszym ciągu dane z~kontrolera Kinect zmieniając jedynie ich stopień istotności (rys. \ref{fig:experiments:sec:follow}). 
@@ -269,14 +269,14 @@ Ze względu na to, że kontroler Kinect, pomimo utraty możliwości śledzenia d
 			\caption{Wizualizacja ruchu bezpośrednio z~urządzeń pomiarowych}
 			\label{fig:experiments:sec:raw}
 		\end{subfigure}
-																																							
+																																									
 		\begin{subfigure}[b]{\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{images/200/Fused.png}		
 			\caption{Wizualizacja ruchu po złączeniu danych z~urządzeń pomiarowych}
 			\label{fig:experiments:sec:fused}
 		\end{subfigure}
-																																						
+																																								
 		\caption[Wizualizacja ruchu ręki w~ćwiczeniu 2]{Wizualizacja ruchu ręki w~ćwiczeniu 2.  Kolory: czarny -- Vicon, niebieski -- czujniki inercyjne, zielony -- Kinect, szary -- metoda Kalkbrennera, pomarańczowy -- metoda autorska (źródło: badania własne)}	
 		\label{fig:experiments:sec}
 	\end{figure}
@@ -292,14 +292,14 @@ Ze względu na to, że kontroler Kinect, pomimo utraty możliwości śledzenia d
 			\caption{Wizualizacja ruchu bezpośrednio z~urządzeń pomiarowych}
 			\label{fig:experiments:th:raw}
 		\end{subfigure}
-																																									
+																																											
 		\begin{subfigure}[b]{\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{images/300/Fused.png}		
 			\caption{Wizualizacja ruchu po złączeniu danych z~urządzeń pomiarowych}
 			\label{fig:experiments:th:fused}	
 		\end{subfigure}
-																																								
+																																										
 		\caption[Wizualizacja ruchu ręki w~ćwiczeniu 3]{Wizualizacja ruchu ręki w~ćwiczeniu 3.  Kolory: czarny -- Vicon, niebieski -- czujniki inercyjne, zielony -- Kinect, szary -- metoda Kalkbrennera, pomarańczowy -- metoda autorska (źródło: badania własne)}	
 		\label{fig:experiments:th}
 	\end{figure}
@@ -349,12 +349,12 @@ Celem ostatniego ćwiczenia było sprawdzenie stabilności pomiarów w~przypadku
 		5                          & 2.5827       & 2.4711       & 4.3170           & 2.4692       & 2.7876       & 4.8454           \\
 		6                          & 2.1827       & 2.4813       & 4.0222           & 2.3609       & 2.7499       & 4.2690           \\
 		\midrule
-																																																																		
+																																																																				
 		Średnia $\overline{RMSE}$ & 2.2688       & 2.5058       & 4.1118           & 2.4715       & 2.7889       & 4.6549           \\
 		Odchylenie                 & 0.1526       & 0.0758       & 0.2842           & 0.0836       & 0.0483       & 0.3173           \\
 		\bottomrule
 	\end{tabular} 
-																																										
+																																											
 \end{table} 
 																				
 Podobnie jak w~ćwiczeniu 1, tak i~w~ćwiczeniu 4, oba urządzenia były w~stanie śledzić ruchy wykonywane przez śledzonego aktora przez cały czas trwania eksperymentu. Jednak, podobnie jak we wspomnianym ćwiczeniu, zmianie ulegały długości segmentów kości i~miało to przełożenie na działanie metody Kalkbrennera. Wizualizacje łańcuchów kinematycznych przedstawione na rysunku \ref{fig:experiments:four} pokazują, że Kinect, mimo pełnej widoczności całej ręki, miał trudność z~poprawnym określeniem jej pozycji w~osi pionowej. Mimo to obie metody były w~stanie wyznaczyć pozycje stawów z~lepszą dokładnością niż każde z~urządzeń pomiarowych osobno.
@@ -369,14 +369,14 @@ Podobnie jak w~ćwiczeniu 1, tak i~w~ćwiczeniu 4, oba urządzenia były w~stani
 			\caption{Wizualizacja ruchu bezpośrednio z~urządzeń pomiarowych}
 			\label{fig:experiments:four:raw}
 		\end{subfigure}
-																																											
+																																													
 		\begin{subfigure}[b]{\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{images/400/Fused.png}		
 			\caption{Wizualizacja ruchu po złączeniu danych z~urządzeń pomiarowych}
 			\label{fig:experiments:four:fused}	
 		\end{subfigure}
-																																										
+																																												
 		\caption[Wizualizacja ruchu ręki w~ćwiczeniu 4]{Wizualizacja ruchu ręki w~ćwiczeniu 4.  Kolory: czarny -- Vicon, niebieski -- czujniki inercyjne, zielony -- Kinect, szary -- metoda Kalkbrennera, pomarańczowy -- metoda autorska (źródło: badania własne)}	
 		\label{fig:experiments:four}
 	\end{figure}
@@ -407,12 +407,12 @@ Wykresy estymacji położenia stawu łokciowego (rys. \ref{fig:experiments:four:
 Wykres estymacji kąta $\beta$ w trakcie ćwiczenia 4 zaprezentowany na rysunku \ref{fig:experiments:fourth:angle} pozwala zauważyć podobne zachowanie do tego zaobserwowanego w~ćwiczeniu 1. W trakcie wykonywania ruchu (w tym ćwiczeniu zamierzona zmiana kąta w łokciu następowała tylko podczas początkowej synchronizacji) widać estymację kąta za pomocą obu metod zbliżoną do danych referencyjnych. Różnica jest natomiast dobrze widoczna podczas braku ruchu. Wówczas widoczne są wyraźne fluktuacje w~oszacowaniach wartości kąta które wpływają na wartość uzyskanego błędu średniowkadratowego.
 			
 \begin{savenotes}
-		\begin{figure}[!htb]
-			\centering
-			\includegraphics[width=\textwidth]{images/400/angle.png}
-			\caption{Wykres przedstawiający oszacowanie wartości kąta zgięcia ręki w łokciu ($\beta$) w ćwiczeniu 4 (źródło: badania własne)}
-			\label{fig:experiments:fourth:angle}
-		\end{figure}
+	\begin{figure}[!htb]
+		\centering
+		\includegraphics[width=\textwidth]{images/400/angle.png}
+		\caption{Wykres przedstawiający oszacowanie wartości kąta zgięcia ręki w łokciu ($\beta$) w ćwiczeniu 4 (źródło: badania własne)}
+		\label{fig:experiments:fourth:angle}
+	\end{figure}
 \end{savenotes}																					
 \section{Podsumowanie}
 																								
@@ -488,7 +488,7 @@ Trzecia wartość -- kąt zgięcia ręki w~łokciu ($\beta$) -- jest uniezależn
 					(ex 2,2.9) +- (0.0, 0.12)
 					(ex 3,2.8) +- (0.0, 0.2)
 				(ex 4,2.5) +- (0.0, 0.07)};
-																																																																																																					
+																																																																																																									
 				\legend{Metoda Kalkbrennera, Metoda autorska}
 				\node at (axis cs:ex 1,4){\textcolor{black}{r = 8\%}};
 				\node at (axis cs:ex 2,4){\textcolor{black}{r = 16\%}};
@@ -534,7 +534,7 @@ Widać na~nich poprawę w~wyznaczaniu położenia stawu łokciowego do 18\%, nad
 					(ex 2,13.35)+- (0.0, 0.65)
 					(ex 3,14.08)+- (0.0, 1.55)
 				(ex 4,4.11)  +- (0.0, 0.29)};
-																																																																																																							
+																																																																																																											
 				\legend{Metoda Kalkbrennera, Metoda autorska}
 				\node at (axis cs:ex 1,16){\textcolor{black}{r = 6\%}};
 				\node at (axis cs:ex 2,16){\textcolor{black}{r = 8\%}};

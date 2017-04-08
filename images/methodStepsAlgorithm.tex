@@ -1,41 +1,41 @@
 \begin{tikzpicture} [
-auto,
-start/.style = {ellipse,fill=red!30, minimum height=2em},
-decision/.style = { diamond, draw=black, thick, fill=black!20,
-	text width=5em, text badly centered,
-	inner sep=1pt, rounded corners },
-block/.style    = { rectangle, draw=black, thick, 
-	fill=black!20, text width=13em, text centered,
-	rounded corners, minimum height=2em },
-line/.style     = { draw, thick, ->, shorten >=2pt },
-]
-% Define nodes in a~matrix
-\begin{scope} 
-\node [start] (start) {Start};\\
-\node [block, below=of start] (block1) {Inicjalizacja czujników inercyjnych}; \\                    
-\node [block, below=of block1] (block2) {Inicjalizacja filtrów łączących dane z~akcelerometru i~żyroskopu}; \\
-\node [block, below=of block2] (block7) {Odczyt danych}; \\
-\node [above=of block2, below, yshift=-0.5cm](null1) {};  \\	
-\node [block, below=of block7] (block3) {Odszumienie danych z~czujników inercyjnych oraz z~kontrolera Kinect}; \\			
-\node [decision, below=of block3] (inSync) {Czy dane zostały zsynchronizowane?}; \\
-\node [block, below=of inSync, xshift=3.5cm, yshift=1.5cm] (block4) {Synchronizacja czasowa sygnałów z~czujników inercyjnych oraz z~kontrolera Kinect}; \\
-\node [block, below=of inSync, xshift=-3.5cm, yshift=1.5cm] (block5) {Łączenie danych z~czujników inercyjnych oraz z~kontrolera Kinect}; \\
-\node [block, below=of inSync, yshift=-1.3cm] (block6) {Oszacowanie położenia stawów}; \\   
-\node [decision, below=of block6] (isEnd) {Czy użytkownik zakończył śledzenie?}; \\
-\node [start, left=of isEnd] (stop) {Stop};\\
-\end{scope}
-% connect all nodes defined above
-\begin{scope} [every path/.style=line]
-\path (start)        --    (block1);
-\path (block1)        --    (block2);
-\path (block2)      -- (block7) --  (block3);
-\path (block3)      --    (inSync);
-\path (inSync)  --++  (-3,0) node [near start, above] {Tak} -| (block5.north);
-\path (inSync)  --++  (3,0) node [near start, above] {Nie} -| (block4.north);
-\path (block5.south)   --++  (0,-1) node {}  -|    (block6.north);
-\path (block4.west) |- (block5.east);
-\path (block6) -- (isEnd);
-\path (isEnd.east)      --++  (7,0) node [near start, above] {Nie} |-  (null1);
-\path (isEnd.west) --++  (-1,0) node [near start, above] {Tak} -- (stop.east);
-\end{scope}			
+		auto,
+		start/.style = {ellipse,fill=red!30, minimum height=2em},
+		decision/.style = { diamond, draw=black, thick, fill=black!20,
+			text width=5em, text badly centered,
+			inner sep=1pt, rounded corners },
+		block/.style    = { rectangle, draw=black, thick, 
+			fill=black!20, text width=13em, text centered,
+			rounded corners, minimum height=2em },
+		line/.style     = { draw, thick, ->, shorten >=2pt },
+	]
+	% Define nodes in a~matrix
+	\begin{scope} 
+		\node [start] (start) {Start};\\
+		\node [block, below=of start] (block1) {Inicjalizacja czujników inercyjnych}; \\                    
+		\node [block, below=of block1] (block2) {Inicjalizacja filtrów łączących dane z~akcelerometru i~żyroskopu}; \\
+		\node [block, below=of block2] (block7) {Odczyt danych}; \\
+		\node [above=of block2, below, yshift=-0.5cm](null1) {};  \\	
+		\node [block, below=of block7] (block3) {Odszumienie danych z~czujników inercyjnych oraz z~kontrolera Kinect}; \\			
+		\node [decision, below=of block3] (inSync) {Czy dane zostały zsynchronizowane?}; \\
+		\node [block, below=of inSync, xshift=3.5cm, yshift=1.5cm] (block4) {Synchronizacja czasowa sygnałów z~czujników inercyjnych oraz z~kontrolera Kinect}; \\
+		\node [block, below=of inSync, xshift=-3.5cm, yshift=1.5cm] (block5) {Łączenie danych z~czujników inercyjnych oraz z~kontrolera Kinect}; \\
+		\node [block, below=of inSync, yshift=-1.3cm] (block6) {Oszacowanie położenia stawów}; \\   
+		\node [decision, below=of block6] (isEnd) {Czy użytkownik zakończył śledzenie?}; \\
+		\node [start, left=of isEnd] (stop) {Stop};\\
+	\end{scope}
+	% connect all nodes defined above
+	\begin{scope} [every path/.style=line]
+		\path (start)        --    (block1);
+		\path (block1)        --    (block2);
+		\path (block2)      -- (block7) --  (block3);
+		\path (block3)      --    (inSync);
+		\path (inSync)  --++  (-3,0) node [near start, above] {Tak} -| (block5.north);
+		\path (inSync)  --++  (3,0) node [near start, above] {Nie} -| (block4.north);
+		\path (block5.south)   --++  (0,-1) node {}  -|    (block6.north);
+		\path (block4.west) |- (block5.east);
+		\path (block6) -- (isEnd);
+		\path (isEnd.east)      --++  (7,0) node [near start, above] {Nie} |-  (null1);
+		\path (isEnd.west) --++  (-1,0) node [near start, above] {Tak} -- (stop.east);
+	\end{scope}			
 \end{tikzpicture}
