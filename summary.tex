@@ -1,17 +1,16 @@
 \chapter{Podsumowanie i~wnioski }\label{chap:finalSummary}
 
-Zaprezentowana w~pracy metoda zawiera nowe podejście do łączenia ze sobą danych z~czujników inercyjnych i~opisu modelu szkieletowego udostępnianego przez kotroler Kinect. W~wyniku hybrydowego łączenia danych o~orientacji kości układu szkieletowego, poprawiona została dokładność śledzenia ruchu stawów oraz możliwa była skuteczna aproksymacja informacji o~pozycji stawów szkieletu, których nie można było wyznaczyć bezpośrednio z~wykorzystanych urządzeń pomiarowych. Względem metod opisanych w~dostępnej i~znanej autorowi literaturze unikalnymi elementami zaproponowanej metody są:
+Zaprezentowana w~pracy metoda zawiera nowe podejście do łączenia ze sobą danych z~czujników inercyjnych i~opisu modelu szkieletowego udostępnianego przez kontroler Kinect. W~wyniku hybrydowego łączenia danych o~orientacji kości układu szkieletowego, poprawiona została dokładność śledzenia ruchu stawów oraz możliwa była skuteczna aproksymacja informacji o~pozycji stawów szkieletu, których nie można było wyznaczyć bezpośrednio z~wykorzystanych urządzeń pomiarowych. Względem metod opisanych w~dostępnej i~znanej autorowi literaturze unikalnymi elementami zaproponowanej metody są:
 \begin{itemize}
-	\item \textbf{łączenie informacji na etapie szacowania orientacji kości i~szacowanie pozycji stawów na podstawie wypadkowej wartości ich orientacji},\\
-	\item \textbf{kompleksowa kompensacja znanych i~mierzalnych błędów pomiarowych obu urządzeń}, \\
+	\item \textbf{łączenie informacji uzyskanych na podstawie danych z obu czujników, na etapie szacowania orientacji kości i~szacowanie pozycji stawów na podstawie wypadkowej wartości ich orientacji},\\
+	\item \textbf{kompensacja znanych i~mierzalnych błędów pomiarowych obu urządzeń}, \\
 	\item \textbf{zróżnicowanie sposobu łączenia ze sobą danych w~zależności od jakości uzyskanych sygnałów, na który wpływa kontekst wykonywanego ruchu}.
 \end{itemize}
 
 
 Zgodnie z~przyjętą tezą mówiącą, że
-\begin{center}
-	\textbf{zastosowanie autorskiej, hybrydowej metody śledzenia ruchu kończyn człowieka, łączącej dane pochodzące z~sensora głębi i~sensorów inercyjnych, uwzględniającej kontekstowe charakterystyki pracy urządzeń, pozwala na bardziej precyzyjne, niż w~przypadku innych metod, śledzenie ruchu}
-\end{center}
+
+\textbf{zastosowanie autorskiej, hybrydowej metody śledzenia ruchu kończyn człowieka, łączącej dane pochodzące z~sensora głębi i~sensorów inercyjnych, uwzględniającej kontekstowe charakterystyki pracy urządzeń, pozwala na bardziej precyzyjne, niż w~przypadku innych metod, śledzenie ruchu}
 
 oraz celami badań, metoda opisana w~niniejszej pracy, łącząca ze sobą sygnały z~ogólnodostępnych urządzeń pomiarowych, jakimi są kontroler Kinect i~zintegrowane moduły inercyjne pokazuje, że odejście od łączenia informacji dotyczących położenia wybranych stawów na rzecz połączenia informacji o~tym jak względem osi układu współrzędnych obrócone sa związane z~nimi kości, zmniejsza błąd oszacowania położenia tychże stawów. Spowodowane jest to tym, że łączenie danych o~pozycjach śledzonych stawów uwypukla błędy związane z~określeniem długości poszczególnych kości modeli szkieletowych postaci wykorzystywanych przez oba te urządzenia. W~przypadku modułów inercyjnych umieszczonych na ciele, informacja o~ich orientacji przestrzennej (a co za tym idzie orientacji przestrzennej kości, do której są przyczepione) jest niejako domyślną i~wymaga mniej złożonego przetwarzania danych. Wyznaczenie położenia stawów powiązanych z~daną kością wymaga, oprócz wyznaczenia orientacji kości, dokładnego pomiaru jej długości tak, żeby wykorzystując przekształcenia geometryczne można było podać pozycję stawów. W~związku z~tym błąd szacowania położenia stawu wynika z~niedokładności określania orientacji kości jak i~błędów pomiaru długości kości. W~przypadku kontrolera Kinect, model szkieletowy śledzonej postaci zawiera informacje o~długościach poszczególnych segmentów, jednak są to informacje szacowane na bieżąco i~długość tej samej kości w~tym modelu może się różnić nawet o~kilka centymetrów pomiędzy następującymi po sobie pomiarami. Jednocześnie, jeśli w~trakcie śledzenia ruchu, za pomocą Kinecta nie występuje okluzja, wówczas oszacowania orientacji poszczególnych kości są bardziej stabilne niż pozycji stawów. W~związku z~powyższym, łączenie sygnałów z~tych dwóch urządzeń pomiarowych: Kinecta i~modułów inercyjnych, wykorzystując informację o~obrotach, eliminuje istotne źródło błędu.\\
 
