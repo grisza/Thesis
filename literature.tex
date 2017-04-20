@@ -39,7 +39,7 @@ Analizowany system firmy Vicon jest systemem wielokamerowym, który wykorzystuje
 	\begin{figure}[!htb]
 		\centering	
 		\includegraphics[width=0.75\textwidth]{images/viconSetup.png}
-		\caption{Rysunek przedstawiający konfigurację sprzętową systemu Vicon dostępnego w Centrum Technologii Informatycznych Politechniki Łódzkiej. IR1..10 -- kamery z filtrem podczerwonym, RGB1, RGB2 -- kamery rejestrujący obraz kolorowy, PC -- stanowisko komputerowe ze specjalistycznym oprogramowaniem do obsługi systemu śledzenia (źródło: opracowanie własne)}
+		\caption[Rysunek przedstawiający konfigurację sprzętową systemu Vicon dostępnego w Centrum Technologii Informatycznych Politechniki Łódzkiej]{Rysunek przedstawiający konfigurację sprzętową systemu Vicon dostępnego w Centrum Technologii Informatycznych Politechniki Łódzkiej. IR1..10 -- kamery z filtrem podczerwonym, RGB1, RGB2 -- kamery rejestrujący obraz kolorowy, PC -- stanowisko komputerowe ze specjalistycznym oprogramowaniem do obsługi systemu śledzenia (źródło: opracowanie własne)}
 		\label{fig:literature:vicon:lutSetup}
 	\end{figure}
 								
@@ -98,7 +98,7 @@ System śledzenia ruchu człowieka, zaimplementowany w~kontrolerze Microsoft Kin
 W swoim artykule Brooks i~Czarowicz \cite{Brooks2012} porównują podstawowe cechy systemów \emph{Organic Motion} oraz systemu wbudowanego w~kontroler Microsoft Kinect v1. W~tabeli \ref{tab:literature:markerless:comparison} znajduje się skrócone porównanie tych dwóch systemów. 
 			
 \begin{table}[h]
-	\caption{Porównanie cech charakterystycznych systemu \emph{Organic Motion} oraz systemu wbudowanego w~kontroler Microsoft Kinect v1 (na podstawie \cite{Brooks2012})}
+	\caption[Porównanie cech charakterystycznych systemu \emph{Organic Motion} oraz systemu wbudowanego w~kontroler Microsoft Kinect v1]{Porównanie cech charakterystycznych systemu \emph{Organic Motion} oraz systemu wbudowanego w~kontroler Microsoft Kinect v1 (na podstawie \cite{Brooks2012})}
 	\label{tab:literature:markerless:comparison}
 	\footnotesize
 	\noindent
@@ -150,7 +150,7 @@ Warto zauważyć, że zarówno moduł zbudowany z~pary czujników inercyjnych ja
 	\begin{figure}[!htb]
 		\centering	
 		\includegraphics[width=0.4\textwidth]{images/IMUAxes.png}
-		\caption{Układ współrzędnych dla czujników inercyjnych i~magnetycznych (źródło: opracowanie własne)}
+		\caption[Układ współrzędnych dla czujników inercyjnych i~magnetycznych]{Układ współrzędnych dla czujników inercyjnych i~magnetycznych (źródło: opracowanie własne)}
 		\label{fig:literature:imu:coordination}
 	\end{figure}
 \end{savenotes}
@@ -159,7 +159,7 @@ W swojej pracy Alexiev i Nikolova \cite{Alexiev2013} wyróżniają 4 klasy czujn
 
 \begin{table}[]
 	\centering
-	\caption{Błąd estymacji położenia w zależności od błędu pomiarów akcelerometru\cite{Alexiev2013}.}
+	\caption[Błąd estymacji położenia w zależności od błędu pomiarów akcelerometru]{Błąd estymacji położenia w zależności od błędu pomiarów akcelerometru\cite{Alexiev2013}.}
 	\label{tab:acc:positionVsError}
 	\begin{tabular}{|l|l|l|l|l|l|}
 		\hline
@@ -213,7 +213,7 @@ Mechaniczne systemy śledzenia ruchu różnią się znacznie od poprzednio opisa
 	\begin{figure}[!htb]
 		\centering	
 		\includegraphics[height=6cm]{images/gypsy7_full.jpg}
-		\caption{Egzoszkielet dla systemu MoCap Gypsy\footfullcite{footnote:gypsy}}	
+		\caption[Egzoszkielet dla systemu systemu śledzenia ruchu Gypsy]{Egzoszkielet dla systemu systemu śledzenia ruchu Gypsy\footfullcite{footnote:gypsy}}	
 		\label{fig:literature:footnote:gypsy:full}
 	\end{figure}
 \end{savenotes}
@@ -260,7 +260,7 @@ Niezależnie od tego, jakie reprezentacje geometryczne wykorzystujemy, istotne j
 	\begin{figure}[!htb]
 		\centering	
 		\includegraphics[height=6cm]{images/Wrist_joint_rotation.png}
-		\caption{Rotacja wewnętrzna (pronacja) i~zewnętrzna (supinacja) dłoni\footfullcite{footnote:wristRotation}}	
+		\caption[Rotacja wewnętrzna (pronacja) i~zewnętrzna (supinacja) dłoni]{Rotacja wewnętrzna (pronacja) i~zewnętrzna (supinacja) dłoni\footfullcite{footnote:wristRotation}}	
 		\label{fig:literature:wristRotation}
 	\end{figure}
 \end{savenotes}
@@ -282,7 +282,7 @@ W niniejszej pracy wykorzystywana jest trójwymiarowa reprezentacja szkieletowa 
 		\scalebox{0.73}{													
 			\input{images/kinectSkeleton.tex}
 		}
-		\caption{Model szkieletowy człowieka wykorzystywany w~kontrolerze Microsoft Kinect\footfullcite{footnote:msdn:kinectSkeleton}}
+		\caption[Model szkieletowy człowieka wykorzystywany w~kontrolerze Microsoft Kinect]{Model szkieletowy człowieka wykorzystywany w~kontrolerze Microsoft Kinect\footfullcite{footnote:msdn:kinectSkeleton}}
 		\label{fig:characteristics:kinect:skeleton}
 	\end{figure}
 \end{savenotes}		
@@ -297,7 +297,7 @@ Optyczne systemy śledzenia ruchu kończyn stosujące markery są przykładem sy
 	\begin{figure}[!htb]
 		\centering	
 		\includegraphics[width=0.75\textwidth]{images/markerPlacement.jpg}
-		\caption[Rysunek przedstawiający schemat umieszczania markerów na ciele człowieka w~systemie śledzenia ruchu firmy Vicon]{Schemat umieszczania markerów na ciele człowieka w~systemie śledzenia ruchu firmy Vicon \cite{ViconGaitPlacement}}
+		\caption[Schemat umieszczania markerów na ciele człowieka w~systemie śledzenia ruchu firmy Vicon]{Schemat umieszczania markerów na ciele człowieka w~systemie śledzenia ruchu firmy Vicon \cite{ViconGaitPlacement}}
 		\label{fig:literature:vicon:markerPlacement}
 	\end{figure}
 \end{savenotes}
@@ -383,7 +383,7 @@ Kontroler Kinect wykorzystuje mechanizm uczenia maszynowego, dzięki któremu mo
 	\begin{figure}[!htb]
 		\centering	
 		\includegraphics[width=\textwidth]{images/KinectRecognitionSteps.jpg}
-		\caption{Schemat przedstawiający kolejne kroki wyznaczania modelu szkieletowego na podstawie mapy głębi (źródło: opracowanie własne na podstawie \cite{MacCormick2011})}
+		\caption[Schemat przedstawiający kolejne kroki wyznaczania modelu szkieletowego na podstawie mapy głębi]{Schemat przedstawiający kolejne kroki wyznaczania modelu szkieletowego na podstawie mapy głębi (źródło: opracowanie własne na podstawie \cite{MacCormick2011})}
 		\label{fig:literature:kinect:classificationSteps}
 	\end{figure}
 \end{savenotes}
