@@ -94,7 +94,7 @@
 				\pgf@x=.5\pgf@ya
 			\fi
 		}
-							  
+									  
 		% Inherit all anchors from the 'circle'-shape:
 		\inheritanchor[from={circle}]{center}
 		\inheritanchor[from={circle}]{mid}
@@ -112,18 +112,18 @@
 		\inheritanchor[from={circle}]{north east}
 		\inheritanchor[from={circle}]{south east}
 		\inheritanchorborder[from={circle}]
-							  
+									  
 		% Draw circle and embed additional code
 		\backgroundpath
 		{
 			% Draw circle
 			\pgfpathcircle{\centerpoint}{\radius}
-										    
+													    
 			% Embed additional code
 			% (Note that this code must call e.g. \pgfusepathqstroke
 			#2
 		}
-							
+									
 		% Define anchor parametrized by the PGF key /tikz/dsp/label
 		\anchor{text}
 		{
@@ -174,14 +174,14 @@
 	% Coordinate offset for the plus
 	\pgfutil@tempdima=\radius
 	\pgfutil@tempdima=0.55\pgfutil@tempdima
-				
+					
 	% Draw plus
 	\pgfmoveto{\pgfpointadd{\centerpoint}{\pgfpoint{0pt}{-\pgfutil@tempdima}}}
 	\pgflineto{\pgfpointadd{\centerpoint}{\pgfpoint{0pt}{ \pgfutil@tempdima}}}
-				
+					
 	\pgfmoveto{\pgfpointadd{\centerpoint}{\pgfpoint{-\pgfutil@tempdima}{0pt}}}
 	\pgflineto{\pgfpointadd{\centerpoint}{\pgfpoint{ \pgfutil@tempdima}{0pt}}}
-				
+					
 	\pgfusepathqstroke
 }
 
@@ -189,14 +189,14 @@
 	% Coordinate offset for the cross
 	\pgfutil@tempdima=\radius
 	\pgfutil@tempdima=0.707106781\pgfutil@tempdima
-				
+					
 	% Draw cross
 	\pgfmoveto{\pgfpointadd{\centerpoint}{\pgfpoint{-\pgfutil@tempdima}{-\pgfutil@tempdima}}}
 	\pgflineto{\pgfpointadd{\centerpoint}{\pgfpoint{ \pgfutil@tempdima}{ \pgfutil@tempdima}}}
-				
+					
 	\pgfmoveto{\pgfpointadd{\centerpoint}{\pgfpoint{-\pgfutil@tempdima}{ \pgfutil@tempdima}}}
 	\pgflineto{\pgfpointadd{\centerpoint}{\pgfpoint{ \pgfutil@tempdima}{-\pgfutil@tempdima}}}
-				
+					
 	\pgfusepathqstroke
 }
 

@@ -17,7 +17,7 @@
 \nomenclature{$T_0$}{neutralna temperatura pracy modułu inercyjnego wg specyfikacji}
 \nomenclature{$t$}{znacznik czasu otrzymanych pomiarów}
 \nomenclature{$t_{szum}$}{czas, w którym pomiary z~kontrolera Kinect pozostają uznawane za niewiarygodne}
-\nomenclature{$\Delta t$}{upływ czasu pomiędzy kolejnymi pomiarami}
+%\nomenclature{$\Delta t$}{upływ czasu pomiędzy kolejnymi pomiarami}
 \nomenclature{$Q = [q_w, q_x, q_y, q_z]$}{orientacja przestrzenna w~postaci kwaternionowej}
 \nomenclature{$\blacksquare^F$}{indeks oznaczający estymaty będące wynikiem fuzji danych}
 \nomenclature{$\blacksquare^K$}{indeks oznaczający dane uzyskane z~kontrolera Kinect}
@@ -30,10 +30,10 @@
 \nomenclature{$w_\phi$}{waga wartości kąta Eulera $\phi$}
 \nomenclature{$w_\theta$}{waga wartości kąta Eulera $\theta$}
 \nomenclature{$w_\psi$}{waga wartości kąta Eulera $\psi$}
-\nomenclature{$A_{th}=[a_x,a_y,a_z]_{th}=[a_{x,th},a_{y,th},a_{z,th}]$}{maksymalny dopuszczalny błąd spoczynkowych pomiarów akcelerometru}
-\nomenclature{$G_{th}=[g_x,g_y,g_z]_{th}=[g_{x,th},g_{y,th},g_{z,th}]$}{maksymalny dopuszczalny błąd spoczynkowych pomiarów żyroskopu}
-\nomenclature{$A_0=[a_x,a_y,a_z]_0=[a_{x,0},a_{y,0},a_{z,0}]$}{oczekiwane wartości spoczynkowe pomiarów akcelerometru}
-\nomenclature{$G_0=[g_x,g_y,g_z]_0=[g_{x,0},g_{y,0},g_{z,0}]$}{oczekiwane wartości spoczynkowe pomiarów żyroskopu}
+\nomenclature{$A_{th}=[a_x,a_y,a_z]_{th}$}{maksymalny dopuszczalny błąd spoczynkowych pomiarów akcelerometru}
+\nomenclature{$G_{th}=[g_x,g_y,g_z]_{th}$}{maksymalny dopuszczalny błąd spoczynkowych pomiarów żyroskopu}
+\nomenclature{$A_0=[a_x,a_y,a_z]_0$}{oczekiwane wartości spoczynkowe pomiarów akcelerometru}
+\nomenclature{$G_0=[g_x,g_y,g_z]_0$}{oczekiwane wartości spoczynkowe pomiarów żyroskopu}
 \nomenclature{$\blacksquare_{sh_L}$}{indeks oznaczający staw barkowy lewy \emph{ang. shoulder left}}
 \nomenclature{$\blacksquare_{sh_R}$}{indeks oznaczający staw barkowy prawy \emph{ang. shoulder right}}
 \nomenclature{$\blacksquare_e$}{indeks oznaczający staw łokciowy \emph{ang. elbow}}
@@ -45,21 +45,21 @@
 \nomenclature{$\bar{G} = [\bar{g}_x, \bar{g}_y, \bar{g}_z ]$}{uśrednione wartości pomiarów z~żyroskopu}
 \nomenclature{$cor_A=[c_{ax},c_{ay},c_{az}]$}{współczynniki korekty pomiarów akcelerometru}
 \nomenclature{$cor_G=[c_{gx},c_{gy},c_{gz}]$}{współczynniki korekty pomiarów żyroskopu}
-\nomenclature{$cor=[cor_A,cor_G]=[c_{ax},c_{ay},c_{az},c_{gx},c_{gy},c_{gz}]$}{współczynniki korekty pomiarów modułów inercyjnych}
+\nomenclature{$cor=[cor_A,cor_G]$}{współczynniki korekty pomiarów modułów inercyjnych}
 \nomenclature{$\tau$}{przesunięcie czasowe pomiędzy sygnałami}
 \nomenclature{$\tau_{max}$}{przesunięcie czasowe pomiędzy sygnałami, dla którego korelacja pomiędzy nimi przyjmuje największą wartość}
 \nomenclature{$I$}{sygnał, którego źródłem jest moduł inercyjny}
-\nomenclature{$I[t]$}{próbka sygnału, którego źródłem jest moduł inercyjny w~chwili t}
+%\nomenclature{$I[t]$}{próbka sygnału, którego źródłem jest moduł inercyjny w~chwili t}
 \nomenclature{$K$}{sygnał, którego źródłem jest Kinect}
-\nomenclature{$K[t]$}{próbka sygnału, którego źródłem jest Kinect w~chwili t}
+%\nomenclature{$K[t]$}{próbka sygnału, którego źródłem jest Kinect w~chwili t}
 \nomenclature{$I \ast K$}{korelacja wzajemna sygnałów o~źródłach w~module inercyjnym oraz kontrolerze Kinect}
 \nomenclature{$A'$}{skorygowany pomiar akcelerometru ze względu na temperaturę}
 \nomenclature{$P'$}{położenie przestrzenne stawu po filtracji}
 \nomenclature{$T_{raw}$}{pomiar temperatury w~formacie bezpośrednio odczytanym z~modułu inercyjnego}
-\nomenclature{$T_{deg}$}{pomiar temperatury przedstawiony w~formie stopni Celsjusza}
+\nomenclature{$T_{deg}$}{pomiar temperatury przedstawiony w~formie stopni Celsjusza wyznaczony na podstawie $T_{raw}$}
 \nomenclature{$g$}{jednostka przyspieszenia grawitacyjnego. W~przybliżeniu $1g = 9.80665 m/{s^2}$}
 \nomenclature{$f_A$}{współczynnik konwersji bezpośrednich pomiarów akcelerometru do jednostek przyspieszenia grawitacyjnego}
 \nomenclature{$f_G$}{współczynnik konwersji bezpośrednich pomiarów żyroskopu do prędkości kątowej $\degree/_s$}
 \nomenclature{$\widetilde{\omega}$}{średnia wartość szumu błądzenia (ARW - \emph{ang. Angular Random Walk}) żyroskopu}
-\nomenclature{$d_e (P_1,P_2)$}{Odległość euklidesowa pomiędzy dwoma dowolnymi punktami w~przestrzeni}
+\nomenclature{$d_e (P_1,P_2)$}{Odległość euklidesowa pomiędzy dwoma dowolnymi punktami $P_1,P_2$ w~przestrzeni}
 %\nomenclature{$HOMT$}{skrótowa nazwa autorskiej metody śledzenia ruchu opisywanej w~ninejszej pracy \emph{ang. Hybrid, Oriented-based Motion Tracking}}
