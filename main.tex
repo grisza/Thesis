@@ -114,9 +114,11 @@
 
 \linespread{1.2}
 
-\brokenpenalty=100000
-\widowpenalty=100000
-\clubpenalty=100000
+\brokenpenalty=10000
+\widowpenalty=10000
+\clubpenalty=10000
+\relpenalty=10000
+\binoppenalty=10000
 
 \makenomenclature
 
@@ -161,6 +163,9 @@
 \input{experiments.tex}
 \input{summary.tex}
 
+\cleardoublepage
+\phantomsection
+
 \appendix
 \part*{Dodatki}
 \renewcommand{\thechapter}{\Alph{chapter}}
@@ -169,10 +174,10 @@
 
 \bookmarksetup{startatroot}
 \addtocontents{toc}{\bigskip}
-
 \backmatter
-\printbibliography[notkeyword=footnote, resetnumbers=true]
 
+
+\printbibliography[notkeyword=footnote, resetnumbers=true]
 \listoffigures
 \listoftables
 
