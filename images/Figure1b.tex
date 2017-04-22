@@ -1,9 +1,9 @@
 \begin{tikzpicture}[scale=0.45]
-	\draw[very thin,pattern=dots, pattern color = black] (-21.5:0.8) -- (-21.5:4) arc (-21.5:21.5:4) -- (21.5:0.8) arc (21.5:-21.5:0.8) -- cycle;
-	\draw[very thin,pattern=horizontal lines, pattern color = black] (-21.5:4) -- (-21.5:8) arc (-21.5:21.5:8) -- (21.5:4) arc (21.5:-21.5:4) -- cycle;
+	\draw[very thin,fill=white] (-21.5:0.8) -- (-21.5:4) arc (-21.5:21.5:4) -- (21.5:0.8) arc (21.5:-21.5:0.8) -- cycle;
+	\draw[very thin,pattern=dots, pattern color = black!20] (-21.5:4) -- (-21.5:8) arc (-21.5:21.5:8) -- (21.5:4) arc (21.5:-21.5:4) -- cycle;
 	\draw[very thin,fill=black!10] (-21.5:8) -- (-21.5:9) arc (-21.5:21.5:9) -- (21.5:8) arc (21.5:-21.5:8) -- cycle;
 	\draw[very thin,fill=black!10] (-21.5:0) -- (-21.5:0.4) arc (-21.5:21.5:0.4) -- (21.5:0) arc (21.5:-21.5:0) -- cycle;
-	\draw[very thin,fill=white] (-21.5:0.4) -- (-21.5:0.8) arc (-21.5:21.5:0.8) -- (21.5:0.4) arc (21.5:-21.5:0.4) -- cycle;
+	\draw[very thin,fill=black] (-21.5:0.4) -- (-21.5:0.8) arc (-21.5:21.5:0.8) -- (21.5:0.4) arc (21.5:-21.5:0.4) -- cycle;
 																																																									
 	\draw[fill=black] (0, 0) circle (0.15);
 	\draw[thick, ->] (0:0) -- (0:9.5);
@@ -13,14 +13,14 @@
 	\draw[black] (-15: 4.3) node[right] {$43^\circ$};
 	% 																																				
 	\draw[->, thin, black, dashed] (0:6.5) arc (0:-10:6.5);
-	\draw[black] (-10: 6.5) node[right] {$-21.5^\circ$};
+	\draw[black] (-10: 6.5) node[below] {$-21.5^\circ$};
 	% 																																				
 	\draw[->, thin, black, dashed] (0:6.5) arc (0:10:6.5);
-	\draw[black] (10: 6.5) node[right] {$+21.5^\circ$};
+	\draw[black] (10: 6.5) node[above] {$+21.5^\circ$};
 	% 																										
 	\draw (0:0) node[left] {Kinect}		;				
 	\draw (20.5:0.4) node[above] {$0.4m$};
-	\draw (33.5:1.2) node[above] {$0.8m$};
+	\draw (33.5:1.6) node[above] {$0.8m$};
 	\draw (21.5:4) node[above] {$4m$};		
 	\draw (21.5:8) node[above] {$8m$};			
 	\draw (21.5:9) node[above] {$9m$};
