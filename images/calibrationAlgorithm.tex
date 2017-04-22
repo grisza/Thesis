@@ -14,27 +14,28 @@
 			$\begin{bmatrix} A_{th} \\ G_{th}\end{bmatrix} := \begin{bmatrix}a_{x,th},a_{y,th},a_{z,th}\\ g_{x,th},g_{y,th},g_{z,th}\end{bmatrix} \quad\quad \begin{bmatrix} A \\ G\end{bmatrix} := \begin{bmatrix}a_{x},a_{y},a_{z}\\ g_{x},g_{y},g_{z}\end{bmatrix}$ \\    
 			};\\
 																						
-		\node [block, below=of init] (resetCounter) {$i:=0$\\
-			$temp := \begin{bmatrix}0, 0, 0 \\ 0, 0, 0\end{bmatrix}$ \\
-			$\begin{bmatrix}\overline{A}\\ \overline{G}\end{bmatrix} = \begin{bmatrix}\overline{a_x},\overline{a_y},\overline{a_z} \\ \overline{g_x},\overline{g_y},\overline{g_z}\end{bmatrix} := \begin{bmatrix}0, 0, 0 \\ 0, 0, 0\end{bmatrix}$};\\
+	%	\node [block, below=of init] (resetCounter) {$i:=0$\\
+	%		$temp := \begin{bmatrix}0, 0, 0 \\ 0, 0, 0\end{bmatrix}$ \\
+%			$\begin{bmatrix}\overline{A}\\ \overline{G}\end{bmatrix} = \begin{bmatrix}\overline{a_x},\overline{a_y},\overline{a_z} \\ \overline{g_x},\overline{g_y},\overline{g_z}\end{bmatrix} := \begin{bmatrix}0, 0, 0 \\ 0, 0, 0\end{bmatrix}$};\\
+		
+			\node [block, below=of init] (resetCounter) {
+			$\begin{bmatrix}\overline{A}\\ \overline{G}\end{bmatrix}_s = \begin{bmatrix}\overline{a_x},\overline{a_y},\overline{a_z} \\ \overline{g_x},\overline{g_y},\overline{g_z}\end{bmatrix}_s := \begin{bmatrix}0, 0, 0 \\ 0, 0, 0\end{bmatrix}_s$};\\
 		\node [above=of resetCounter, below, yshift=-0.5cm](nullResetCounter) {};  \\
 																						
-		\node [decision, below=of resetCounter] (loop1) {$i<n$?}; \\
-		\node [above=of loop1, below, yshift=-0.5cm](nullLoop1) {};  \\
+	%	\node [decision, below=of resetCounter] (loop1) {$i<n$?}; \\
+	%	\node [above=of loop1, below, yshift=-0.5cm](nullLoop1) {};  \\
 																				
-		\node [left=of loop1,xshift=-3cm] (nullReadMotionData) {};
-		\node [action, below=of nullReadMotionData] (readMotionData){$\begin{bmatrix} A \\ G\end{bmatrix} := \begin{bmatrix} odczyt \\ z\quad sensorow\end{bmatrix}- \begin{bmatrix}cor_A\\ cor_G\end{bmatrix}_{s-1}$\\ $temp := temp + \begin{bmatrix} A \\ G\end{bmatrix}$\\$i:=i+1$};  
+	%	\node [left=of loop1,xshift=-3cm] (nullReadMotionData) {};
+	%	\node [action, below=of nullReadMotionData] (readMotionData){$\begin{bmatrix} A \\ G\end{bmatrix} := \begin{bmatrix} odczyt \\ z\quad sensorow\end{bmatrix}- \begin{bmatrix}cor_A\\ cor_G\end{bmatrix}_{s-1}$\\ $temp := temp + \begin{bmatrix} A \\ G\end{bmatrix}$\\$i:=i+1$};  
 																						        
-		\node [right=of loop1,xshift=3cm] (nullCalculateAverage) {};
-		\node [action, below=of nullCalculateAverage] (calculateAverage){$\begin{bmatrix}\overline{A}\\ \overline{G}\end{bmatrix}_s := \frac{1}{n} temp$};\\   
+	%	\node [right=of loop1,xshift=3cm] (nullCalculateAverage) {};
+	%	\node [action, below=of nullCalculateAverage] (calculateAverage){$\begin{bmatrix}\overline{A}\\ \overline{G}\end{bmatrix}_s := \frac{1}{n} temp$};\\   
+		\node [action, below=of resetCounter] (calculateAverage){$\begin{bmatrix}\overline{A}\\ \overline{G}\end{bmatrix}_s := \frac{1}{n} \sum_{i=1}^{n}{(\begin{bmatrix} A \\ G\end{bmatrix}_{s,i} - \begin{bmatrix}cor_A\\ cor_G\end{bmatrix}_{s-1})}$};\\
 																			             
-		\node [decision, below=of loop1, yshift=-2cm] (loop2) {
-			$\overline{a_x} \leq a_{x,th} \land$\\ 
-			$\overline{a_y} \leq a_{y,th} \land$\\ 
-			$\overline{a_z} \leq a_{z,th} \land$\\ 
-			$\overline{g_x} \leq g_{x,th} \land$\\
-			$\overline{g_y} \leq g_{y,th} \land$\\ 
-			$\overline{g_z} \leq g_{z,th}$ ?};\\
+		\node [decision, below=of calculateAverage] (loop2) {
+		$[\overline{A}\quad \overline{G}]_s$ \\
+		$\leq$ \\
+		$[A_{th}\quad G_{th}]$ ?};\\
 																			
 		\node [left=of loop2, xshift=-3cm] (nullReturn){};  
 		\node [action, below=of nullReturn] (return){return $cor_s$};  
@@ -52,9 +53,9 @@
 	\end{scope}
 											
 	\begin{scope} [every path/.style=line]
-		\path  (start)        --    (init)  --   (resetCounter)   --    (loop1);
-		\path  (loop1)  --++  (-3,0) node [near start, above] {Tak} -| (readMotionData)--++ (-4,0) node [near start] {} |-  (nullLoop1);
-		\path  (loop1)  --++  (3,0) node [near start, above] {Nie} -| (calculateAverage);	               
+		\path  (start)        --    (init)  --   (resetCounter)   --    (calculateAverage);
+		%\path  (loop1)  --++  (-3,0) node [near start, above] {Tak} -| (readMotionData)--++ (-4,0) node [near start] {} |-  (nullLoop1);
+		%\path  (loop1)  --++  (3,0) node [near start, above] {Nie} -| (calculateAverage);	               
 		\path  (calculateAverage.south) --++ (0,-1) node {} -| (loop2.north);
 		\path (loop2)  --++  (-4,0) node [near start, above] {Tak} -| (return) -- (stop);
 		\path (loop2.east) --++  (2,0) node [near start, above] {Nie} --++ (0,-3.5) node {} -| (loop3);
