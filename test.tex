@@ -82,11 +82,20 @@
 \begin{savenotes}
 	\begin{figure}[!htb]
 		\centering
-		\input{images/temperatureError.tex}													
-		\caption[Pomiar przyspieszenia ziemskiego w~przedziale temperatur 10-50$\degree C$]{Pomiar przyspieszenia ziemskiego w~przedziale temperatur 10-50$\degree C$ [źródło własne]}
-		\label{fig:characteristics:imu:temp}
+		\begin{minipage}{.18\textwidth}
+			\centering
+			\includegraphics{images/hierarchical-structure.png}       
+		\end{minipage}%
+		\hfill
+		\begin{minipage}{0.75\textwidth}
+			\centering
+			\scalebox{0.73}{
+				\input{images/modelHierarchyTree.tex}
+			}
+		\end{minipage}
+		\caption[Uproszczony hierarchiczny model szkieletowy człowieka wraz z~diagramem przedstawiającym hierarchię poszczególnych elementów]{Uproszczony hierarchiczny model szkieletowy człowieka (lewy) wraz z~diagramem przedstawiającym hierarchię poszczególnych elementów(prawy) \cite{Kwolek2014}}
+		\label{fig:literature:skeletonModelHierarchy}
 	\end{figure}
-\end{savenotes}
-					
+\end{savenotes}	
 
 \end{document}

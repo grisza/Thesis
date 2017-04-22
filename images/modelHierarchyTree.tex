@@ -1,23 +1,23 @@
-\tiny
+\footnotesize
 \begin{tikzpicture}[
-		level 1/.style={sibling distance=5.3cm},
-		level 2/.style={sibling distance=2.3cm}, 
+		level 1/.style={sibling distance=3.7cm},
+		level 2/.style={sibling distance=3.6cm}, 
 		every node/.style = {shape=rectangle, rounded corners,
 			draw, align=center}]]
 		\node {0. Miednica\\(\emph{ang. Pelvis})\\6 DOF}   
-		child { node {3. Lewe udo\\(\emph{ang. Upper Right Leg})\\2 DOF}
-			child { node {4. Lewy piszczel\\(\emph{ang. Right Lower Leg})\\1 DOF}}
+		child { node{3. Lewe udo\\(\emph{ang. Upper Right Leg})\\2 DOF}
+			child { node[yshift=-0.5cm] {4. Lewy piszczel\\(\emph{ang. Right Lower Leg})\\1 DOF}}
 		}
-		child { node {1. Kręgosłup\\(\emph{ang. Spine})\\3 DOF}    	
-			child {node{7. Prawe ramię\\(\emph{ang. Upper Right Arm})\\3 DOF}
-				child {node{8. Prawe przedramię\\(\emph{ang. Right Forearm})\\1 DOF}}
+		child { node[yshift=-2.3cm] {1. Kręgosłup\\(\emph{ang. Spine})\\3 DOF}    	
+			child {node[yshift=-0.5cm]{7. Prawe ramię\\(\emph{ang. Upper Right Arm})\\3 DOF}
+				child {node[yshift=-0.5cm]{8. Prawe przedramię\\(\emph{ang. Right Forearm})\\1 DOF}}
 			}
-			child {node{2. Głowa\\(\emph{ang. Head})\\3 DOF}}
-			child {node{9. Lewe ramię\\(\emph{ang. Upper Left Arm})\\3 DOF}
-				child {node{10. Lewe przedramię\\(\emph{ang. Left Forearm})\\1 DOF}}
+			child {node[yshift=-0.5cm]{2. Głowa\\(\emph{ang. Head})\\3 DOF}}
+			child {node[yshift=-0.5cm]{9. Lewe ramię\\(\emph{ang. Upper Left Arm})\\3 DOF}
+				child {node[yshift=-0.5cm]{10. Lewe przedramię\\(\emph{ang. Left Forearm})\\1 DOF}}
 			}	     
 		}
 		child { node {5. Prawe udo\\(\emph{ang. Upper Left Leg})\\2 DOF}
-			child { node {6. Prawy piszczel\\(\emph{ang. Left Lower Leg})\\1 DOF}}
+			child { node[yshift=-0.5cm] {6. Prawy piszczel\\(\emph{ang. Left Lower Leg})\\1 DOF}}
 		};
 	\end{tikzpicture}
