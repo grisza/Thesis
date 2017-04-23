@@ -23,7 +23,14 @@ Eksperymenty badawcze, opisane w~niniejszej pracy, zostały przeprowadzone na pr
 				
 Sposób umieszczenia markerów został zaczerpnięty ze schematu ich rozmieszczenia zawartego w~instrukcji do systemu Vicon, jednak poszerzony został o~dodatkowe markery tak, aby nadgarstek i~łokieć śledzony był za pomocą czterech znaczników, a~ramię za pomocą trzech. Aby móc skutecznie porównać ze sobą położenie stawów, wyznaczonych na podstawie pomiarów z~kontrolera Kinect i~z czujników inercyjnych, z~tymi wyznaczonymi przez system śledzenia ruchu Vicon, współrzędne śledzonych markerów, reprezentujące wybrany staw, muszą być uśrednione, tak żeby na ich podstawie obliczyć współrzędne stawów analizowanej kończyny. Do dokładnego wyznaczenia pojedynczego punktu reprezentującego staw, pomocne jest oszacowanie położenia trzech markerów. Dzięki zastosowaniu uzupełniających markerów do układu rekomendowanego przez firmę Vicon, udało się znacznie ograniczyć liczbę pomiarów, na których były widoczne mniej niż trzy markery, przez co precyzja śledzenia ruchu kończyn była większa. System śledzenia ruchu Vicon, w~wykorzystanej konfiguracji, dostarczał pomiary co 10 ms -- działał z~częstotliwością 100 Hz.  
 				
-Oprócz markerów niezbędnych dla poprawnego działania systemu Vicon na przedramieniu i~ramieniu, w~połowie ich długości, zostały umieszczone czujniki inercyjne. Czujniki te, aby możliwie wiernie rejestrować ruchy kończyn zostały przymocowane do skóry za pomocą taśmy klejącej oraz dodatkowo dociśnięte elastycznymi opaskami. Dzięki temu były one w~stanie wykonywać obroty wraz z~kończynami minimalizując względne przesunięcia. Zostały one umieszczone na wierzchniej stronie ręki, tam gdzie jest relatywnie cienka warstwa mięśni i~ścięgien. Dzięki temu czujniki w~większym stopniu reagowały na obroty kości i~były mniej wrażliwe na pracę otaczających je tkanek (wpływ ruchu między innymi skóry, ścięgień i~mięśni na badanie ruchu kości można znaleźć w~\cite{Sati2016,Reinschmidt2016}).
+Oprócz markerów niezbędnych dla poprawnego działania systemu Vicon na przedramieniu i~ramieniu, w~połowie ich długości, zostały umieszczone czujniki inercyjne. Czujniki te, aby możliwie wiernie rejestrować ruchy kończyn zostały przymocowane do skóry za pomocą taśmy klejącej oraz dodatkowo dociśnięte elastycznymi opaskami. Dzięki temu były one w~stanie wykonywać obroty wraz z~kończynami minimalizując względne przesunięcia. Zostały one umieszczone na wierzchniej stronie ręki, tam gdzie jest relatywnie cienka warstwa mięśni i~ścięgien tak jak na rysunku \ref{fig:experiments:handMarker}. Dzięki temu czujniki w~większym stopniu reagowały na obroty kości i~były mniej wrażliwe na pracę otaczających je tkanek (wpływ ruchu między innymi skóry, ścięgień i~mięśni na badanie ruchu kości można znaleźć w~\cite{Sati2016,Reinschmidt2016}).
+				
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.9\textwidth]{images/WP_20170423_00_49_25_Raw.jpg}
+	\caption{Moduł inercyjny umieszczony na przedramieniu autora(źródło: badania własne)}
+	\label{fig:experiments:handMarker}
+\end{figure}
 				
 \section{Badanie ruchu}
 				
@@ -31,12 +38,13 @@ Każdy z~ruchów ręki był zrealizowany przez trzech użytkowników i~wykonany 
 			
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.8\textwidth]{images/poses.png}
+	\includegraphics[width=0.9\textwidth]{images/poses.png}
 	\caption{Ćwiczenia wykonywane w~ramach eksperymentu  (źródło: badania własne)}
 	\label{fig:experiments:poses}
 \end{figure}
-						
+\newpage				
 Lista wykonywanych ćwiczeń obejmuje kolejno:
+
 \begin{enumerate}
 	\item Zgięcie ręki w~łokciu do góry (zgięcie w płaszczyźnie XY układu współrzędnych Kinecta); \\
 	\item Zgięcie ręki w~łokciu do przodu (zgięcie w płaszczyźnie XZ układu współrzędnych Kinecta); \\
@@ -69,10 +77,8 @@ Błędy szacowania pozycji stawów oraz kąta zgięcia stawu łokciowego został
 które są łączone celem zmniejszenia niedokładności ($P^{F,P}_j$,$\beta^{F,P}$).
 						
 Każda z~sesji śledzenia konkretnego ruchu składała się z~5 nieprzerywanych powtórzeń tego samego ruchu. Dla każdej z~takich sesji zostały wyliczone wartości błędu średniokwadratowego każdego z~wyżej wymienionych oszacowań (pozycje stawów łokciowego ($P^F_E, j = E$  \emph{ang. Elbow}) i~nadgarstkowego ($P^F_W, j = W$ \emph{ang. Wrist}) oraz kąt zgięcia łokcia $\beta^F$). Całkowity błąd szacowania metody został określony jako średnia arytmetyczna błedów śrdniokwadratowych ($\overline{RMSE}$) ze wszystkich sześciu sesji śledzenia ruchu (indeks sesji śledzenia -- $s$) dla danego stawu (łokcia $E$ lub nadgarstka $W$) lub kąta $\beta$ (wz. \ref{eq:experiments:average}).
-						
-		
-Wyniki zostały zebrane w~tabelach \ref{tab:experiments:first:avg}, \ref{tab:experiments:sec:avg}, \ref{tab:experiments:thr:avg} i~\ref{tab:experiments:four:avg}.
-Porównanie pomiędzy wynikami uzyskanymi za pomocą metody Kalkbrennera i~metody łączenia danych opartej na obrotach kości zostało wyznaczone jako stosunek procentowy ($r$) różnicy pomiędzy uśrednionym błędem średniokwadratowym dla metody Kalkbrennera ($\overline{RMSE^P_j}$) a~uśrednonym błędem średniokwadratowym dla metody opracowanej przez autora niniejszej dysertacji ($\overline{RMSE^O_j}$) do $\overline{RMSE^P_j}$, gdzie $j$ oznacza analizowany staw szkieletu ($j=E, W$) lub kąt $\beta$ (wz. \ref{eq:experiments:comparison}). \\
+
+Wyniki zostały zebrane w~tabelach \ref{tab:experiments:first:avg}, \ref{tab:experiments:sec:avg}, \ref{tab:experiments:thr:avg} i~\ref{tab:experiments:four:avg}. Porównanie pomiędzy wynikami uzyskanymi za pomocą metody Kalkbrennera i~metody łączenia danych opartej na obrotach kości zostało wyznaczone jako stosunek procentowy ($r$) różnicy pomiędzy uśrednionym błędem średniokwadratowym dla metody Kalkbrennera ($\overline{RMSE^P_j}$) a~uśrednonym błędem średniokwadratowym dla metody opracowanej przez autora niniejszej dysertacji ($\overline{RMSE^O_j}$) do $\overline{RMSE^P_j}$, gdzie $j$ oznacza analizowany staw szkieletu ($j=E, W$) lub kąt $\beta$ (wz. \ref{eq:experiments:comparison}). \\
 						
 \begin{equation}
 	r = \frac{\overline{RMSE^P_j} - \overline{RMSE^O_j}}{\overline{RMSE^P_j}} * 100\%
@@ -114,27 +120,26 @@ Pierwsze ćwiczenie, jakie zostało wykonane z~użyciem omawianej metody, to zgi
 		\multicolumn{2}{|c|}{{Odchylenie}}                 & 0.0727       & 0.0141       & 0.1230           & 0.0585       & 0.0603       & 0.1216           \\
 		\hline
 	\end{tabular} 																					
-\end{table} 
-								
+\end{table} 								
 Ćwiczenie polegające na wielokrotnym zgięciu ręki w~łokciu do góry, zgodnie z~przewidywaniami, dla obu urządzeń pomiarowych nie było trudne. Przez cały czas trwania ćwiczenia stawy były poprawnie identyfikowane i~w~pełni śledzone przez kontroler Kinect. Także czujniki inercyjne były w~stanie zarejestrować w~pełni  wykonywany ruch. Obie porównywane ze sobą metody uzyskiwały podobne wyniki, a~zakres szacowanego przez nie ruchu był zbliżony do tego wykonywanego w rzeczywistości. Widoczne było natomiast zróżnicowanie w~dopasowaniu szkieletu do ciała ze względu na przyjęty model długości kości. W~metodzie Kalkbrennera miała miejsce częsta zmiana tego oszacowania, co wpływało na to, że śledzony staw potrafił zmienić swoje położenie podczas gdy postać pozostawała w bezruchu, a~także potrafił znaleźć się poza konturem postaci. W~przypadku metody autora niniejszej rozprawy, zauważalne były częste, jednak niewielkie, fluktuacje wartości oszacowanych pozycji stawów. Były one jednak na tyle niewielkie, że nie wpływały w istotny sposób na wartość błędu średniokwadratowego uzyskanego szacowania, w przeciwieństwie do wpływu na ten błąd zmiennej długości segmentów reprezentujących kości wykorzystywanych w metodzie Kalkbrennera. Wydaje się również, że to właśnie brak stałego modelu długości kości w~metodzie Kalkbrennera ma największy wpływ na różnicę uzyskiwanych wyników w ćwiczeniu 1. \\
 						
 W omawianym ćwiczeniu ruch wykonywany był głównie przez przedramię, czyli istotne i~zamierzone zmiany położenia były widoczne na stawie nadgarstkowym. Wykresy \ref{fig:experiments:first:wristX}, \ref{fig:experiments:first:wristY}, \ref{fig:experiments:first:wristZ} pokazują położenie stawu nadgarstkowego w~każdej z~trzech osi w~trakcie wykonywania ruchu. Widać na nich wyraźną różnicę w~stabilności pomiarów objawiającą się ciągłymi drganiami widocznymi na wykresie łączenia danych za pomocą metody Kalkbrennera.
 					
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.8\textwidth]{images/100/Slide4.png}
+	\includegraphics[width=0.9\textwidth]{images/100/Slide4.png}
 	\caption{Wykres przedstawiający położenie stawu nadgarstkowego w~osi X w ćwiczeniu 1 (źródło: badania własne)}
 	\label{fig:experiments:first:wristX}
 \end{figure}
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.8\textwidth]{images/100/Slide5.png}
+	\includegraphics[width=0.9\textwidth]{images/100/Slide5.png}
 	\caption{Wykres przedstawiający położenie stawu nadgarstkowego w~osi Y w ćwiczeniu 1 (źródło: badania własne)}
 	\label{fig:experiments:first:wristY}
 \end{figure}
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.8\textwidth]{images/100/Slide6.png}
+	\includegraphics[width=0.9\textwidth]{images/100/Slide6.png}
 	\caption{Wykres przedstawiający położenie stawu nadgarstkowego w~osi Z w ćwiczeniu 1 (źródło: badania własne)}
 	\label{fig:experiments:first:wristZ}
 \end{figure}
@@ -143,7 +148,7 @@ Wykres na rysunku \ref{fig:experiments:first:angle} przedstawia oszacowanie kąt
 			
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.8\textwidth]{images/100/angle.png}
+	\includegraphics[width=0.9\textwidth]{images/100/angle.png}
 	\caption{Wykres przedstawiający oszacowanie wartości kąta zgięcia ręki w łokciu ($\beta$) w ćwiczeniu 1 (źródło: badania własne)}
 	\label{fig:experiments:first:angle}
 \end{figure}
@@ -155,18 +160,17 @@ Rysunki \ref{fig:experiments:first:raw} oraz \ref{fig:experiments:first:fused} w
 	\centering
 	\begin{subfigure}[b]{0.48\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{images/100/raw.png}	
+		\includegraphics[width=0.9\textwidth]{images/100/raw.png}	
 		\caption{Wizualizacja ruchu bezpośrednio z~urządzeń pomiarowych}
 		\label{fig:experiments:first:raw}
 	\end{subfigure}
 	\hfill																														
 	\begin{subfigure}[b]{0.48\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{images/100/Fused.png}		
+		\includegraphics[width=0.9\textwidth]{images/100/Fused.png}		
 		\caption{Wizualizacja ruchu po złączeniu danych z~urządzeń pomiarowych}
 		\label{fig:experiments:first:fused}	
-	\end{subfigure}
-																																					
+	\end{subfigure}																														
 	\caption[Wizualizacja ruchu ręki w~ćwiczeniu 1]{Wizualizacja ruchu ręki w~ćwiczeniu 1.  Kolory: czarny -- Vicon, niebieski -- czujniki inercyjne, zielony -- Kinect, szary -- metoda Kalkbrennera, pomarańczowy -- metoda autorska (źródło: badania własne)}	
 	\label{fig:experiments:first}
 \end{figure}
@@ -180,7 +184,7 @@ Rysunki \ref{fig:experiments:first:raw} oraz \ref{fig:experiments:first:fused} w
 	\noindent
 	\tiny
 	\centering
-	\begin{tabular}{|c|c|N{1}{2}|N{1}{2}|N{1}{2}|N{1}{2}|N{1}{2}|N{1}{2}|}		
+	\begin{tabular}{|c|c|N{1}{2}|N{1}{2}|N{2}{2}|N{1}{2}|N{1}{2}|N{2}{2}|}		
 		\hline 
 		\multicolumn{2}{|c|}{}	& \multicolumn{3}{c|}{{Metoda autorska}} & \multicolumn{3}{c|}{{Metoda Kalkbrennera}}  \\ 
 		\hline 
@@ -206,7 +210,7 @@ Rysunki \ref{fig:experiments:first:raw} oraz \ref{fig:experiments:first:fused} w
 	\noindent
 	\tiny
 	\centering
-	\begin{tabular}{|c|c|N{1}{2}|N{1}{2}|N{1}{2}|N{1}{2}|N{1}{2}|N{1}{2}|}		
+	\begin{tabular}{|c|c|N{1}{2}|N{1}{2}|N{2}{2}|N{1}{2}|N{1}{2}|N{2}{2}|}		
 		\hline 
 		\multicolumn{2}{|c|}{}	& \multicolumn{3}{c|}{{Metoda autorska}} & \multicolumn{3}{c|}{{Metoda Kalkbrennera}}  \\ 
 		\hline 
@@ -232,7 +236,7 @@ Ze względu na to, że kontroler Kinect, pomimo utraty możliwości śledzenia w
 				
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=\textwidth]{images/300/Slide3_focus.png}
+	\includegraphics[width=0.9\textwidth]{images/300/Slide3_focus.png}
 	\caption{Wykres przedstawiający podążanie wyznaczania pozycji stawu za pomiarami Kinecta w~ćwiczeniu 3 (źródło: badania własne)}
 	\label{fig:experiments:sec:follow}
 \end{figure}
@@ -241,14 +245,14 @@ Ze względu na to, że kontroler Kinect, pomimo utraty możliwości śledzenia w
 	\centering
 	\begin{subfigure}[b]{0.48\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{images/200/raw.png}	
+		\includegraphics[width=0.9\textwidth]{images/200/raw.png}	
 		\caption{Wizualizacja ruchu bezpośrednio z~urządzeń pomiarowych}
 		\label{fig:experiments:sec:raw}
 	\end{subfigure}
 	\hfill																																	
 	\begin{subfigure}[b]{0.48\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{images/200/Fused.png}		
+		\includegraphics[width=0.9\textwidth]{images/200/Fused.png}		
 		\caption{Wizualizacja ruchu po złączeniu danych z~urządzeń pomiarowych}
 		\label{fig:experiments:sec:fused}
 	\end{subfigure}
@@ -262,14 +266,14 @@ Ze względu na to, że kontroler Kinect, pomimo utraty możliwości śledzenia w
 	\centering
 	\begin{subfigure}[b]{0.48\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{images/300/raw.png}	
+		\includegraphics[width=0.9\textwidth]{images/300/raw.png}	
 		\caption{Wizualizacja ruchu bezpośrednio z~urządzeń pomiarowych}
 		\label{fig:experiments:th:raw}
 	\end{subfigure}
 	\hfill																																				
 	\begin{subfigure}[b]{0.48\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{images/300/Fused.png}		
+		\includegraphics[width=0.9\textwidth]{images/300/Fused.png}		
 		\caption{Wizualizacja ruchu po złączeniu danych z~urządzeń pomiarowych}
 		\label{fig:experiments:th:fused}	
 	\end{subfigure}
@@ -284,13 +288,13 @@ Wykresy z rysunków \ref{fig:experiments:second:angle} i \ref{fig:experiments:th
 				
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.8\textwidth]{images/200/angle.png}
+	\includegraphics[width=0.9\textwidth]{images/200/angle.png}
 	\caption{Wykres przedstawiający oszacowanie wartości kąta zgięcia ręki w łokciu ($\beta$) w ćwiczeniu 2 (źródło: badania własne)}
 	\label{fig:experiments:second:angle}
 \end{figure}
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.8\textwidth]{images/300/angle.png}
+	\includegraphics[width=0.9\textwidth]{images/300/angle.png}
 	\caption{Wykres przedstawiający oszacowanie wartości kąta zgięcia ręki w łokciu ($\beta$) w ćwiczeniu 3  (źródło: badania własne)}
 	\label{fig:experiments:third:angle}
 \end{figure}
@@ -332,14 +336,14 @@ Podobnie jak w~ćwiczeniu 1, tak i~w~ćwiczeniu 4, oba urządzenia były w~stani
 	\centering
 	\begin{subfigure}[b]{0.48\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{images/400/raw.png}	
+		\includegraphics[width=0.9\textwidth]{images/400/raw.png}	
 		\caption{Wizualizacja ruchu bezpośrednio z~urządzeń pomiarowych}
 		\label{fig:experiments:four:raw}
 	\end{subfigure}
 	\hfill																																											
 	\begin{subfigure}[b]{0.48\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{images/400/Fused.png}		
+		\includegraphics[width=0.9\textwidth]{images/400/Fused.png}		
 		\caption{Wizualizacja ruchu po złączeniu danych z~urządzeń pomiarowych}
 		\label{fig:experiments:four:fused}	
 	\end{subfigure}
@@ -351,35 +355,28 @@ Podobnie jak w~ćwiczeniu 1, tak i~w~ćwiczeniu 4, oba urządzenia były w~stani
 Wykresy estymacji położenia stawu łokciowego (rys. \ref{fig:experiments:four:elbowZ}) oraz nadgarstkowego (rys. \ref{fig:experiments:four:wristZ}) pozwalają zaobserwować wpływ stabilności pomiarów jednego stawu na drugi. Jest to szczególnie widoczne w~wykresie metody Kalkbrennera, gdzie amplituda drgań pozycji nadgarstka jest widocznie większa niż w~przypadku drgań łokcia. 
 					
 \begin{figure}[!htb]
-	\centering
-	\begin{subfigure}[b]{0.7\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{images/400/3.png}		
-		\caption{Łokieć}
+	\centering	
+		\includegraphics[width=0.9\textwidth]{images/400/3.png}		
+		\caption[Wykres położenia stawu łokciowego w~osi Z~w~ćwiczeniu 4]{Wykres położenia stawu łokciowego w~osi Z~w~ćwiczeniu 4 (źródło: badania własne)}
 		\label{fig:experiments:four:elbowZ}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.7\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{images/400/6.png}		
-		\caption{Nadgarstek}
+\end{figure}
+\begin{figure}[!htb]
+	\centering
+		\includegraphics[width=0.9\textwidth]{images/400/6.png}		
+		\caption[Wykres położenia stawu nadgarstkowego w~osi Z~w~ćwiczeniu 4]{Wykres położenia stawu nadgarstkowego w~osi Z~w~ćwiczeniu 4 (źródło: badania własne)}	
 		\label{fig:experiments:four:wristZ}
-	\end{subfigure}
-	\caption[Wykres położenia stawu łokciowego i nadgarstkowego w~osi Z~w~ćwiczeniu 4]{Wykres położenia stawu łokciowego (a) i nadgarstkowego (b) w~osi Z~w~ćwiczeniu 4 (źródło: badania własne)}	
-	\label{fig:experiments:four:Zaxis}
 \end{figure}
 		
 Wykres estymacji kąta $\beta$ w trakcie ćwiczenia 4, zaprezentowany na rysunku \ref{fig:experiments:fourth:angle}, pozwala zauważyć podobne zachowanie estymowanych wartości kąta do tego zaobserwowanego w~ćwiczeniu 1. W trakcie wykonywania ruchu (w tym ćwiczeniu zamierzona zmiana kąta w łokciu następowała tylko podczas początkowej synchronizacji) widać estymację kąta za pomocą obu metod zbliżoną do danych referencyjnych. Różnica jest natomiast dobrze widoczna podczas braku ruchu. Wówczas widoczne są wyraźne fluktuacje w~oszacowaniach wartości kąta, które wpływają na wartość uzyskanego błędu średniowkadratowego.
 			
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.7\textwidth]{images/400/angle.png}
+	\includegraphics[width=0.9\textwidth]{images/400/angle.png}
 	\caption{Wykres przedstawiający oszacowanie wartości kąta zgięcia ręki w łokciu ($\beta$) w ćwiczeniu 4 (źródło: badania własne)}
 	\label{fig:experiments:fourth:angle}
 \end{figure}
-																			
-\section{Podsumowanie}
-																								
+														
+\section{Podsumowanie}																								
 Ćwiczenia wykonywane w~ramach eksperymentów miały za zadanie zweryfikować dokładność metody autora niniejszej pracy, i porównać ją z metodą Kalkbrennera w~sytuacji, gdy pomiary z czujników przestają być wiarygodne oraz kiedy są one degradowane w~czasie. Dla kontrastu weryfikacja dokładności porównywanych metod, dokonana została także na bazie ćwiczenia, które dla obu urządzeń pomiarowych może być nazywane neutralnym (ćwiczenie 1).
 																								
 Porównane ze sobą zostały wartości trzech parametrów wybranego układu szkieletowego, wyznaczone przez dwie metody: metodę Kalkbrennera i~metodę łączącą dane opartą o~obroty kości. Porównanymi parametrami kończyny górnej były: położenie stawu łokciowego, położenie stawu nadgarstkowego oraz kąt zgięcia ręki w~łokciu ($\beta$). Błąd oszacowania pozycji stawów w~przestrzeni (wz. \ref{eq:experiments:average}) może być wykorzystany jako wskaźnik na ile dana metoda mogłaby być wykorzystana tam gdzie istotne jest wykrycie czy dochodzi do interakcji pomiędzy estymowanym modelem a~otoczeniem. Jako przykład można podać środowisko wirtualne, w~którym znajdują się obiekty, którymi można manipulować. Każdy taki obiekt ma swoje ściśle określone położenie w~przestrzeni, a~estymacja pozycji stawów jest niezbędna żeby określić czy doszło do interakcji z~takim obiektem czy nie.
@@ -392,7 +389,7 @@ Trzeci parametr układu szkieletowego ręki -- kąt zgięcia ręki w~łokciu ($\
 		\begin{axis}[
 				ybar,
 				bar width=.5cm,
-				width=\textwidth,
+				width=0.9\textwidth,
 				height=.5\textwidth,
 				legend style={at={(0.5,1)},
 					anchor=north,legend columns=-1},
@@ -429,7 +426,7 @@ Trzeci parametr układu szkieletowego ręki -- kąt zgięcia ręki w~łokciu ($\
 		\begin{axis}[
 				ybar,
 				bar width=.5cm,
-				width=\textwidth,
+				width=0.9\textwidth,
 				height=.5\textwidth,
 				legend style={at={(0.5,1)},
 					anchor=north,legend columns=-1},
@@ -449,7 +446,7 @@ Trzeci parametr układu szkieletowego ręki -- kąt zgięcia ręki w~łokciu ($\
 				(ex 2,2.9) +- (0.0, 0.12)
 				(ex 3,2.8) +- (0.0, 0.2)
 			(ex 4,2.5) +- (0.0, 0.07)};
-																																																																																																												
+		
 			\legend{Metoda Kalkbrennera, Metoda autorska}
 			\node at (axis cs:ex 1,4){\textcolor{black}{r = 8\%}};
 			\node at (axis cs:ex 2,4){\textcolor{black}{r = 16\%}};
@@ -471,7 +468,7 @@ Widać na~nich poprawę w~wyznaczaniu położenia stawu łokciowego do 18\%, nad
 		\begin{axis}[
 				ybar,
 				bar width=.5cm,
-				width=\textwidth,
+				width=0.9\textwidth,
 				height=.5\textwidth,
 				legend style={at={(0.5,1)},
 					anchor=north,legend columns=-1},
