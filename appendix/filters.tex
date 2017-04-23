@@ -324,6 +324,7 @@ gdzie ${^S_E \hat{\mathbf{q}} = [q_1,q_2,q_3,q_4]}$ \footnote{$q_4$ w~tym przypa
 Przyjmując, że $\Delta t$ oznacza okres próbkowania, wówczas aktualna orientacja czujnika, wyznaczona na podstawie odczytów z~żyroskopu, wyrażona jest wzorem \ref{eq:mad:13}:
 \begin{equation}
 	^S_E{\mathbf{q}}_{\omega,t} = {^S_E \hat{q}_{est, t-1}}\otimes {^S_E\dot{\mathbf{q}}_{\omega,t}}\Delta t
+	\label{eq:mad:13}
 \end{equation}	
 
 Na podstawie pomiarów czujnika ${^S\hat{\mathbf{s}}} = [0,s_x,s_y,s_z]$ określającego kierunki sił działających w~polu grawitacyjnym (akcelerometr) lub magnetycznym (magnetometr)  możliwe jest wyznaczenie orientacji czujnika w~tym polu. W~związku z~tym, definiując referencyjny kierunek działania sił ${^E\hat{\mathbf{d}}} = [0,d_x,d_y,d_z]$, jednoznaczne wyznaczenie orientacji przestrzennej można przedstawić jako problem optymalizacji $\underset{{^S_E \hat{q}} \in \Re^4}{\min} \mathbf{f}({^S_E \hat{q}},{^E\hat{\mathbf{d}}} , {^S\hat{\mathbf{s}}})$ gdzie funkcja $\mathbf{f}()$ wyrażona wzorem \ref{eq:mad:15}.
