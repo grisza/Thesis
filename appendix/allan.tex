@@ -1,6 +1,6 @@
 \chapter{Wariancja Allana}\label{chap:appx:allan}
 Wariancja Allana jest metodą wykorzystywaną do określenia charakterystyk szumów zawartych w~sygnałach mierzonych przez układy oparte o~oscylatory. Metoda ta została opisana w~\cite{Allan1966} jako część pracy magisterskiej w~latach 60-tych XX wieku i~od tamtego czasu została przyjęta jako standardowa do wyznaczania charakterystyk tego typu układów. W~literaturze można znaleźć między innymi prace opisujące analizę sygnałów układów inercyjnych \cite{El-Sheimy2008, FreescaleSemiconductor2015}, czy układów GPS \cite{Wright2007}. 
-Wariancja Allana ($\sigma_{\Omega}^2(\Delta t)$) wyznaczana jest dla sygnału $\Omega$ wyrażonego w~domenie czasu i~podzielonego na $N$ przedziałów o~czasie trwania $\Delta t$ każdy. Przyjmując, że $n$ oznacza numer przedziału badanego sygnału, a $\Omega_n(\Delta t)$ oznacza średnią wartość sygnału w przedziale o numerze $n$ o długości czasu $\Delta t$, wariancję Allana możemy wyrazić za pomocą równania \ref{eq:appx:allan:avar}\cite{Sochocka2004,Allan1987}.
+Wariancja Allana ($\sigma_{\Omega}^2(\Delta t)$) wyznaczana jest dla sygnału $\Omega$ wyrażonego w~domenie czasu i~podzielonego na $N$ przedziałów o~czasie trwania $\Delta t$ każdy. Przyjmując, że $n$ oznacza numer przedziału badanego sygnału, a~$\Omega_n(\Delta t)$ oznacza średnią wartość sygnału w~przedziale o~numerze $n$ o~długości czasu $\Delta t$, wariancję Allana możemy wyrazić za pomocą równania \ref{eq:appx:allan:avar}\cite{Sochocka2004,Allan1987}.
 
 \begin{equation}
 	\label{eq:appx:allan:avar}
@@ -8,7 +8,7 @@ Wariancja Allana ($\sigma_{\Omega}^2(\Delta t)$) wyznaczana jest dla sygnału $\
 \end{equation}
 
 		
-Aby na podstawie wyznaczonej wariancji określić charakterystyki szumów należy obliczyć odchylenie Allana $\sigma_{\Omega}(\Delta t) = \sqrt{\sigma^2(\Delta t)}$ i~przeanalizować przebieg tej funkcji na wykresie w~skali logarytmicznej (przykładowy wykres odchylania Allana dla żyroskopu przedstawia wykres z rysunku \ref{fig:appx:allan:slopes}). Wykres ten zawiera informacje o~5 różnych rodzajach szumu jakie są zawarte w~badanym sygnale (nazwy szumów na podstawie \cite{PASZEK2016}):
+Aby na podstawie wyznaczonej wariancji określić charakterystyki szumów należy obliczyć odchylenie Allana $\sigma_{\Omega}(\Delta t) = \sqrt{\sigma^2(\Delta t)}$ i~przeanalizować przebieg tej funkcji na wykresie w~skali logarytmicznej (przykładowy wykres odchylania Allana dla żyroskopu przedstawia wykres z~rysunku \ref{fig:appx:allan:slopes}). Wykres ten zawiera informacje o~5 różnych rodzajach szumu jakie są zawarte w~badanym sygnale (nazwy szumów na podstawie \cite{PASZEK2016}):
 		
 \begin{enumerate}
 	\item {Błąd kwantyzacji -- szum wprowadzony w~trakcie konwersji sygnału analogowego na cyfrowy i~spowodowany przez różnice pomiędzy faktyczną wartością sygnału, a~wartością wynikającą z~punktu, w~którym nastąpiło próbkowanie.}
@@ -18,7 +18,7 @@ Aby na podstawie wyznaczonej wariancji określić charakterystyki szumów należ
 	\item {Błąd RR -- systematycznie pojawiający się błąd pomiarów, którego wartość zależna jest od czasu działania. Pomiary zakłócone tego rodzaju szumem nie są w~stanie powrócić do wartości początkowych.}	
 \end{enumerate}
 		
-Powyższe zakłócenia pomiarów zawarte są na wykresie odchylenia jako obszary, w~których kąt nachylenia wykresu do osi $X$ jest zbliżony do kąta nachylenia prostej (\emph{ang. slope}) o~współczynniku kierunkowym wynoszącym odpowiednio: $-1, -0.5, 0, 0.5 , 1$. Obszary te są widoczne na wykresie z rysunku \ref{fig:appx:allan:slopes}.
+Powyższe zakłócenia pomiarów zawarte są na wykresie odchylenia jako obszary, w~których kąt nachylenia wykresu do osi $X$ jest zbliżony do kąta nachylenia prostej (\emph{ang. slope}) o~współczynniku kierunkowym wynoszącym odpowiednio: $-1, -0.5, 0, 0.5 , 1$. Obszary te są widoczne na wykresie z~rysunku \ref{fig:appx:allan:slopes}.
 
 \begin{savenotes}
 	\begin{figure}[!htb]

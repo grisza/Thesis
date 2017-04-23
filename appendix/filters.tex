@@ -1,7 +1,7 @@
 % !TeX root = main.tex
 % !TeX spellcheck = pl_PL
 % !TeX encoding = UTF-8
-\chapter{Popularne metody filtracji i estymacji sygnałów pomiarowych}
+\chapter{Popularne metody filtracji i~estymacji sygnałów pomiarowych}
 \label{chap:appx:filters}
 Istotnym etapem przetwarzania sygnałów jest ich filtracja. Zazwyczaj celem tej operacji jest usunięcie niepożądanego szumu z~uzyskanych pomiarów.~Znanych jest wiele metod filtracji, które weszły do powszechnego użytku, jednak szczególną grupą filtrów są filtry Kalmana.~Przez ponad 50 lat znalazły one zastosowanie w~przemyśle, a~także stały się obiektem wielu\footnote{W samej tylko bibliotece cyfrowej IEEE Xplore (\url{http://ieeexplore.ieee.org}) wyszukiwanie frazy ''Kalman filter'' zwraca około 25000 wyników.} badań i~opracowań naukowych \cite{Droleta,Welch2006, Kedzierski2007, Huo2014, Pandey2014}.
 
@@ -24,7 +24,7 @@ Faza pierwsza polega na oszacowaniu aktualnej wartości (stanu) pomiaru na podst
 
 gdzie:
 \begin{itemize}
-	\item $\widehat{x}^-_k$ -- prognozowana wartość stanu w kroku $k$,
+	\item $\widehat{x}^-_k$ -- prognozowana wartość stanu w~kroku $k$,
 	\item $\widehat{x}_{k-1}$ -- wartość stanu oszacowana w~kroku $k-1$,
 	\item $P^-_k$ -- prognozowana wartość kowariancji estymacji,
 	\item $P_{k-1}$ -- faktyczna wartość kowariancji estymacji wykonana w~kroku $k-1$,
@@ -49,7 +49,7 @@ Drugim etapem jaki możemy wyszczególnić w~trakcie działania omawianego filtr
 
 gdzie:
 \begin{itemize}
-	\item $z_k$ -- aktualny pomiar uzyskany ze źródła w kroku $k$,
+	\item $z_k$ -- aktualny pomiar uzyskany ze źródła w~kroku $k$,
 	\item $H$ -- macierz definiująca powiązanie aktualnego pomiaru z~oszacowanym stanem,
 	\item $v_k$ -- szum pomiaru,
 	\item $K_k$ -- wzmocnienie Kalmana (\emph{ang. Kalman gain}),
@@ -59,7 +59,7 @@ gdzie:
 
 Wartością, którą filtr zwraca jako wynik swojego działania jest $\widehat{x}_k$.
 
-Obie fazy wykonywane są cyklicznie, a~kompletny algorytm przedstawia schemat z rysunku \ref{fig:appx:KF:algorithm}.
+Obie fazy wykonywane są cyklicznie, a~kompletny algorytm przedstawia schemat z~rysunku \ref{fig:appx:KF:algorithm}.
 
 \begin{savenotes}
 	\begin{figure}[!htb]
@@ -203,7 +203,7 @@ Faza korekcji została wyrażona wzorami \ref{eq:appx:UKF:ph2a} - \ref{eq:appx:U
 %	\item TODO
 %\end{itemize}
 		
-Dokładny opis bezśladowego filtru Kalmana można znaleźć między innymi w~pracach E. Wana oraz R. van der Merwe \cite{Wan2000, Wan2001}, którzy pracowali nad rozwinięciem tej metody. Wspomniani autorzy, w~tej samej pracy, porównali ze sobą dokładność szacowania dla EKF i~UKF wykorzystując sygnał wygenerowany na podstawie równania Mackey-Glassa \cite{Glass2010} zaburzonego białym szumem. Zamieszczone wyniki jednoznacznie pokazują, że filtr UKF był w~stanie oszacować odfiltrowany sygnał z~mniejszym błędem niż EKF. Podobne badania, porównujące oba te filtry, były prowadzone także w~polskich ośrodkach badawczych między innymi w Wojskowej Akademii Technicznej. Także i~w tym przypadku, opublikowane wyniki wskazywały na większą dokładność filtru UKF \cite{Konatowski2007, Konatowski2007a}.
+Dokładny opis bezśladowego filtru Kalmana można znaleźć między innymi w~pracach E. Wana oraz R. van der Merwe \cite{Wan2000, Wan2001}, którzy pracowali nad rozwinięciem tej metody. Wspomniani autorzy, w~tej samej pracy, porównali ze sobą dokładność szacowania dla EKF i~UKF wykorzystując sygnał wygenerowany na podstawie równania Mackey-Glassa \cite{Glass2010} zaburzonego białym szumem. Zamieszczone wyniki jednoznacznie pokazują, że filtr UKF był w~stanie oszacować odfiltrowany sygnał z~mniejszym błędem niż EKF. Podobne badania, porównujące oba te filtry, były prowadzone także w~polskich ośrodkach badawczych między innymi w~Wojskowej Akademii Technicznej. Także i~w tym przypadku, opublikowane wyniki wskazywały na większą dokładność filtru UKF \cite{Konatowski2007, Konatowski2007a}.
 		
 \section*{Filtr komplementarny}\label{sec:appx:filters:CF}
 Filtr Kalmana w~swojej podstawowej postaci, jak i~w wersji rozszerzonej został od razu wykorzystany w~pozaakademickim środowisku i~stał się niejako standardowym narzędziem filtracji i~fuzji sygnałów. Jednak w~przypadku kiedy stan obserwowanego systemu jest wyrażony przez więcej niż jedną wartość liczbową, implementacja filtru Kalmana wymaga wykorzystania algebry macierzowej, która jest złożona obliczeniowo \cite{wiki:MatrixAlgebraComplexity2016}. Świadomość tego ograniczenia skłoniła badaczy do poszukiwania alternatywnego sposobu na filtrację sygnałów przy zachowaniu zbliżonej dokładności. Przykład efektów takich badań możemy zobaczyć w~pracy Higginsa \cite{Higgins1975}, w~której prezentuje on postać filtru komplementarnego oraz wykazuje związek takiej metody z~filtrem Kalmana. Typowym zastosowaniem filtru komplementarnego jest złączenie ze sobą sygnałów opisujących to samo zjawisko, ale odznaczających się różną częstotliwością szumu (wysoką i~niską). Ogólny schemat podstawowego filtru komplementarnego zaprezentowany został na rysunku \ref{fig:appx:CF:algorithmA}.
@@ -307,26 +307,26 @@ Zarówno wspomniany już Higgins, jak i~Brown \cite{BROWN1972} w~swoich artykuł
 \section*{Filtry Mahoney'a i~Madgwicka}
 Podobnie jak w~przypadku filtru Kalmana, istnieje także wariant filtra komplementarnego dla sygnałów nieliniowych. W~podobnym kontekście prace nad opracowaniem takiego filtra prowadził między innymi Robert Mahoney, który zaprezentował serię artykułów przedstawiających zarówno sam filtr, jak i~sposób jego projektowania oraz zastosowanie \cite{Baldwin2007,Mahony2005a,Mahony2008,Euston2008}. 
 Na bazie tych prac w~2010 roku Sebastian Madgwick opracował autorską metodę \cite{Madgwick2010,Madgwick2011} integracji danych z~czujników inercyjnych i~magnetycznych w~celu wyznaczenia orientacji w~przestrzeni obserwowanego obiektu. Algorytm ten, według opublikowanych wyników eksperymentów, wykazuje większą dokładność niż algorytm oparty o~filtr Kalmana.
-Pierwszym krokiem wykonywanym przez ten filtr jest wyznaczenie orientacji modułu inercyjnego na podstawie odczytów z żyroskopu oraz akcelerometru, a także wykorzystując dotychczasową estymację tego filtra. Przyjmując oznaczenia zaproponowane przez Madgwicka, $^S \omega = [0,\omega_x,\omega_y,\omega_z]$ wyraża wartości pomiarów otrzymanych z~żyroskopu, natomiast pochodna kwaternionu opisującego zmianę orientacji czujnika inercyjnego względem Ziemi wyrażona jest wzorem \ref{eq:mad:11}:
+Pierwszym krokiem wykonywanym przez ten filtr jest wyznaczenie orientacji modułu inercyjnego na podstawie odczytów z~żyroskopu oraz akcelerometru, a~także wykorzystując dotychczasową estymację tego filtra. Przyjmując oznaczenia zaproponowane przez Madgwicka, $^S \omega = [0,\omega_x,\omega_y,\omega_z]$ wyraża wartości pomiarów otrzymanych z~żyroskopu, natomiast pochodna kwaternionu opisującego zmianę orientacji czujnika inercyjnego względem Ziemi wyrażona jest wzorem \ref{eq:mad:11}:
 
 \begin{equation}
 	{^S_E \dot{q}} = \frac{1}{2}{^S_E \hat{\mathbf{q}}}\otimes {^S{\omega}}
 	\label{eq:mad:11}
 \end{equation}
 
-gdzie ${^S_E \hat{\mathbf{q}} = [q_1,q_2,q_3,q_4]}$ \footnote{$q_4$ w tym przypadku oznacza część rzeczywistą kwaternionu} oznacza dotychczasową orientację czujnika. Wykorzystując wzór \ref{eq:mad:11}, możliwe jest określenie bieżącej orientacji czujnika względem Ziemi w~chwili czasowej $t$ ($^S_E{\mathbf{q}}_{\omega,t}$) za pomocą całkowania numerycznego pochodnej $^S_E\dot{\mathbf{q}}_{\omega,t}$ wyznaczonej na podstawie aktualnego odczytu danych żyroskopu i estymacji orientacji czujnika w chwili $t-1$ (${^S_E \hat{q}_{est, t-1}}$) zgodnie ze wzorem \ref{eq:mad:12}.
+gdzie ${^S_E \hat{\mathbf{q}} = [q_1,q_2,q_3,q_4]}$ \footnote{$q_4$ w~tym przypadku oznacza część rzeczywistą kwaternionu} oznacza dotychczasową orientację czujnika. Wykorzystując wzór \ref{eq:mad:11}, możliwe jest określenie bieżącej orientacji czujnika względem Ziemi w~chwili czasowej $t$ ($^S_E{\mathbf{q}}_{\omega,t}$) za pomocą całkowania numerycznego pochodnej $^S_E\dot{\mathbf{q}}_{\omega,t}$ wyznaczonej na podstawie aktualnego odczytu danych żyroskopu i~estymacji orientacji czujnika w~chwili $t-1$ (${^S_E \hat{q}_{est, t-1}}$) zgodnie ze wzorem \ref{eq:mad:12}.
 
 \begin{equation}
 	^S_E\dot{\mathbf{q}}_{\omega,t} = \frac{1}{2}{^S_E \hat{q}_{est, t-1}}\otimes {^S{\omega_t}}
 	\label{eq:mad:12}
 \end{equation}
 
-Przyjmując, że $\Delta t$ oznacza okres próbkowania, wówczas aktualna orientacja czujnika, wyznaczona na podstawie odczytów z żyroskopu, wyrażona jest wzorem \ref{eq:mad:13}:
+Przyjmując, że $\Delta t$ oznacza okres próbkowania, wówczas aktualna orientacja czujnika, wyznaczona na podstawie odczytów z~żyroskopu, wyrażona jest wzorem \ref{eq:mad:13}:
 \begin{equation}
 	^S_E{\mathbf{q}}_{\omega,t} = {^S_E \hat{q}_{est, t-1}}\otimes {^S_E\dot{\mathbf{q}}_{\omega,t}}\Delta t
 \end{equation}	
 
-Na podstawie pomiarów czujnika ${^S\hat{\mathbf{s}}} = [0,s_x,s_y,s_z]$ określającego kierunki sił działających w polu grawitacyjnym (akcelerometr) lub magnetycznym (magnetometr)  możliwe jest wyznaczenie orientacji czujnika w tym polu. W związku z tym, definiując referencyjny kierunek działania sił ${^E\hat{\mathbf{d}}} = [0,d_x,d_y,d_z]$, jednoznaczne wyznaczenie orientacji przestrzennej można przedstawić jako problem optymalizacji $\underset{{^S_E \hat{q}} \in \Re^4}{\min} \mathbf{f}({^S_E \hat{q}},{^E\hat{\mathbf{d}}} , {^S\hat{\mathbf{s}}})$ gdzie funkcja $\mathbf{f}()$ wyrażona wzorem \ref{eq:mad:15}.
+Na podstawie pomiarów czujnika ${^S\hat{\mathbf{s}}} = [0,s_x,s_y,s_z]$ określającego kierunki sił działających w~polu grawitacyjnym (akcelerometr) lub magnetycznym (magnetometr)  możliwe jest wyznaczenie orientacji czujnika w~tym polu. W~związku z~tym, definiując referencyjny kierunek działania sił ${^E\hat{\mathbf{d}}} = [0,d_x,d_y,d_z]$, jednoznaczne wyznaczenie orientacji przestrzennej można przedstawić jako problem optymalizacji $\underset{{^S_E \hat{q}} \in \Re^4}{\min} \mathbf{f}({^S_E \hat{q}},{^E\hat{\mathbf{d}}} , {^S\hat{\mathbf{s}}})$ gdzie funkcja $\mathbf{f}()$ wyrażona wzorem \ref{eq:mad:15}.
 
 \begin{equation}
 	\begin{split}
@@ -340,8 +340,8 @@ Na podstawie pomiarów czujnika ${^S\hat{\mathbf{s}}} = [0,s_x,s_y,s_z]$ określ
 	\label{eq:mad:15}
 \end{equation}
 
-Wzór\ref{eq:mad:15} pozwala na wyznaczenie różnicy pomiędzy pomiarami czujnika, a wartościami referencyjnymi. Symbol ${^S_E \hat{\mathbf{q}}}^*$ oznacza koniugację kwaternionu ${^S_E \hat{\mathbf{q}}}$.
-W przypadku omawianego filtru Madgwicka, metoda optymalizująca funkcję $\mathbf{f}()$ została zaimplementowana w formie iteracyjnej metody malejących gradientów zgodnie ze wzorem \ref{eq:mad:19}:
+Wzór\ref{eq:mad:15} pozwala na wyznaczenie różnicy pomiędzy pomiarami czujnika, a~wartościami referencyjnymi. Symbol ${^S_E \hat{\mathbf{q}}}^*$ oznacza koniugację kwaternionu ${^S_E \hat{\mathbf{q}}}$.
+W przypadku omawianego filtru Madgwicka, metoda optymalizująca funkcję $\mathbf{f}()$ została zaimplementowana w~formie iteracyjnej metody malejących gradientów zgodnie ze wzorem \ref{eq:mad:19}:
 
 \begin{equation}
 	{^S_E {q}_{k+1}} = {^S_E \hat{q}_{k}} - \mu \frac{\nabla \mathbf{f}({^S_E \hat{q}},{^E\hat{\mathbf{d}}} , {^S\hat{\mathbf{s}}})}{\norm{\nabla \mathbf{f}({^S_E \hat{q}},{^E\hat{\mathbf{d}}} , {^S\hat{\mathbf{s}}})}} , k = 0,1,2 \ldots n
@@ -369,7 +369,7 @@ gdzie $\mathbf{J}({^S_E \hat{q}},{^E\hat{\mathbf{d}}})$ przedstawia Jakobian wyr
 	\label{eq:mad:22}
 \end{equation}
 
-Przyjmując, że wykorzystywanym czujnikiem jest akcelerometr (${^S\hat{\mathbf{a}}} = [0,a_x,a_y,a_z]$) działający w polu grawitacyjnym Ziemi ${^E\hat{\mathbf{g}}} = [0,0,0,1]$, wówczas funkcja ze wzoru \ref{eq:mad:15} przyjmuje postać jak we wzorze \ref{eq:mad:25}
+Przyjmując, że wykorzystywanym czujnikiem jest akcelerometr (${^S\hat{\mathbf{a}}} = [0,a_x,a_y,a_z]$) działający w~polu grawitacyjnym Ziemi ${^E\hat{\mathbf{g}}} = [0,0,0,1]$, wówczas funkcja ze wzoru \ref{eq:mad:15} przyjmuje postać jak we wzorze \ref{eq:mad:25}
 
 \begin{equation}
 	\mathbf{f}({^S_E \hat{q}},{^S\hat{\mathbf{a}}}) = 
@@ -393,7 +393,7 @@ natomiast Jakobian przyjmuje postać przedstawioną we wzorze \ref{eq:mad:26}
 	\label{eq:mad:26}
 \end{equation}
 
-Na podstawie wzorów \ref{eq:mad:19}, \ref{eq:mad:25}, \ref{eq:mad:26}, orientacja przestrzenna akcelerometru w~polu grawitacyjnym Ziemi w chwili $t$ wyrażona jest wzorem \ref{eq:mad:33}
+Na podstawie wzorów \ref{eq:mad:19}, \ref{eq:mad:25}, \ref{eq:mad:26}, orientacja przestrzenna akcelerometru w~polu grawitacyjnym Ziemi w~chwili $t$ wyrażona jest wzorem \ref{eq:mad:33}
 
 \begin{equation}
 	{^S_E {q}_{\nabla, t}} = {^S_E \hat{q}_{est, t-1}} - \mu_t\frac{\nabla \mathbf{f}}{\norm{\mathbf{f}}}
@@ -402,14 +402,14 @@ Na podstawie wzorów \ref{eq:mad:19}, \ref{eq:mad:25}, \ref{eq:mad:26}, orientac
 
 gdzie $\nabla \mathbf{f} = \mathbf{J}^T_g({^S_E \hat{q}_{est, t-1}})\mathbf{f}_g( {^S_E \hat{q}_{est, t-1}}, ^S \hat{\mathbf{a}}_t)$.
 
-Kolejnym krokiem po wyznaczeniu orientacji na podstawie żyroskopu oraz akcelerometru jest fuzja tych dwóch wartości. Madgwick przyjął jako metodę fuzji orientacji z obu źródeł filtr komplementarny zdefiniowany zgodnie ze wzorem \ref{eq:mad:36}
+Kolejnym krokiem po wyznaczeniu orientacji na podstawie żyroskopu oraz akcelerometru jest fuzja tych dwóch wartości. Madgwick przyjął jako metodę fuzji orientacji z~obu źródeł filtr komplementarny zdefiniowany zgodnie ze wzorem \ref{eq:mad:36}
 
 \begin{equation}
 	{^S_E \hat{q}_{est, t}} = \alpha_t {^S_E {q}_{\nabla, t}} + (1-\alpha_t){^S_E {q}_{\omega, t}} , 0 \le \alpha \le 1
 	\label{eq:mad:36}
 \end{equation}
 
-gdzie $\alpha_t$ określa poziom istotności orientacji wyznaczonej na podstawie akcelerometru w danej chwili $t$. Wartość wagi $\alpha_t$ jest zmienna w czasie i jest wyznaczona na podstawie wzoru \ref{eq:mad:38}.
+gdzie $\alpha_t$ określa poziom istotności orientacji wyznaczonej na podstawie akcelerometru w~danej chwili $t$. Wartość wagi $\alpha_t$ jest zmienna w~czasie i~jest wyznaczona na podstawie wzoru \ref{eq:mad:38}.
 
 \begin{equation}
 	\alpha_t = \frac{\beta}{\mu_t/{\Delta t} + \beta}
