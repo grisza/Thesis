@@ -15,9 +15,9 @@
 			\node[newBlock](Temp) at (2,0.5){Korekta \\ względem \\ temperatury (wz. \eqref{eq:hybrid:temperatureCorrection})};
 			\node[block](AHRS) at (4.5,2){Filtr \\ Madgwicka + LERP};
 			\node[block](EulerImu) at (7,2){Transformacja do \\ kątów Eulera (wz. \eqref{eq:appx:rot:quatToEuler})};
-			\node[newBlock](Fusion) at (7, 0){Łączenie \\ orientacji (wz. \eqref{eq:hybrid:reliableFusion} i~\eqref{eq:hybrid:unreliableFusion})};
+			\node[newBlock](Fusion) at (7, 0){Łączenie \\ orientacji (wz. \eqref{eq:hybrid:reliableFusion}, \eqref{eq:hybrid:unreliableFusion} i~\eqref{eq:dynamicWeight})};
 			\node[block](EulerKinect) at (7,-2){Transformacja do \\ kątów Eulera (wz. \eqref{eq:appx:rot:quatToEuler})};
-			\node[newBlock](Triage) at (7,-3.5){Ocena jakości pomiarów Kinecta};
+			\node[newBlock](Triage) at (7,-3.5){Ocena jakości pomiarów Kinecta (wz. \eqref{eq:hybrid:kinect:hpf})};
 																																																																	
 																																																																	
 			\node[newBlock](LPF) at (4.5,-3.5){Filtr \\ dolnoprzepustowy (wz. \eqref{eq:hybrid:kinect:lpf})};

@@ -191,7 +191,7 @@ W przypadku systemów śledzenia ruchu człowieka opartych o~IMU i~MARG wpływ n
 	\begin{figure}[!htb]
 		\centering	
 		\includegraphics[width=\textwidth]{images/centerOfMass.png}
-		\caption[Rozmieszczenie środków mas poszczególnych części ciała człowieka według propozycji de Leva]{Rozmieszczenie środków mas (ŚM) poszczególnych części ciała człowieka według propozycji de Leva \cite{DeLeva1996}}	
+		\caption[Rozmieszczenie środków mas poszczególnych części ciała człowieka według propozycji Zatsiorskiego i~Seluyanova oraz de Leva]{Rozmieszczenie środków mas (ŚM) poszczególnych części ciała człowieka według propozycji Zatsiorskiego i~Seluyanova (lewo) oraz de Leva (prawo) \cite{DeLeva1996}}	
 		\label{fig:centerOfMass}	
 	\end{figure}
 \end{savenotes}
@@ -807,7 +807,7 @@ Akcelerometr mierzy siłę działającą na niego w~dowolnym z~trzech kierunków
 		\hfill												
 		\begin{subfigure}[b]{0.7\textwidth}
 			\includegraphics[width=\textwidth]{images/memsAccelerometerIdea.png}		
-			\caption[Wizualizacja budowy akcelerometru]{Wizualizacja budowy\footfullcite{footnote:memsAccIdea2016}}
+			\caption[Wizualizacja budowy akcelerometru]{Wizualizacja budowy\footnote{\label{footnote:memsAccIdea2016}\fullcite{footnote:memsAccIdea2016}}}
 			\label{fig:characteristics:imu:acc:memsB}
 		\end{subfigure}				
 		\caption{Struktura wewnętrzna akcelerometru w~technologii MEMS}
@@ -853,7 +853,7 @@ Następnie łącząc ze sobą wzory \ref{eq:characteristics:imu:capacityToVoltag
 \end{equation}																																											
 Szczegółowy opis budowy i~działania akcelerometrów zbudowanych w~architekturze MEMS można znaleźć w~pracy Mateja Andrejasica z~Uniwersytetu w~Lubljanie \cite{Andrejasic2008}.
 \subsubsection*{Żyroskop}
-Budowa wykorzystanego żyroskopu, podobnie jak akcelerometru, opiera się na układzie kondensatorów o~zmiennej pojemności, jednak w~tym przypadku są one dodatkowo wprawione w~drgania. Działanie takiego żyroskopu opiera się na efekcie Coriolisa{\footfullcite{footnote:memsAccIdea2016}}. Budowę i~uproszczony sposób działania czujnika przedstawia rysunek \ref{fig:characteristics:imu:gyro:mems}. Wykorzystane urządzenie mierzy prędkość kątową wokół trzech osi, wyrażoną w~stopniach na sekundę ($^\degree/_s$), odpowiadającą konwencji nazewniczej związanej z~reprezentacją obrotów w~postaci kątów Eulera (rozdział \ref{chap:orientstionRep}).
+Budowa wykorzystanego żyroskopu, podobnie jak akcelerometru, opiera się na układzie kondensatorów o~zmiennej pojemności, jednak w~tym przypadku są one dodatkowo wprawione w~drgania. Działanie takiego żyroskopu opiera się na efekcie Coriolisa{\cref{footnote:memsAccIdea2016}}. Budowę i~uproszczony sposób działania czujnika przedstawia rysunek \ref{fig:characteristics:imu:gyro:mems}. Wykorzystane urządzenie mierzy prędkość kątową wokół trzech osi, wyrażoną w~stopniach na sekundę ($^\degree/_s$), odpowiadającą konwencji nazewniczej związanej z~reprezentacją obrotów w~postaci kątów Eulera (rozdział \ref{chap:orientstionRep}).
 																																						
 \begin{savenotes}
 	\begin{figure}[!htb]
@@ -867,7 +867,7 @@ Budowa wykorzystanego żyroskopu, podobnie jak akcelerometru, opiera się na uk�
 		\hfill																			
 		\begin{subfigure}[b]{0.6\textwidth}
 			\includegraphics[width=\textwidth]{images/memsGyroscopeIdea.jpg}		
-			\caption[Wizualizacja budowy żyroskopu]{Wizualizacja budowy\footfullcite{footnote:memsAccIdea2016}}
+			\caption[Wizualizacja budowy żyroskopu]{Wizualizacja budowy\cref{footnote:memsAccIdea2016}}
 			\label{fig:characteristics:imu:gyro:memsB}
 		\end{subfigure}				
 		\caption{Struktura wewnętrzna żyroskopu w~technologii MEMS}
@@ -969,10 +969,10 @@ Warto tutaj dodać, że autorzy uzależnili wartość współczynnika Kalmana $K
 a~następnie współczynnika Kalmana $K$ wykorzystując wzór \ref{eq:kalman:gain}:
 											
 \begin{equation}
-	K = P * I^T * (I * P * I^T +R)^-1
+	K = P * H^T * (H * P * H^T +R)^-1
 	\label{eq:kalman:gain}
 \end{equation}
-gdzie: $I$ jest macierzą jednostkową, $R$ to macierz kowariancji kontrolera Kinect wyznaczona według wzoru \ref{eq:kalman:matrixR}, a~$P$ to macierz kowariancji czujników inercyjnych. Wartość współczynnika $\kappa$ we wzorze \ref{eq:kalman:matrixR} została przez autorów artukułu wyznaczona empirycznie na $15$.
+gdzie: $H$ jest macierzą definiującą powiązanie pomiędzy dwoma kolejnymi pomiarami kontrolera Kinect (autorzy zdefiniowali ją jako macierz jednostkową), $R$ to macierz kowariancji kontrolera Kinect wyznaczona według wzoru \ref{eq:kalman:matrixR}, a~$P$ to macierz kowariancji czujników inercyjnych. Wartość współczynnika $\kappa$ we wzorze \ref{eq:kalman:matrixR} została przez autorów artukułu wyznaczona empirycznie na $15$.
 
 Twórcy omawianej metody podali wartość średniego odchylenia wyznaczania położenia wybranych stawów na $\pm 2.2cm$ wobec $\pm 5.5cm$ dla kontrolera Kinect pracującego samodzielnie. Z~opisu zaproponowanej metody wynika, że dla wyznaczenia pozycji stawów na podstawie IMU, model długości poszczególnych kości pobrany był wprost z~danych Kinecta. Z~jednej strony ułatwiło to późniejsze złączenie ze sobą pozycji stawów wyznaczonych przez Kinecta oraz wyznaczonych na podstawie pomiarów czujników inercyjnych, ponieważ jedyna różnica pomiędzy rzeczonymi stawami wynika z~orientacji kości łączących śledzone stawy. Z~drugiej zaś strony, oszacowanie długości kości przez kontroler Kinect jest niedokładne i~zmienia się niemal w~każdej klatce pomiarowej, więc uniemożliwiało to wyznaczenie prawdziwego modelu szkieletowego, w~którym długości poszczególnych kości odpowiadałyby prawdziwym długościom.
 

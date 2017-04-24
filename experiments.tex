@@ -64,19 +64,19 @@ Błąd estymacji pozycji stawów, w~pojedynczej sesji wykonywanego ruchu, zosta�
 	\label{eq:experiments:RMSE}
 \end{equation}
 
-Następnie została obliczona średnia arytmetyczna z~wyznaczonych błędów średniokwadratowych każdej z~sesji śledzenia według wzoru \ref{eq:experiments:average}
+Następnie została obliczona średnia arytmetyczna z~wyznaczonych błędów średniokwadratowych każdej z~sześciu sesji śledzenia według wzoru \ref{eq:experiments:average}
 
 \begin{equation}
 	\overline{RMSE^F_j} = \frac{\sum_{s=1}^{6}{RMSE^F_{j,s}}}{6}
 	\label{eq:experiments:average}
 \end{equation}
 
-w~celu wyznaczenia dokładności szacowania pozycji stawów w~każdym z~wykonanych ćwiczeń. Podobną metodologię określania błędu oszacowania badanej metody zastosowali w~swoich pracach między innymi Kassim i~in. \cite{Kassim2008} oraz Tadano i~in. \cite{Tadano2013}. W~analogiczny sposób do wzoru \ref{eq:experiments:RMSE} został oszacowany błąd wyznaczania kąta zgięcia stawu łokciowego $\beta$.
+w~celu wyznaczenia dokładności szacowania pozycji stawów w~każdym z~wykonanych ćwiczeń. Podobną metodologię określania błędu oszacowania badanej metody zastosowali w~swoich pracach między innymi Kassim i~in. \cite{Kassim2008} oraz Tadano i~in. \cite{Tadano2013}. W~analogiczny sposób (wzór \ref{eq:experiments:RMSE} w którym poycja stawu została zastapiona kątem zgięcia kończyn w stawie) został oszacowany błąd wyznaczania kąta zgięcia stawu łokciowego $\beta$.
 						
 Błędy szacowania pozycji stawów oraz kąta zgięcia stawu łokciowego zostały wyznaczone dla opisywanej w~niniejszej dysertacji metody łączenia danych, opartej na obrotach kości ($P^{F,O}_j$,$\beta^{F,O}$) oraz dla analogicznych oszacowań uzyskanych za pomocą metody o~najniższym opisanym w~literaturze błędzie szacowania położenia stawów -- metodzie Kalkbrenera i~in. \cite{Kalkbrenner2014}. Metoda Kalkbrenera wykorzystuje  dane o~pozycjach poszczególnych stawów, zarejstrowanych niezaleznie przez kontroler Kinect i~czyjniki inercyjne,
 które są łączone celem zmniejszenia niedokładności oszacowania ($P^{F,P}_j$,$\beta^{F,P}$).
 						
-Każda z~sesji śledzenia konkretnego ruchu składała się z~5 nieprzerywanych powtórzeń tego samego ruchu. Dla każdej z~takich sesji zostały wyliczone wartości błędu średniokwadratowego każdego z~wyżej wymienionych oszacowań (pozycje stawów łokciowego ($P^F_E, j = E$  \emph{ang. Elbow}) i~nadgarstkowego ($P^F_W, j = W$ \emph{ang. Wrist}) oraz kąt zgięcia łokcia $\beta^F$). Całkowity błąd szacowania metody został określony jako średnia arytmetyczna błędów śrdniokwadratowych ($\overline{RMSE}$) ze wszystkich sześciu sesji śledzenia ruchu (indeks sesji śledzenia -- $s$) dla danego stawu (łokcia $E$ lub nadgarstka $W$) lub kąta $\beta$ (wz. \ref{eq:experiments:average}).
+Każda z~sesji śledzenia konkretnego ruchu składała się z~5 nieprzerywanych powtórzeń tego samego ruchu. Dla każdej z~takich sesji zostały wyliczone wartości błędu średniokwadratowego  (wzór \ref{eq:experiments:RMSE}) każdego z~wyżej wymienionych oszacowań (pozycje stawów łokciowego ($P^F_E, j = E$  \emph{ang. Elbow}) i~nadgarstkowego ($P^F_W, j = W$ \emph{ang. Wrist}) oraz kąt zgięcia łokcia $\beta^F$). Całkowity błąd szacowania metody został określony jako średnia arytmetyczna błędów śrdniokwadratowych ($\overline{RMSE}$) ze wszystkich sześciu sesji śledzenia ruchu (indeks sesji śledzenia -- $s$) dla danego stawu (łokcia $E$ lub nadgarstka $W$) lub kąta $\beta$ (wz. \ref{eq:experiments:average}).
 
 Wyniki zostały zebrane w~tabelach \ref{tab:experiments:first:avg}, \ref{tab:experiments:sec:avg}, \ref{tab:experiments:thr:avg} i~\ref{tab:experiments:four:avg}. Porównanie pomiędzy wynikami uzyskanymi za pomocą metody Kalkbrennera i~metody łączenia danych opartej na obrotach kości zostało wyznaczone jako stosunek procentowy ($r$) różnicy pomiędzy uśrednionym błędem średniokwadratowym dla metody Kalkbrennera ($\overline{RMSE^P_j}$) a~uśrednonym błędem średniokwadratowym dla metody opracowanej przez autora niniejszej dysertacji ($\overline{RMSE^O_j}$) do $\overline{RMSE^P_j}$, gdzie $j$ oznacza analizowany staw szkieletu ($j=E, W$) lub kąt $\beta$ (wz. \ref{eq:experiments:comparison}). \\
 						
@@ -130,18 +130,21 @@ W omawianym ćwiczeniu ruch wykonywany był głównie przez przedramię, czyli i
 	\includegraphics[width=0.9\textwidth]{images/100/Slide4.png}
 	\caption{Wykres przedstawiający położenie stawu nadgarstkowego w~osi X w~ćwiczeniu 1 (źródło: badania własne)}
 	\label{fig:experiments:first:wristX}
+	 \vspace{-10pt}
 \end{figure}
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.9\textwidth]{images/100/Slide5.png}
 	\caption{Wykres przedstawiający położenie stawu nadgarstkowego w~osi Y w~ćwiczeniu 1 (źródło: badania własne)}
 	\label{fig:experiments:first:wristY}
+	 \vspace{-10pt}
 \end{figure}
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.9\textwidth]{images/100/Slide6.png}
 	\caption{Wykres przedstawiający położenie stawu nadgarstkowego w~osi Z~w~ćwiczeniu 1 (źródło: badania własne)}
 	\label{fig:experiments:first:wristZ}
+	 \vspace{-10pt}
 \end{figure}
 			
 Wykres na rysunku \ref{fig:experiments:first:angle} przedstawia oszacowanie kąta zgięcia ręki w~łokciu ($\beta$). Widać na nim, wyraźną różnicę w~dokładności i~stabilności szacowania wartości w~trakcie wykonywania ruchu oraz w~położeniach skrajnych (wyprostowana ręka lub zgięta). W~położeniu skrajnym widoczne są fluktuacje oszacowań zarówno w~przypadku metody Kalkbrennera jak i~metody autorskiej. Jednakże fluktuacje obecne w~oszacowaniach metody, łączącej ze sobą obroty są, widocznie mniejsze niż te występujące w~metodzie opartej o~łączenie pozycji stawów.
